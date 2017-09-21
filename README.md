@@ -88,7 +88,7 @@ Details
 =======
 
 As you can imagine, it could take our TAs a lot of time to check out
-your game. Accordingly, we want you to turn in a file named`Readme.md`,
+your game. Accordingly, we want you to turn in a file named`Data.txt`,
 which provides
 
 1.  a list of numbers to enter in order to win the game by landing
@@ -101,7 +101,7 @@ Submission
 
 You should ensure that you use your GitHub classroom account with a
 regular commit history. This assignment should consist of
-your`LunarLander.py` file and your `Readme.txt` file.
+your`LunarLander.py` file and your `Data.txt` file.
 
 *Only* files submitted to via our GitHub Classroom will be accepted. We
 do not accept assignments submitted by email or other means.
