@@ -101,7 +101,7 @@ Submission
 
 You should ensure that you use your GitHub classroom account with a
 regular commit history. This assignment should consist of
-your`LunarLander.py` file and your `Readme.md` file.
+your`LunarLander.py` file and your `Readme.txt` file.
 
 *Only* files submitted to via our GitHub Classroom will be accepted. We
 do not accept assignments submitted by email or other means.
