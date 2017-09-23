@@ -95,8 +95,8 @@ Your program should have exactly the following functions. You may have
 additional functions if you wish; all functions, except those that do
 I/O, must be unit tested.
 
-`def read_sudoku(file_name)`
-:   Reads and returns in a Sudoku problem from a file. The file will
+`def read_sudoku(file_name)`:   
+    Reads and returns in a Sudoku problem from a file. The file will
     contain a list of lists, such as the following:
 
      [ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ], 
@@ -132,7 +132,7 @@ The `read_sudoku` function is an input function, and so is exempt from unit te
 should **not** do any input/output, and you must have unit tests for each. **Please write the unit tests first! 
 We will be able to see if you have via your commit history** (although obviously there are ways around this but that is self defeating).
 
-`def convertToSets(problem)`:
+`def convertToSets(problem)`:   
     Given a two-dimensional array *`problem`* of integers, create and
     return a new two-dimensional array of sets. For each location
     in *`problem`* that contains an integer 1 to 9, create a set
@@ -142,7 +142,7 @@ We will be able to see if you have via your commit history** (although obviously
     two-dimensional array, not just a 9x9 array (this will make writing
     unit tests easier).
 
-`def convertToInts(problem)`:
+`def convertToInts(problem)`:   
     Given a two-dimensional array `problem` of sets, create and return a
     new two-dimensional array of integers. For each location
     in `problem` that contains a singleton set (a set with only one
@@ -155,19 +155,19 @@ We will be able to see if you have via your commit history** (although obviously
     in *`problem`* contains an empty set (this should never happen), put
     a `0` in the result array.
 
-`def getRowLocations(rowNumber)`:
+`def getRowLocations(rowNumber)`:   
     Given a `rowNumber`, return a list of all nine "locations" 
     (`(row, column)`  tuples) in that row. 
 
-`def getColumnLocations(columnNumber)`:
+`def getColumnLocations(columnNumber)`:   
     Given a `columnNumber`, return a list of all nine "locations" 
     (`(row, column)`  tuples) in that column.
 
-`def getBoxLocations(location)`:
+`def getBoxLocations(location)`:   
     Return a list of all nine "locations"  (`(row, column)`  tuples) in
     the same box as the given `location`.
 
-`def eliminate(problem, location, listOfLocations)`:
+`def eliminate(problem, location, listOfLocations)`:   
     The given `location` in the array *`problem`* should contain a set
     containing a single number. For each location in
     the *`listOfLocations`* **except* `location`***, remove the number
@@ -177,12 +177,12 @@ We will be able to see if you have via your commit history** (although obviously
     should work for any two-dimensional array, not just a 9x9 array
     (this will make writing unit tests easier).
 
-`def isSolved(problem)`:
+`def isSolved(problem)`:   
     Given a two-dimensional array `problem` of sets, return `True` if
     the Sudoku problem has been solved (every set contains exactly one
     element), and `False` otherwise.
 
-`def solve(problem)`:
+`def solve(problem)`:   
     Given a two-dimensional array `problem` of sets, try to solve it.
     This function **changes the array** *`problem`* and
     returns `True` if the problem has been solved, `False` otherwise.\
