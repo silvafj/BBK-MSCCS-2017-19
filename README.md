@@ -7,81 +7,22 @@ Purposes of this assignment:
 -   [To enforce the idea of unit testing.]{style="font-size: 1rem;"}\
 
 General idea of the assignment:
+
 ===============================
 
-+-----------------------+-----------------------+-----------------------+
-| In **Sudoku**, you    |                       | +-------------------- |
-| are given a 9x9 grid, |                       | --------------------- |
-| divided into nine 3x3 |                       | --------------------- |
-| "boxes," as shown on  |                       | ---------+            |
-| the right. Each box   |                       | | <div align="center" |
-| has nine "cells," and |                       | >                     |
-| some of these cells   |                       |                       |
-| have digits in them   |                       |          |            |
-| (but most are         |                       | |                     |
-| blank).               |                       |                       |
-|                       |                       |                       |
-| The puzzle is to fill |                       |          |            |
-| in the rest of the    |                       | | [![](https://www.ci |
-| grid so that every    |                       | s.upenn.edu/~matuszek |
-| row, every column,    |                       | /cit591-2011/Images/p |
-| and every 3x3 box     |                       | uzzvirgi |            |
-| contains the digits 1 |                       | | n.gif){width="273"  |
-| through 9. In other   |                       |                       |
-| words, every row      |                       |                       |
-| contains all nine     |                       |          |            |
-| digits, every column  |                       | | height="273"}](http |
-| contains all nine     |                       | s://www.cis.upenn.edu |
-| digits, and every box |                       | /~matuszek/cit591-201 |
-| contains all nine     |                       | 1/Assign |            |
-| digits. Your          |                       | | ments/04-sudoku.htm |
-| assignment is to      |                       | l#)                   |
-| write a program to    |                       |                       |
-| try to solve* *Sudoku |                       |          |            |
-| puzzles. You won't be |                       | |                     |
-| able to solve them    |                       |                       |
-| all.                  |                       |                       |
-|                       |                       |          |            |
-| --------------------- |                       | | </div>              |
-| --------------------- |                       |                       |
-| --------------------- |                       |                       |
-| ---------             |                       |          |            |
-|                       |                       | +-------------------- |
-| This image is         |                       | --------------------- |
-| from <http://www.sudo |                       | --------------------- |
-| ku.com/>,             |                       | ---------+            |
-| which used to have    |                       | | <div align="center" |
-| additional            |                       | >                     |
-| explanations and      |                       |                       |
-| puzzles, but I don't  |                       |          |            |
-| see them now. (Maybe  |                       | |                     |
-| I haven't looked hard |                       |                       |
-| enough.) The site     |                       |                       |
-| seems to be much more |                       |          |            |
-| commercial than it    |                       | | **Roll your mouse o |
-| used to be.           |                       | n and off the grid.** |
-|                       |                       | \                     |
-|                       |                       |          |            |
-|                       |                       | | You may have to wai |
-|                       |                       | t for the page to loa |
-|                       |                       | d fully               |
-|                       |                       |          |            |
-|                       |                       | |                     |
-|                       |                       |                       |
-|                       |                       |                       |
-|                       |                       |          |            |
-|                       |                       | | </div>              |
-|                       |                       |                       |
-|                       |                       |                       |
-|                       |                       |          |            |
-|                       |                       | +-------------------- |
-|                       |                       | --------------------- |
-|                       |                       | --------------------- |
-|                       |                       | ---------+            |
-+-----------------------+-----------------------+-----------------------+
+In **Sudoku**, you are given a 9x9 grid, divided into nine 3x3 "boxes," as shown on
+below. Each box has nine "cells," and some of these cells 
+have digits in them  (but most are blank). 
 
-Your job is to write a program to try to solve Sudoku puzzles. If you
-write the program correctly, it should be able to solve easy puzzles.
+The puzzle is to fill in the rest of the grid so that every 
+row, every column, and every 3x3 box contains the digits 1 through 9. 
+In other words, every row contains all nine digits, every column 
+contains all nine digits, and every box contains all nine 
+digits. Your assignment is to write a program to try to solve **Sudoku** puzzles. 
+You won't be able to solve them all. 
+
+Your task is to write a program to try to solve Sudoku puzzles. If you
+write the program correctly, it should be able to *solve* easy puzzles.
 (If you are good at Sudoku, this program can be expanded to solve harder
 puzzles; but that's *not* part of the assignment!) 
 
@@ -344,7 +285,7 @@ The following puzzles can probably be solved by your program:
   [ 0, 9, 0,   3, 6, 0,   0, 0, 0 ],
   [ 2, 0, 0,   1, 0, 0,   6, 3, 0 ] ]
 
-  [ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ],
+[ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ],
   [ 3, 0, 0,   4, 7, 0,   0, 0, 5 ],
   [ 1, 5, 0,   8, 2, 0,   0, 0, 3 ],
 
@@ -358,7 +299,7 @@ The following puzzles can probably be solved by your program:
   [ 6, 0, 0,   0, 1, 2,   0, 0, 0 ],
   [ 9, 3, 0,   0, 0, 0,   7, 1, 0 ] ]
   
-  [ [ 0, 0, 0,   2, 0, 3,   9, 6, 0 ],
+[ [ 0, 0, 0,   2, 0, 3,   9, 6, 0 ],
   [ 2, 0, 6,   0, 0, 7,   0, 3, 0 ],
   [ 7, 0, 0,   1, 5, 0,   8, 0, 0 ],
 
@@ -387,7 +328,7 @@ The following puzzles probably cannot be completely solved by your program:
   [ 0, 0, 7,   2, 0, 6,   9, 0, 0 ],
   [ 0, 4, 0,   5, 0, 8,   0, 7, 0 ] ]
   
-  [ [ 9, 0, 0,   0, 0, 8,   0, 0, 0 ],
+[ [ 9, 0, 0,   0, 0, 8,   0, 0, 0 ],
   [ 0, 0, 0,   0, 3, 2,   0, 0, 0 ],
   [ 6, 8, 0,   9, 0, 1,   0, 7, 0 ],
   
