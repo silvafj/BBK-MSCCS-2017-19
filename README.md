@@ -47,7 +47,6 @@ Specific functions
 
 Define and use at least the following functions:
 
-\
 
 `def main():`
 
