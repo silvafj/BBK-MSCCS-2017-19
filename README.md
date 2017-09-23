@@ -115,8 +115,8 @@ I/O, must be unit tested.
 What might be called an "array" in other languages is called a
 "list" in Python. A two-dimensional array is a list of lists. So,
 for example, if the above data is in an "array" named `problem`,
-then `problem[8]` is the list `[9, 3, 0, 0, 0, 0, 7, 1, 0]`,
-while `problem[8][0]` contains the integer `9`. You can find the number of rows in a two-dimensional
+then `problem[8]` is the list `[9, 3, 0, 0, 0, 0, 7, 1, 0]`, while `problem[8][0]` contains the integer `9`. 
+You can find the number of rows in a two-dimensional 
 array `problem` with `len(problem)`, and you can find the number of columns with `len(problem[0])`. 
 For this assignment, represent a location in an array with a  `(row, column)`  2-tuple.
     
@@ -194,11 +194,10 @@ We will be able to see if you have via your commit history** (although obviously
     eliminate anything, return the boolean result.
 
 `def print_sudoku(problem)`
-
 :   Prints the Sudoku array (given as a list of lists of integers) in
     the following form, using dots to represent zeros. As this is an
     output function, don't try to write a unit test for it.
-    ```
+
         +-------+-------+-------+
         | . . 4 | . . . | . 6 7 |
         | 3 . . | 4 7 . | . . 5 |
@@ -212,7 +211,7 @@ We will be able to see if you have via your commit history** (although obviously
         | 6 . . | . 1 2 | . . . |
         | 9 3 . | . . . | 7 1 . |
         +-------+-------+-------+
-    ```
+
 `def main()`
 :   (Your name should be in comments at the top of your program.) Ask
     the user for the name of a file containing a Sudoku puzzle. Print
@@ -232,7 +231,7 @@ incorrect. You can create additional functions, but you must also have
 the given ones as specified. Any additional functions should also have
 unit tests.
 
-> I have been asked if it is okay to write some functions to
+> We have been asked if it is okay to write some functions to
 > have *default parameters*. Yes, so long as we can call and test each function with the
 > required parameters as described above. Our tests won't even know
 > about your default parameters - but if you do this, *your* tests
