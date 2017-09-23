@@ -192,7 +192,8 @@ We will be able to see if you have via your commit history** (although obviously
     than zero), repeat this procedure. When it is no longer possible to
     eliminate anything, return the boolean result.
 
-`def print_sudoku(problem)`:   
+`def print_sudoku(problem)`:  
+ 
     Prints the Sudoku array (given as a list of lists of integers) in
     the following form, using dots to represent zeros. As this is an
     output function, don't try to write a unit test for it.
