@@ -98,20 +98,20 @@ I/O, must be unit tested.
 
 `def read_sudoku(file_name)`
 :   Reads and returns in a Sudoku problem from a file. The file will
-    contain a list of lists, such as the following:\
-    +-----------------------------------------------------------------------+
-    |     [ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ],                              |
-    |       [ 3, 0, 0,   4, 7, 0,   0, 0, 5 ],                              |
-    |       [ 1, 5, 0,   8, 2, 0,   0, 0, 3 ],                              |
-    |                                                                       |
-    |       [ 0, 0, 6,   0, 0, 0,   0, 3, 1 ],                              |
-    |       [ 8, 0, 2,   1, 0, 5,   6, 0, 4 ],                              |
-    |       [ 4, 1, 0,   0, 0, 0,   9, 0, 0 ],                              |
-    |                                                                       |
-    |       [ 7, 0, 0,   0, 8, 0,   0, 4, 6 ],                              |
-    |       [ 6, 0, 0,   0, 1, 2,   0, 0, 0 ],                              |
-    |       [ 9, 3, 0,   0, 0, 0,   7, 1, 0 ] ]                             |
-    +-----------------------------------------------------------------------+
+    contain a list of lists, such as the following:
+    ```
+     [ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ], 
+       [ 3, 0, 0,   4, 7, 0,   0, 0, 5 ], 
+       [ 1, 5, 0,   8, 2, 0,   0, 0, 3 ], 
+                                          
+       [ 0, 0, 6,   0, 0, 0,   0, 3, 1 ], 
+       [ 8, 0, 2,   1, 0, 5,   6, 0, 4 ], 
+       [ 4, 1, 0,   0, 0, 0,   9, 0, 0 ], 
+                                          
+       [ 7, 0, 0,   0, 8, 0,   0, 4, 6 ], 
+       [ 6, 0, 0,   0, 1, 2,   0, 0, 0 ], 
+       [ 9, 3, 0,   0, 0, 0,   7, 1, 0 ] ]
+    ```
 
     What might be called an "array" in other languages is called a
     "list" in Python. A two-dimensional array is a list of lists. So,
@@ -121,17 +121,21 @@ I/O, must be unit tested.
     number of rows in a two-dimensional
     array `problem` with `len(problem)`, and you can find the number of
     columns with `len(problem[0])`. For this assignment, represent a
-    location in an array with a  `(row, column)`  2-tuple. \
-    \
-    Since I haven't told you yet how to read from files, here's the
+    location in an array with a  `(row, column)`  2-tuple.
+    
+    Since we haven't told you yet how to read from files, here's the
     code:
+    ```
+    def read_sudoku(file):
+        stream = open(file)
+        data = stream.readlines()
+        stream.close()
+        return eval("".join(data))
+    ```
 
-The `read_sudoku` function is an input function, and so is exempt from
-unit testing. Most of the following functions should **not** do any
-input/output, and you must have unit tests for each. **Please write the
-unit tests first! We will be able to see if you have via your commit
-history** (although obviously there are ways around this but that is
-self defeating).
+The `read_sudoku` function is an input function, and so is exempt from unit testing. Most of the following functions 
+should **not** do any input/output, and you must have unit tests for each. **Please write the unit tests first! 
+We will be able to see if you have via your commit history** (although obviously there are ways around this but that is self defeating).
 
 `def convertToSets(problem)`
 :   Given a two-dimensional array *`problem`* of integers, create and
@@ -199,7 +203,7 @@ self defeating).
 :   Prints the Sudoku array (given as a list of lists of integers) in
     the following form, using dots to represent zeros. As this is an
     output function, don't try to write a unit test for it.
-
+    ```
         +-------+-------+-------+
         | . . 4 | . . . | . 6 7 |
         | 3 . . | 4 7 . | . . 5 |
@@ -213,7 +217,7 @@ self defeating).
         | 6 . . | . 1 2 | . . . |
         | 9 3 . | . . . | 7 1 . |
         +-------+-------+-------+
-
+    ```
 `def main()`
 :   (Your name should be in comments at the top of your program.) Ask
     the user for the name of a file containing a Sudoku puzzle. Print
@@ -234,8 +238,7 @@ the given ones as specified. Any additional functions should also have
 unit tests.
 
 > I have been asked if it is okay to write some functions to
-> have *default parameters* (which we haven't yet talked about in
-> class). Yes, so long as we can call and test each function with the
+> have *default parameters*. Yes, so long as we can call and test each function with the
 > required parameters as described above. Our tests won't even know
 > about your default parameters - but if you do this, *your* tests
 > should test the functions both with and without the extra parameters.
