@@ -211,7 +211,7 @@ We will be able to see if you have via your commit history** (although obviously
         | 9 3 . | . . . | 7 1 . |
         +-------+-------+-------+
 
-`def main()`:
+`def main()`:   
     (Your name should be in comments at the top of your program.) 
     Ask the user for the name of a file containing a Sudoku puzzle. 
     Print the puzzle, try to solve the puzzle, then print the (possibly
