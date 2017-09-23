@@ -112,25 +112,21 @@ I/O, must be unit tested.
        [ 9, 3, 0,   0, 0, 0,   7, 1, 0 ] ]
     
 
-    What might be called an "array" in other languages is called a
-    "list" in Python. A two-dimensional array is a list of lists. So,
-    for example, if the above data is in an "array" named `problem`,
-    then `problem[8]` is the list `[9, 3, 0, 0, 0, 0, 7, 1, 0]`,
-    while `problem[8][0]` contains the integer `9`. You can find the
-    number of rows in a two-dimensional
-    array `problem` with `len(problem)`, and you can find the number of
-    columns with `len(problem[0])`. For this assignment, represent a
-    location in an array with a  `(row, column)`  2-tuple.
+What might be called an "array" in other languages is called a
+"list" in Python. A two-dimensional array is a list of lists. So,
+for example, if the above data is in an "array" named `problem`,
+then `problem[8]` is the list `[9, 3, 0, 0, 0, 0, 7, 1, 0]`,
+while `problem[8][0]` contains the integer `9`. You can find the number of rows in a two-dimensional
+array `problem` with `len(problem)`, and you can find the number of columns with `len(problem[0])`. 
+For this assignment, represent a location in an array with a  `(row, column)`  2-tuple.
     
-    Since we haven't told you yet how to read from files, here's the
-    code:
-    ```
+Since we haven't told you yet how to read from files, here's the code:
+
     def read_sudoku(file):
         stream = open(file)
         data = stream.readlines()
         stream.close()
         return eval("".join(data))
-    ```
 
 The `read_sudoku` function is an input function, and so is exempt from unit testing. Most of the following functions 
 should **not** do any input/output, and you must have unit tests for each. **Please write the unit tests first! 
