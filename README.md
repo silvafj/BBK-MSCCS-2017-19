@@ -2,17 +2,14 @@ Purposes of this assignment:
 ============================
 
 -   To give you experience with sets.
--   To get you started with "arrays" (lists, and lists of lists) and
-    nested loops.
--   [To enforce the idea of unit testing.]{style="font-size: 1rem;"}\
+-   To get you started with "arrays" (lists, and lists of lists) and nested loops.
+-   To enforce the idea of unit testing.
 
 General idea of the assignment:
-
 ===============================
 
 In **Sudoku**, you are given a 9x9 grid, divided into nine 3x3 "boxes," as shown on
-below. Each box has nine "cells," and some of these cells 
-have digits in them  (but most are blank). 
+below. Each box has nine "cells," and some of these cells have digits in them  (but most are blank). 
 
 The puzzle is to fill in the rest of the grid so that every 
 row, every column, and every 3x3 box contains the digits 1 through 9. 
@@ -20,6 +17,8 @@ In other words, every row contains all nine digits, every column
 contains all nine digits, and every box contains all nine 
 digits. Your assignment is to write a program to try to solve **Sudoku** puzzles. 
 You won't be able to solve them all. 
+
+![alt text](https://github.com/BBK-DCSIS-PoP-I-2017-18/sudoku/blob/master/images/puzzsolved.gif "Puzzle")
 
 Your task is to write a program to try to solve Sudoku puzzles. If you
 write the program correctly, it should be able to *solve* easy puzzles.
@@ -99,7 +98,7 @@ I/O, must be unit tested.
 `def read_sudoku(file_name)`
 :   Reads and returns in a Sudoku problem from a file. The file will
     contain a list of lists, such as the following:
-    ```
+
      [ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ], 
        [ 3, 0, 0,   4, 7, 0,   0, 0, 5 ], 
        [ 1, 5, 0,   8, 2, 0,   0, 0, 3 ], 
@@ -111,7 +110,7 @@ I/O, must be unit tested.
        [ 7, 0, 0,   0, 8, 0,   0, 4, 6 ], 
        [ 6, 0, 0,   0, 1, 2,   0, 0, 0 ], 
        [ 9, 3, 0,   0, 0, 0,   7, 1, 0 ] ]
-    ```
+    
 
     What might be called an "array" in other languages is called a
     "list" in Python. A two-dimensional array is a list of lists. So,
