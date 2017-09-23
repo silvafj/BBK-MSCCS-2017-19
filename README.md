@@ -132,8 +132,8 @@ The `read_sudoku` function is an input function, and so is exempt from unit te
 should **not** do any input/output, and you must have unit tests for each. **Please write the unit tests first! 
 We will be able to see if you have via your commit history** (although obviously there are ways around this but that is self defeating).
 
-`def convertToSets(problem)`
-:   Given a two-dimensional array *`problem`* of integers, create and
+`def convertToSets(problem)`:
+    Given a two-dimensional array *`problem`* of integers, create and
     return a new two-dimensional array of sets. For each location
     in *`problem`* that contains an integer 1 to 9, create a set
     containing just that one integer. For each location
@@ -142,8 +142,8 @@ We will be able to see if you have via your commit history** (although obviously
     two-dimensional array, not just a 9x9 array (this will make writing
     unit tests easier).
 
-`def convertToInts(problem)`
-:   Given a two-dimensional array `problem` of sets, create and return a
+`def convertToInts(problem)`:
+    Given a two-dimensional array `problem` of sets, create and return a
     new two-dimensional array of integers. For each location
     in `problem` that contains a singleton set (a set with only one
     element), the corresponding integer array location should contain
@@ -155,20 +155,20 @@ We will be able to see if you have via your commit history** (although obviously
     in *`problem`* contains an empty set (this should never happen), put
     a `0` in the result array.
 
-`def getRowLocations(rowNumber)`
-:   Given a `rowNumber`, return a list of all nine "locations" 
+`def getRowLocations(rowNumber)`:
+    Given a `rowNumber`, return a list of all nine "locations" 
     (`(row, column)`  tuples) in that row. 
 
-`def getColumnLocations(columnNumber)`
-:   Given a `columnNumber`, return a list of all nine "locations" 
+`def getColumnLocations(columnNumber)`:
+    Given a `columnNumber`, return a list of all nine "locations" 
     (`(row, column)`  tuples) in that column.
 
-`def getBoxLocations(location)`
-:   Return a list of all nine "locations"  (`(row, column)`  tuples) in
+`def getBoxLocations(location)`:
+    Return a list of all nine "locations"  (`(row, column)`  tuples) in
     the same box as the given `location`.
 
-`def eliminate(problem, location, listOfLocations)`
-:   The given `location` in the array *`problem`* should contain a set
+`def eliminate(problem, location, listOfLocations)`:
+    The given `location` in the array *`problem`* should contain a set
     containing a single number. For each location in
     the *`listOfLocations`* **except* `location`***, remove the number
     in *`location`* from the set in each other location. This
@@ -177,13 +177,13 @@ We will be able to see if you have via your commit history** (although obviously
     should work for any two-dimensional array, not just a 9x9 array
     (this will make writing unit tests easier).
 
-`def isSolved(problem)`
-:   Given a two-dimensional array `problem` of sets, return `True` if
+`def isSolved(problem)`:
+    Given a two-dimensional array `problem` of sets, return `True` if
     the Sudoku problem has been solved (every set contains exactly one
     element), and `False` otherwise.
 
-`def solve(problem)`
-:   Given a two-dimensional array `problem` of sets, try to solve it.
+`def solve(problem)`:
+    Given a two-dimensional array `problem` of sets, try to solve it.
     This function **changes the array** *`problem`* and
     returns `True` if the problem has been solved, `False` otherwise.\
     Here's what this function needs to do. For every location in the
@@ -192,8 +192,7 @@ We will be able to see if you have via your commit history** (although obviously
     than zero), repeat this procedure. When it is no longer possible to
     eliminate anything, return the boolean result.
 
-`def print_sudoku(problem)`:  
- 
+`def print_sudoku(problem)`:   
     Prints the Sudoku array (given as a list of lists of integers) in
     the following form, using dots to represent zeros. As this is an
     output function, don't try to write a unit test for it.
@@ -212,14 +211,14 @@ We will be able to see if you have via your commit history** (although obviously
         | 9 3 . | . . . | 7 1 . |
         +-------+-------+-------+
 
-`def main()`
-:   (Your name should be in comments at the top of your program.) Ask
-    the user for the name of a file containing a Sudoku puzzle. Print
-    the puzzle, try to solve the puzzle, then print the (possibly
+`def main()`:
+    (Your name should be in comments at the top of your program.) 
+    Ask the user for the name of a file containing a Sudoku puzzle. 
+    Print the puzzle, try to solve the puzzle, then print the (possibly
     incomplete) solution. If the puzzle has not been completely solved,
     then also print out a list of unsolved locations, and what numbers
-    are still possible for those locations. (For example, say that
-    location (0, 4) might be any of {3, 6, 9}). After each solution, ask
+    are still possible for those locations. 
+    (For example, say that location (0, 4) might be any of {3, 6, 9}). After each solution, ask
     the user if s/he wants to read in and solve another puzzle. This
     function does no real work itself; all the work is done in the
     functions that it calls. Since it also calls functions to do
