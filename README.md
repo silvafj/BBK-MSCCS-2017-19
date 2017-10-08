@@ -34,7 +34,7 @@ Start the Python interpreter and use it as a calculator.
 
 7. How many miles are there in 10 kilometres? Hint: there are 1.61 kilometres in a mile.
 
-8. If you run a 10 kilometre race in 42 minutes 42 seconds, what is your average pace (time per mile in minutes and seconds)? What is your average speed in miles per hour?
+8. (*) If you run a 10 kilometre race in 42 minutes 42 seconds, what is your average pace (time per mile in minutes and seconds)? What is your average speed in miles per hour?
 
 9. We’ve seen that `n = 42` is legal. What about `42 = n`?
 
@@ -48,15 +48,15 @@ Start the Python interpreter and use it as a calculator.
 
 14. What is the volume of a sphere with radius 5?
 
-15. Suppose the cover price of a book is $24.95, but bookstores get a 40% discount. Shipping costs $3 for the first copy and 75 cents for each additional copy. 
+15. (*) Suppose the cover price of a book is $24.95, but bookstores get a 40% discount. Shipping costs $3 for the first copy and 75 cents for each additional copy. 
 What is the total wholesale cost for 60 copies?
 
-16. If I leave my house at 6:52 am and run 1 mile at an easy pace (8:15 per mile), then 3 miles at tempo (7:12 per mile) and 1 mile at easy pace again, 
+16. (*) If I leave my house at 6:52 am and run 1 mile at an easy pace (8:15 per mile), then 3 miles at tempo (7:12 per mile) and 1 mile at easy pace again, 
 what time do I get home for breakfast?
 
 # Functions
 
-17. Write a function named `right_justify` that takes a string named `s` as a parameter and prints the string with enough leading spaces so that the last letter of the string 
+17. (*) Write a function named `right_justify` that takes a string named `s` as a parameter and prints the string with enough leading spaces so that the last letter of the string 
 is in column 70 of the display.
 ```javascript
    >>> right_justify('monty')
@@ -66,7 +66,7 @@ is in column 70 of the display.
 </pre>
 Hint: Use string concatenation and repetition. Also, Python provides a built-in function called `len` that returns the length of a string, so the value of `len('monty')` is 5.
 
-18. A function object is a value you can assign to a variable or pass as an argument. 
+18. (*) A function object is a value you can assign to a variable or pass as an argument. 
 For example, `do_twice` is a function that takes a function object as an argument and calls it twice:
 ```javascript
 def do_twice(f):
@@ -81,13 +81,13 @@ def print_spam():
 ```
 Type this example into a script and test it.
 
-19. Modify `do_twice` so that it takes two arguments, a function object and a value, and calls the function twice, passing the value as an argument.
+19. (*) Modify `do_twice` so that it takes two arguments, a function object and a value, and calls the function twice, passing the value as an argument.
 
-20. Copy the definition of `print_twice` from earlier in this section to your script.
+20. (*) Copy the definition of `print_twice` from earlier in this section to your script.
 
-21. Use the modified version of `do_twice` to call `print_twice` twice, passing 'spam' as an argument.
+21. (*) Use the modified version of `do_twice` to call `print_twice` twice, passing 'spam' as an argument.
 
-22. Define a new function called `do_four` that takes a function object and a value and calls the function four times, passing the value as a parameter. 
+22. (*) Define a new function called `do_four` that takes a function object and a value and calls the function four times, passing the value as a parameter. 
 There should be only two statements in the body of this function, not four.
 
 # Supplemental
@@ -118,8 +118,8 @@ By default, `print` advances to the next line, but you can override that behavio
 The output of these statements is '+ -'.
 A print statement with no argument ends the current line and goes to the next line.
 
-24. Write a function that draws a similar grid with four rows and four columns.
+24. (*) Write a function that draws a similar grid with user input that specifies the number of rows and columns.
 
 25. Write a program that prints your full name and your birthday as separate strings
 
-26. Write a program that shows the use of all seven math functions
+26. (*) Write a program that shows the use of all seven math functions
