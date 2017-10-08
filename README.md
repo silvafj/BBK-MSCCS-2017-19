@@ -1,6 +1,10 @@
 # Worksheet-One
 Worksheet One for Principle of Programming I
 
+These are quite simple exercises which would usually be attempted in session one. The reason for including them here is so that you can concentrate on using
+Git and GitHub (and therefore, GitHub Classroom). It is also for us to check that your submissions are arriving at GitHub Classroom. You do not need to attempt 
+all the exercises if you consider you are comfortable with the materials; in that case only attempt the "*" items.
+
 There are usually several ways to solve most programming exercises so just get something to work first and then refine it (refactor).
 
 Always experiment when you are trying out a new feature and do look at other questions and exercises above and beyond the worksheets. 
@@ -37,3 +41,41 @@ Start the Python interpreter and use it as a calculator.
 What is the total wholesale cost for 60 copies?
 16. If I leave my house at 6:52 am and run 1 mile at an easy pace (8:15 per mile), then 3 miles at tempo (7:12 per mile) and 1 mile at easy pace again, 
 what time do I get home for breakfast?
+
+# Functions
+
+17. Write a function named right_justify that takes a string named s as a parameter and prints the string with enough leading spaces so that the last letter of the string is in column 70 of the display.
+   >>> right_justify('monty')
+monty
+Hint: Use string concatenation and repetition. Also, Python provides a built-in function called len that returns the length of a string, so the value of len('monty') is 5.
+18. A function object is a value you can assign to a variable or pass as an argument. For example, do_twice is a function that takes a function object as an argument and calls it twice:
+   def do_twice(f):
+       f()
+f()
+Here’s an example that uses do_twice to call a function named print_spam twice. def print_spam():
+       print('spam')
+   do_twice(print_spam)
+Type this example into a script and test it.
+19. Modifydo_twicesothatittakestwoarguments,afunctionobjectandavalue,and calls the function twice, passing the value as an argument.
+20. Copy the definition of print_twice from earlier in this chapter to your script.
+21. Use the modified version of do_twice to call print_twice twice, passing 'spam'
+as an argument.
+22. Define a new function called do_four that takes a function object and a value and calls the function four times, passing the value as a parameter. 
+There should be only two statements in the body of this function, not four.
+
+# Supplemental
+
+23. Write a function that draws a grid like the following:
++----+----+ ||| ||| ||| ||| +----+----+ ||| ||| ||| ||| +----+----+
+Hint: to print more than one value on a line, you can print a comma-separated sequence of values:
+print('+', '-')
+By default, print advances to the next line, but you can override that behavior
+and put a space at the end, like this:
+   print('+', end=' ')
+   print('-')
+The output of these statements is '+ -'.
+A print statement with no argument ends the current line and goes to the next
+line.
+24. Write a function that draws a similar grid with four rows and four columns.
+25. Write a program that prints your full name and your birthday as separate strings
+26. Write a program that shows the use of all seven math functions
