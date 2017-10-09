@@ -6,7 +6,6 @@ Git and GitHub (and therefore, GitHub Classroom). It is also for us to check tha
 all the exercises if you consider you are comfortable with the materials; in that case only attempt the "*" items.
 
 There are usually several ways to solve most programming exercises so just get something to work first and then refine it (refactor).
-
 Always experiment when you are trying out a new feature and do look at other questions and exercises above and beyond the worksheets. 
 Programming is all about practice and experience, and you don’t get that by doing the minimum.
 Whenever you are experimenting with a new feature, you should try to make mistakes. For example, in the “Hello, world!” program, what happens 
