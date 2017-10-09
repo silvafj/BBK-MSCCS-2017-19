@@ -1,6 +1,6 @@
 # Worksheet-Two
 
-More exercises from the "Interactive Python 3 tutorial" + some questions on GitHub classroom.
+More exercises from the "Interactive Python 3 tutorial".
 
 You should attempt (at least) the "Easy" and "Medium" labelled exercises.
 
