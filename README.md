@@ -57,7 +57,7 @@ what time do I get home for breakfast?
 
 17. (*) Write a function named `right_justify` that takes a string named `s` as a parameter and prints the string with enough leading spaces so that the last letter of the string 
 is in column 70 of the display.
-```javascript
+```python
    >>> right_justify('monty')
 ```
 <pre>
@@ -67,27 +67,31 @@ Hint: Use string concatenation and repetition. Also, Python provides a built-in 
 
 18. (*) A function object is a value you can assign to a variable or pass as an argument. 
 For example, `do_twice` is a function that takes a function object as an argument and calls it twice:
-```javascript
+```python
 def do_twice(f):
 	f()
 	f()
 ```
 Here’s an example that uses `do_twice` to call a function named `print_spam` twice. 
-```javascript
+```python
 def print_spam():
     print('spam')
 	do_twice(print_spam)
 ```
-Type this example into a script and test it.
+Type this example into a script and test it. Observer the *strange* behaviour.
 
 19. (*) Modify `do_twice` so that it takes two arguments, a function object and a value, and calls the function twice, passing the value as an argument.
 
-20. (*) Copy the definition of `print_twice` from earlier in this section to your script.
+20. (*) Copy the following definition of `print_twice` to your script:
+```python
+def print_twice(s):
+	print(s)
+	print(s)
+```
 
-21. (*) Use the modified version of `do_twice` to call `print_twice` twice, passing 'spam' as an argument.
+21. (*) Use the modified version of `do_twice` to call `print_twice` twice, passing the string `"spam"` as an argument.
 
-22. (*) Define a new function called `do_four` that takes a function object and a value and calls the function four times, passing the value as a parameter. 
-There should be only two statements in the body of this function, not four.
+22. (*) Define a new function called `do_four` that takes a function object and a value and calls the function four times, passing the value as a parameter. There should be only two statements in the body of this function, not four.
 
 # Supplemental
 
