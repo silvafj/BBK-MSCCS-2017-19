@@ -1,4 +1,4 @@
-# Worksheet-Two
+# Worksheet-Two - Strings and Lists
 
 More exercises from the "Interactive Python 3 tutorial".
 
