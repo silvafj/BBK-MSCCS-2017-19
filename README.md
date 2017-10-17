@@ -1,6 +1,6 @@
 # Worksheet Three - Sets and Dictionaries
 
-More exercises from the "Interactive Python 3 tutorial". 
+More exercises from the "Interactive Python 3 tutorial" on https://snakify.org
 
 You should attempt (at least) the exercises labelled as "Easy" and "Medium".
 
