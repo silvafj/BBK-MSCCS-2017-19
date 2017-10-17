@@ -1,25 +1,17 @@
 # Worksheet Three - Sets and Dictionaries
 
-More exercises from the "Interactive Python 3 tutorial".
+More exercises from the "Interactive Python 3 tutorial". 
 
-You should attempt (at least) the "Easy" and "Medium" labelled exercises.
+You should attempt (at least) the exercises labelled as "Easy" and "Medium".
 
-<ol style="-moz-column-count: 2;
-    -moz-column-gap: 20px;
-    -webkit-column-count: 2;
-    -webkit-column-gap: 20px;
-    column-count: 2;
-    column-gap: 20px;">
-
-<li><a href="https://snakify.org/lessons/sets/problems/number_of_unique/">The number of distinct numbers</a> (Easy)</li>
-<li><a href="https://snakify.org/lessons/sets/problems/number_of_coincidental/">The number of equal numbers</a> (Easy)</li>
-<li><a href="https://snakify.org/lessons/sets/problems/sets_intersection/">The intersection of sets</a> (Medium)</li>
-<li><a href="https://snakify.org/lessons/sets/problems/cubes/">Cubes</a> (Medium)</li>
-<li><a href="https://snakify.org/lessons/sets/problems/guess_number/">Guess the number</a> (Medium)</li>
-<li><a href="https://snakify.org/lessons/sets/problems/polyglots/">Polyglots</a> (Hard)</li>
-<li><a href="https://snakify.org/lessons/dictionaries_dicts/problems/number_of_occurrences_before/">Number of occurrences</a> (Easy)</li>
-<li><a href="https://snakify.org/lessons/dictionaries_dicts/problems/synonym_dictionary/">Dictionary of synonyms</a> (Easy)</li>
-<li><a href="https://snakify.org/lessons/dictionaries_dicts/problems/permissions/">Access rights</a> (Easy)</li>
-<li><a href="https://snakify.org/lessons/dictionaries_dicts/problems/frequency_analysis/">Frequency analysis</a> (Medium)</li>
-<li><a href="https://snakify.org/lessons/dictionaries_dicts/problems/english_latin_dict/">English-Latin dictionary</a> (Medium)</li>
-</ol>
+1. [The number of distinct numbers](https://snakify.org/lessons/sets/problems/number_of_unique/) (Easy)
+2. [The number of equal numbers](https://snakify.org/lessons/sets/problems/number_of_coincidental/) (Easy)
+3. [The intersection of sets](https://snakify.org/lessons/sets/problems/sets_intersection/) (Medium)
+4. [Cubes](https://snakify.org/lessons/sets/problems/cubes/) (Medium)
+5. [Guess the number](https://snakify.org/lessons/sets/problems/guess_number/) (Medium)
+6. [Polyglots](https://snakify.org/lessons/sets/problems/polyglots/) (Hard)
+7. [Number of occurrences<](https://snakify.org/lessons/dictionaries_dicts/problems/number_of_occurrences_before/) (Easy)
+8. [Dictionary of synonyms](https://snakify.org/lessons/dictionaries_dicts/problems/synonym_dictionary/) (Easy)
+9. [Access rights](https://snakify.org/lessons/dictionaries_dicts/problems/permissions/) (Easy)
+10. [Frequency analysis](https://snakify.org/lessons/dictionaries_dicts/problems/frequency_analysis/) (Medium)
+11. [English-Latin dictionary](https://snakify.org/lessons/dictionaries_dicts/problems/english_latin_dict/) (Medium)
