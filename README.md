@@ -54,9 +54,24 @@ For written answers then please put them in a file `ex??.txt` where `??` is the 
     /* 4 */ The lamb was sure to go!
     ```
     Prompt the user for the input and output file names.
-15. (Hard) The file `deductions.csv` (from web site `http://www.irs.gov/uac/Tax-Stats-2`) contains information about many tax deductions. 
-    Write a Python program that analyzes the deduction for home mortgage interest. What is the average deduction for taxpayers in each of the listed income groups? 
-    How much more would the treasury collect if the deduction was eliminated for the top n groups?
+15. (Hard) The *Caesar* cipher, which shifts all letters by a fixed amount, is far too easy to crack. Here is a better idea. As the key, don’t use numbers but words. 
+    Suppose the key word is **FEATHER**. Then first remove duplicate letters, yielding **FEATHR**, and append the other letters of the alphabet in reverse order:
+    ```
+    FEATHRZYXWVUSQPONMLKJIGDCB
+    ```
+    Now encrypt the letters as follows:
+    ```
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    ```
+    maps to
+    ```
+    FEATHRZYXWVUSQPONMLKJIGDCB
+    ```
+ 	Using appropriate data structures and file handling, write a program that encrypts or decrypts a file using this cipher. For example,
+    ```
+    crypt -d -kFEATHER encrypt.txt output.txt 
+    ```
+    decrypts a file using the keyword *FEATHER*. It is an error not to supply a keyword.
 16. (Hard) The parent directory of the current working directory is specified by a string containing two periods, `".."`. 
     How would you list the contents of the parent directory, excluding the current working directory? 
 
