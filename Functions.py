@@ -13,25 +13,21 @@ def right_justify(s):
     """
     print((70 - len(s)) * " " + s)
 
-def do_twice(f):
+def do_twice(f, v):
     """
-    Takes a function as an argument and calls it twice.
+    Takes a function and values as arguments and calls it twice.
 
     :param func f: Function to be called twice
+    :param object v: Value to be passed as argument to f
     :return: None
 
     :Example:
-    >>> def print_spam():
-    >>>     print('spam')
-    >>> do_twice(print_spam)
+    >>> do_twice(print, "spam")
     spam
     spam
     """
-    f()
-    f()
-
-def print_spam():
-    print("spam")
+    f(v)
+    f(v)
 
 right_justify("monty")
-do_twice(print_spam)
+do_twice(print, "spam")
