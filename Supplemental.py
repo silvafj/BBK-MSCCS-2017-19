@@ -1,18 +1,25 @@
 # Supplemental.py
 
-def draw_grid():
+def draw_grid(rows, cols):
     """
-    Draws a grid with 2 rows and 2 columns.
+    Draws a grid.
+
+    :param int rows: Number of rows
+    :param int cols: Number of columns
+    :return: None
     """
+    LENGTH = 4
 
     def separator():
-        print("+", 4 * "-", "+", 4 * "-", "+", sep="")
+        line = ["+" + LENGTH * "-" for _ in range(cols)] + ["+"]
+        print(''.join(line))
 
-    for r in range(2):
+    for r in range(rows):
         separator()
-        for _ in range(4):
-            print("|", 4 * " ", "|", 4 * " ", "|", sep="")
+        for _ in range(LENGTH):
+            line = ["|" + LENGTH * " " for _ in range(cols)] + ["|"]
+            print(''.join(line))
 
     separator()
 
-draw_grid()
+draw_grid(3, 5)
