@@ -104,6 +104,8 @@ def confirm_new_game():
 def land_the_lander():
     """Deploy a new lander for the player to land."""
 
+    print("")  # Empty line for aesthetical purposes
+
     # Create a new lander instance. It will keep track of the current physical
     # state and allows us to interact with it.
     lander = Lander()
@@ -122,15 +124,42 @@ def land_the_lander():
 
 def print_lander_status(lander):
     """Update the screen with the current lander information."""
+
     print("Altitude: {:.1f}m | Velocity: {:.1f}m/s | Fuel: {:.1f}l".format(
         lander.altitude, lander.velocity, lander.fuel,
     ))
 
 
+def welcome():
+    """ Prints the welcome screen and game instructions. """
+
+    # Lunar Lander ASCII art generated from
+    # http://patorjk.com/software/taag/#p=display&f=Big&t=Lunar%20Lander
+
+    print("""
+       _                              _                     _
+      | |                            | |                   | |
+      | |    _   _ _ __   __ _ _ __  | |     __ _ _ __   __| | ___ _ __
+      | |   | | | | '_ \ / _` | '__| | |    / _` | '_ \ / _` |/ _ \ '__|
+      | |___| |_| | | | | (_| | |    | |___| (_| | | | | (_| |  __/ |
+      |______\__,_|_| |_|\__,_|_|    |______\__,_|_| |_|\__,_|\___|_|
+
+                        by Fernando Silva <fdealm02>
+
+      You are in a lunar module, some distance above the Moon's surface.
+
+      Gravity is pulling you toward the Moon at an ever-increasing rate
+      of speed.
+
+      You have a limited amount of fuel to use, and each time you burn
+      fuel, you reduce your speed by a certain amount. If you burn the
+      right amount of fuel at the right time, you can land safely.
+    """)
+
 # This is required so we can import this module from other scripts without
 # running the game immediately (e.g, unit testing)
 if __name__ == '__main__':
-    print("*** Lunar Lander ***", end="\n\n")
+    welcome()
 
     keep_playing = True
     while keep_playing:
