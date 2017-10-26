@@ -1,23 +1,24 @@
 """
 Author: Fernando Silva <fdealm02>
-
 Lunar Lander is a game that simulates the landing of a spacecraft on the moon.
 """
 
 class Lander:
     """
-    A lunar lander is a kind of spacecraft designed to conduct a moon landing.
+    A lunar lander is a kind of spacecraft designed for moon landing.
 
     This class simulates the lander physical properties and behaviours, which
     will be updated based on external inputs.
     """
 
-    # That is, velocity decreases by **some constant** times the amount of fuel. A
-    # constant of 0.15 makes the game fairly easy to win.
+    MOON_GRAVITATIONAL_ACCELERATION = 1.6  # metres/second
+
+    # That is, velocity decreases by **some constant** times the amount of fuel.
+    # A constant of 0.15 makes the game fairly easy to win.
     VELOCITY_FUEL_RATE = 0.15
 
     def __init__(self):
-        self.altitude = 1000.0  # Altitude above the moon (metres)
+        self.altitude = 100.0  # Altitude above the moon (metres)
         self.velocity = 0.0     # Velocity toward the moon (metres/second)
         self.fuel = 1000.0      # Fuel remaining (litres)
 
@@ -26,51 +27,92 @@ class Lander:
         Burn an amount of fuel and calculate the lander new position.
 
         :param float fuel: Amount of fuel to be burned
+        :return: None
         """
 
-        # We can't burn a negative amount of fuel, neither we can burn more
-        # fuel than what we currently have.
-        fuel = 0 if fuel < 0 else fuel
-        fuel = self.fuel if fuel > self.fuel else fuel
+        # Adjust the fuel to burn: (1) can't burn a negative amount of fuel,
+        # (2) neither can burn more fuel than what currently exists.
+        if fuel < 0:
+            fuel = 0
+        elif fuel > self.fuel:
+            fuel = self.fuel
 
         # Velocity increases by 1.6 m/s due to the acceleration of gravity and
-        self.velocity += 1.6
+        self.velocity += self.MOON_GRAVITATIONAL_ACCELERATION
 
         # decreases by an amount proportional to the amount of fuel just burned
         self.velocity -= fuel * self.VELOCITY_FUEL_RATE
 
-        # Altitude decreases by the velocity
+        # Altitude decreases by the velocity, adjustable as it can't be negative
         self.altitude -= self.velocity
+        if self.altitude < 0:
+            self.altitude = 0
 
         # Fuel decreases by the amount that was burn
         self.fuel -= fuel
 
     def has_landed(self):
+        """ Lander has landed if the altitude is less than or equal to 0. """
+
+        # NOTE: Checking for altitude less than or equal to 0 is to comply with
+        # the project specifications. In practice, the way the position is being
+        # calculated doesn't allow the altitude to be less 0.
+
         return self.altitude <= 0
 
     def has_landed_safely(self):
+        """ Safe landing happens if the velocity is under 10 meters/second. """
         return self.has_landed() and self.velocity <= 10
 
 
+def query_fuel_burn():
+    """
+    Specialized input for how much fuel to burn.
+
+    :return: Amount of fuel to burn
+    :rtype: float
+    """
+
+    while True:
+        print("How much fuel you want to burn? ", end="")
+
+        s = input()
+        try:
+            # Avoid that the game crashes due to bad input
+            return float(s)
+        except:
+            pass
+
+def confirm_new_game():
+    """
+    Specialized input to ask confirmation about starting a new game.
+
+    :return: The user confirmation
+    :rtype: bool
+    """
+
+    print("")  # Empty line for aesthetical purposes
+
+    while True:
+        print("Do you want to play again (y/n)? ", end="")
+
+        s = input().upper()
+        if s in ["Y", "N"]:
+            return s == "Y"
+
+
 def land_the_lander():
-    """
-    The game loop, sends a new lander to the moon that we attempt to land.
-    """
+    """Deploy a new lander for the player to land."""
 
     # Create a new lander instance. It will keep track of the current physical
     # state and allows us to interact with it.
     lander = Lander()
 
     while not lander.has_landed():
-        # Print lander current state
-        print("Altitude: {}m | Velocity: {}m/s | Fuel remaining: {}l".format(
-            lander.altitude, lander.velocity, lander.fuel,
-        ))
+        print_lander_status(lander)
+        lander.burn_fuel(query_fuel_burn())
 
-        print("How much fuel to burn?")
-        s = float(input())
-
-        lander.burn_fuel(s)
+    print_lander_status(lander)
 
     if lander.has_landed_safely():
         print("Congratulations! You have safely landed :)")
@@ -78,26 +120,21 @@ def land_the_lander():
         print("Bummer! You have crashed into the moon!")
 
 
-def confirm_new_game():
-    """
-    Ask confirmation about starting a new game.
-
-    :return: The user confirmation
-    :rtype: bool
-    """
-    # After each game, ask the user if they want to play again. Any response
-    # that begins
-    # with `'y'` or `'Y'`means "yes," any response that begins
-    # with `'n'` or `'N'` means "no," and for any other answer you should ask again.
-    pass
+def print_lander_status(lander):
+    """Update the screen with the current lander information."""
+    print("Altitude: {:.1f}m | Velocity: {:.1f}m/s | Fuel: {:.1f}l".format(
+        lander.altitude, lander.velocity, lander.fuel,
+    ))
 
 
 # This is required so we can import this module from other scripts without
 # running the game immediately (e.g, unit testing)
 if __name__ == '__main__':
-    print("*** Lunar Lander ***")
+    print("*** Lunar Lander ***", end="\n\n")
 
-    is_landing = True
-    while is_landing:
+    keep_playing = True
+    while keep_playing:
         land_the_lander()
-        is_landing = confirm_new_game()
+        keep_playing = confirm_new_game()
+
+    print("\nBye! Thank you for playing.")
