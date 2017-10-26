@@ -18,7 +18,7 @@ class Lander:
     VELOCITY_FUEL_RATE = 0.15
 
     def __init__(self):
-        self.altitude = 100.0  # Altitude above the moon (metres)
+        self.altitude = 1000.0  # Altitude above the moon (metres)
         self.velocity = 0.0     # Velocity toward the moon (metres/second)
         self.fuel = 1000.0      # Fuel remaining (litres)
 
