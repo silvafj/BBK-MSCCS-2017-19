@@ -40,9 +40,9 @@ Your final solution is unlikely to be the *optimal*
 (best possible) solution, but that's okay, so long as it isn't 
 obviously terrible.
 
-##Specific requirements
+## Specific requirements
 
-###Data representation
+### Data representation
 
 We are providing a file, `city-data.txt`, containing the 
 latitudes and longitudes of the fifty state capitals of the U.S.A. 
@@ -63,7 +63,7 @@ function parameters and function results, this does not imply that
 you have to work with these representations as you solve the problems.
 Python makes it easy to convert from one kind of sequence to another.
 
-###Required functions (file `cities.py`)
+### Required functions (file `cities.py`)
 
 `def read_cities(file_name)`
 >  Read in the cities from the given `file_name`, and return 
@@ -119,7 +119,7 @@ and handle this case correctly.
 > Reads in, and prints out, the city data, then creates the *"best"* 
 cycle and prints it out.
 
-###Required tests (file `cities_test.py`)
+### Required tests (file `cities_test.py`)
 
 Programs should be tested as thoroughly as possible using 
 the `pytest` unit testing framework. Functions that do input or output 
@@ -150,7 +150,7 @@ Here is the general approach:
    Repeat as many times as necessary until the function is complete.
 5. If any functions remain to be written, return to step 2.
 
-##Programming hints
+## Programming hints
 
 - You don't need any global variables.
 - Import `random` at the top of your program; then 
@@ -168,7 +168,7 @@ Here is the general approach:
   cities in the data set you are given, but don't use fifty in your 
   code;  you can use something like `len(city_list)` instead.
   
-##Grading
+## Grading
 
 The assignment will be graded on the basis of 100 points total:
 
