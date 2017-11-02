@@ -1,0 +1,3 @@
+# What happens if you have two values with no operator between them?
+
+Two values with no operator between them will be considered a single value.

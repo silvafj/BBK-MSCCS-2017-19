@@ -1,0 +1,5 @@
+# In a `print` statement, what happens if you leave out one of the parentheses,
+# or both?
+
+In Python 3, `print` is a function. Leaving out one or both parentheses will
+cause a syntax error. 

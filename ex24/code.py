@@ -1,5 +1,3 @@
-# Supplemental.py
-
 def draw_grid(rows, cols):
     """
     Draws a grid.
@@ -22,4 +20,10 @@ def draw_grid(rows, cols):
 
     separator()
 
-draw_grid(3, 5)
+print("How many rows?")
+rows = int(input())
+
+print("How many columns?")
+cols = int(input())
+
+draw_grid(rows, cols)

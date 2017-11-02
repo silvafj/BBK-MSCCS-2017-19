@@ -1,0 +1,9 @@
+# If you are trying to print a string, what happens if you leave out one of the
+# quotation marks, or both?
+
+If we leave out both quotation marks there are three possible scenarios:
+(1) the string is a defined variable and we will print the value of it
+(2) the string is not a defined variable and it will crash/complain at runtime
+(3) the string contains spaces and it will cause syntax error
+
+If we leave out just one of the quotation marks it will cause syntax error.

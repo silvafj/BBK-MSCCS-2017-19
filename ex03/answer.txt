@@ -1,0 +1,5 @@
+# You can use a minus sign to make a negative number like `-2`. What happens if
+# you put a plus sign before a number? What about `2++2`?
+
+`+2` is considered a valid positive integer, because `+` is the sign.
+`2++2` is a valid statement and gives `4`.

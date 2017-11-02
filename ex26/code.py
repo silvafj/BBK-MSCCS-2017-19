@@ -1,5 +1,3 @@
-# SevenMathOps.py
-
 import math
 from datetime import datetime
 

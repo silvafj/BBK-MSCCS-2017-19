@@ -1,0 +1,8 @@
+# What if you put a period at the end of a statement?
+
+Depends.
+
+If the statement is the assignment of a value to a variable `x = 5.` it
+will enforce that `x` is a float `5.0`.
+
+With that exception, the period is not a valid in the end of a statement.

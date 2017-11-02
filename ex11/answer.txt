@@ -1,0 +1,4 @@
+# In some languages every statement ends with a semi-colon, ";". What happens if
+# you put a semi-colon at the end of a Python statement?
+
+Python will parse it as statement separator.
