@@ -8,7 +8,7 @@ import random
 
 def human_move(computer_score, human_score):
     """
-    Handle the game turn of the human player
+    Handle the game turn of the human player.
 
     :param int computer_score: Computer score
     :param int human_score: Human score
@@ -16,21 +16,20 @@ def human_move(computer_score, human_score):
     :rtype: int
     """
 
-    print("Scores # You {:>4} | Computer {:>4}.".format(
-        human_score, computer_score))
-
+    how_far_message = "You are tied."
     score_diff = human_score - computer_score
-    if score_diff == 0:
-        print("You are tied.")
-    else:
-        print("You are {} {}.".format(
+    if score_diff != 0:
+        how_far_message = "You are {} {}.".format(
             abs(score_diff),
-            "ahead" if score_diff > 0 else "behind"))
+            "ahead" if score_diff > 0 else "behind")
+
+    print("{} # You {:>3} | Computer {:>3}".format(
+        how_far_message, human_score, computer_score))
 
     rolls_sum = 0
     last_roll = 0
     keep_rolling = True
-    while last_roll > 1 and keep_rolling:
+    while last_roll != 1 and keep_rolling:
         keep_rolling = ask_yes_or_no("Roll again")
         if not keep_rolling:
             break
@@ -46,18 +45,27 @@ def human_move(computer_score, human_score):
 
 def computer_move(computer_score, human_score):
     """
-    Handle the game turn of the computer player
+    Handle the game turn of the computer player.
 
     :param int computer_score: Computer score
     :param int human_score: Human score
     :return: Sum of the rolls
     :rtype: int
     """
-    # The computer rolls some number of times, displays the result of each roll,
-    # and the function returns the result (either 0 or the total of the rolls).
-    # The function may use its parameters in order to play more intelligently
-    # (for example, it may wish to gamble more agressively if it is behind).
-    pass
+
+    rolls = []
+    rolls_sum = 0
+    for _ in range(5):
+        last_roll = roll()
+        rolls.append(str(last_roll))
+        if last_roll > 1:
+            rolls_sum += last_roll
+        else:
+            rolls_sum = 0
+            break
+
+    print("Computer rolls: {}".format(', '.join(rolls)))
+    return rolls_sum
 
 
 def is_game_over(computer_score, human_score):
@@ -113,7 +121,7 @@ def show_results(computer_score, human_score):
     :return: None
     """
 
-    print("Game Over! You {} by {}".format(
+    print("Game Over! You {} by {}.".format(
         "WON" if human_score > computer_score else "LOST",
         abs(human_score - computer_score),
     ))
@@ -165,9 +173,12 @@ def main():
 
     computer_score = human_score = 0
     while not is_game_over(computer_score, human_score):
+        print("")  # Make this better aesthetically
         computer_score += computer_move(computer_score, human_score)
+        print("")  # Make this better aesthetically
         human_score += human_move(computer_score, human_score)
 
+    print("")  # Make this better aesthetically
     show_results(computer_score, human_score)
 
 
