@@ -4,33 +4,53 @@ Author: Fernando Silva <fdealm02>
 Hundred is a turn-based game and the objective is to reach a score of 100.
 """
 
+import random
 
 def human_move(computer_score, human_score):
     """
-    ???
+    Handle the game turn of the human player
 
     :param int computer_score: Computer score
     :param int human_score: Human score
-    :return: ???
+    :return: Sum of the rolls
     :rtype: int
     """
 
-    # Tells the user both her current score and the computer's score, and how far
-    # behind (or ahead) she is. Then repeatedly asks whether the user wants to
-    # roll again. This continues until either:
-    # 1. The user decides not to roll again. The function should return the
-    # total of the rolls made during this move.
-    # 2. The user rolls a 1. The function should return 0.``
-    pass
+    print("Scores # You {:>4} | Computer {:>4}.".format(
+        human_score, computer_score))
+
+    score_diff = human_score - computer_score
+    if score_diff == 0:
+        print("You are tied.")
+    else:
+        print("You are {} {}.".format(
+            abs(score_diff),
+            "ahead" if score_diff > 0 else "behind"))
+
+    rolls_sum = 0
+    last_roll = 0
+    keep_rolling = True
+    while last_roll > 1 and keep_rolling:
+        keep_rolling = ask_yes_or_no("Roll again")
+        if not keep_rolling:
+            break
+
+        last_roll = roll()
+        if last_roll > 1:
+            rolls_sum += last_roll
+        else:
+            rolls_sum = 0
+
+    return rolls_sum
 
 
 def computer_move(computer_score, human_score):
     """
-    ???
+    Handle the game turn of the computer player
 
     :param int computer_score: Computer score
     :param int human_score: Human score
-    :return: ???
+    :return: Sum of the rolls
     :rtype: int
     """
     # The computer rolls some number of times, displays the result of each roll,
@@ -50,8 +70,8 @@ def is_game_over(computer_score, human_score):
     :rtype: bool
     """
 
-    # TODO: (Call this  only after the human's move.)
-    pass
+    return computer_score != human_score and \
+           (computer_score >= 100 or human_score >= 100)
 
 
 def roll():
@@ -62,10 +82,7 @@ def roll():
     :rtype: int
     """
 
-    # To do this, find the
-    # random module on https://docs.python.org/3/library/index.html and follow the
-    # link to find the randint method.
-    pass
+    return random.randint(1, 6)
 
 
 def ask_yes_or_no(prompt):
@@ -95,7 +112,11 @@ def show_results(computer_score, human_score):
     :param int human_score: Human score
     :return: None
     """
-    pass
+
+    print("Game Over! You {} by {}".format(
+        "WON" if human_score > computer_score else "LOST",
+        abs(human_score - computer_score),
+    ))
 
 
 def instructions():
@@ -114,19 +135,40 @@ def instructions():
 
                         by Fernando Silva <fdealm02>
 
-      TODO: instructions ...
+           Two players take turns; on each turn, a player rolls a
+           six-sided die  as many times as they  desire, or until
+           they roll a 1.
+
+           Each number  they  roll is  added to  their score this
+           turn; but if they roll a 1, their score for  this turn
+           is zero and their turn ends.
+
+           At the end  of each  turn, the  score for that turn is
+           added to the player's total score. The first player to
+           reach or exceed 100 wins.
+
+           If both players reach a tie break with  a score of 100
+           or more, each gets another turn and the game continues
+           until the tie is broken.
+
+           You will play against the computer.
+
+           The computer goes first...
     """)
     pass
 
 
 def main():
     """ Program execution entry point. """
+
     instructions()
 
-    # TODO: game loop
-    # ask_yes_or_no("Roll again")
+    computer_score = human_score = 0
+    while not is_game_over(computer_score, human_score):
+        computer_score += computer_move(computer_score, human_score)
+        human_score += human_move(computer_score, human_score)
 
-    show_results()
+    show_results(computer_score, human_score)
 
 
 # This is required so we can import this module from other scripts without
