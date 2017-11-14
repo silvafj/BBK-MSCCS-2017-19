@@ -74,9 +74,7 @@ def query_fuel_burn():
     """
 
     while True:
-        print("How much fuel you want to burn? ", end="")
-
-        s = input()
+        s = input("How much fuel you want to burn? ")
         try:
             # Avoid that the game crashes due to bad input
             return float(s)
@@ -93,12 +91,13 @@ def confirm_new_game():
 
     print("")  # Empty line for aesthetical purposes
 
-    while True:
-        print("Do you want to play again (y/n)? ", end="")
+    acceptable = set(["Y", "YES", "N", "NO"])
 
-        s = input().upper()
-        if s in ["Y", "N"]:
-            return s == "Y"
+    choice = ""
+    while choice not in acceptable:
+        choice = input("Do you want to play again (y/n)? ").upper()
+
+    return choice[0] == "Y"
 
 
 def land_the_lander():
