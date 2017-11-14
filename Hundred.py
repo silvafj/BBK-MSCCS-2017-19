@@ -106,8 +106,7 @@ def ask_yes_or_no(prompt):
 
     choice = ""
     while choice not in acceptable:
-        print(prompt + " (y/n)?", end=" ")
-        choice = input().upper()
+        choice = input(prompt + " (y/n)? ").upper()
 
     return choice[0] == "Y"
 
