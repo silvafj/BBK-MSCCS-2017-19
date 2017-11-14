@@ -1,0 +1,3 @@
+A text file is stored using standard ASCII or UNICODE characters and can be
+read by any text editor. A binary file uses specialized encoding to store data
+and to read it, will require detecting and understanding its serialization.

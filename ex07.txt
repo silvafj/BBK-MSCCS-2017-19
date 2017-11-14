@@ -1,0 +1,2 @@
+When we attempt to open a file for writting that doesn't exist, a new empty file
+will be created.

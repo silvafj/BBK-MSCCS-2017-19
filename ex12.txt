@@ -1,0 +1,4 @@
+Using `seek()` we can move the file marker freely to any location of the file,
+even past the end of it. When the file is open to write, we are able to write
+data at the new location; and, when reading, it will return an empty string if
+the `seek()` was past the file size.

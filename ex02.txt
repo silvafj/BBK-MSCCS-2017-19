@@ -1,0 +1,2 @@
+It creates an empty `input.txt` file in the current directory. If `input.txt`
+exists it will be truncated.

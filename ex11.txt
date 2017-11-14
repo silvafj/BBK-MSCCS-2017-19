@@ -1,0 +1,3 @@
+A file marker is a pointer that tells us where in the file we are currently.
+This marker will move when we `read()` data or `seek()` to a specific location.
+We can check the current location in the file by using the function `tell()`.

@@ -1,0 +1,2 @@
+It's attempting to write into a file that was open as read only.
+Because of that, will throw an exception stating that is not writable.

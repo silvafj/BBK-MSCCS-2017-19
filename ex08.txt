@@ -1,0 +1,3 @@
+To open a file whose name contains a backslash we need to escape it. For
+example, if we try to open `c:\temp\output.dat` we must specify it as
+`c:\\temp\\output.dat`.
