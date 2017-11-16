@@ -74,6 +74,3 @@ class TestHundred(TestCase):
         # The minimum we should test is that the instructions are being
         # displayed. Part of those is the sentence below.
         self.assertTrue("You will play against the computer." in args[0])
-
-
-    # TODO: test main() with a few mocks just to confirm that it sums up
