@@ -5,7 +5,7 @@ shouldn't need to resort to using `snakify` directly.
 
 You should attempt (at least) the "Easy" and "Medium" labelled exercises. Place each attempt under the appropriate folder, e.g., exercise one under the folder `ex01`, etc.
 
-1. The length of the segment (Easy)
+1. **The length of the segment** (Easy)
 
 	Given four real numbers representing cartesian coordinates: 
 	(x<sub>1</sub>,y<sub>1</sub>),(x<sub>2</sub>,y<sub>2</sub>), write a function `distance(x1, y1, x2, y2)` 
@@ -14,7 +14,7 @@ You should attempt (at least) the "Easy" and "Medium" labelled exercises. Place 
 
 	The formula for distance between two points can be found at [Wolfram](http://mathworld.wolfram.com/Distance.html).
 
-2. Negative exponent (Easy) 
+2. **Negative exponent** (Easy) 
 
 	Given a positive real number *a* and integer *n*; compute a<sup>n</sup>.
 	
@@ -22,7 +22,7 @@ You should attempt (at least) the "Easy" and "Medium" labelled exercises. Place 
 
 	**Do not** use the function of the same name from the standard library.	
 
-3. Uppercase (Medium)
+3. **Uppercase** (Medium)
 
 	Write a function `capitalise(lower_case_word)` that takes the lower case word and returns the word with 
 	the first letter capitalised. E.g., `print(capitalize('word'))` should print the word `Word`.
@@ -35,7 +35,7 @@ You should attempt (at least) the "Easy" and "Medium" labelled exercises. Place 
 
 	For example, `ord('a') == 97`, and `chr(97) == 'a'`. 
 
-4. Exponentiation (Medium) 
+4. **Exponentiation** (Medium) 
 
 	Given a positive real number *a*  and a non-negative integer *n*, calculate a<sup>n</sup> without using loops, 
 	the `**` operator, or the built in function `math.pow()` (or any other *third party* function). 
@@ -44,12 +44,12 @@ You should attempt (at least) the "Easy" and "Medium" labelled exercises. Place 
 	
 	Your function should be of the form `power(a, n)`.
 	
-5. Reverse the sequence (Hard) 
+5. **Reverse the sequence** (Hard) 
 
 	Given a sequence of integers that end with a `0`, print the sequence in reverse order.
 	Don't use lists or other data structures, instead use *recursion*. 
 	
-6. Fibonacci numbers (Hard) 
+6. **Fibonacci numbers** (Hard) 
 
 	Given a non-negative integer *n*, write a function that returns the *n<sup>th</sup>* Fibonacci number. 
 	Your function should be called `fibonacci` and have a single argument, `n`.
