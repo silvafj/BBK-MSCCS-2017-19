@@ -99,10 +99,12 @@ The aim of this exercise is to learn more about layout using the ‘pack’ layo
 The program `exercise3.py` displays the following (left hand picture shows the original display and the 
 right hand side shows what happens when the window is resized):
 
-include
+![layout1][fig3]
 
 The desired behaviour is shown below. The four labels are positioned at the corners and the labels 
 fill the space when the window is resized.
+
+![layout2][fig4]
 
 ### Exercise 3.1: Arrange the labels is a square grid
 
@@ -257,3 +259,5 @@ Thanks to TEACHING LONDON COMPUTING: A RESOURCE HUB FROM CAS LONDON for the basi
 
 [fig1]: images/fig1.png "title, frame, and button"
 [fig2]: images/fig2.png "entry, button, and label"
+[fig3]: images/fig3.png "Layout 1"
+[fig4]: images/fig4.png "Layout 2"
