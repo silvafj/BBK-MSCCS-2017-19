@@ -251,6 +251,111 @@ for a suitable choice of three (or more) colours.
 
 ![radio][fig8]
 
+## 7: Additional Notes (no exercises)
+
+### 7.1 Layout
+
+When a widget is created it needs to be positioned inside its parent. 
+The positioning also needs to consider the possibility that the window may be resized. 
+Layout is the responsibility of a layout manager: Tkinter offers a choice of layout managers.
+
+These exercises have utilised the `pack` layout manager. It is simplest to get started with and also behaves 
+reasonably with respect to resizing. Other layout managers are `place` and `grid`; 
+the latter is often recommended for more complex layouts.
+
+The following two example program fragments illustrate the principles:
+```
+#
+# Create three labels of given width
+#
+bA = Label(app, text="A", width=12, bg='red')
+bB = Label(app, text="B", width=12, bg='yellow') 
+bC = Label(app, text="C", width=12, bg='blue')
+
+# Pack horizontally
+# -----------------
+# Horizontal packing with
+#  side = "left"
+#  side = "right"
+
+bA.pack(side='left') 
+bB.pack(side='left') 
+bC.pack(side='left')
+```
+results in the display:
+
+![screen][fig9]
+
+Whereas the vertical packing:
+```
+# Pack vertically
+# ---------------
+# Vertical packing with
+#  side = "top"
+#  side = "bottom"
+#
+bA.pack(side='top') 
+bB.pack(side='top') 
+bC.pack(side='top')
+```
+displays:
+
+![screen][fig10]
+
+There are two ways to control layout further using pack:
+
+1. Create extra frames to hold widgets. For example, to position widget in the four quadrants of a square, 
+   create frames for the two and bottom halves and pack these vertically, then pack the widgets 
+   horizontally into the two frames.
+2. Use the ‘expand’ and ‘fill’ attributes of pack.
+	* Fill (values X, Y, BOTH) determines the direction in which a widget can grow to fill available space.
+	* Expand (integer value) determines whether the containing frame gives more space to the widgets it contains. 
+	  A zero value means no expansion. A positive value determine the relative expansion of each widget.
+
+
+### 7.2 The Top-Level Window
+
+A *top-level window* is a window that has an independent existence under the window manager. 
+It has the standard icons for closing or minimising the window, and can be moved and resized independently. 
+Your application can use any number of top-level windows.
+
+A top level window can conveniently be created:
+
+#### Attributes
+
+| attribute  | meaning  |
+|---------------|----------------|
+| `bg` or `background`    |   The background color of the window.   |
+| `menu`    |   To provide this window with a top-level menubar, supply a `Menu` widget as the value of this option.  |
+
+#### Methods
+
+| method name  | meaning  |
+|---------------|----------------|
+| `.geometry(newGeometry=None)`   |   Set the window geometry. For example: `200x400`, `200x400+10+20`, `200x400-10-20`. If the argument is omitted, the current geometry string is returned.  |
+| `.title(text=None)`   |  Set the window title. If the argument is omitted, returns the current title.   |
+
+### 7.3 Message Dialogs
+
+The following message dialogs can prove useful:
+
+![dialogs][fig11]
+
+On messages with a choice, the default choice is the first one. Use the `default` option:
+```
+default = C
+```
+
+to change this where `C = CANCEL`, `IGNORE`, `OK`, `NO`, `RETRY`, or `YES`
+
+
+Each of the `ask...` pop-up functions returns a value that depends on which button the user pushed to 
+remove the pop-up.
+
+* `askokcancel`, `askretrycancel`, and `askyesno` all return a bool value: `True` for `OK` or `Yes` choices, 
+   `False` for `No` or `Cancel` choices.
+* `askquestion` returns `yes` for `Yes`, or `no` for `No`.
+
 -----------------
 
 Thanks to TEACHING LONDON COMPUTING: A RESOURCE HUB FROM CAS LONDON for the basis of this worksheet.
@@ -264,4 +369,6 @@ Thanks to TEACHING LONDON COMPUTING: A RESOURCE HUB FROM CAS LONDON for the basi
 [fig6]: images/menu1.png "Menu example"
 [fig7]: images/radio1.png "Radio buttons example 1"
 [fig8]: images/radio2.png "Radio buttons example 2"
-
+[fig9]: images/screen1.png "Pack example"
+[fig10]: images/screen2.png "Pack example II"
+[fig11]: images/dialogs.png "Example dialogs"
