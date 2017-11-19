@@ -94,7 +94,7 @@ it only prints the text from the entry. Complete it so that it behaves as descri
 
 ## Exercise 3: Managing Layout
 
-The aim of this exercise is to learn more about layout using the ‘pack’ layout manager. 
+The aim of this exercise is to learn more about layout using the `pack` layout manager. 
 
 The program `exercise3.py` displays the following (left hand picture shows the original display and the 
 right hand side shows what happens when the window is resized):
@@ -108,7 +108,7 @@ fill the space when the window is resized.
 
 ### Exercise 3.1: Arrange the labels is a square grid
 
-The pack layout manager introduces extra frames so that the labels are in the frames and the frames are 
+The `pack` layout manager introduces extra frames so that the labels are in the frames and the frames are 
 in the top-level window. In the diagram above, the frames have a border so they can be seen.
 
 
@@ -282,7 +282,7 @@ bA.pack(side='left')
 bB.pack(side='left') 
 bC.pack(side='left')
 ```
-results in the display:
+results in the display (`pack-ex1.py`:
 
 ![screen][fig9]
 
@@ -298,7 +298,7 @@ bA.pack(side='top')
 bB.pack(side='top') 
 bC.pack(side='top')
 ```
-displays:
+displays (`pack-ex2.py`:
 
 ![screen][fig10]
 
