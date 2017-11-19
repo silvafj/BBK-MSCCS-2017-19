@@ -58,7 +58,7 @@ Although it has not been explained yet, see if you can figure out how to make th
 
 The aim of this exercise is to try out getting and setting attributes. The exercise is in two parts: at the end, your program should display the following:
 
-include
+![buttons][fig2]
 
 The widgets are:
 
@@ -256,3 +256,4 @@ Thanks to TEACHING LONDON COMPUTING: A RESOURCE HUB FROM CAS LONDON for the basi
 
 
 [fig1]: images/fig1.png "title, frame, and button"
+[fig2]: images/fig2.png "entry, button, and label"
