@@ -1,4 +1,4 @@
-import sum from sum
+from sum import sum
 
 def test_one():
 	assert sum(1) == 1

@@ -1,0 +1,2 @@
+def digitalSum(n):
+	pass
