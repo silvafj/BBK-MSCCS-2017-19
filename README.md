@@ -40,7 +40,7 @@ As usual, you should (at least) attempt the exercises labelled "Easy" and "Mediu
 	Implement this recursive algorithm in Python as the function `how_many(num)`, where `num` represents the positive
 	integer value for which we wish to determine the number of digits.
 
-1. (Medium) Define a recursive function `nestedListContains(NL, target)`, that takes a nested list `NL` of 
+1. (Hard) Define a recursive function `nestedListContains(NL, target)`, that takes a nested list `NL` of 
 	integers and an integer value `target`, and indicates whether `target` is contained anywhere in the nested list. 
 	Your code should return the boolean value `True` when the specified value is contained in the nested list, 
 	and `False` otherwise.
@@ -49,7 +49,7 @@ As usual, you should (at least) attempt the exercises labelled "Easy" and "Mediu
 	`nestedListContains([1, [2, [3], 4]], 5)` shou reurn `False`.
 
 
-1. (Hard) Write a recursive Python function `max(lst)` that has a parameter (`lst`) 
+1. (Medium) Write a recursive Python function `max(lst)` that has a parameter (`lst`) 
 	representing a list of integers and returns the maximum stored in the list. 
 
 	Thinking recursively, the maximum is either the first value in the list or the maximum 
