@@ -1,7 +1,8 @@
 # Worksheet on recursion using Python (I)
 
-These exercises are from the "Interactive Python 3 tutorial" but we include the tests in this repository so you 
-shouldn't need to resort to using `snakify` directly. Place each attempt under the appropriate folder, e.g., exercise one under the folder `ex01`, etc.; you should find the appropriate tests under the respective folder.
+These exercises are modified versions of the exercises from the "Interactive Python 3 tutorial";
+we include the tests in this repository so you shouldn't need to resort to using `snakify` directly. 
+Place each attempt under the appropriate folder, e.g., exercise one under the folder `ex01`, etc.; you should find the appropriate tests under the respective folder.
 
 
 As usual, you should (at least) attempt the exercises labelled "Easy" and "Medium". 
