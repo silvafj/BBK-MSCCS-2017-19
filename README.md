@@ -126,7 +126,7 @@ The aim of this exercise is to learn about the drawing canvas and also to use tw
 
 The program `exercise4.py` displays a canvas with some shapes:
 
-include
+![canvas][fig5]
 
 In addition, two events are bound:
 
@@ -155,7 +155,7 @@ The aim of this exercise is to use dialogs and menus.
 
 The program `example5.py` displays a frame, with two menu items.
 
-include
+![menu][fig6]
 
 It does not do much yet! Change it to a simple application that can read a file, 
 convert it to upper case and save it again. The commands are:
@@ -242,15 +242,14 @@ root.mainloop()
 * There are three radio buttons
 * Selecting one of the buttons changes the text of the label.
 
-include
+![radio][fig7]
 
 ### Exercise 6.1: Enhanced the program
 
 The complete program should change the colour of the button is well as the text, 
 for a suitable choice of three (or more) colours.
 
-include
-
+![radio][fig8]
 
 -----------------
 
@@ -261,3 +260,8 @@ Thanks to TEACHING LONDON COMPUTING: A RESOURCE HUB FROM CAS LONDON for the basi
 [fig2]: images/fig2.png "entry, button, and label"
 [fig3]: images/fig3.png "Layout 1"
 [fig4]: images/fig4.png "Layout 2"
+[fig5]: images/canvas1.png "Canvas example"
+[fig6]: images/menu1.png "Menu example"
+[fig7]: images/radio1.png "Radio buttons example 1"
+[fig8]: images/radio2.png "Radio buttons example 2"
+
