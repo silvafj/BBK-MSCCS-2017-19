@@ -80,7 +80,7 @@ As usual, you should (at least) attempt the exercises labelled "Easy" and "Mediu
 	Mathematicians believe that every hailstone sequence reaches 1 eventually, no matter what value of n we start 
 	with. However, no one has been able to prove this yet.
 	
-1. (Hard) Write a recursive function in Python for the sieve of Eratosthenes (`sieve`.
+1. (Hard) Write a recursive function in Python for the sieve of Eratosthenes (`sieve`).
 	
 	The sieve of Eratosthenes is a simple algorithm for finding all prime numbers up to a specified integer. 
 	It was created by the ancient Greek mathematician *Eratosthenes*. 
