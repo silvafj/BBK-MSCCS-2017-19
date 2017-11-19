@@ -18,9 +18,10 @@ As usual, you should (at least) attempt the exercises labelled "Easy" and "Mediu
 
 	Given a positive real number *a* and integer *n*; compute a<sup>n</sup>.
 	
-	Write a function `power(a, n)` to calculate the results using the function.
+	Write a function `power(a, n)` to calculate the results using the function. 
+	You should **not** use recursion for this exercise.
 
-	**Do not** use the function of the same name from the standard library.	
+	**Do not** use the an equivalent function from the standard library, or the built-in operator `**`.	
 
 3. **Uppercase** (Medium)
 
@@ -45,7 +46,9 @@ As usual, you should (at least) attempt the exercises labelled "Easy" and "Mediu
 	
 5. **Reverse the sequence** (Hard) 
 
-	Given a sequence of integers that end with a `0`, return the sequence in reverse order.
+	Write a function named `reverse(seq)`, where `seq` is a sequence of integers that end with a `0`, that returns 
+	the sequence in reverse order.
+	
 	Don't use lists or other data structures, instead use *recursion*. 
 	
 6. **Fibonacci numbers** (Hard) 
