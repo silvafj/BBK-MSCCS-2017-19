@@ -1,7 +1,8 @@
 def capitalise(lower_case_word):
 	"""Capitalises the first letter of each word."""
-	words = lower_case_word.split()
-	for i in range(len(words)):
-		words[i] = chr(ord(words[i][0]) - 32) + words[i][1:]
+	upper_to_lower = ord('A') - ord('a')
+
+	words = [chr(ord(word[0]) + upper_to_lower) + word[1:]
+			 for word in lower_case_word.split()]
 
 	return ' '.join(words)
