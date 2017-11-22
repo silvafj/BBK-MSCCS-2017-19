@@ -6,9 +6,9 @@ def sieve(n):
     primes = {i: True for i in range(2, n + 1)}
 
     i = 2
-    while i <= n:
+    while i <= sqrt(n):
         if primes[i]:
-            j = 2
+            j = i
             while j <= n:
                 if i * j in primes:
                     primes[i * j] = False
