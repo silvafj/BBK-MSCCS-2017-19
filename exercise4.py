@@ -1,6 +1,6 @@
 # CODE for EXERCISE 4
 # -------------------
-# This exercise introduces  
+# This exercise introduces
 #   * Canvas widget
 #   * Event bindings
 #
@@ -17,7 +17,7 @@ app.geometry('400x400')  # OPTIONALLY set the size
 # -----------------
 #   - background is blue (this is a bit odd)
 #   - make it as large as the main window
-w = Canvas(app, bg='blue') 
+w = Canvas(app, bg='blue')
 w.pack(expand = 1, fill = BOTH)
 
 
@@ -28,8 +28,6 @@ w.pack(expand = 1, fill = BOTH)
 #        bottom right corner at (x1, y1)
 #   - oval(x0, y0, x1, y1, ...), also used for circles
 #   - text(x, y, text="...", ...)
-w.create_rectangle(10, 10, 100, 50, outline="red", width = 5)
-w.create_rectangle(50, 150, 100, 200, fill="yellow")
 w.create_oval(140, 110, 200, 170, outline="green", width = 5)
 w.create_text(200, 200, text = "Hello")
 
@@ -53,7 +51,9 @@ app.bind("<KeyPress-h>", hKey)
 #
 def mouseClick(event):
     print("Mouse click at x =", event.x, "y =", event.y)
-    
+    w.create_rectangle(event.x, event.y, event.x + 100, event.y + 100,
+                       fill="green", outline="red", width = 2)
+
 # Bind the mouse click TO THE CANVAS
 #   bind has a pattern and a function name
 #   The pattern is "<Button-1>"
