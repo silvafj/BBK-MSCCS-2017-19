@@ -18,8 +18,15 @@ app.geometry('200x100')
 #    * copy it to the label
 # This means updating the test attribute of the Label
 def copyTextToLabel():
-    if v.get():
+    if b1["text"] == "Clear Text":
+        v.set("")
+        b1["text"] = "Copy Text"
+    elif v.get():
+        b1["background"] = app.cget("background")
         l1["text"] = v.get()
+        b1["text"] = "Clear Text"
+    else:
+        b1["background"] = "red"
     print(v.get()) # This shows how to get the string from v
 
 # Create a button
