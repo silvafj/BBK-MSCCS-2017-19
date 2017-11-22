@@ -1,6 +1,6 @@
 # CODE for EXERCISE 3
 # -------------------
-# This exercise introduces  
+# This exercise introduces
 #   * Difference border styles
 #   * Pack options: side, fill, expand
 #
@@ -20,10 +20,13 @@ app.title("GUI Example 3") # OPTIONALLY set the title
 #
 # bg - background colour
 #
-bA = Label(app, text="A", width=12, bg='red', relief=GROOVE, bd=5)
-bB = Label(app, text="B", width=12, bg='yellow')
-bC = Label(app, text="C", width=12, bg='blue')
-bD = Label(app, text="D", width=12, bg='white')
+lF = Frame(app, bd=1, relief=RAISED)
+bA = Label(lF, text="A", width=12, bg='blue')
+bB = Label(lF, text="B", width=12, bg='white')
+
+rF = Frame(app, bd=1, relief=RAISED)
+bC = Label(rF, text="C", width=12, bg='white')
+bD = Label(rF, text="D", width=12, bg='blue')
 
 # Pack arguments
 # ---------------
@@ -35,11 +38,15 @@ bD = Label(app, text="D", width=12, bg='white')
 #
 # Expand: is more space give to widget, by its parent?
 #    expand=0 (default) no epxansion
-#    expand=1 expand - number gives relative expansion 
-bA.pack(side='top',fill=X, expand=1)
-bB.pack(side='bottom')
-bC.pack(side='left', fill=Y, expand=1)
-bD.pack(side='right')
+#    expand=1 expand - number gives relative expansion
+
+lF.pack(side="left", fill=BOTH, expand=1)
+bA.pack(side='top', fill=BOTH, expand=1)
+bB.pack(side='bottom', fill=BOTH, expand=1)
+
+rF.pack(side="right", fill=BOTH, expand=1)
+bC.pack(side='top', fill=BOTH, expand=1)
+bD.pack(side='bottom', fill=BOTH, expand=1)
 
 
 app.mainloop() # Start the main loop
