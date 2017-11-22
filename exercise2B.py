@@ -1,6 +1,6 @@
 # CODE for EXERCISE 2B
 # -------------------
-# This exercise introduces  
+# This exercise introduces
 #   * The label widget (part A)
 #   * The entry widget (part B)
 #
@@ -13,12 +13,13 @@ app = Tk()
 app.title("GUI Example")
 app.geometry('200x100')
 
-# MODIFY THIS METHOD
-# This method should 
+# This method should
 #    * check if text has been entered
 #    * copy it to the label
 # This means updating the test attribute of the Label
 def copyTextToLabel():
+    if v.get():
+        l1["text"] = v.get()
     print(v.get()) # This shows how to get the string from v
 
 # Create a button
