@@ -1,6 +1,6 @@
 # CODE for EXERCISE 2, Part A
 # ---------------------------
-# This exercise introduces  
+# This exercise introduces
 #   * The label widget (part A)
 #   * The entry widget (part B)
 #
@@ -13,15 +13,13 @@ app = Tk()
 app.title("GUI Example")
 app.geometry('200x100')
 
-# MODIFY THIS METHOD
 # This method should update the label text when the button is pressed
 #    * If the text is "Text A", change it to Text B
 #    * If the text is "Text B", change it to Text A
-# This means reading and updating the text attribute of the Label
 def changeLabelText():
-    print("The current text is", l1['text']) # get an attribute value
-    l1['text'] = "Changed Text"              # set an attribute
-        
+    print("The current text is", l1['text'])
+    l1['text'] = "Text B" if l1['text'] == "Text A" else "Text A"
+
 # Create a button
 b1 = Button(app, text="Change Text", command=changeLabelText)
 
