@@ -1,6 +1,6 @@
 # CODE for EXERCISE 5
 # -------------------
-# This exercise introduces  
+# This exercise introduces
 #   * Menus
 #   * Dialogs
 #
@@ -15,7 +15,7 @@ app.geometry('400x400')
 # Create handlers for menu items
 # ------------------------------
 # These function handle the menu selections
-# 
+#
 # Three of the handlers use dialogs
 #   - a dialog is a special window that forces a response
 #   - some dialogs are for messages / questions / errors
@@ -37,7 +37,7 @@ def openFile():
         title="Choose a file to open", \
         filetypes=[("Text","*.txt"), ("All", "*")] )
     print(filename)
-    
+
 # Create menu bar and menus
 #-------------------
 # The Menu widget is used twice
@@ -49,8 +49,13 @@ app.winfo_toplevel()['menu'] = menuBar
 
 file = Menu(menuBar)
 file.add_command(label='Open', command=openFile)
+file.add_command(label='Save')
 file.add_command(label='Quit', command=exitApp)
 menuBar.add_cascade(label="File", menu=file)
+
+edit = Menu(menuBar)
+edit.add_command(label='Convert to upper')
+menuBar.add_cascade(label="Edit", menu=edit)
 
 hlp = Menu(menuBar)
 hlp.add_command(label='Help', command=giveHelp)
@@ -58,4 +63,3 @@ hlp.add_command(label='About', command=aboutMsg)
 menuBar.add_cascade(label="Help", menu=hlp)
 
 app.mainloop()
-
