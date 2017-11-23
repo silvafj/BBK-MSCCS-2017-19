@@ -17,46 +17,83 @@ app.geometry('400x400')
 
 current_filename = None
 current_contents = None
+current_file_changed = False
 
 def exitApp():
+    if not confirmUnsavedChanges("quit"):
+        return
+
     app.destroy()
 
 def giveHelp():
-    ans = messagebox.askquestion("Not Much Help", "Are you sure you need help", \
-                    default=messagebox.NO)
+    ans = messagebox.askquestion("Not Much Help",
+                                 "Are you sure you need help",
+                                 default=messagebox.NO)
     print(ans)
 
 def aboutMsg():
-    messagebox.showinfo("About Exercise 5", "Exercise 5 covers menus and dialogs")
+    messagebox.showinfo("About Exercise 5",
+                        "Exercise 5 covers menus and dialogs")
 
 def openFile():
-    global current_filename, current_contents
+    global current_filename, current_contents, current_file_changed
 
-    filename = filedialog.askopenfilename( \
-        title="Choose a file to open", \
-        filetypes=[("Text","*.txt"), ("All", "*")] )
+    if not confirmUnsavedChanges("open file"):
+        return
+
+    filename = filedialog.askopenfilename(
+        title="Choose a file to open",
+        filetypes=[("Text","*.txt"), ("All", "*")])
     print(filename)
-    current_filename = filename
-    with open(current_filename, "r") as f:
-        current_contents = f.read()
+
+    if filename:
+        with open(filename, "r") as f:
+            current_contents = f.read()
+            current_file_changed = False
+            current_filename = filename
 
 def saveFile():
-    global current_filename, current_contents
+    global current_filename, current_contents, current_file_changed
+
+    if not current_filename:
+        messagebox.showerror("Error", "No open file!")
+        return
+
+    if not current_file_changed:
+        messagebox.showinfo("Changes", "No changes to be saved.")
+        return
 
     with open(current_filename, "w") as f:
         f.write(current_contents)
+        current_file_changed = False
 
 def convertFile():
-    global current_contents
+    global current_filename, current_contents, current_file_changed
+
+    if not current_filename:
+        messagebox.showerror("Error", "No open file!")
+        return
 
     if current_contents:
         current_contents = current_contents.upper()
+        current_file_changed = True
+
+def confirmUnsavedChanges(action):
+    global current_file_changed
+
+    if not current_file_changed:
+        return True
+
+    ans = messagebox.askquestion(
+        "Unsaved changes",
+         "Do you want to {}?".format(action),
+         default=messagebox.NO)
+
+    return ans == "yes"
+
 
 # Create menu bar and menus
-#-------------------
-# The Menu widget is used twice
-#   - for the menu bar
-#   - for tne menu in the menu bar
+# -------------------------
 
 menuBar = Menu(app)
 app.winfo_toplevel()['menu'] = menuBar
