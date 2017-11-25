@@ -33,7 +33,7 @@ class Lander:
         # Adjust the fuel to burn: (1) can't burn a negative amount of fuel,
         # (2) neither can burn more fuel than what currently exists.
         if fuel < 0:
-            fuel = 0
+            fuel = 0.0
         elif fuel > self.fuel:
             fuel = self.fuel
 
@@ -74,11 +74,11 @@ def query_fuel_burn():
     """
 
     while True:
-        s = input("How much fuel you want to burn? ")
+        to_burn = input("How much fuel you want to burn? ")
         try:
             # Avoid that the game crashes due to bad input
-            return float(s)
-        except:
+            return float(to_burn)
+        except Exception:
             pass
 
 def confirm_new_game():
