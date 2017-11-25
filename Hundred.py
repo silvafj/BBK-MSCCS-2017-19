@@ -162,7 +162,6 @@ def instructions():
 
            The computer goes first...
     """)
-    pass
 
 
 def main():
