@@ -43,8 +43,6 @@ class TestSudoku2011(unittest.TestCase):
         array[3][5] = {1, 2}
         self.assertFalse(all([len(array[r][c]) == 1 for r in range(0, 9)
                                                     for c in range(0, 9)]))
-
-"""
     def testSolve(self):
         # Easy
         sudoku1 = [[4, 0, 0,  0, 0, 3,  0, 7, 0],
@@ -131,4 +129,3 @@ class TestSudoku2011(unittest.TestCase):
         solved = convertToInts(problemAsSets)
 ##        print_sudoku(solution)
         self.assertEqual(solution, solved)
-"""

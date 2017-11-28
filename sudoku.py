@@ -116,9 +116,16 @@ def eliminate(problem, location, listOfLocations):
         return 0
 
     number = next(iter(number_set))
-    count = 0
 
+    # Don't perform the elimination on the source location
+    if location in listOfLocations:
+        listOfLocations.remove(location)
+
+    count = 0
     for loc_remove in listOfLocations:
+        if loc_remove == location:
+            continue
+
         lr, lc = loc_remove
         if number in problem[lr][lc]:
             problem[lr][lc] = problem[lr][lc] - number_set
@@ -145,8 +152,26 @@ def isSolved(problem):
 
 
 def solve(problem):
-    """Given a two-dimensional array `problem` of sets, try to solve it."""
-    pass
+    """
+    Given a two-dimensional array of sets, try to solve it.
+
+    :param array problem: Two-dimensional array of sets
+    :return: If the problem has been solved, return True
+    :rtype: bool
+    """
+    eliminate_count = 1
+    while eliminate_count > 0:
+        eliminate_count = 0
+
+        for row in range(len(problem)):
+            for col in range(len(problem[row])):
+                location = (row, col)
+                locations = getRowLocations(row)
+                locations.extend(getColumnLocations(col))
+                locations.extend(getBoxLocations(location))
+                eliminate_count += eliminate(problem, location, locations)
+
+    return isSolved(problem)
 
 
 def print_sudoku(problem):

@@ -9,13 +9,13 @@ General idea of the assignment:
 ===============================
 
 In **Sudoku**, you are given a 9x9 grid, divided into nine 3x3 "boxes," as shown on
-below. Each box has nine "cells," and some of these cells have digits in them  (but most are blank). 
+below. Each box has nine "cells," and some of these cells have digits in them  (but most are blank).
 
-The puzzle is to fill in the rest of the grid so that every 
-row, every column, and every 3x3 box contains the digits 1 through 9. 
-In other words, every row contains all nine digits, every column 
-contains all nine digits, and every box contains all nine 
-digits. Your assignment is to write a program to try to solve **Sudoku** puzzles. 
+The puzzle is to fill in the rest of the grid so that every
+row, every column, and every 3x3 box contains the digits 1 through 9.
+In other words, every row contains all nine digits, every column
+contains all nine digits, and every box contains all nine
+digits. Your assignment is to write a program to try to solve **Sudoku** puzzles.
 You won't be able to solve them all. 
 
 ![alt text](https://github.com/BBK-DCSIS-PoP-I-2017-18/sudoku/blob/master/images/puzzsolved.gif "Puzzle")
@@ -99,27 +99,27 @@ I/O, must be unit tested.
     Reads and returns in a Sudoku problem from a file. The file will
     contain a list of lists, such as the following:
 
-     [ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ], 
-       [ 3, 0, 0,   4, 7, 0,   0, 0, 5 ], 
-       [ 1, 5, 0,   8, 2, 0,   0, 0, 3 ], 
-                                          
-       [ 0, 0, 6,   0, 0, 0,   0, 3, 1 ], 
-       [ 8, 0, 2,   1, 0, 5,   6, 0, 4 ], 
-       [ 4, 1, 0,   0, 0, 0,   9, 0, 0 ], 
-                                          
-       [ 7, 0, 0,   0, 8, 0,   0, 4, 6 ], 
-       [ 6, 0, 0,   0, 1, 2,   0, 0, 0 ], 
+     [ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ],
+       [ 3, 0, 0,   4, 7, 0,   0, 0, 5 ],
+       [ 1, 5, 0,   8, 2, 0,   0, 0, 3 ],
+
+       [ 0, 0, 6,   0, 0, 0,   0, 3, 1 ],
+       [ 8, 0, 2,   1, 0, 5,   6, 0, 4 ],
+       [ 4, 1, 0,   0, 0, 0,   9, 0, 0 ],
+
+       [ 7, 0, 0,   0, 8, 0,   0, 4, 6 ],
+       [ 6, 0, 0,   0, 1, 2,   0, 0, 0 ],
        [ 9, 3, 0,   0, 0, 0,   7, 1, 0 ] ]
-    
+
 
 What might be called an "array" in other languages is called a
 "list" in Python. A two-dimensional array is a list of lists. So,
 for example, if the above data is in an "array" named `problem`,
-then `problem[8]` is the list `[9, 3, 0, 0, 0, 0, 7, 1, 0]`, while `problem[8][0]` contains the integer `9`. 
-You can find the number of rows in a two-dimensional 
-array `problem` with `len(problem)`, and you can find the number of columns with `len(problem[0])`. 
+then `problem[8]` is the list `[9, 3, 0, 0, 0, 0, 7, 1, 0]`, while `problem[8][0]` contains the integer `9`.
+You can find the number of rows in a two-dimensional
+array `problem` with `len(problem)`, and you can find the number of columns with `len(problem[0])`.
 For this assignment, represent a location in an array with a  `(row, column)`  2-tuple.
-    
+
 Since we haven't told you yet how to read from files, here's the code:
 
     def read_sudoku(file):
@@ -128,8 +128,8 @@ Since we haven't told you yet how to read from files, here's the code:
         stream.close()
         return eval("".join(data))
 
-The `read_sudoku` function is an input function, and so is exempt from unit testing. Most of the following functions 
-should **not** do any input/output, and you must have unit tests for each. **Please write the unit tests first! 
+The `read_sudoku` function is an input function, and so is exempt from unit testing. Most of the following functions
+should **not** do any input/output, and you must have unit tests for each. **Please write the unit tests first!
 We will be able to see if you have via your commit history** (although obviously there are ways around this but that is self defeating).
 
 `def convertToSets(problem)`:   
@@ -157,7 +157,7 @@ We will be able to see if you have via your commit history** (although obviously
 
 `def getRowLocations(rowNumber)`:   
     Given a `rowNumber`, return a list of all nine "locations" 
-    (`(row, column)`  tuples) in that row. 
+    (`(row, column)`  tuples) in that row.
 
 `def getColumnLocations(columnNumber)`:   
     Given a `columnNumber`, return a list of all nine "locations" 
@@ -201,7 +201,7 @@ We will be able to see if you have via your commit history** (although obviously
         | . . 4 | . . . | . 6 7 |
         | 3 . . | 4 7 . | . . 5 |
         | 1 5 . | 8 2 . | . . 3 |
-        +-------+-------+-------+ 
+        +-------+-------+-------+
         | . . 6 | . . . | . 3 1 |
         | 8 . 2 | 1 . 5 | 6 . 4 |
         | 4 1 . | . . . | 9 . . |
@@ -212,12 +212,12 @@ We will be able to see if you have via your commit history** (although obviously
         +-------+-------+-------+
 
 `def main()`:   
-    (Your name should be in comments at the top of your program.) 
-    Ask the user for the name of a file containing a Sudoku puzzle. 
+    (Your name should be in comments at the top of your program.)
+    Ask the user for the name of a file containing a Sudoku puzzle.
     Print the puzzle, try to solve the puzzle, then print the (possibly
     incomplete) solution. If the puzzle has not been completely solved,
     then also print out a list of unsolved locations, and what numbers
-    are still possible for those locations. 
+    are still possible for those locations.
     (For example, say that location (0, 4) might be any of {3, 6, 9}). After each solution, ask
     the user if s/he wants to read in and solve another puzzle. This
     function does no real work itself; all the work is done in the
@@ -259,24 +259,24 @@ The following puzzles can probably be solved by your program:
 [ [ 0, 8, 0,   0, 0, 0,   2, 0, 5 ],
   [ 7, 0, 1,   4, 0, 0,   0, 8, 9 ],
   [ 9, 0, 0,   3, 5, 0,   0, 1, 0 ],
-          
+
   [ 0, 0, 9,   0, 0, 7,   6, 3, 0 ],
   [ 0, 0, 2,   0, 0, 9,   7, 0, 0 ],
   [ 0, 7, 8,   5, 0, 0,   0, 0, 0 ],
-          
+
   [ 0, 6, 0,   0, 4, 5,   0, 0, 3 ],
   [ 2, 9, 0,   0, 0, 6,   5, 0, 1 ],
   [ 4, 0, 5,   0, 0, 0,   8, 7, 0 ] ]
-  
+
 
 [ [ 0, 1, 6,   0, 0, 9,   0, 0, 2 ],
   [ 0, 0, 0,   0, 3, 1,   0, 4, 0 ],
   [ 8, 7, 0,   5, 2, 0,   0, 1, 0 ],
-  
+
   [ 0, 0, 9,   0, 8, 0,   2, 0, 1 ],
   [ 5, 0, 0,   6, 0, 7,   0, 0, 9 ],
   [ 4, 0, 1,   0, 5, 0,   3, 0, 0 ],
-  
+
   [ 0, 4, 0,   0, 7, 8,   0, 9, 5 ],
   [ 0, 9, 0,   3, 6, 0,   0, 0, 0 ],
   [ 2, 0, 0,   1, 0, 0,   6, 3, 0 ] ]
@@ -294,7 +294,7 @@ The following puzzles can probably be solved by your program:
   [ 7, 0, 0,   0, 8, 0,   0, 4, 6 ],
   [ 6, 0, 0,   0, 1, 2,   0, 0, 0 ],
   [ 9, 3, 0,   0, 0, 0,   7, 1, 0 ] ]
-  
+
 [ [ 0, 0, 0,   2, 0, 3,   9, 6, 0 ],
   [ 2, 0, 6,   0, 0, 7,   0, 3, 0 ],
   [ 7, 0, 0,   1, 5, 0,   8, 0, 0 ],
@@ -308,30 +308,30 @@ The following puzzles can probably be solved by your program:
   [ 0, 0, 7,   0, 6, 8,   0, 0, 3 ],
   [ 0, 3, 0,   7, 0, 0,   4, 0, 6 ],
   [ 0, 1, 2,   9, 0, 4,   0, 0, 0 ] ]
-  
+
 ```
 The following puzzles probably cannot be completely solved by your program:
 ```
 [ [ 0, 6, 0,   1, 0, 4,   0, 5, 0 ],
   [ 0, 0, 8,   3, 0, 5,   6, 0, 0 ],
   [ 2, 0, 0,   0, 0, 0,   0, 0, 1 ],
-        
+
   [ 8, 0, 0,   4, 0, 7,   0, 0, 6 ],
   [ 0, 0, 6,   0, 0, 0,   3, 0, 0 ],
   [ 7, 0, 0,   9, 0, 1,   0, 0, 4 ],
-  
+
   [ 5, 0, 0,   0, 0, 0,   0, 0, 2 ],
   [ 0, 0, 7,   2, 0, 6,   9, 0, 0 ],
   [ 0, 4, 0,   5, 0, 8,   0, 7, 0 ] ]
-  
+
 [ [ 9, 0, 0,   0, 0, 8,   0, 0, 0 ],
   [ 0, 0, 0,   0, 3, 2,   0, 0, 0 ],
   [ 6, 8, 0,   9, 0, 1,   0, 7, 0 ],
-  
+
   [ 8, 0, 9,   5, 2, 0,   0, 3, 0 ],
   [ 2, 0, 0,   0, 0, 0,   0, 0, 5 ],
   [ 0, 4, 0,   0, 9, 3,   7, 0, 8 ],
-  
+
   [ 0, 2, 0,   3, 0, 9,   0, 6, 4 ],
   [ 0, 0, 0,   2, 8, 0,   0, 0, 0 ],
   [ 0, 0, 0,   6, 0, 0,   0, 0, 3 ] ]
