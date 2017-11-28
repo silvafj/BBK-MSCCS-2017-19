@@ -28,9 +28,21 @@ def read_sudoku(file_name):
 
 
 def convertToSets(problem):
-    """Given a two-dimensional array *`problem`* of integers, create and
-    return a new two-dimensional array of sets."""
-    pass
+    """
+    Given a two-dimensional array of integers return a new two-dimensional array
+    of sets.
+
+    :param array problem: Two-dimensional array of integers
+    :return: Two-dimensional array of sets
+    :rtype: array
+    """
+
+    # A set containing the numbers 1 through 9 will replace any location
+    # with the number 0.
+    set_1_to_9 = set(range(1, 10))
+
+    return [[set([loc]) if loc != 0 else set_1_to_9 for loc in row]
+            for row in problem]
 
 
 def convertToInts(problem):
@@ -53,9 +65,8 @@ def getBoxLocations(location):
     pass
 
 
-def eliminate(problem, location, listOfLocations):
-    """The given `location` in the array *`problem`* should contain a set
-    containing a single number."""
+def eliminate(problem, location, listOfLocations):
+    """The given `location` in the array *`problem`* should contain a set containing a single number."""
     pass
 
 
