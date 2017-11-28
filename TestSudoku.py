@@ -10,12 +10,11 @@ class TestSudoku2011(unittest.TestCase):
         self.assertEqual([[s, {1}, {2}], [{1}, s, {2}], [s, {1}, s]], convertToSets(ary))
         self.assertTrue(type(ary[0][0]) is int, "The original array has been changed.")
 
-"""
     def testConvertToInts(self):
         sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {3}]]
         self.assertEqual([[0, 3, 4], [1, 0, 2], [0, 2, 3]], convertToInts(sets))
         self.assertTrue(type(sets[0][0]) is set, "The original array has been changed.")
-
+"""
     def testGetRowLocations(self):
         lst = [(5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8)]
         self.assertEqual(set(lst), set(getRowLocations(5)))

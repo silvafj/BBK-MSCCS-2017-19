@@ -46,9 +46,17 @@ def convertToSets(problem):
 
 
 def convertToInts(problem):
-    """Given a two-dimensional array `problem` of sets, create and return a
-    new two-dimensional array of integers."""
-    pass
+    """
+    Given a two-dimensional array of sets return a new two-dimensional array
+    of integers.
+
+    :param array problem: Two-dimensional array of sets
+    :return: Two-dimensional array of integer
+    :rtype: array
+    """
+
+    return [[next(iter(loc)) if len(loc) == 1 else 0 for loc in row]
+            for row in problem]
 
 
 def getRowLocations(rowNumber):
