@@ -60,12 +60,25 @@ def convertToInts(problem):
 
 
 def getRowLocations(rowNumber):
-    """Given a `rowNumber`, return a list of all nine "locations" (`(row, column)`  tuples) in that row."""
-    pass
+    """
+    Return a list of all nine locations in a row.
+
+    :param int rowNumber: Row
+    :return: Array of tupples
+    :rtype: array
+    """
+    return [(rowNumber, col) for col in range(9)]
 
 
 def getColumnLocations(columnNumber):
-    """Given a `columnNumber`, return a list of all nine "locations"  (`(row, column)`  tuples) in that column."""
+    """
+    Return a list of all nine locations in a column.
+
+    :param int rowNumber: Column
+    :return: Array of tupples
+    :rtype: array
+    """
+    return [(row, columnNumber) for row in range(9)]
 
 
 def getBoxLocations(location):
