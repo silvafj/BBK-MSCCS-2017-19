@@ -175,9 +175,28 @@ def solve(problem):
 
 
 def print_sudoku(problem):
-    """Prints the Sudoku array (given as a list of lists of integers) in
-    the following form, using dots to represent zeros."""
-    pass
+    """
+    Prints the two-dimensional array of integers as a Sudoku grid.
+
+    :param array problem: Two-dimensional array of integers
+    """
+
+    def separator():
+        line = ["+" + 7 * "-" for _ in range(3)] + ["+"]
+        print(''.join(line))
+
+    for r in range(len(problem)):
+        if r % 3 == 0:
+            separator()
+
+        row = [str(v) if v > 0 else "." for v in problem[r]]
+
+        for i in range(0, 13, 4):
+            row.insert(i, "|")
+
+        print(' '.join(row))
+
+    separator()
 
 
 def main():
