@@ -102,10 +102,20 @@ def eliminate(problem, location, listOfLocations):
 
 
 def isSolved(problem):
-    """Given a two-dimensional array `problem` of sets, return `True` if
-    the Sudoku problem has been solved (every set contains exactly one
-    element), and `False` otherwise."""
-    pass
+    """
+    Given a two-dimensional array of sets, checks if every set contains exactly
+    one element.
+
+    :param array problem: array of sets
+    :return: True if every set contains exactly one element
+    :rtype: bool
+    """
+    for row in problem:
+        for col in row:
+            if len(col) > 1:
+                return False
+
+    return True
 
 
 def solve(problem):
