@@ -63,7 +63,7 @@ def getRowLocations(rowNumber):
     Return a list of all nine locations in a row.
 
     :param int rowNumber: Row
-    :return: Array of tupples
+    :return: Array of tuples
     :rtype: array
     """
     return [(rowNumber, col) for col in range(9)]
@@ -74,7 +74,7 @@ def getColumnLocations(columnNumber):
     Return a list of all nine locations in a column.
 
     :param int rowNumber: Column
-    :return: Array of tupples
+    :return: Array of tuples
     :rtype: array
     """
     return [(row, columnNumber) for row in range(9)]
@@ -84,8 +84,8 @@ def getBoxLocations(location):
     """
     Return a list of all nine locations in the same box as `location`.
 
-    :param tupple location: Location
-    :return: Array of tupples
+    :param tuple location: Location
+    :return: Array of tuples
     :rtype: array
     """
     loc_r, loc_c = location
@@ -97,8 +97,34 @@ def getBoxLocations(location):
 
 
 def eliminate(problem, location, listOfLocations):
-    """The given `location` in the array *`problem`* should contain a set containing a single number."""
-    pass
+    """
+    Given a list of locations, eliminate from the problem the number that is
+    present at the `location`.
+
+    :param array problem: Two-dimensional array of sets
+    :param tuple location: Location with the number to be removed
+    :param array<tuple> listOfLocations: List of locations to have the number
+                                         removed
+    :return: Count of eliminations
+    :rtype: int
+    """
+    lr, lc = location
+    number_set = problem[lr][lc]
+
+    # Don't perform any elimination if the location contains more than a number
+    if len(number_set) > 1:
+        return 0
+
+    number = next(iter(number_set))
+    count = 0
+
+    for loc_remove in listOfLocations:
+        lr, lc = loc_remove
+        if number in problem[lr][lc]:
+            problem[lr][lc] = problem[lr][lc] - number_set
+            count += 1
+
+    return count
 
 
 def isSolved(problem):

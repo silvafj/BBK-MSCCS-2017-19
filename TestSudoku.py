@@ -26,7 +26,7 @@ class TestSudoku2011(unittest.TestCase):
     def testGetBoxLocations(self):
         lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
         self.assertEqual(set(lst), set(getBoxLocations((3, 2))))
-    """
+
     def testEliminate(self):
         sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
         location = (1, 2) # contains {2}
@@ -34,7 +34,7 @@ class TestSudoku2011(unittest.TestCase):
         self.assertEqual(2, count)
         self.assertEqual([[{1}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 3}]],
                          sets)
-    """
+
     def testIsSolved(self):
         # Just check whether every cell has been reduced to one number
         array = [[{1}] * 9] * 9
