@@ -22,11 +22,11 @@ class TestSudoku2011(unittest.TestCase):
     def testGetColumnLocations(self):
         lst = [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5)]
         self.assertEqual(set(lst), set(getColumnLocations(5)))
-"""
+
     def testGetBoxLocations(self):
         lst = [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2), (5, 0), (5, 1), (5, 2)]
         self.assertEqual(set(lst), set(getBoxLocations((3, 2))))
-
+"""
     def testEliminate(self):
         sets = [[{1, 2}, {3}, {4}], [{1}, {3, 5, 7}, {2}], [{2, 3}, {2}, {1, 2, 3}]]
         location = (1, 2) # contains {2}

@@ -54,7 +54,6 @@ def convertToInts(problem):
     :return: Two-dimensional array of integer
     :rtype: array
     """
-
     return [[next(iter(loc)) if len(loc) == 1 else 0 for loc in row]
             for row in problem]
 
@@ -82,8 +81,19 @@ def getColumnLocations(columnNumber):
 
 
 def getBoxLocations(location):
-    """Return a list of all nine "locations"  (`(row, column)`  tuples) in the same box as the given `location`."""
-    pass
+    """
+    Return a list of all nine locations in the same box as `location`.
+
+    :param tupple location: Location
+    :return: Array of tupples
+    :rtype: array
+    """
+    loc_r, loc_c = location
+    box_r = loc_r // 3 * 3
+    box_c = loc_c // 3 * 3
+
+    return [(row, col) for row in range(box_r, box_r + 3)
+                       for col in range(box_c, box_c + 3)]
 
 
 def eliminate(problem, location, listOfLocations):
