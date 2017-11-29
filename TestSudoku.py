@@ -1,7 +1,5 @@
 import pytest
-
 from sudoku import *
-from unittest.mock import patch
 
 def testConvertToSets():
     ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
@@ -110,15 +108,12 @@ def testSolve(problem, solution):
     solved = convertToInts(problemAsSets)
     assert solution == solved
 
-@patch("sudoku.input")
-def testAskYesOrNo(mock_input):
-    test_options = {
-        'y': True,
-        'yes': True,
-        'n': False,
-        'no': False,
-    }
-
-    for k, v in test_options.items():
-        mock_input.return_value = k
-        assert ask_yes_or_no("Question") == v
+@pytest.mark.parametrize("input,result", [
+    ('y', True),
+    ('yes', True),
+    ('n', False),
+    ('no', False),
+])
+def testAskYesOrNo(monkeypatch, input, result):
+    monkeypatch.setattr('builtins.input', lambda prompt: input)
+    assert ask_yes_or_no("Question") == result
