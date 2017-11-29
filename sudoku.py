@@ -84,8 +84,9 @@ def getBoxLocations(location):
     box_r = loc_r // 3 * 3
     box_c = loc_c // 3 * 3
 
-    return [(row, col) for row in range(box_r, box_r + 3)
-                       for col in range(box_c, box_c + 3)]
+    return [(row, col)
+            for row in range(box_r, box_r + 3)
+            for col in range(box_c, box_c + 3)]
 
 
 def eliminate(problem, location, listOfLocations):
@@ -100,27 +101,23 @@ def eliminate(problem, location, listOfLocations):
     :return: Count of eliminations
     :rtype: int
     """
-    lr, lc = location
-    number_set = problem[lr][lc]
+    loc_r, loc_c = location
+    number_set = problem[loc_r][loc_c]
 
     # Don't perform any elimination if the location contains more than a number
-    if len(number_set) > 1:
+    if len(number_set) != 1:
         return 0
 
     number = next(iter(number_set))
-
-    # Don't perform the elimination on the source location
-    if location in listOfLocations:
-        listOfLocations.remove(location)
 
     count = 0
     for loc_remove in listOfLocations:
         if loc_remove == location:
             continue
 
-        lr, lc = loc_remove
-        if number in problem[lr][lc]:
-            problem[lr][lc] = problem[lr][lc] - number_set
+        loc_r, loc_c = loc_remove
+        if number in problem[loc_r][loc_c]:
+            problem[loc_r][loc_c] = problem[loc_r][loc_c] - number_set
             count += 1
 
     return count
@@ -135,12 +132,7 @@ def isSolved(problem):
     :return: True if every set contains exactly one element
     :rtype: bool
     """
-    for row in problem:
-        for col in row:
-            if len(col) > 1:
-                return False
-
-    return True
+    return all((len(col) == 1 for row in problem for col in row))
 
 
 def solve(problem):
@@ -155,11 +147,11 @@ def solve(problem):
     while eliminate_count > 0:
         eliminate_count = 0
 
-        for row in range(len(problem)):
-            for col in range(len(problem[row])):
-                location = (row, col)
-                locations = getRowLocations(row)
-                locations.extend(getColumnLocations(col))
+        for r, row in enumerate(problem):
+            for c, _ in enumerate(row):
+                location = (r, c)
+                locations = getRowLocations(r)
+                locations.extend(getColumnLocations(c))
                 locations.extend(getBoxLocations(location))
                 eliminate_count += eliminate(problem, location, locations)
 
@@ -177,11 +169,11 @@ def print_sudoku(problem):
         line = ["+" + 7 * "-" for _ in range(3)] + ["+"]
         print(''.join(line))
 
-    for r in range(len(problem)):
+    for r, row in enumerate(problem):
         if r % 3 == 0:
             separator()
 
-        row = [str(v) if v > 0 else "." for v in problem[r]]
+        row = [str(v) if v > 0 else "." for v in row]
 
         for i in range(0, 13, 4):
             row.insert(i, "|")
@@ -233,11 +225,10 @@ def main():
 
             if not isSolved(problemAsSets):
                 print("\nList of unsolved locations and possible numbers:")
-                for row in range(len(problemAsSets)):
-                    for col in range(len(problemAsSets[row])):
-                        if len(problemAsSets[row][col]) > 1:
-                            print("({}, {}) -> {}".format(
-                                row, col, problemAsSets[row][col]))
+                for r, row in enumerate(problemAsSets):
+                    for c, col in enumerate(row):
+                        if len(col) > 1:
+                            print("({}, {}) -> {}".format(r, c, col))
 
         keep_solving = ask_yes_or_no("\nDo you want to solve another problem")
 
@@ -246,4 +237,3 @@ def main():
 # For example, unit testing.
 if __name__ == '__main__':
     main()
-    # TODO: make this work in the console and GUI with tkinter might be interesting
