@@ -1,29 +1,21 @@
 """
 Author: Fernando Silva <fdealm02>
 
-This program is able to solve sudoku puzzles of easy difficulty.
+This program can be used to solve sudoku puzzles, giving the user a full or
+partial (in case of more complex problems) solutions.
 """
 
 def read_sudoku(file_name):
     """
-    Reads and returns in a Sudoku problem from a file.
-    The file will contain a list of lists, such as the following:
+    Reads a file and returns a two-dimensional array of integers.
 
-     [ [ 0, 0, 4,   0, 0, 0,   0, 6, 7 ],
-       [ 3, 0, 0,   4, 7, 0,   0, 0, 5 ],
-       [ 1, 5, 0,   8, 2, 0,   0, 0, 3 ],
-
-       [ 0, 0, 6,   0, 0, 0,   0, 3, 1 ],
-       [ 8, 0, 2,   1, 0, 5,   6, 0, 4 ],
-       [ 4, 1, 0,   0, 0, 0,   9, 0, 0 ],
-
-       [ 7, 0, 0,   0, 8, 0,   0, 4, 6 ],
-       [ 6, 0, 0,   0, 1, 2,   0, 0, 0 ],
-       [ 9, 3, 0,   0, 0, 0,   7, 1, 0 ] ]
+    :param str file_name: Full path of the file containing a sudoku problem
+    :return: Two-dimensional array of integers
+    :rtype: array
     """
-    stream = open(file)
-    data = stream.readlines()
-    stream.close()
+    with open(file_name) as stream:
+        data = stream.readlines()
+
     return eval("".join(data))
 
 
@@ -199,5 +191,59 @@ def print_sudoku(problem):
     separator()
 
 
+def ask_yes_or_no(prompt):
+    """
+    Specialized input to ask confirmation for a question.
+
+    :param str prompt: Question to be confirmed
+    :return: The user confirmation
+    :rtype: bool
+    """
+
+    acceptable = set(["Y", "YES", "N", "NO"])
+
+    choice = ""
+    while choice not in acceptable:
+        choice = input(prompt + " (y/n)? ").upper()
+
+    return choice[0] == "Y"
+
+
 def main():
-    pass
+    """ Program execution entry point. """
+
+    keep_solving = True
+    while keep_solving:
+        problem = None
+        file_name = input("Sudoku problem file: ")
+        try:
+            problem = read_sudoku(file_name)
+        except:
+            print("'{}' is invalid.".format(file_name))
+
+        if problem:
+            print("\n{:^24}".format("PROBLEM"))
+            print_sudoku(problem)
+            problemAsSets = convertToSets(problem)
+            solve(problemAsSets)
+
+            print("\n{:^24}".format("SOLUTION"))
+            solution = convertToInts(problemAsSets)
+            print_sudoku(solution)
+
+            if not isSolved(problemAsSets):
+                print("\nList of unsolved locations and possible numbers:")
+                for row in range(len(problemAsSets)):
+                    for col in range(len(problemAsSets[row])):
+                        if len(problemAsSets[row][col]) > 1:
+                            print("({}, {}) -> {}".format(
+                                row, col, problemAsSets[row][col]))
+
+        keep_solving = ask_yes_or_no("\nDo you want to solve another problem")
+
+
+# Required to avoid running this immediately when imported from other scripts.
+# For example, unit testing.
+if __name__ == '__main__':
+    main()
+    # TODO: make this work in the console and GUI with tkinter might be interesting

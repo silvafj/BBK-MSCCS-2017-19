@@ -1,8 +1,12 @@
-import unittest
+from unittest import TestCase
+from unittest.mock import patch
 from sudoku import *
 import copy
 
-class TestSudoku2011(unittest.TestCase):
+# TODO: convert all this to pytest
+# TODO: improve the performance of all the functions
+
+class TestSudoku2011(TestCase):
 
     def testConvertToSets(self):
         ary = [[0, 1, 2], [1, 0, 2], [0, 1, 0]]
@@ -129,3 +133,16 @@ class TestSudoku2011(unittest.TestCase):
         solved = convertToInts(problemAsSets)
 ##        print_sudoku(solution)
         self.assertEqual(solution, solved)
+
+    @patch("sudoku.input")
+    def test_ask_yes_or_no(self, mock_input):
+        test_options = {
+            'y': True,
+            'yes': True,
+            'n': False,
+            'no': False,
+        }
+
+        for k, v in test_options.items():
+            mock_input.return_value = k
+            self.assertEqual(ask_yes_or_no("Question"), v)
