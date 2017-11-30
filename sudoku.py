@@ -7,11 +7,11 @@ partial (in case of more complex problems) solutions.
 
 def read_sudoku(file_name):
     """
-    Reads a file and returns a two-dimensional array of integers.
+    Reads a file and returns a two-dimensional list of integers.
 
     :param str file_name: Full path of the file containing a sudoku problem
-    :return: Two-dimensional array of integers
-    :rtype: array
+    :return: Two-dimensional list of integers
+    :rtype: list
     """
     with open(file_name) as stream:
         data = stream.readlines()
@@ -21,12 +21,12 @@ def read_sudoku(file_name):
 
 def convertToSets(problem):
     """
-    Given a two-dimensional array of integers return a new two-dimensional array
+    Given a two-dimensional list of integers return a new two-dimensional list
     of sets.
 
-    :param array problem: Two-dimensional array of integers
-    :return: Two-dimensional array of sets
-    :rtype: array
+    :param list problem: Two-dimensional list of integers
+    :return: Two-dimensional list of sets
+    :rtype: list
     """
 
     # A set containing the numbers 1 through 9 will replace any location
@@ -39,12 +39,12 @@ def convertToSets(problem):
 
 def convertToInts(problem):
     """
-    Given a two-dimensional array of sets return a new two-dimensional array
+    Given a two-dimensional list of sets return a new two-dimensional list
     of integers.
 
-    :param array problem: Two-dimensional array of sets
-    :return: Two-dimensional array of integer
-    :rtype: array
+    :param list problem: Two-dimensional list of sets
+    :return: Two-dimensional list of integer
+    :rtype: list
     """
     return [[next(iter(loc)) if len(loc) == 1 else 0 for loc in row]
             for row in problem]
@@ -55,8 +55,8 @@ def getRowLocations(rowNumber):
     Return a list of all nine locations in a row.
 
     :param int rowNumber: Row
-    :return: Array of tuples
-    :rtype: array
+    :return: List of tuples
+    :rtype: list
     """
     return [(rowNumber, col) for col in range(9)]
 
@@ -66,8 +66,8 @@ def getColumnLocations(columnNumber):
     Return a list of all nine locations in a column.
 
     :param int rowNumber: Column
-    :return: Array of tuples
-    :rtype: array
+    :return: List of tuples
+    :rtype: list
     """
     return [(row, columnNumber) for row in range(9)]
 
@@ -77,8 +77,8 @@ def getBoxLocations(location):
     Return a list of all nine locations in the same box as `location`.
 
     :param tuple location: Location
-    :return: Array of tuples
-    :rtype: array
+    :return: List of tuples
+    :rtype: list
     """
     loc_r, loc_c = location
     box_r = loc_r // 3 * 3
@@ -94,9 +94,9 @@ def eliminate(problem, location, listOfLocations):
     Given a list of locations, eliminate from the problem the number that is
     present at the `location`.
 
-    :param array problem: Two-dimensional array of sets
+    :param list problem: Two-dimensional list of sets
     :param tuple location: Location with the number to be removed
-    :param array<tuple> listOfLocations: List of locations to have the number
+    :param list<tuple> listOfLocations: List of locations to have the number
                                          removed
     :return: Count of eliminations
     :rtype: int
@@ -125,10 +125,10 @@ def eliminate(problem, location, listOfLocations):
 
 def isSolved(problem):
     """
-    Given a two-dimensional array of sets, checks if every set contains exactly
+    Given a two-dimensional list of sets, checks if every set contains exactly
     one element.
 
-    :param array problem: array of sets
+    :param list problem: list of sets
     :return: True if every set contains exactly one element
     :rtype: bool
     """
@@ -137,9 +137,9 @@ def isSolved(problem):
 
 def solve(problem):
     """
-    Given a two-dimensional array of sets, try to solve it.
+    Given a two-dimensional list of sets, try to solve it.
 
-    :param array problem: Two-dimensional array of sets
+    :param list problem: Two-dimensional list of sets
     :return: If the problem has been solved, return True
     :rtype: bool
     """
@@ -160,9 +160,9 @@ def solve(problem):
 
 def print_sudoku(problem):
     """
-    Prints the two-dimensional array of integers as a Sudoku grid.
+    Prints the two-dimensional list of integers as a Sudoku grid.
 
-    :param array problem: Two-dimensional array of integers
+    :param list problem: Two-dimensional list of integers
     """
 
     def separator():
