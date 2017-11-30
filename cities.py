@@ -5,6 +5,8 @@ Implementation of the Travelling Salesman problem: given a list of cities and
 the distances between each pair of cities, calculates the shortest possible
 route that visits each city exactly once and returns to the origin city.
 """
+import copy
+
 from math import *
 
 def read_cities(file_name):
@@ -60,10 +62,11 @@ def compute_total_distance(road_map):
     :return: Sum of the distances of all connections in miles
     :rtype: float
     """
-    if len(road_map) < 2:
-        return 0
+    total_distance = 0.0
 
-    total_distance = 0
+    if len(road_map) < 2:
+        return total_distance
+
     for i, item in enumerate(road_map):
         _, _, lat1degrees, long1degrees = item
         _, _, lat2degrees, long2degrees = road_map[(i + 1) % len(road_map)]
@@ -76,14 +79,24 @@ def compute_total_distance(road_map):
 
 def swap_adjacent_cities(road_map, index):
     """
-    Take the city at location `index` in the `road_map`, and the city at
-    location `index+1` (or at `0`, if `index` refers to the last element
-    in the list), swap their positions in the `road_map`, compute the
-    new total distance, and return the tuple
+    Swaps two adjacent cities based on the given `index`. City at the location
+    `index` will be swapped with the city at the location `index + 1` (or at
+    `0`, if `index` refers to the last element in the list).
 
-        (new_road_map, new_total_distance)
+    :param list road_map: List of four-tuples containing cities data
+    :param int index: City to be swaped
+    :return: Tuple with new `road_map` and `total_distance`
+    :rtype: tuple
     """
-    pass
+    new_road_map = copy.copy(road_map)
+
+    if len(road_map) < 2:
+        return (new_road_map, 0.0)
+
+    new_road_map[index], new_road_map[(index + 1) % len(new_road_map)] = \
+        new_road_map[(index + 1) % len(new_road_map)], new_road_map[index]
+
+    return (new_road_map, compute_total_distance(new_road_map))
 
 
 def swap_cities(road_map, index1, index2):
