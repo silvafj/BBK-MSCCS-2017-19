@@ -167,7 +167,7 @@ def print_map(road_map):
         print("{} => {}: {:.2f}".format(city1, city2, distance))
 
     distance = compute_total_distance(road_map)
-    print("TOTAL DISTANCE: {:.2f}".format(distance))
+    print("\nTOTAL DISTANCE: {:.2f}".format(distance))
 
 
 def main():
@@ -175,10 +175,14 @@ def main():
     Reads in, and prints out, the city data, then creates the "best"
     cycle and prints it out.
     """
-    road_map = read_cities('city-data.txt')
-    # print_cities(road_map)
+    road_map = read_cities("city-data.txt")
+
+    print("\n{:=^80}\n".format(" CITY DATA "))
+    print_cities(road_map)
+
     new_road_map = find_best_cycle(road_map)
-    print(compute_total_distance(new_road_map))
+
+    print("\n{:=^80}\n".format(" BEST ROUTE "))
     print_map(new_road_map)
 
 
