@@ -123,7 +123,24 @@ def find_best_cycle(road_map):
     try `10000` swaps, and each time keep the best cycle found so far.
     After `10000` swaps, return the best cycle found so far.
     """
-    pass
+
+    # When we travel from city 1 to city 2, it must be the shortest distance
+    # So, I should find for each city what is the closest
+    best_road_map = road_map
+    best_total_distance = compute_total_distance(road_map)
+
+    swaps = 0
+    swap_from = 0
+    while swaps <= 10000 and swap_from <= len(road_map):
+        for i in range(swap_from + 1, len(road_map)):
+            swaps += 1
+            new_road_map, new_total_distance = swap_cities(best_road_map, swap_from, i)
+            if new_total_distance < best_total_distance:
+                best_road_map = new_road_map
+                best_total_distance = new_total_distance
+        swap_from += 1
+
+    return best_road_map
 
 
 def print_map(road_map):
@@ -142,6 +159,8 @@ def main():
     """
     road_map = read_cities('city-data.txt')
     print_cities(road_map)
+    new_road_map = find_best_cycle(road_map)
+    print(compute_total_distance(new_road_map))
 
 
 if __name__ == "__main__":
