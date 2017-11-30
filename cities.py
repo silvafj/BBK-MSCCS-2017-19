@@ -5,6 +5,7 @@ Implementation of the Travelling Salesman problem: given a list of cities and
 the distances between each pair of cities, calculates the shortest possible
 route that visits each city exactly once and returns to the origin city.
 """
+from math import *
 
 def read_cities(file_name):
     """
@@ -34,13 +35,43 @@ def print_cities(road_map):
         print("{} {:.2f} {:.2f}".format(city, lat, lon))
 
 
+def distance(lat1degrees, long1degrees, lat2degrees, long2degrees):
+    earth_radius = 3956  # miles
+    lat1 = radians(lat1degrees)
+    long1 = radians(long1degrees)
+    lat2 = radians(lat2degrees)
+    long2 = radians(long2degrees)
+    lat_difference = lat2 - lat1
+    long_difference = long2 - long1
+    sin_half_lat = sin(lat_difference / 2)
+    sin_half_long = sin(long_difference / 2)
+    a = sin_half_lat ** 2 + cos(lat1) * cos(lat2) * sin_half_long ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1.0 - a))
+    return earth_radius * c
+
+
 def compute_total_distance(road_map):
     """
-    Returns, as a floating point number, the sum of the distances of all
-    the connections in the `road_map`. Remember that it's a cycle, so that
-    (for example) in the initial `road_map`, Wyoming connects to Alabama...
+    Calculates the sum of the distances of all the connections in
+    the `road_map`. Note that `road_map` is a cycle and the last connection
+    returns to the starting point.
+
+    :param list road_map: List of four-tuples containing cities data
+    :return: Sum of the distances of all connections in miles
+    :rtype: float
     """
-    pass
+    if len(road_map) < 2:
+        return 0
+
+    total_distance = 0
+    for i, item in enumerate(road_map):
+        _, _, lat1degrees, long1degrees = item
+        _, _, lat2degrees, long2degrees = road_map[(i + 1) % len(road_map)]
+
+        total_distance += distance(lat1degrees, long1degrees,
+                                   lat2degrees, long2degrees)
+
+    return total_distance
 
 
 def swap_adjacent_cities(road_map, index):
