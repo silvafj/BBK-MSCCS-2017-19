@@ -88,29 +88,33 @@ def swap_adjacent_cities(road_map, index):
     :return: Tuple with new `road_map` and `total_distance`
     :rtype: tuple
     """
-    new_road_map = copy.copy(road_map)
-
-    if len(road_map) < 2:
-        return (new_road_map, 0.0)
-
-    new_road_map[index], new_road_map[(index + 1) % len(new_road_map)] = \
-        new_road_map[(index + 1) % len(new_road_map)], new_road_map[index]
-
-    return (new_road_map, compute_total_distance(new_road_map))
+    index2 = index if len(road_map) < 2 else (index + 1) % len(road_map)
+    return swap_cities(road_map, index, index2)
 
 
 def swap_cities(road_map, index1, index2):
     """
-    Take the city at location `index` in the `road_map`, and the
-    city at location `index2`, swap their positions in the `road_map`,
-    compute the new total distance, and return the tuple
+    Swaps two cities based on the given `index1` and `index2`.
 
-        (new_road_map, new_total_distance)
+    :param list road_map: List of four-tuples containing cities data
+    :param int index1: City to be swaped to `index2`
+    :param int index2: City to be swaped to `index1`
+    :return: Tuple with new `road_map` and `total_distance`
+    :rtype: tuple
 
     Allow for the possibility that `index1=index2`,
     and handle this case correctly.
     """
-    pass
+    new_road_map = copy.copy(road_map)
+
+    if len(new_road_map) < 2:
+        return (new_road_map, 0.0)
+
+    if index1 != index2:
+        new_road_map[index1], new_road_map[index2] = \
+            new_road_map[index2], new_road_map[index1]
+
+    return (new_road_map, compute_total_distance(new_road_map))
 
 
 def find_best_cycle(road_map):
