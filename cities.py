@@ -8,12 +8,11 @@ route that visits each city exactly once and returns to the origin city.
 
 def read_cities(file_name):
     """
-    Read in the cities from the given `file_name`, and return
-    them as a list of four-tuples:
-
-      [(state, city, latitude, longitude), ...]
+    Parse the data from the given `file_name` and return as a list.
 
     :param str file_name: File containing the cities data
+    :return: List of four-tuples `[(state, city, latitude, longitude), ...]`
+    :rtype: list<tuple>
     """
     cities = []
     with open(file_name) as f:
@@ -27,9 +26,12 @@ def read_cities(file_name):
 def print_cities(road_map):
     """
     Prints a list of cities, along with their locations.
-    Print only one or two digits after the decimal point.
+
+    :param list road_map: List of four-tuples containing cities data
     """
-    pass
+    for item in road_map:
+        _, city, lat, lon = item
+        print("{} {:.2f} {:.2f}".format(city, lat, lon))
 
 
 def compute_total_distance(road_map):
@@ -90,8 +92,8 @@ def main():
     Reads in, and prints out, the city data, then creates the "best"
     cycle and prints it out.
     """
-    pass
-    print(read_cities('city-data.txt'))
+    road_map = read_cities('city-data.txt')
+    print_cities(road_map)
 
 
 if __name__ == "__main__":
