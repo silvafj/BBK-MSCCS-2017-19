@@ -67,5 +67,24 @@ def test_swap_cities(road_map, index1, index2, expected_road_map, expected_dista
     assert road_map == original_road_map
 
 
-def test_find_best_cycle():
-    pass
+@pytest.mark.parametrize("road_map,expected_road_map", [
+    # No roadmap
+    ([], []),
+    # Single city
+    ([("Alabama", "Montgomery", 32.361538, -86.279118)],
+     [("Alabama", "Montgomery", 32.361538, -86.279118)]),
+    # Two cities
+    ([("Alabama", "Montgomery", 32.361538, -86.279118),
+      ("Alaska", "Juneau", 58.301935, -134.41974)],
+      [("Alabama", "Montgomery", 32.361538, -86.279118),
+       ("Alaska", "Juneau", 58.301935, -134.41974)]),
+    # Three cities
+    ([("Alabama", "Montgomery", 32.361538, -86.279118),
+      ("Alaska", "Juneau", 58.301935, -134.41974),
+      ("Arizona", "Phoenix", 33.448457, -112.073844)],
+     [("Alaska", "Juneau", 58.301935, -134.41974),
+      ("Alabama", "Montgomery", 32.361538, -86.279118),
+      ("Arizona", "Phoenix", 33.448457, -112.073844)]),
+])
+def test_find_best_cycle(road_map, expected_road_map):
+    assert find_best_cycle(road_map) == expected_road_map
