@@ -1,23 +1,25 @@
 import copy
 import pytest
-from cities import *
+
+from cities import compute_total_distance, find_best_cycle, \
+                   swap_adjacent_cities, swap_cities
 
 
 @pytest.mark.parametrize("road_map,expected_distance", [
     # No roadmap
     ([], 0.0),
     # Single city
-    ([("Alabama", "Montgomery", 32.361538, -86.279118)], 0.0),
+    ([("state", "city", 0.0, 0.0)], 0.0),
     # Two cities
-    ([("Alabama", "Montgomery", 32.361538, -86.279118),
-      ("Alaska", "Juneau", 58.301935, -134.41974)], 5699.255086025024),
+    ([("state", "city1", 0.0, 0.0),
+      ("state", "city2", 1.0, 1.0)], 195.28443017165606),
     # Two cities (reverse direction) should be the same distance
-    ([("Alaska", "Juneau", 58.301935, -134.41974),
-      ("Alabama", "Montgomery", 32.361538, -86.279118)], 5699.255086025024),
+    ([("state", "city2", 1.0, 1.0),
+      ("state", "city1", 0.0, 0.0)], 195.28443017165606),
     # Three cities
-    ([("Alabama", "Montgomery", 32.361538, -86.279118),
-      ("Alaska", "Juneau", 58.301935, -134.41974),
-      ("Arizona", "Phoenix", 33.448457, -112.073844)], 6346.559636342563),
+    ([("state", "city1", 0.0, 0.0),
+      ("state", "city2", 1.0, 1.0),
+      ("state", "city3", 2.0, 2.0)], 390.5391132370841),
 ])
 def test_compute_total_distance(road_map, expected_distance):
     original_road_map = copy.copy(road_map)
@@ -29,14 +31,13 @@ def test_compute_total_distance(road_map, expected_distance):
     # No roadmap
     ([], 0, [], 0.0),
     # Single city
-    ([("Alabama", "Montgomery", 32.361538, -86.279118)], 0,
-     [("Alabama", "Montgomery", 32.361538, -86.279118)], 0.0),
+    ([("state", "city", 0.0, 0.0)], 0,
+     [("state", "city", 0.0, 0.0)], 0.0),
     # Two cities
-    ([("Alabama", "Montgomery", 32.361538, -86.279118),
-      ("Alaska", "Juneau", 58.301935, -134.41974)], 0,
-      [("Alaska", "Juneau", 58.301935, -134.41974),
-       ("Alabama", "Montgomery", 32.361538, -86.279118)],
-        5699.255086025024),
+    ([("state", "city1", 0.0, 0.0),
+      ("state", "city2", 1.0, 1.0)], 0,
+     [("state", "city2", 1.0, 1.0),
+      ("state", "city1", 0.0, 0.0)], 195.28443017165606),
 ])
 def test_swap_adjacent_cities(road_map, index, expected_road_map, expected_distance):
     original_road_map = copy.copy(road_map)
@@ -50,14 +51,13 @@ def test_swap_adjacent_cities(road_map, index, expected_road_map, expected_dista
     # No roadmap
     ([], 0, 1, [], 0.0),
     # Single city
-    ([("Alabama", "Montgomery", 32.361538, -86.279118)], 0, 1,
-     [("Alabama", "Montgomery", 32.361538, -86.279118)], 0.0),
+    ([("state", "city1", 0.0, 0.0)], 0, 1,
+     [("state", "city1", 0.0, 0.0)], 0.0),
     # Two cities
-    ([("Alabama", "Montgomery", 32.361538, -86.279118),
-      ("Alaska", "Juneau", 58.301935, -134.41974)], 1, 0,
-      [("Alaska", "Juneau", 58.301935, -134.41974),
-       ("Alabama", "Montgomery", 32.361538, -86.279118)],
-        5699.255086025024),
+    ([("state", "city1", 0.0, 0.0),
+      ("state", "city2", 1.0, 1.0)], 1, 0,
+     [("state", "city2", 1.0, 1.0),
+      ("state", "city1", 0.0, 0.0)], 195.28443017165606),
 ])
 def test_swap_cities(road_map, index1, index2, expected_road_map, expected_distance):
     original_road_map = copy.copy(road_map)
@@ -71,20 +71,20 @@ def test_swap_cities(road_map, index1, index2, expected_road_map, expected_dista
     # No roadmap
     ([], []),
     # Single city
-    ([("Alabama", "Montgomery", 32.361538, -86.279118)],
-     [("Alabama", "Montgomery", 32.361538, -86.279118)]),
+    ([("state", "city1", 0.0, 0.0)],
+     [("state", "city1", 0.0, 0.0)]),
     # Two cities
-    ([("Alabama", "Montgomery", 32.361538, -86.279118),
-      ("Alaska", "Juneau", 58.301935, -134.41974)],
-      [("Alabama", "Montgomery", 32.361538, -86.279118),
-       ("Alaska", "Juneau", 58.301935, -134.41974)]),
+    ([("state", "city1", 0.0, 0.0),
+      ("state", "city2", 1.0, 1.0)],
+     [("state", "city1", 0.0, 0.0),
+      ("state", "city2", 1.0, 1.0)]),
     # Three cities
-    ([("Alabama", "Montgomery", 32.361538, -86.279118),
-      ("Alaska", "Juneau", 58.301935, -134.41974),
-      ("Arizona", "Phoenix", 33.448457, -112.073844)],
-     [("Alaska", "Juneau", 58.301935, -134.41974),
-      ("Alabama", "Montgomery", 32.361538, -86.279118),
-      ("Arizona", "Phoenix", 33.448457, -112.073844)]),
+    ([("state", "city3", 2.0, 2.0),
+      ("state", "city1", 10.0, 10.0),
+      ("state", "city2", 1.0, 1.0)],
+     [("state", "city1", 10.0, 10.0),
+      ("state", "city3", 2.0, 2.0),
+      ("state", "city2", 1.0, 1.0)]),
 ])
 def test_find_best_cycle(road_map, expected_road_map):
     assert find_best_cycle(road_map) == expected_road_map

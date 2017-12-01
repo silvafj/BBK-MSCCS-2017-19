@@ -6,8 +6,8 @@ the distances between each pair of cities, calculates the shortest possible
 route that visits each city exactly once and returns to the origin city.
 """
 import copy
+import math
 import operator
-from math import *
 
 
 def distance(lat1degrees, long1degrees, lat2degrees, long2degrees):
@@ -22,16 +22,16 @@ def distance(lat1degrees, long1degrees, lat2degrees, long2degrees):
     :rtype: float
     """
     earth_radius = 3956  # miles
-    lat1 = radians(lat1degrees)
-    long1 = radians(long1degrees)
-    lat2 = radians(lat2degrees)
-    long2 = radians(long2degrees)
+    lat1 = math.radians(lat1degrees)
+    long1 = math.radians(long1degrees)
+    lat2 = math.radians(lat2degrees)
+    long2 = math.radians(long2degrees)
     lat_difference = lat2 - lat1
     long_difference = long2 - long1
-    sin_half_lat = sin(lat_difference / 2)
-    sin_half_long = sin(long_difference / 2)
-    a = sin_half_lat ** 2 + cos(lat1) * cos(lat2) * sin_half_long ** 2
-    c = 2 * atan2(sqrt(a), sqrt(1.0 - a))
+    sin_half_lat = math.sin(lat_difference / 2)
+    sin_half_long = math.sin(long_difference / 2)
+    a = sin_half_lat ** 2 + math.cos(lat1) * math.cos(lat2) * sin_half_long ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1.0 - a))
     return earth_radius * c
 
 
@@ -44,8 +44,8 @@ def read_cities(file_name):
     :rtype: list<tuple(str, str, float, float)>
     """
     cities = []
-    with open(file_name) as f:
-        for line in f:
+    with open(file_name) as source:
+        for line in source:
             state, city, latitude, longitude = line.strip().split("\t")
             cities.append((state, city, float(latitude), float(longitude)))
 
@@ -193,14 +193,13 @@ def print_map(road_map):
 
         _, city1, _, _ = connection[0]
         _, city2, _, _ = connection[1]
-        city1 += " "
-        city1_to_city2 = city1.ljust(32 - len(city2), ".") + " " + city2
-        distance = compute_total_distance(connection)
 
-        print("{}: {:8.2f}".format(city1_to_city2, distance))
+        print("{}: {:8.2f}".format(
+            city1.ljust(32 - len(city2), ".") + " " + city2,
+            compute_total_distance(connection)))
 
-    distance = compute_total_distance(road_map)
-    print("\nTOTAL DISTANCE: {:.2f} miles".format(distance))
+    print("\nTOTAL DISTANCE: {:.2f} miles".format(
+        compute_total_distance(road_map)))
 
 
 def main():
