@@ -1,3 +1,5 @@
+from datetime import date
+
 class BirkbeckCourse:
     """This class represents a course at Birkbeck."""
 
@@ -5,7 +7,7 @@ class BirkbeckCourse:
         self.department = department
         self.code = code
         self.title = title
-        self.students = set()
+        self.students = dict()
         self.instructors = list()
 
         if instructors is None:
@@ -15,23 +17,28 @@ class BirkbeckCourse:
         else:
             self.instructors = list(instructors)
 
-    def mark_attendance(self, *students):
+    def mark_attendance(self, day, *students):
         """
         Mark students as present.
 
+        :param date day: When students attended
         :param *students: Sequence of student names attending the course
         """
-        self.students.update(set(students))
+        if day not in self.students:
+            self.students[day] = set()
 
-    def is_present(self, student):
+        self.students[day].update(set(students))
+
+    def is_present(self, day, student):
         """
         Check if student is present in the course.
 
+        :param date day: Day of attendance
         :param str student: Student name
         :return: Return True, if student was found in the course
         :rtype: bool
         """
-        return student in self.students
+        return day in self.students and student in self.students[day]
 
     def __eq__(self, value):
         return self.department == value.department and self.code == value.code

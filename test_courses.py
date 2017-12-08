@@ -1,5 +1,5 @@
 from courses import BirkbeckCourse
-
+from datetime import date, datetime, timedelta
 
 def test_course_instantiation():
     course = BirkbeckCourse("CS", "PoP-I", "Principles of Programming I")
@@ -9,10 +9,14 @@ def test_course_instantiation():
 
 def test_course_attendance():
     course = BirkbeckCourse("CS", "PoP-I", "Principles of Programming I")
-    assert not course.is_present("Fernando")
-    course.mark_attendance("Fernando", "John", "Jack")
-    assert course.is_present("Fernando")
-    assert course.is_present("John")
+    assert not course.is_present(date.today, "Fernando")
+
+    course.mark_attendance(date.today, "Fernando", "John", "Jack")
+    assert course.is_present(date.today, "Fernando")
+    assert course.is_present(date.today, "John")
+
+    yesterday = date.fromtimestamp((datetime.now() - timedelta(days=1)).timestamp())
+    assert not course.is_present(yesterday, "Fernando")
 
 
 def test_comparison_operators():
