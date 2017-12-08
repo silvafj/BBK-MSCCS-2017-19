@@ -53,3 +53,16 @@ class BirkbeckCSISCourse(BirkbeckCourse):
     def __init__(self, department, code, title, recorded=False):
         super().__init__(department, code, title)
         self.is_recorded = recorded
+
+
+class CourseCatalog:
+    """This class provides functions to manage a list of courses."""
+
+    def __init__(self, courses):
+        self.courses = courses
+
+    def courses_by_department(self, department_name):
+        return [course for course in self.courses if course.department == department_name]
+
+    def courses_by_search_term(self, search_snippet):
+        return [course for course in self.courses if search_snippet in course.title]
