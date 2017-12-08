@@ -1,11 +1,19 @@
 class BirkbeckCourse:
     """This class represents a course at Birkbeck."""
 
-    def __init__(self, department, code, title):
+    def __init__(self, department, code, title, instructors=None):
         self.department = department
         self.code = code
         self.title = title
         self.students = set()
+        self.instructors = list()
+
+        if instructors is None:
+            pass
+        elif isinstance(instructors, str):
+            self.instructors.append(instructors)
+        else:
+            self.instructors = list(instructors)
 
     def mark_attendance(self, *students):
         """
