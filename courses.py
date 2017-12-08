@@ -25,6 +25,12 @@ class BirkbeckCourse:
         """
         return student in self.students
 
+    def __eq__(self, value):
+        return self.department == value.department and self.code == value.code
+
+    def __le__(self, value):
+        return self.code <= value.code
+
 
 class BirkbeckCSISCourse(BirkbeckCourse):
     """This class represents a CSIS course at Birkbeck."""
