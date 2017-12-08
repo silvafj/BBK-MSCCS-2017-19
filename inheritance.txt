@@ -1,0 +1,26 @@
+>>> from courses import BirkbeckCourse, BirkbeckCSISCourse
+>>> a = BirkbeckCourse("CSIS", "FoC", "Fundamentals of Computing")
+>>> b = BirkbeckCSCourse("CSIS", "CS", "Computer Systems")
+>>> x = BirkbeckCSCourse("CSIS", "PoP-II", "Principles of Programming II", recorded=True)
+>>> a.code
+"FoC"
+>>> b.code
+"CS"
+>>> type(a)
+BirkbeckCourse
+>>> isinstance(a, BirkbeckCourse)
+True
+>>> isinstance(b, BirkbeckCourse)
+True
+>>> isinstance(x, BirkbeckCourse)
+True
+>>> isinstance(x, BirkbeckCSCourse)
+True
+>>> type(a) == type(b)
+False
+>>> type(b) == type(x)
+True
+>>> a == b
+False
+>>> b == x
+False
