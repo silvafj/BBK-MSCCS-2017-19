@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/exercise-eight/exercise-eight.iml" filepath="$PROJECT_DIR$/exercise-eight/exercise-eight.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-five/exercise-five.iml" filepath="$PROJECT_DIR$/exercise-five/exercise-five.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-four/exercise-four.iml" filepath="$PROJECT_DIR$/exercise-four/exercise-four.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-one/exercise-one.iml" filepath="$PROJECT_DIR$/exercise-one/exercise-one.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-seven/exercise-seven.iml" filepath="$PROJECT_DIR$/exercise-seven/exercise-seven.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-six/exercise-six.iml" filepath="$PROJECT_DIR$/exercise-six/exercise-six.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-three/exercise-three.iml" filepath="$PROJECT_DIR$/exercise-three/exercise-three.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-two/exercise-two.iml" filepath="$PROJECT_DIR$/exercise-two/exercise-two.iml" />
+      <module fileurl="file://$PROJECT_DIR$/worksheet-one-a.iml" filepath="$PROJECT_DIR$/worksheet-one-a.iml" />
+    </modules>
+  </component>
+</project>
