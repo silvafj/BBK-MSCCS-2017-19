@@ -2,9 +2,14 @@
 
 Examining the basic constructs of Java.
 
-For each exercise there is a corresponding *module* on the repository. Each module contains a
-code template and some unit tests for the problem. You should complete the code template so that
-it passes the provided tests AND the additional requirements of each exercise.
+For each exercise there is a corresponding IntelliJ *module* on the repository. 
+Each module contains a code template and some unit tests for the problem. 
+You should complete the code template so that it passes the provided tests AND the additional requirements of each exercise.
+
+There is also a *gradle* build script associated with each module should you 
+prefer to compile-test-run the code from the command line.
+
+
 
 1. Write a program that uses nested loops to collect data and calculate the average rainfall over a period of years. 
  The program should first ask for the number of years. 
@@ -83,10 +88,11 @@ The terms in the formula are:
  
 8. The following table shows the approximate speed of sound in air, water, and steel.
 
- Medium Speed
-   + Air 1,100 feet per second
-   + Water 4,900 feet per second
-   + Steel 16,400 feet per second
+ | Medium  | Speed  |
+|---------------|----------------|
+| Air    |   1,100 feet per second   |
+| Water    |   4,900 feet per second   |
+| Steel |  16,400 feet per second |
  
  Write a program that displays a menu allowing the user to select air, water, or steel. 
  After the user has made a selection, he or she should ask to enter the distance a sound wave will travel in the selected medium. 

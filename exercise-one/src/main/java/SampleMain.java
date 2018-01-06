@@ -2,7 +2,7 @@ public class SampleMain {
     final static int NUM_MONTHS = 12; // Months per year
 
     public static void main(String[] args) {
-
+	System.out.println("TODO");
     }
 }
 
