@@ -1,13 +1,16 @@
 import java.util.List;
 
 public class AverageRainfall {
+
     static double calculateTotalRainFall(List<Double> rainFall) {
-        // TODO
-        return 0;
+        Double sum = 0.0;
+        for (Double month : rainFall) {
+            sum += month;
+        }
+        return sum;
     }
 
     static double calculateAverageRainFall(List<Double> rainFall) {
-        // TODO
-        return 0;
+        return calculateTotalRainFall(rainFall) / rainFall.size();
     }
 }
