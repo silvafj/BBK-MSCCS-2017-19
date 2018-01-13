@@ -1,3 +1,5 @@
+import pytest
+
 from power import power
 
 def test_a():
@@ -40,7 +42,7 @@ def test_m():
 	assert power(3,0) == 1
 
 def test_n():
-	assert power(1.1414, 2) == 1.30279
+	assert power(1.1414, 2) == pytest.approx(1.30279, 0.00001)
 
 def test_o():
-	assert power(1.5,10) == 57.665
+	assert power(1.5,10) == pytest.approx(57.665, 0.001)

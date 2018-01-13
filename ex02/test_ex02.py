@@ -1,10 +1,12 @@
+import pytest
+
 from power import power
 
 def test_one():
 	assert power(2,-3) == 0.125
 
 def test_two():
-	assert power(2,1) == 2 
+	assert power(2,1) == 2
 
 def test_three():
 	assert power(2,2) == 4
@@ -43,10 +45,10 @@ def test_fourteen():
 	assert power(3,0) == 1
 
 def test_fifteen():
-	assert power(1.1414,2) == 1.30279
+	assert power(1.1414,2) == pytest.approx(1.30279, 0.00001)
 
 def test_sixteen():
-	assert power(1.5,10) == 57.665
+	assert power(1.5,10) == pytest.approx(57.665, 0.001)
 
 def test_seventeen():
 	assert power(1,-1) == 1
@@ -67,37 +69,37 @@ def test_twentytwo():
 	assert power(2,-8) == 0.00390625
 
 def test_twentythree():
-	assert power(2,-9) == 0.00195312
+	assert power(2,-9) == pytest.approx(0.00195312, 0.00001)
 
 def test_twentyfour():
-	assert power(2,-10) == 0.000976562
+	assert power(2,-10) == pytest.approx(0.000976562, 0.00001)
 
 def test_twentyfive():
-	assert power(2,-15) == 3.05176e-05
+	assert power(2,-15) == pytest.approx(3.05176e-05)
 
 def test_twentysix():
-	assert power(3,-1) == 0.333333
+	assert power(3,-1) == pytest.approx(0.333333, 0.00001)
 
 def test_twentyseven():
-	assert power(3,-2) == 0.111111
+	assert power(3,-2) == pytest.approx(0.111111, 0.00001)
 
 def test_twentyeight():
-	assert power(3,-3) == 0.037037
+	assert power(3,-3) == pytest.approx(0.037037, 0.00001)
 
 def test_twentynine():
-	assert power(3,-4) == 0.0123457
+	assert power(3,-4) == pytest.approx(0.0123457, 0.00001)
 
 def test_thirty():
-	assert power(3,-5) == 0.00411523
+	assert power(3,-5) == pytest.approx(0.00411523, 0.000001)
 
 def test_thirtyone():
-	assert power(3,-10) == 1.69351e-05
+	assert power(3,-10) == pytest.approx(1.69351e-05)
 
 def test_thirtytwo():
-	assert power(3,-6) == 0.00137174
+	assert power(3,-6) == pytest.approx(0.00137174, 0.00001)
 
 def test_thirtythree():
-	assert power(1.1414,-2) == 0.767581
+	assert power(1.1414,-2) == pytest.approx(0.767581, 0.000001)
 
 def test_thirtyfour():
-	assert power(1.5,-10) == 0.0173415
+	assert power(1.5,-10) == pytest.approx(0.0173415, 0.00001)
