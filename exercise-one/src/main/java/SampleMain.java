@@ -6,8 +6,7 @@ public class SampleMain {
     final static int NUM_MONTHS = 12; // Months per year
 
     public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in); // done once
+        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter the number of years: ");
         int years = scanner.nextInt();
@@ -21,8 +20,9 @@ public class SampleMain {
             }
         }
 
-        System.out.println("");
-        System.out.println("Number of months: " + rainFall.size());
+        scanner.close();
+
+        System.out.println("\nNumber of months: " + rainFall.size());
         System.out.println("Total rainfall: "+ AverageRainfall.calculateTotalRainFall(rainFall)+" inches");
         System.out.println("Average monthly rainfall: "+ AverageRainfall.calculateAverageRainFall(rainFall)+" inches");
 
