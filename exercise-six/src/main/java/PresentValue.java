@@ -1,16 +1,25 @@
 import java.util.Scanner;
+import static java.lang.Math.pow;
 
 public class PresentValue {
 
     public static void main(String[] args) {
-        // Scanner object to get input
-        Scanner keyboard = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        // Desired future value
         System.out.print("Future value? ");
-        double futureValue = keyboard.nextDouble();
+        double futureValue = scanner.nextDouble();
 
-        // TODO
+        System.out.print("Annual interest rate? ");
+        double annualInterestRate = scanner.nextDouble();
+
+        System.out.print("Number of years ");
+        int numberOfYears = scanner.nextInt();
+
+        scanner.close();
+
+        System.out.println("You need to invest $" +
+                PresentValue.calculatePresentValue(futureValue, annualInterestRate, numberOfYears));
+
     }
 
     /**
@@ -23,16 +32,6 @@ public class PresentValue {
      */
     public static double calculatePresentValue(double futureValue,
                                                double annualInterestRate, int numberOfYears) {
-        // TODO
-        return 0;
+        return futureValue / pow(1 + annualInterestRate, numberOfYears);
     }
 }
-
-/*
-Sample Output:
-
-Future value? 1000
-Annual interest rate? .10
-Number of years? 10
-You need to invest $385.5432894295314
- */
