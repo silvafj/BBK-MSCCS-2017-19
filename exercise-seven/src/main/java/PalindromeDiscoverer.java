@@ -3,12 +3,14 @@ import java.util.Scanner;
 public class PalindromeDiscoverer {
 
     public static void main(String[] args) {
-        // Create a Scanner object for keyboard input.
-        Scanner keyboard = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        // Get user input
         System.out.print("Enter a word or phrase: ");
-        String userInput = keyboard.nextLine();
+        String userInput = scanner.nextLine();
+
+        scanner.close();
+
+        System.out.println("'" + userInput + "' is" + (isPalindrome(userInput) ? " " : " not ") + "palindrome.");
     }
 
     /**
@@ -21,7 +23,13 @@ public class PalindromeDiscoverer {
      * @return
      */
     public static boolean isPalindrome(String str) {
-        return false;
+        str = str.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+        for (int i = 0; i <= str.length() / 2; i++) {
+            if (str.charAt(i) != str.charAt(str.length() - 1 - i)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 
