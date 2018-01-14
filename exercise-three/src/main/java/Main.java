@@ -21,6 +21,8 @@ public class Main {
         System.out.print("Enter your height, in inches: ");
         height = keyboard.nextDouble();
 
-        // TODO
+        keyboard.close();
+
+        System.out.println(BodyMassIndex.bmiDescription(BodyMassIndex.calculateBMI(height, weight)));
     }
 }
