@@ -69,7 +69,7 @@ At the end of 10 years you would like to have £10,000 in the account.
 How much do you need to deposit today to make that happen? 
 You can use the following formula, which is known as the present value formula, to find out:
  ```
-P= F/(1/+r)^n
+P= F/(1+r)^n
  ```
 The terms in the formula are:
    + P is the present value, or the amount that you need to deposit today. 

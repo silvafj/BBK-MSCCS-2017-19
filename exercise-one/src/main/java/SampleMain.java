@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class SampleMain {
@@ -15,7 +14,7 @@ public class SampleMain {
         ArrayList<Double> rainFall = new ArrayList<Double>();
         for (int year = 1; year <= years; year++) {
             for (int month = 1; month <= NUM_MONTHS; month++) {
-                System.out.print("Year "+year+" month "+month+": ");
+                System.out.print("Year " + year + " month " + month + ": ");
                 rainFall.add(scanner.nextDouble());
             }
         }
@@ -23,9 +22,8 @@ public class SampleMain {
         scanner.close();
 
         System.out.println("\nNumber of months: " + rainFall.size());
-        System.out.println("Total rainfall: "+ AverageRainfall.calculateTotalRainFall(rainFall)+" inches");
-        System.out.println("Average monthly rainfall: "+ AverageRainfall.calculateAverageRainFall(rainFall)+" inches");
-
+        System.out.println("Total rainfall: " + AverageRainfall.calculateTotalRainFall(rainFall) + " inches");
+        System.out.println("Average monthly rainfall: " + AverageRainfall.calculateAverageRainFall(rainFall) + " inches");
 
 
     }
