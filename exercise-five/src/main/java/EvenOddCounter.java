@@ -7,8 +7,7 @@ public class EvenOddCounter {
      * @return true if the num is true otherwise false
      */
     public static boolean isEven(int num) {
-        // TODO
-        return false;
+        return num % 2 == 0;
     }
 
     public static void main(String[] args) {
@@ -18,7 +17,16 @@ public class EvenOddCounter {
 
         Random randomValue = new Random();
 
-        // TODO
+        for (int i = 0; i < 100; i++) {
+            if (EvenOddCounter.isEven(randomValue.nextInt())) {
+                evenNumberCount++;
+            } else {
+                oddNumberCount++;
+            }
+        }
+
+        System.out.println("Even numbers generated: " + evenNumberCount);
+        System.out.println("Odd numbers generated: " + oddNumberCount);
     }
 
 }
