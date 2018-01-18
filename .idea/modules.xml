@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/exercise-eight/exercise-eight.iml" filepath="$PROJECT_DIR$/exercise-eight/exercise-eight.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-eleven/exercise-eleven.iml" filepath="$PROJECT_DIR$/exercise-eleven/exercise-eleven.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-five/exercise-five.iml" filepath="$PROJECT_DIR$/exercise-five/exercise-five.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-four/exercise-four.iml" filepath="$PROJECT_DIR$/exercise-four/exercise-four.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-nine/exercise-nine.iml" filepath="$PROJECT_DIR$/exercise-nine/exercise-nine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-one/exercise-one.iml" filepath="$PROJECT_DIR$/exercise-one/exercise-one.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-seven/exercise-seven.iml" filepath="$PROJECT_DIR$/exercise-seven/exercise-seven.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-six/exercise-six.iml" filepath="$PROJECT_DIR$/exercise-six/exercise-six.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-ten/exercise-ten.iml" filepath="$PROJECT_DIR$/exercise-ten/exercise-ten.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-three/exercise-three.iml" filepath="$PROJECT_DIR$/exercise-three/exercise-three.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-twelve/exercise-twelve.iml" filepath="$PROJECT_DIR$/exercise-twelve/exercise-twelve.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exercise-two/exercise-two.iml" filepath="$PROJECT_DIR$/exercise-two/exercise-two.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pop-ii-worksheet-two.iml" filepath="$PROJECT_DIR$/pop-ii-worksheet-two.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seven/seven.iml" filepath="$PROJECT_DIR$/seven/seven.iml" />
+    </modules>
+  </component>
+</project>
