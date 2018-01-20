@@ -1,14 +1,20 @@
 public class FreezingAndBoilingPoints {
 
+    private static final double ETHYL_FREEZING = -173;
+    private static final double ETHYL_BOILING = 172;
+    private static final double OXYGEN_FREEZING = -362;
+    private static final double OXYGEN_BOILING = -306;
+    private static final double WATER_FREEZING = 32;
+    private static final double WATER_BOILING = 212;
+
     private double temperature;
 
     public FreezingAndBoilingPoints(double t) {
-        // TODO
+        temperature = t;
     }
 
     public double getTemperature() {
-        // TODO
-        return 0.0;
+        return temperature;
     }
 
     /**
@@ -17,8 +23,7 @@ public class FreezingAndBoilingPoints {
      * @return true if Ethyl is freezing
      */
     public boolean isEthylAlchoolFreezing() {
-        // TODO
-        return false;
+        return getTemperature() <= ETHYL_FREEZING;
     }
 
     /**
@@ -27,8 +32,7 @@ public class FreezingAndBoilingPoints {
      * @return true if Ethyl is boiling
      */
     public boolean isEthylAlchoolBoiling() {
-        // TODO
-        return false;
+        return getTemperature() >= ETHYL_BOILING;
     }
 
     /**
@@ -37,8 +41,7 @@ public class FreezingAndBoilingPoints {
      * @return true if Oxygen is freezing
      */
     public boolean isOxygenFreezing() {
-        // TODO
-        return false;
+        return getTemperature() <= OXYGEN_FREEZING;
     }
 
     /**
@@ -47,8 +50,7 @@ public class FreezingAndBoilingPoints {
      * @return true if Oxygen is boiling
      */
     public boolean isOxygenBoiling() {
-        // TODO
-        return false;
+        return getTemperature() >= OXYGEN_BOILING;
     }
 
     /**
@@ -57,8 +59,7 @@ public class FreezingAndBoilingPoints {
      * @return true if Water is freezing
      */
     public boolean isWaterFreezing() {
-        // TODO
-        return false;
+        return getTemperature() <= WATER_FREEZING;
     }
 
     /**
@@ -67,7 +68,6 @@ public class FreezingAndBoilingPoints {
      * @return true if Water is boiling
      */
     public boolean isWaterBoiling() {
-        // TODO
-        return false;
+        return getTemperature() >= WATER_BOILING;
     }
 }
