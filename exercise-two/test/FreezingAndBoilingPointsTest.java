@@ -25,8 +25,8 @@ public class FreezingAndBoilingPointsTest {
 
     @Test
     public void test_isOxygenBoiling() {
-        freezeAndBoiling = new FreezingAndBoilingPoints(-362);
-        assertTrue(freezeAndBoiling.isOxygenFreezing());
+        freezeAndBoiling = new FreezingAndBoilingPoints(-306);
+        assertTrue(freezeAndBoiling.isOxygenBoiling());
     }
 
     @Test
