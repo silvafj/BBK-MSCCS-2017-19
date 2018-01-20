@@ -10,8 +10,8 @@ public class Main {
             numbers.add(++i);
         }
 
-        // TODO - make use of the provided Choice class (which you should complete)
-
+        List<Integer> selection = (new Choice()).selectSixNumbers(numbers);
+        System.out.println("Your lucky numbers are: " + selection.toString());
     }
 
 

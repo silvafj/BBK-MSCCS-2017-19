@@ -1,7 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Choice {
+
+    final static int NUM_COUNT = 6;
+
     /**
      * Returns six distinct numbers between 1 and 49.
      *
@@ -10,8 +12,12 @@ public class Choice {
      */
     public List<Integer> selectSixNumbers(List<Integer> intList){
         List<Integer> selection = new ArrayList<>();
-        // TODO
-        return null;
+        for (int i = 1; i <= NUM_COUNT; i++) {
+            selection.add(selectNumber(intList.size(), intList));
+        }
+
+        Collections.sort(selection);
+        return selection;
     }
 
     /**
@@ -23,7 +29,6 @@ public class Choice {
      * @return the number selected
      */
     public Integer selectNumber(int limit, List<Integer> intList){
-        // TODO
-        return 0;
+        return intList.remove((new Random()).nextInt(limit));
     }
 }
