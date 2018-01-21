@@ -1,0 +1,37 @@
+Q: Why can't you implement a Java method that swaps the contents of two int variables?
+   Illustrate your answer with an appropriate example.
+
+Because the two int variables will be passed by value to the Java method.
+
+void swap(int a, int b) {
+  int tmp = a;
+  a = b;
+  b = a;
+}
+
+int a = 5;
+int b = 6;
+swap(a, b);
+
+// "a" is still 5 and "b" is 6, because they are passed by value and we only swapped the value inside the method
+
+Q: Write a method that swaps the contents of two IntHolder objects.
+   (Look up this rather obscure class in the API documentation.)
+
+void swap(IntHolder a, IntHolder b) {
+    int tmp = a.value;
+    a.value = b.value;
+    b.value = tmp;
+}
+
+IntHolder a = new IntHolder();
+a.value = 5;
+IntHolder b = new IntHolder();
+b.value = 6;
+
+swap(a, b);
+
+Q: Can you swap the contents of two Integer objects?
+
+Integer class is immutable. After being instantiated, there is no setter function of member variable that allows us to
+change the value.
