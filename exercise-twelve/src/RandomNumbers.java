@@ -3,7 +3,7 @@ import java.util.Random;
 
 /**
  * This class provides functions to obtain random elements from int[] and ArrayList<Integer>.
- *
+ * <p>
  * Both int[] and ArrayList<Integer> are builtin implementations, where extending their behavior can only be done
  * either by inheritance/wrapping or composition (as is this class).
  */

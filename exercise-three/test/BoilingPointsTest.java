@@ -2,7 +2,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertFalse;
@@ -10,9 +9,16 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class BoilingPointsTest {
+    @Parameterized.Parameter(0)
+    public Element.Type element;
+    @Parameterized.Parameter(1)
+    public double temperature;
+    @Parameterized.Parameter(2)
+    public boolean expected;
+
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
-        return Arrays.asList(new Object[][] {
+        return Arrays.asList(new Object[][]{
                 {Element.Type.ETHYL, 173, true},
                 {Element.Type.ETHYL, 172, true},
                 {Element.Type.ETHYL, 171, false},
@@ -24,15 +30,6 @@ public class BoilingPointsTest {
                 {Element.Type.WATER, 211, false},
         });
     }
-
-    @Parameterized.Parameter(0)
-    public Element.Type element;
-
-    @Parameterized.Parameter(1)
-    public double temperature;
-
-    @Parameterized.Parameter(2)
-    public boolean expected;
 
     @Test
     public void test() {

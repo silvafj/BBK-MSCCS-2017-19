@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<Integer> numbers = new ArrayList<>();
-        for (int i=0; i < MAX; i++){
+        for (int i = 0; i < MAX; i++) {
             numbers.add(++i);
         }
 

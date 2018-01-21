@@ -1,6 +1,6 @@
 /**
  * This class represents a car travelling along the x-axis.
- *
+ * <p>
  * It is not immutable, because it must allow the state of private members variables to be changed after instantiation.
  */
 public class Car {

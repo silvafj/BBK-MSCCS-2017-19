@@ -3,7 +3,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class RandomNumbersTest {
 
@@ -15,8 +15,8 @@ public class RandomNumbersTest {
 
     @Test
     public void randomFromArray() {
-        assertEquals(0, RandomNumbers.randomElement(new int[] {}));
-        assertEquals(1, RandomNumbers.randomElement(new int[] {1}));
+        assertEquals(0, RandomNumbers.randomElement(new int[]{}));
+        assertEquals(1, RandomNumbers.randomElement(new int[]{1}));
     }
 
     @Test

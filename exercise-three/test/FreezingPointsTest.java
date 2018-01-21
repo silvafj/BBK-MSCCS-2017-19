@@ -9,6 +9,13 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class FreezingPointsTest {
+    @Parameterized.Parameter(0)
+    public Element.Type element;
+    @Parameterized.Parameter(1)
+    public double temperature;
+    @Parameterized.Parameter(2)
+    public boolean expected;
+
     @Parameterized.Parameters
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][]{
@@ -23,15 +30,6 @@ public class FreezingPointsTest {
                 {Element.Type.WATER, 33, false},
         });
     }
-
-    @Parameterized.Parameter(0)
-    public Element.Type element;
-
-    @Parameterized.Parameter(1)
-    public double temperature;
-
-    @Parameterized.Parameter(2)
-    public boolean expected;
 
     @Test
     public void test() {

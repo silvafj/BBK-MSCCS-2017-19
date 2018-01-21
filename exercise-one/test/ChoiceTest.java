@@ -19,7 +19,7 @@ public class ChoiceTest {
         Collections.sort(expected);
 
         List<Integer> selected = (new Choice()).selectSixNumbers(list);
-        assertEquals (expected, selected);
+        assertEquals(expected, selected);
         assertEquals(Integer.valueOf(0), Integer.valueOf(list.size()));
     }
 
