@@ -1,0 +1,11 @@
+Q: Consider the nextInt method of the Scanner class. Is it an accessor or mutator? Why?
+   What about the nextInt method of the Random class?
+
+nextInt() method both in Scanner and Random classes is neither an accessor or mutator.
+
+Accessor and mutator are also known as getter and setter. The getter is used to return the value of a private member
+variable, while the setter provides us a way of altering the value of that private member variable.
+
+Taking this as the definition, we conclude that nextInt() (on both classes) does much more than just returning a value
+from a private member variable. It performs other work like reading from the input stream or calculating a value based
+on a seed.
