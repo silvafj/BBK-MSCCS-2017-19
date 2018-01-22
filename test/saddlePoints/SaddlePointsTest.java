@@ -2,8 +2,7 @@ package saddlePoints;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * @author Fernando Silva <fdealm02>
@@ -80,5 +79,14 @@ public class SaddlePointsTest {
 
         int[][] a3 = {{-5, -3, -1}, {0, 0, 0}, {5, 3, -1}};
         assertArrayEquals(new int[]{-5, 0, -1}, sp.smallestValues(a3));
+    }
+
+    @Test
+    public void testHasSaddlePoint() {
+        int[][] with = {{-9, 12, -6}, {7, 14, 5}, {10, -8, 3}, {6, 17, -10}};
+        assertTrue(sp.hasSaddlePoint(with));
+
+        int[][] without = {{1, -2, 3}, {-6, 5, -4}, {7, -8, 9}};
+        assertFalse(sp.hasSaddlePoint(without));
     }
 }

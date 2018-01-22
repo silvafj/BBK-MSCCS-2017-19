@@ -87,9 +87,9 @@ public class SaddlePoints {
      * @return an array of the largest values in each column.
      */
     int[] largestValues(int[][] array) {
-        int[] largest = new int[array.length];
+        int[] largest = new int[array.length > 0 ? array[0].length : 0];
 
-        for (int col = 0; col < array.length; col++) {
+        for (int col = 0; col < largest.length; col++) {
             int[] column = new int[array.length];
             for (int row = 0; row < array.length; row++) {
                 column[row] = array[row][col];
@@ -109,7 +109,7 @@ public class SaddlePoints {
     int[] smallestValues(int[][] array) {
         int[] smallest = new int[array.length];
 
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < smallest.length; i++) {
             smallest[i] = smallest(array[i]);
         }
 
@@ -123,7 +123,7 @@ public class SaddlePoints {
      * @return True if the array has a saddle point, else false.
      */
     boolean hasSaddlePoint(int[][] array) {
-        return true;
+        return largest(smallestValues(array)) == smallest(largestValues(array));
     }
 
     /**
