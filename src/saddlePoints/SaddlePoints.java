@@ -134,6 +134,15 @@ public class SaddlePoints {
      * @return the lowest-numbered row containing a saddle point.
      */
     int saddlePointRow(int[][] array) {
+        if (hasSaddlePoint(array)) {
+            int[] smallest = smallestValues(array);
+            for (int i = 0; i < smallest.length; ++i) {
+                if (smallest[i] == largest(smallest)) {
+                    return i;
+                }
+            }
+        }
+
         return -1;
     }
 
@@ -146,6 +155,15 @@ public class SaddlePoints {
      */
 
     int saddlePointColumn(int[][] array) {
+        if (hasSaddlePoint(array)) {
+            int[] largest = largestValues(array);
+            for (int i = 0; i < largest.length; ++i) {
+                if (largest[i] == smallest(largest)) {
+                    return i;
+                }
+            }
+        }
+
         return -1;
     }
 }
