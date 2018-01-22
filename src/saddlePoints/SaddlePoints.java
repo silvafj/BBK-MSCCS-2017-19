@@ -44,7 +44,7 @@ public class SaddlePoints {
      * @param numberOfColumns The number of columns desired.
      * @param minValue        The smallest number allowable in the array.
      * @param maxValue        The largest number allowable in the array.
-     * @return
+     * @return and array with random numbers.
      */
     int[][] createRandomArray(int numberOfRows, int numberOfColumns, int minValue, int maxValue) {
         return null;
@@ -58,9 +58,9 @@ public class SaddlePoints {
      */
     int largest(int[] array) {
         int largest = Integer.MIN_VALUE;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] > largest) {
-                largest = array[i];
+        for (int element : array) {
+            if (element > largest) {
+                largest = element;
             }
         }
         return largest;
@@ -74,9 +74,9 @@ public class SaddlePoints {
      */
     int smallest(int[] array) {
         int smallest = Integer.MAX_VALUE;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] < smallest) {
-                smallest = array[i];
+        for (int element : array) {
+            if (element < smallest) {
+                smallest = element;
             }
         }
         return smallest;
@@ -103,15 +103,20 @@ public class SaddlePoints {
     }
 
     /**
-     * Returns an array containing the smallest values in each rpw of the given array.
+     * Returns an array containing the smallest values in each row of the given array.
      *
-     * @param array The array to be searched.
-     * @return An array of the smallest values in each row.
+     * @param array the array to be searched.
+     * @return an array of the smallest values in each row.
      */
     int[] smallestValues(int[][] array) {
-        return null;
-    }
+        int[] smallest = new int[array.length];
 
+        for (int i = 0; i < array.length; i++) {
+            smallest[i] = smallest(array[i]);
+        }
+
+        return smallest;
+    }
 
     /**
      * Returns true if the given array has a saddle point, and false if it does not.
