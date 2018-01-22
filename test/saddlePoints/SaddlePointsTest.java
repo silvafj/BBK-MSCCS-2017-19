@@ -37,4 +37,17 @@ public class SaddlePointsTest {
         assertEquals(-1, sp.largest(a3));
     }
 
+    @Test
+    public void testSmallest() {
+        assertEquals(Integer.MAX_VALUE, sp.smallest(EMPTY_ARRAY));
+
+        int[] a1 = {-1, 0, 1};
+        assertEquals(-1, sp.smallest(a1));
+
+        int[] a2 = {-1, -1, 3};
+        assertEquals(-1, sp.smallest(a2));
+
+        int[] a3 = {-5, -3, -1};
+        assertEquals(-5, sp.smallest(a3));
+    }
 }

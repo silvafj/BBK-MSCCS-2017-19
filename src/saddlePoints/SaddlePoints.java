@@ -69,11 +69,17 @@ public class SaddlePoints {
     /**
      * Finds the smallest value in an array of integers.
      *
-     * @param array The array to be searched.
-     * @return The smallest value in the array.
+     * @param array the array to be searched.
+     * @return the smallest value in the array.
      */
     int smallest(int[] array) {
-        return Integer.MAX_VALUE;
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < smallest) {
+                smallest = array[i];
+            }
+        }
+        return smallest;
     }
 
     /**
