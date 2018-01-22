@@ -85,11 +85,21 @@ public class SaddlePoints {
     /**
      * Returns an array containing the largest values in each column of the given array.
      *
-     * @param array The array to be searched.
-     * @return An array of the largest values in each column.
+     * @param array the array to be searched.
+     * @return an array of the largest values in each column.
      */
     int[] largestValues(int[][] array) {
-        return null;
+        int[] largest = new int[array.length];
+
+        for (int col = 0; col < array.length; col++) {
+            int[] column = new int[array.length];
+            for (int row = 0; row < array.length; row++) {
+                column[row] = array[row][col];
+            }
+            largest[col] = largest(column);
+        }
+
+        return largest;
     }
 
     /**
