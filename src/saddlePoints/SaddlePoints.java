@@ -53,11 +53,17 @@ public class SaddlePoints {
     /**
      * Finds the largest value in an array of integers.
      *
-     * @param array The array to be searched.
-     * @return The largest value in the array.
+     * @param array the array to be searched.
+     * @return the largest value in the array.
      */
     int largest(int[] array) {
-        return Integer.MIN_VALUE;
+        int largest = Integer.MIN_VALUE;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > largest) {
+                largest = array[i];
+            }
+        }
+        return largest;
     }
 
     /**
