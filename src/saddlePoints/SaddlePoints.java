@@ -8,9 +8,8 @@ package saddlePoints;
  */
 public class SaddlePoints {
     /**
-     * Creates arrays various sizes (including some 2x2 arrays and some larger),
-     * fills them with random values, and prints each array and information about
-     * it. Keeps generating arrays until it has printed at least one with and
+     * Creates arrays various sizes (including some 2x2 arrays and some larger), fills them with random values, and
+     * prints each array and information about it. Keeps generating arrays until it has printed at least one with and
      * one without a saddle point.
      */
     void run() {
@@ -27,8 +26,8 @@ public class SaddlePoints {
     }
 
     /**
-     * Prints whether the given array has a saddle point, and if so, where it is (row and column)
-     * and what its value is. (If there are multiple saddle points, just prints the first.)
+     * Prints whether the given array has a saddle point, and if so, where it is (row and column) and what its value
+     * is. (If there are multiple saddle points, just prints the first.)
      *
      * @param array The array to be checked.
      */
@@ -37,8 +36,7 @@ public class SaddlePoints {
     }
 
     /**
-     * Creates and returns an array of the given size and fills it with random
-     * values in the specified range.
+     * Creates and returns an array of the given size and fills it with random values in the specified range.
      *
      * @param numberOfRows    The number of rows desired.
      * @param numberOfColumns The number of columns desired.
@@ -121,7 +119,7 @@ public class SaddlePoints {
     /**
      * Returns true if the given array has a saddle point, and false if it does not.
      *
-     * @param array The array to be checked.
+     * @param array the array to be checked.
      * @return True if the array has a saddle point, else false.
      */
     boolean hasSaddlePoint(int[][] array) {
@@ -129,24 +127,22 @@ public class SaddlePoints {
     }
 
     /**
-     * Given an array that is known to have a saddle point, returns the number of a
-     * row containing a saddle point. If more than one row contains a saddle point,
-     * the first such row will be returned.
+     * Given an array that is known to have a saddle point, returns the number of a row containing a saddle point.
+     * If more than one row contains a saddle point, the first such row will be returned.
      *
-     * @param array An array containing one or more saddle points.
-     * @return The lowest-numbered row containing a saddle point.
+     * @param array an array containing one or more saddle points.
+     * @return the lowest-numbered row containing a saddle point.
      */
     int saddlePointRow(int[][] array) {
         return -1;
     }
 
     /**
-     * Given an array that is known to have a saddle point, returns the number of a
-     * column containing a saddle point. If more than one column contains a saddle point,
-     * the first such column will be returned.
+     * Given an array that is known to have a saddle point, returns the number of a column containing a saddle point.
+     * If more than one column contains a saddle point, the first such column will be returned.
      *
-     * @param array An array containing one or more saddle points.
-     * @return The lowest-numbered column containing a saddle point.
+     * @param array an array containing one or more saddle points.
+     * @return the lowest-numbered column containing a saddle point.
      */
 
     int saddlePointColumn(int[][] array) {

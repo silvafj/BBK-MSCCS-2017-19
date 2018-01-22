@@ -1,7 +1,5 @@
 package saddlePoints;
 
-import saddlePoints.SaddlePoints;
-
 /**
  * @author Fernando Silva <fdealm02>
  */
