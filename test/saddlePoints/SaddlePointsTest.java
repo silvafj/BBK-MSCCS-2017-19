@@ -1,4 +1,4 @@
-package saddlepoints;
+package saddlePoints;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -6,8 +6,7 @@ import org.junit.Test;
 import saddlePoints.SaddlePoints;
 
 /**
- * @author Your name goes here
- *
+ * @author Fernando Silva <fdealm02>
  */
 public class SaddlePointsTest {
     SaddlePoints sp = new SaddlePoints(); // create an instance variable
