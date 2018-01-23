@@ -11,19 +11,10 @@ public class SaddlePointsTest {
 
     private static final int[] EMPTY_ARRAY = {};
     private static final int[][] EMPTY_ARRAY_2D = {};
+    private static final int[][] SADDLE_ARRAY = {{-9, 12, -6}, {7, 14, 5}, {10, -8, 3}, {6, 17, -10}};
+    private static final int[][] NO_SADDLE_ARRAY = {{1, -2, 3}, {-6, 5, -4}, {7, -8, 9}};
 
     private SaddlePoints sp = new SaddlePoints(); // create an instance variable
-
-    // If you use the same variables in multiple tests,
-    // declare them here
-
-    /*
-    @Before
-    public void setUp() throws Exception {
-        // If you use the same variables in multiple tests,
-        //  assign values to them here
-    }
-    */
 
     @Test
     public void testCreateRandomArray() {
@@ -103,29 +94,19 @@ public class SaddlePointsTest {
     @Test
     public void testHasSaddlePoint() {
         assertFalse(sp.hasSaddlePoint(EMPTY_ARRAY_2D));
-
-        int[][] with = {{-9, 12, -6}, {7, 14, 5}, {10, -8, 3}, {6, 17, -10}};
-        assertTrue(sp.hasSaddlePoint(with));
-
-        int[][] without = {{1, -2, 3}, {-6, 5, -4}, {7, -8, 9}};
-        assertFalse(sp.hasSaddlePoint(without));
+        assertTrue(sp.hasSaddlePoint(SADDLE_ARRAY));
+        assertFalse(sp.hasSaddlePoint(NO_SADDLE_ARRAY));
     }
 
     @Test
     public void testSaddlePointRow() {
-        int[][] with = {{-9, 12, -6}, {7, 14, 5}, {10, -8, 3}, {6, 17, -10}};
-        assertEquals(1, sp.saddlePointRow(with));
-
-        int[][] without = {{1, -2, 3}, {-6, 5, -4}, {7, -8, 9}};
-        assertEquals(-1, sp.saddlePointRow(without));
+        assertEquals(1, sp.saddlePointRow(SADDLE_ARRAY));
+        assertEquals(-1, sp.saddlePointRow(NO_SADDLE_ARRAY));
     }
 
     @Test
     public void testSaddlePointColumn() {
-        int[][] with = {{-9, 12, -6}, {7, 14, 5}, {10, -8, 3}, {6, 17, -10}};
-        assertEquals(2, sp.saddlePointColumn(with));
-
-        int[][] without = {{1, -2, 3}, {-6, 5, -4}, {7, -8, 9}};
-        assertEquals(-1, sp.saddlePointColumn(without));
+        assertEquals(2, sp.saddlePointColumn(SADDLE_ARRAY));
+        assertEquals(-1, sp.saddlePointColumn(NO_SADDLE_ARRAY));
     }
 }
