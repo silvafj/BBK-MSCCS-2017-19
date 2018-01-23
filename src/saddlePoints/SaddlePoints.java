@@ -3,8 +3,8 @@ package saddlePoints;
 import java.util.Random;
 
 /**
- * Creates a number of random arrays, and checks each array to see
- * if it contains a saddle point. Prints the arrays and the results.
+ * Creates a number of random arrays, and checks each array to see if it contains a saddle point.
+ * Prints the arrays and the results.
  *
  * @author Fernando Silva <fdealm02>
  */
@@ -19,10 +19,10 @@ public class SaddlePoints {
      */
     void run() {
         int generatedCount = 0;
-        boolean withSaddlePoints = false, withoutSaddlePoints = false;
+        boolean withSaddlePoint = false, withoutSaddlePoint = false;
         int rows = 2, cols = 2; // First array should be 2x2
 
-        while (!(withSaddlePoints && withoutSaddlePoints)) {
+        while (!(withSaddlePoint && withoutSaddlePoint)) {
             generatedCount++;
 
             int min = random.nextInt(49);
@@ -30,9 +30,9 @@ public class SaddlePoints {
 
             int[][] array = createRandomArray(rows, cols, min, max);
             if (hasSaddlePoint(array)) {
-                withSaddlePoints = true;
+                withSaddlePoint = true;
             } else {
-                withoutSaddlePoints = true;
+                withoutSaddlePoint = true;
             }
 
             printArray(array);
@@ -49,7 +49,7 @@ public class SaddlePoints {
     /**
      * Prints the array.
      *
-     * @param array The array to be printed.
+     * @param array the array to be printed.
      */
     void printArray(int[][] array) {
         for (int[] row : array) {
@@ -80,10 +80,10 @@ public class SaddlePoints {
     /**
      * Creates and returns an array of the given size and fills it with random values in the specified range.
      *
-     * @param numberOfRows    the number of rows desired.
+     * @param numberOfRows the number of rows desired.
      * @param numberOfColumns the number of columns desired.
-     * @param minValue        the smallest number allowable in the array.
-     * @param maxValue        the largest number allowable in the array.
+     * @param minValue the smallest number allowable in the array.
+     * @param maxValue the largest number allowable in the array.
      * @return and array with random numbers.
      */
     int[][] createRandomArray(int numberOfRows, int numberOfColumns, int minValue, int maxValue) {
