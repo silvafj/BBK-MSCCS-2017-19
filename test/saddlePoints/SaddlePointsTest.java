@@ -28,11 +28,17 @@ public class SaddlePointsTest {
         assertEquals(3, arr3.length);
         assertEquals(4, arr3[0].length);
 
+        boolean allValuesEqual = true;
+        int prevValue = arr3[0][0];
         for (int[] row : arr3) {
             for (int value : row) {
                 assertTrue(value >= 15 && value <= 99);
+
+                if (value != prevValue) allValuesEqual = false;
+                prevValue = value;
             }
         }
+        assertFalse(allValuesEqual);
     }
 
     @Test
