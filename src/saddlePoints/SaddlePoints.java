@@ -9,13 +9,41 @@ import java.util.Random;
  * @author Fernando Silva <fdealm02>
  */
 public class SaddlePoints {
+
+    private Random random = new Random();
+
     /**
      * Creates arrays various sizes (including some 2x2 arrays and some larger), fills them with random values, and
      * prints each array and information about it. Keeps generating arrays until it has printed at least one with and
      * one without a saddle point.
      */
     void run() {
+        int generatedCount = 0;
+        boolean withSaddlePoints = false, withoutSaddlePoints = false;
+        int rows = 2, cols = 2; // First array should be 2x2
 
+        while (!(withSaddlePoints && withoutSaddlePoints)) {
+            generatedCount++;
+
+            int min = random.nextInt(49);
+            int max = random.nextInt(49) + min;
+
+            int[][] array = createRandomArray(rows, cols, min, max);
+            if (hasSaddlePoint(array)) {
+                withSaddlePoints = true;
+            } else {
+                withoutSaddlePoints = true;
+            }
+
+            printArray(array);
+            printArrayInfo(array);
+            System.out.println();
+
+            rows = random.nextInt(10) + 2;
+            cols = random.nextInt(10) + 2;
+        }
+
+        System.out.println("Number of arrays generated: " + generatedCount);
     }
 
     /**
@@ -24,31 +52,41 @@ public class SaddlePoints {
      * @param array The array to be printed.
      */
     void printArray(int[][] array) {
-
+        for (int[] row : array) {
+            for (int value : row) {
+                System.out.printf("%3d ", value);
+            }
+            System.out.println();
+        }
     }
 
     /**
      * Prints whether the given array has a saddle point, and if so, where it is (row and column) and what its value
      * is. (If there are multiple saddle points, just prints the first.)
      *
-     * @param array The array to be checked.
+     * @param array the array to be checked.
      */
     void printArrayInfo(int[][] array) {
-
+        if (!hasSaddlePoint(array)) {
+            System.out.println("No saddle point found.");
+        } else {
+            int col = saddlePointColumn(array);
+            int row = saddlePointRow(array);
+            int point = array[row][col];
+            System.out.println("Saddle point found with value " + point + " at location (" + row + ", " + col + ").");
+        }
     }
 
     /**
      * Creates and returns an array of the given size and fills it with random values in the specified range.
      *
-     * @param numberOfRows the number of rows desired.
+     * @param numberOfRows    the number of rows desired.
      * @param numberOfColumns the number of columns desired.
-     * @param minValue the smallest number allowable in the array.
-     * @param maxValue the largest number allowable in the array.
+     * @param minValue        the smallest number allowable in the array.
+     * @param maxValue        the largest number allowable in the array.
      * @return and array with random numbers.
      */
     int[][] createRandomArray(int numberOfRows, int numberOfColumns, int minValue, int maxValue) {
-        Random random = new Random();
-
         int[][] array = new int[numberOfRows][numberOfColumns];
         for (int row = 0; row < numberOfRows; row++) {
             for (int col = 0; col < numberOfColumns; col++) {
