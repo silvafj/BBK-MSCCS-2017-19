@@ -16,5 +16,4 @@ public class FractionTest {
         // test that should throw an ArithmeticException
     }
 
-
 }

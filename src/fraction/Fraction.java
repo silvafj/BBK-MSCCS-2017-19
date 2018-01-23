@@ -1,20 +1,60 @@
 package fraction;
 
+/**
+ *
+ */
 public interface Fraction extends Comparable<Fraction> {
-    public Fraction add(Fraction f);
+    /**
+     *
+     * @param f
+     * @return
+     */
+    Fraction add(Fraction f);
 
-    public Fraction subtract(Fraction f);
+    /**
+     *
+     * @param f
+     * @return
+     */
+    Fraction subtract(Fraction f);
 
-    public Fraction multiply(Fraction f);
+    /**
+     *
+     * @param f
+     * @return
+     */
+    Fraction multiply(Fraction f);
 
-    public Fraction divide(Fraction f);
+    /**
+     *
+     * @param f
+     * @return
+     */
+    Fraction divide(Fraction f);
 
-    public Fraction abs();
+    /**
+     *
+     * @return
+     */
+    Fraction abs();
 
-    public Fraction negate();
+    /**
+     *
+     * @return
+     */
+    Fraction negate();
 
-    public Fraction inverse();
+    /**
+     *
+     * @return
+     */
+    Fraction inverse();
 
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
-    public boolean equals(Object o);
+    boolean equals(Object o);
 }
