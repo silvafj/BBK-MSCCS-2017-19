@@ -1,100 +1,114 @@
 package fraction;
 
 /**
+ * Representation of a rational number, using Euclid's algorithm.
  *
+ * @author Fernando Silva (fdealm02>)
  */
 public class FractionImpl implements Fraction {
 
-    private int numerator;
-    private int denominator;
+    private int numerator, denominator;
 
     /**
-     * Need to add JavaDoc for each method
+     * Create a fraction given the numerator and denominator. The fraction is reduced to lowest terms.
      *
-     * @param numerator
-     * @param denominator
+     * @param numerator the numerator.
+     * @param denominator the denominator.
      */
     public FractionImpl(int numerator, int denominator) {
-
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
 
     /**
+     * Create a fraction from an int. The fraction is wholeNumber / 1.
      *
-     * @param wholeNumber
+     * @param wholeNumber the numerator.
      */
     public FractionImpl(int wholeNumber) {
 
     }
 
     /**
+     * Create a fraction from a String, with the format numerator/denominator.
      *
-     * @param fraction
+     * @param fraction the fraction as a String.
      */
     public FractionImpl(String fraction) {
 
     }
 
     /**
-     * @see ...
-     * @param f
-     * @return
+     * Adds the value of another fraction to this one.
+     *
+     * @param f the fraction to add.
+     * @return a Fraction instance.
      */
-    @Override
     public Fraction add(Fraction f) {
         return null;
     }
 
     /**
+     * Subtracts the value of another fraction from the value of this one.
      *
-     * @param f
-     * @return
+     * @param f the fraction to subtract.
+     * @return a Fraction instance.
      */
-    @Override
     public Fraction subtract(Fraction f) {
         return null;
     }
 
     /**
+     * Multiplies the value of another fraction with this one.
      *
-     * @param f
-     * @return
+     * @param f the fraction to multiply by.
+     * @return a Fraction instance.
      */
-    @Override
     public Fraction multiply(Fraction f) {
         return null;
     }
 
     /**
+     * Divides the value of this fraction by another.
      *
-     * @param f
-     * @return
+     * @param f the fraction to divide by.
+     * @return a Fraction instance.
      */
-    @Override
     public Fraction divide(Fraction f) {
         return null;
     }
 
     /**
+     * Returns the absolute value of this fraction.
      *
-     * @return
+     * @return a Fraction instance.
      */
-    @Override
     public Fraction abs() {
         return null;
     }
 
     /**
+     * Returns a fraction that has same numeric value of this fraction, but the opposite sign.
      *
-     * @return
+     * @return a Fraction instance.
      */
-    @Override
     public Fraction negate() {
         return null;
     }
 
     /**
+     * Returns the inverse of this fraction.
      *
-     * @return
+     * @return a Fraction instance.
+     */
+    public Fraction inverse() {
+        return null;
+    }
+
+    /**
+     * Gets a hashCode for the fraction.
+     *
+     * @return a hash code value for this object
      */
     @Override
     public int hashCode() {
@@ -102,9 +116,12 @@ public class FractionImpl implements Fraction {
     }
 
     /**
+     * Test for the equality of two fractions. If the lowest term numerator and denominators are the same for both
+     * fractions, the two fractions are considered to be equal.
      *
-     * @param obj
-     * @return
+     * @param obj fraction to test for equality to this fraction.
+     * @return true if two fractions are equal, false if object is null, not an instance of Fraction,
+     *         or not equal to this fraction instance.
      */
     @Override
     public boolean equals(Object obj) {
@@ -112,7 +129,6 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     *
      * @return
      * @throws CloneNotSupportedException
      */
@@ -122,18 +138,10 @@ public class FractionImpl implements Fraction {
     }
 
     /**
+     * Compares this Fraction to another object.
      *
-     * @return
-     */
-    @Override
-    public Fraction inverse() {
-        return null;
-    }
-
-    /**
-     *
-     * @param o
-     * @return
+     * @param o the fraction to compare to.
+     * @return -1 if this is less than object, +1 if this is greater than object, 0 if they are equal.
      */
     @Override
     public int compareTo(Fraction o) {
@@ -141,8 +149,9 @@ public class FractionImpl implements Fraction {
     }
 
     /**
+     * Returns the String representing this fraction, e.g, "num / dem" or just "num" if the denominator is one.
      *
-     * @return
+     * @return a string representation of the fraction.
      */
     @Override
     public String toString() {
