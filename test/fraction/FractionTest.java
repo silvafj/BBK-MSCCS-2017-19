@@ -143,10 +143,29 @@ public class FractionTest {
     }
 
     @Test
+    public void testDivideByZero() {
+        assertThrown(() -> (new FractionImpl(1)).divide(new FractionImpl(0)), ArithmeticException.class);
+    }
+
+
+    @Test
     public void testNegate() {
         assertEquals("1/1", (new FractionImpl("-1")).negate().toString());
         assertEquals("0/1", (new FractionImpl("0")).negate().toString());
         assertEquals("-1/1", (new FractionImpl("1")).negate().toString());
+    }
+
+    @Test
+    public void testInverse() {
+        assertEquals("-1/1", (new FractionImpl("-1")).inverse().toString());
+        assertEquals("0/1", (new FractionImpl("0")).inverse().toString());
+        assertEquals("1/1", (new FractionImpl("1")).inverse().toString());
+        assertEquals("4/1", (new FractionImpl("1/4")).inverse().toString());
+    }
+
+    @Test
+    public void testInverseZero() {
+        assertThrown(() -> (new FractionImpl(0)).inverse(), ArithmeticException.class);
     }
 
 }

@@ -201,7 +201,7 @@ public class FractionImpl implements Fraction {
      * @return a Fraction instance.
      */
     public Fraction inverse() {
-        return null;
+        return new FractionImpl(this.denominator, this.numerator);
     }
 
     /**
