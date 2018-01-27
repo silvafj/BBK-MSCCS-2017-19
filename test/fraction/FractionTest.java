@@ -52,12 +52,25 @@ public class FractionTest {
 
     @Test
     public void testAdd() {
-        // Tests that are expected to succeed
-    }
+        String[][] rows = {
+                {"0", "-1", "-1/1"},
+                {"0", "0", "0/1"},
+                {"0", "1", "1/1"},
 
-    @Test(expected = ArithmeticException.class)
-    public void testDivideByZero() {
-        // test that should throw an ArithmeticException
+                {"1", "-1", "0/1"},
+                {"1", "0", "1/1"},
+                {"1", "1", "2/1"},
+
+                {"1/2", "1/2", "1/1"},
+                {"1/4", "1/4", "1/2"},
+                {"23/11", "12/5", "247/55"},
+                {"-23/11", "12/5", "17/55"},
+                {"23/11", "12/-5", "-17/55"},
+        };
+
+        for (String[] row: rows) {
+            assertEquals(row[2], new FractionImpl(row[0]).add(new FractionImpl(row[1])).toString());
+        }
     }
 
 }
