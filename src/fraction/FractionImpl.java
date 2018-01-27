@@ -3,7 +3,7 @@ package fraction;
 /**
  * Representation of a rational number, using Euclid's algorithm.
  *
- * @author Fernando Silva (fdealm02>)
+ * @author Fernando Silva (fdealm02)
  */
 public class FractionImpl implements Fraction {
 
@@ -183,6 +183,7 @@ public class FractionImpl implements Fraction {
      * @return a Fraction instance.
      */
     public Fraction abs() {
+        // TODO: I don't know what is expected here
         return null;
     }
 
@@ -233,8 +234,10 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * @return
-     * @throws CloneNotSupportedException
+     * Returns a cloned instance of the current Fraction.
+     *
+     * @return a cloned Fraction
+     * @throws CloneNotSupportedException if this operation is not supported
      */
     @Override
     protected Object clone() throws CloneNotSupportedException {
