@@ -136,7 +136,13 @@ public class FractionImpl implements Fraction {
      * @return a Fraction instance.
      */
     public Fraction subtract(Fraction f) {
-        return null;
+        FractionImpl fi = (FractionImpl)f;
+
+        // a/b - c/d = (ad - bc) / bd
+        return new FractionImpl(
+                this.numerator * fi.denominator - this.denominator * fi.numerator,
+                this.denominator * fi.denominator
+        );
     }
 
     /**

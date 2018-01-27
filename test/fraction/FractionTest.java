@@ -63,6 +63,7 @@ public class FractionTest {
 
                 {"1/2", "1/2", "1/1"},
                 {"1/4", "1/4", "1/2"},
+
                 {"23/11", "12/5", "247/55"},
                 {"-23/11", "12/5", "17/55"},
                 {"23/11", "12/-5", "-17/55"},
@@ -70,6 +71,29 @@ public class FractionTest {
 
         for (String[] row: rows) {
             assertEquals(row[2], new FractionImpl(row[0]).add(new FractionImpl(row[1])).toString());
+        }
+    }
+
+    @Test
+    public void testSubtract() {
+        String[][] rows = {
+                {"0", "-1", "1/1"},
+                {"0", "0", "0/1"},
+                {"0", "1", "-1/1"},
+
+                {"1", "-1", "2/1"},
+                {"1", "0", "1/1"},
+                {"1", "1", "0/1"},
+
+                {"1/2", "1/2", "0/1"},
+
+                {"23/11", "12/5", "-17/55"},
+                {"-23/11", "12/5", "-247/55"},
+                {"23/11", "12/-5", "247/55"},
+        };
+
+        for (String[] row: rows) {
+            assertEquals(row[2], new FractionImpl(row[0]).subtract(new FractionImpl(row[1])).toString());
         }
     }
 
