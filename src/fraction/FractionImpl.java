@@ -249,7 +249,9 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public int compareTo(Fraction o) {
-        return 0;
+        // To compare two fractions we have to normalize them to have a common denominator
+        FractionImpl f = (FractionImpl) o;
+        return (this.numerator * f.denominator) - (f.numerator * this.denominator);
     }
 
     /**

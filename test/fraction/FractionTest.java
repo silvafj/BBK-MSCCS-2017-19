@@ -164,14 +164,20 @@ public class FractionTest {
 
     @Test
     public void testInverse() {
-        assertEquals(new FractionImpl("-1/1"), (new FractionImpl("-1")).inverse());
-        assertEquals(new FractionImpl("1/1"), (new FractionImpl("1")).inverse());
-        assertEquals(new FractionImpl("4/1"), (new FractionImpl("1/4")).inverse());
+        assertEquals(new FractionImpl("-1"), (new FractionImpl("-1")).inverse());
+        assertEquals(new FractionImpl("4"), (new FractionImpl("1/4")).inverse());
     }
 
     @Test
     public void testInverseZero() {
         assertThrown(() -> (new FractionImpl(0)).inverse(), ArithmeticException.class);
+    }
+
+    @Test
+    public void testCompareTo() {
+        assertEquals(-1, (new FractionImpl("1/2")).compareTo(new FractionImpl(1)));
+        assertEquals(0, (new FractionImpl("10/6")).compareTo(new FractionImpl("5/3")));
+        assertEquals(1, (new FractionImpl(1)).compareTo(new FractionImpl("1/2")));
     }
 
 }
