@@ -1,5 +1,7 @@
 package fraction;
 
+import java.lang.ArithmeticException;
+
 /**
  * Representation of a rational number, using Euclid's algorithm.
  *
@@ -10,32 +12,107 @@ public class FractionImpl implements Fraction {
     private int numerator, denominator;
 
     /**
-     * Create a fraction given the numerator and denominator. The fraction is reduced to lowest terms.
-     *
-     * @param numerator the numerator.
-     * @param denominator the denominator.
-     */
-    public FractionImpl(int numerator, int denominator) {
-        this.numerator = numerator;
-        this.denominator = denominator;
-    }
-
-    /**
-     * Create a fraction from an int. The fraction is wholeNumber / 1.
+     * Creates a fraction from an int. The fraction is wholeNumber / 1.
      *
      * @param wholeNumber the numerator.
      */
     public FractionImpl(int wholeNumber) {
-
+        this.numerator = wholeNumber;
+        this.denominator = 1;
     }
 
     /**
-     * Create a fraction from a String, with the format numerator/denominator.
+     * Creates a fraction given the numerator and denominator. Fraction will be normalised to lowest terms with
+     * Euclid's algorithm.
      *
-     * @param fraction the fraction as a String.
+     * @param numerator the numerator.
+     * @param denominator the denominator.
+     * @throws ArithmeticException if denominator is zero.
      */
-    public FractionImpl(String fraction) {
+    public FractionImpl(int numerator, int denominator) throws ArithmeticException {
+        if (denominator == 0) {
+            throw new ArithmeticException("Divide by zero");
+        } else if (denominator < 0) {
+            numerator *= -1;
+            denominator *= -1;
+        }
 
+        if (numerator == 0) {
+            this.numerator = 0;
+            this.denominator = 1;
+        } else {
+            int common = gcd(Math.abs(numerator), denominator);
+            this.numerator = numerator / common;
+            this.denominator = denominator / common;
+        }
+    }
+
+    /**
+     * Creates a fraction from a String, with the format "numerator/denominator" or "whole number". Fraction will be
+     * normalised to lowest terms with Euclid's algorithm.
+     *
+     * @param fraction the fraction (or whole number) as a String.
+     * @throws ArithmeticException if denominator is zero.
+     * @throws NumberFormatException if fraction is malformed.
+     */
+    public FractionImpl(String fraction) throws ArithmeticException, NumberFormatException {
+        String[] parts = fraction.split("/");
+
+        if (parts.length > 2) {
+            throw new NumberFormatException("Fraction is malformed.");
+        }
+
+        int numerator = Integer.parseInt(parts[0].trim());
+        if (parts.length == 1) {
+            this.numerator = numerator;
+            this.denominator = 1;
+        } else {
+            int denominator = Integer.parseInt(parts[1].trim());
+
+            if (denominator == 0) {
+                throw new ArithmeticException("Divide by zero");
+            } else if (denominator < 0) {
+                numerator *= -1;
+                denominator *= -1;
+            }
+
+            if (numerator == 0) {
+                this.numerator = 0;
+                this.denominator = 1;
+            } else {
+                int common = gcd(Math.abs(numerator), denominator);
+                this.numerator = numerator / common;
+                this.denominator = denominator / common;
+            }
+        }
+    }
+
+    /**
+     * Calculates the Greatest Common Divisor for two numbers using Euclid's algorithm.
+     *
+     * @param number1 the first number.
+     * @param number2 the second number.
+     * @return the Greatest Common Divisor.
+     * @throws ArithmeticException if number1 or number2 are zero.
+     */
+    private int gcd(int number1, int number2) throws ArithmeticException {
+        if (number1 == 0 || number2 == 0) throw new ArithmeticException("Numbers must be non-zero.");
+
+        if (number1 == number2) {
+            return number1;
+        } else if (number2 > number1) {
+            int temp = number1;
+            number1 = number2;
+            number2 = temp;
+        }
+
+        while (number2 != 0) {
+            int temp = number2;
+            number2 = number1 % number2;
+            number1 = temp;
+        }
+
+        return number1;
     }
 
     /**
@@ -155,6 +232,6 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public String toString() {
-        return null;
+        return numerator + "/" + denominator;
     }
 }
