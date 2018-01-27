@@ -142,4 +142,11 @@ public class FractionTest {
         }
     }
 
+    @Test
+    public void testNegate() {
+        assertEquals("1/1", (new FractionImpl("-1")).negate().toString());
+        assertEquals("0/1", (new FractionImpl("0")).negate().toString());
+        assertEquals("-1/1", (new FractionImpl("1")).negate().toString());
+    }
+
 }

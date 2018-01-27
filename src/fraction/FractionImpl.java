@@ -192,7 +192,7 @@ public class FractionImpl implements Fraction {
      * @return a Fraction instance.
      */
     public Fraction negate() {
-        return null;
+        return new FractionImpl(this.numerator * -1, this.denominator);
     }
 
     /**
