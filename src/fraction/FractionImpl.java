@@ -224,7 +224,12 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (obj instanceof FractionImpl) {
+            FractionImpl f = (FractionImpl) obj;
+            return this.numerator == f.numerator && this.denominator == f.denominator;
+        }
+
+        return false;
     }
 
     /**

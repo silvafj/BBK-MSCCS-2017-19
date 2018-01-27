@@ -12,20 +12,19 @@ public class FractionTest {
 
     @Test
     public void testValidFractions() {
-        assertEquals("1/1", (new FractionImpl(1)).toString());
-        assertEquals("0/1", (new FractionImpl(0)).toString());
-        assertEquals("-1/1", (new FractionImpl(-1)).toString());
+        assertEquals(new FractionImpl("1/1"), new FractionImpl(1));
+        assertEquals(new FractionImpl("0/1"), new FractionImpl(0));
+        assertEquals(new FractionImpl("-1/1"), new FractionImpl(-1));
 
-        assertEquals("1/1", (new FractionImpl(1, 1)).toString());
-        assertEquals("0/1", (new FractionImpl(0, 1)).toString());
-        assertEquals("-1/1", (new FractionImpl(-1, 1)).toString());
-        assertEquals("-2/3", (new FractionImpl(8, -12)).toString());
+        assertEquals(new FractionImpl("1/1"), new FractionImpl(1, 1));
+        assertEquals(new FractionImpl("0/1"), new FractionImpl(0, 1));
+        assertEquals(new FractionImpl("-1/1"), new FractionImpl(-1, 1));
+        assertEquals(new FractionImpl("-2/3"), new FractionImpl(8, -12));
 
-        assertEquals("1/1", (new FractionImpl(" 1 /1 ")).toString());
-        assertEquals("0/1", (new FractionImpl("0/1")).toString());
-        assertEquals("0/1", (new FractionImpl("0")).toString());
-        assertEquals("-1/1", (new FractionImpl("-1/1")).toString());
-        assertEquals("-2/3", (new FractionImpl("8/-12")).toString());
+        assertEquals(new FractionImpl("1/1"), new FractionImpl(" 1 /1 "));
+        assertEquals(new FractionImpl("0/1"), new FractionImpl("0/1"));
+        assertEquals(new FractionImpl("0/1"), new FractionImpl("0"));
+        assertEquals(new FractionImpl("-2/3"), new FractionImpl("8/-12"));
     }
 
     /**
@@ -70,7 +69,7 @@ public class FractionTest {
         };
 
         for (String[] row: rows) {
-            assertEquals(row[2], new FractionImpl(row[0]).add(new FractionImpl(row[1])).toString());
+            assertEquals(new FractionImpl(row[2]), new FractionImpl(row[0]).add(new FractionImpl(row[1])));
         }
     }
 
@@ -93,7 +92,7 @@ public class FractionTest {
         };
 
         for (String[] row: rows) {
-            assertEquals(row[2], new FractionImpl(row[0]).subtract(new FractionImpl(row[1])).toString());
+            assertEquals(new FractionImpl(row[2]), new FractionImpl(row[0]).subtract(new FractionImpl(row[1])));
         }
     }
 
@@ -117,7 +116,7 @@ public class FractionTest {
         };
 
         for (String[] row: rows) {
-            assertEquals(row[2], new FractionImpl(row[0]).multiply(new FractionImpl(row[1])).toString());
+            assertEquals(new FractionImpl(row[2]), new FractionImpl(row[0]).multiply(new FractionImpl(row[1])));
         }
     }
 
@@ -138,7 +137,7 @@ public class FractionTest {
         };
 
         for (String[] row: rows) {
-            assertEquals(row[2], new FractionImpl(row[0]).divide(new FractionImpl(row[1])).toString());
+            assertEquals(new FractionImpl(row[2]), new FractionImpl(row[0]).divide(new FractionImpl(row[1])));
         }
     }
 
@@ -150,17 +149,16 @@ public class FractionTest {
 
     @Test
     public void testNegate() {
-        assertEquals("1/1", (new FractionImpl("-1")).negate().toString());
-        assertEquals("0/1", (new FractionImpl("0")).negate().toString());
-        assertEquals("-1/1", (new FractionImpl("1")).negate().toString());
+        assertEquals(new FractionImpl("1/1"), (new FractionImpl("-1")).negate());
+        assertEquals(new FractionImpl("0/1"), (new FractionImpl("0")).negate());
+        assertEquals(new FractionImpl("-1/1"), (new FractionImpl("1")).negate());
     }
 
     @Test
     public void testInverse() {
-        assertEquals("-1/1", (new FractionImpl("-1")).inverse().toString());
-        assertEquals("0/1", (new FractionImpl("0")).inverse().toString());
-        assertEquals("1/1", (new FractionImpl("1")).inverse().toString());
-        assertEquals("4/1", (new FractionImpl("1/4")).inverse().toString());
+        assertEquals(new FractionImpl("-1/1"), (new FractionImpl("-1")).inverse());
+        assertEquals(new FractionImpl("1/1"), (new FractionImpl("1")).inverse());
+        assertEquals(new FractionImpl("4/1"), (new FractionImpl("1/4")).inverse());
     }
 
     @Test
