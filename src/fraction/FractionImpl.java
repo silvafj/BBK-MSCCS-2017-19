@@ -1,7 +1,5 @@
 package fraction;
 
-import java.lang.ArithmeticException;
-
 /**
  * Representation of a rational number, using Euclid's algorithm.
  *
@@ -25,26 +23,12 @@ public class FractionImpl implements Fraction {
      * Creates a fraction given the numerator and denominator. Fraction will be normalised to lowest terms with
      * Euclid's algorithm.
      *
-     * @param numerator the numerator.
+     * @param numerator   the numerator.
      * @param denominator the denominator.
      * @throws ArithmeticException if denominator is zero.
      */
     public FractionImpl(int numerator, int denominator) throws ArithmeticException {
-        if (denominator == 0) {
-            throw new ArithmeticException("Divide by zero");
-        } else if (denominator < 0) {
-            numerator *= -1;
-            denominator *= -1;
-        }
-
-        if (numerator == 0) {
-            this.numerator = 0;
-            this.denominator = 1;
-        } else {
-            int common = gcd(Math.abs(numerator), denominator);
-            this.numerator = numerator / common;
-            this.denominator = denominator / common;
-        }
+        validateAndNormalize(numerator, denominator);
     }
 
     /**
@@ -52,37 +36,22 @@ public class FractionImpl implements Fraction {
      * normalised to lowest terms with Euclid's algorithm.
      *
      * @param fraction the fraction (or whole number) as a String.
-     * @throws ArithmeticException if denominator is zero.
+     * @throws ArithmeticException   if denominator is zero.
      * @throws NumberFormatException if fraction is malformed.
      */
     public FractionImpl(String fraction) throws ArithmeticException, NumberFormatException {
         String[] parts = fraction.split("/");
 
-        if (parts.length > 2) {
+        if (parts.length == 0 || parts.length > 2) {
             throw new NumberFormatException("Fraction is malformed.");
-        }
-
-        int numerator = Integer.parseInt(parts[0].trim());
-        if (parts.length == 1) {
-            this.numerator = numerator;
-            this.denominator = 1;
         } else {
-            int denominator = Integer.parseInt(parts[1].trim());
-
-            if (denominator == 0) {
-                throw new ArithmeticException("Divide by zero");
-            } else if (denominator < 0) {
-                numerator *= -1;
-                denominator *= -1;
-            }
-
-            if (numerator == 0) {
-                this.numerator = 0;
+            int numerator = Integer.parseInt(parts[0].trim());
+            if (parts.length == 1) {
+                this.numerator = numerator;
                 this.denominator = 1;
             } else {
-                int common = gcd(Math.abs(numerator), denominator);
-                this.numerator = numerator / common;
-                this.denominator = denominator / common;
+                int denominator = Integer.parseInt(parts[1].trim());
+                validateAndNormalize(numerator, denominator);
             }
         }
     }
@@ -101,6 +70,7 @@ public class FractionImpl implements Fraction {
         if (number1 == number2) {
             return number1;
         } else if (number2 > number1) {
+            // swap numbers, as we will be dividing by the lowest one
             int temp = number1;
             number1 = number2;
             number2 = temp;
@@ -113,6 +83,34 @@ public class FractionImpl implements Fraction {
         }
 
         return number1;
+    }
+
+    /**
+     * Validates the numerator and denominator.
+     * 1. If the fraction is negative, the sign is applied to the numerator
+     * 2. The denominator is never negative
+     * 3. Zero is always represented with numerator 0 and denominator 1
+     *
+     * @param numerator   the numerator.
+     * @param denominator the denominator.
+     * @throws ArithmeticException if denominator is zero.
+     */
+    private void validateAndNormalize(int numerator, int denominator) throws ArithmeticException {
+        if (denominator == 0) {
+            throw new ArithmeticException("Divide by zero");
+        } else if (denominator < 0) {
+            numerator *= -1;
+            denominator *= -1;
+        }
+
+        if (numerator == 0) {
+            this.numerator = 0;
+            this.denominator = 1;
+        } else {
+            int common = gcd(Math.abs(numerator), denominator);
+            this.numerator = numerator / common;
+            this.denominator = denominator / common;
+        }
     }
 
     /**
@@ -198,7 +196,7 @@ public class FractionImpl implements Fraction {
      *
      * @param obj fraction to test for equality to this fraction.
      * @return true if two fractions are equal, false if object is null, not an instance of Fraction,
-     *         or not equal to this fraction instance.
+     * or not equal to this fraction instance.
      */
     @Override
     public boolean equals(Object obj) {
