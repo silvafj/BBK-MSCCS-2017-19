@@ -121,4 +121,25 @@ public class FractionTest {
         }
     }
 
+    @Test
+    public void testDivide() {
+        String[][] rows = {
+                {"0", "-1", "0/1"},
+                {"0", "1", "0/1"},
+
+                {"1", "-1", "-1/1"},
+                {"1", "1", "1/1"},
+
+                {"1/2", "1/2", "1/1"},
+
+                {"23/11", "12/5", "115/132"},
+                {"-23/11", "12/5", "-115/132"},
+                {"23/11", "12/-5", "-115/132"},
+        };
+
+        for (String[] row: rows) {
+            assertEquals(row[2], new FractionImpl(row[0]).divide(new FractionImpl(row[1])).toString());
+        }
+    }
+
 }
