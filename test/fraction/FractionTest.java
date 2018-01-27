@@ -50,6 +50,14 @@ public class FractionTest {
     }
 
     @Test
+    public void testToString() {
+        assertEquals("-1", (new FractionImpl(-1)).toString());
+        assertEquals("0", (new FractionImpl(0)).toString());
+        assertEquals("1", (new FractionImpl(1)).toString());
+        assertEquals("1/2", (new FractionImpl(1, 2)).toString());
+    }
+
+    @Test
     public void testAdd() {
         String[][] rows = {
                 {"0", "-1", "-1/1"},

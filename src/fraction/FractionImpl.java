@@ -259,6 +259,6 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public String toString() {
-        return numerator + "/" + denominator;
+        return denominator == 1 ? String.valueOf(numerator) : numerator + "/" + denominator;
     }
 }
