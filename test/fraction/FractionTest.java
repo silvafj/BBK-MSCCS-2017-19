@@ -97,4 +97,28 @@ public class FractionTest {
         }
     }
 
+    @Test
+    public void testMultiply() {
+        String[][] rows = {
+                {"0", "-1", "0/1"},
+                {"0", "0", "0/1"},
+                {"0", "1", "0/1"},
+
+                {"1", "-1", "-1/1"},
+                {"1", "0", "0/1"},
+                {"1", "1", "1/1"},
+
+                {"1/2", "1/2", "1/4"},
+                {"1/4", "1/4", "1/16"},
+
+                {"23/11", "12/5", "276/55"},
+                {"-23/11", "12/5", "-276/55"},
+                {"23/11", "12/-5", "-276/55"},
+        };
+
+        for (String[] row: rows) {
+            assertEquals(row[2], new FractionImpl(row[0]).multiply(new FractionImpl(row[1])).toString());
+        }
+    }
+
 }

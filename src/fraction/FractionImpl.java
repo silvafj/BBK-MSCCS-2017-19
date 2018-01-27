@@ -152,7 +152,13 @@ public class FractionImpl implements Fraction {
      * @return a Fraction instance.
      */
     public Fraction multiply(Fraction f) {
-        return null;
+        FractionImpl fi = (FractionImpl)f;
+
+        // (a/b) * (c/d) = (a*c) / (b*d)
+        return new FractionImpl(
+                this.numerator * fi.numerator,
+                this.denominator * fi.denominator
+        );
     }
 
     /**
