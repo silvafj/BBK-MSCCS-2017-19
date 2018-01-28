@@ -10,7 +10,7 @@ public class FractionImpl implements Fraction {
     private int numerator, denominator;
 
     /**
-     * Creates a fraction from an int. The fraction is wholeNumber / 1.
+     * Creates a fraction from an <code>int</code>. The fraction is <code>wholeNumber / 1</code>.
      *
      * @param wholeNumber the numerator.
      */
@@ -20,8 +20,8 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Creates a fraction given the numerator and denominator. Fraction will be normalised to lowest terms with
-     * Euclid's algorithm.
+     * Creates a fraction given the numerator and denominator. <code>Fraction</code> will be normalised to lowest terms
+     * with Euclid's algorithm.
      *
      * @param numerator   the numerator.
      * @param denominator the denominator.
@@ -32,10 +32,10 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Creates a fraction from a String, with the format "numerator/denominator" or "whole number". Fraction will be
-     * normalised to lowest terms with Euclid's algorithm.
+     * Creates a fraction from a <code>String</code>, with the format "numerator/denominator" or is a whole number.
+     * <code>Fraction</code> will be normalised to lowest terms with Euclid's algorithm.
      *
-     * @param fraction the fraction (or whole number) as a String.
+     * @param fraction the fraction (or whole number) as a <code>String</code>.
      * @throws ArithmeticException   if denominator is zero.
      * @throws NumberFormatException if fraction is malformed.
      */
@@ -114,13 +114,10 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Adds the value of another fraction to this one.
-     *
-     * @param f the fraction to add.
-     * @return a Fraction instance.
+     * {@inheritDoc}
      */
     public Fraction add(Fraction f) {
-        FractionImpl fi = (FractionImpl)f;
+        FractionImpl fi = (FractionImpl) f;
 
         // a/b + c/d = (ad + bc) / bd
         return new FractionImpl(
@@ -130,13 +127,10 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Subtracts the value of another fraction from the value of this one.
-     *
-     * @param f the fraction to subtract.
-     * @return a Fraction instance.
+     * {@inheritDoc}
      */
     public Fraction subtract(Fraction f) {
-        FractionImpl fi = (FractionImpl)f;
+        FractionImpl fi = (FractionImpl) f;
 
         // a/b - c/d = (ad - bc) / bd
         return new FractionImpl(
@@ -146,13 +140,10 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Multiplies the value of another fraction with this one.
-     *
-     * @param f the fraction to multiply by.
-     * @return a Fraction instance.
+     * {@inheritDoc}
      */
     public Fraction multiply(Fraction f) {
-        FractionImpl fi = (FractionImpl)f;
+        FractionImpl fi = (FractionImpl) f;
 
         // (a/b) * (c/d) = (a*c) / (b*d)
         return new FractionImpl(
@@ -162,13 +153,10 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Divides the value of this fraction by another.
-     *
-     * @param f the fraction to divide by.
-     * @return a Fraction instance.
+     * {@inheritDoc}
      */
     public Fraction divide(Fraction f) {
-        FractionImpl fi = (FractionImpl)f;
+        FractionImpl fi = (FractionImpl) f;
 
         // (a/b) / (c/d) = (a*d) / (b*c)
         return new FractionImpl(
@@ -178,36 +166,28 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Returns the absolute value of this fraction.
-     *
-     * @return a Fraction instance.
+     * {@inheritDoc}
      */
     public Fraction abs() {
         return new FractionImpl(Math.abs(this.numerator), this.denominator);
     }
 
     /**
-     * Returns a fraction that has same numeric value of this fraction, but the opposite sign.
-     *
-     * @return a Fraction instance.
+     * {@inheritDoc}
      */
     public Fraction negate() {
         return new FractionImpl(this.numerator * -1, this.denominator);
     }
 
     /**
-     * Returns the inverse of this fraction.
-     *
-     * @return a Fraction instance.
+     * {@inheritDoc}
      */
     public Fraction inverse() {
         return new FractionImpl(this.denominator, this.numerator);
     }
 
     /**
-     * Gets a hashCode for the fraction.
-     *
-     * @return a hash code value for this object
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -215,17 +195,12 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Test for the equality of two fractions. If the lowest term numerator and denominators are the same for both
-     * fractions, the two fractions are considered to be equal.
-     *
-     * @param obj fraction to test for equality to this fraction.
-     * @return true if two fractions are equal, false if object is null, not an instance of Fraction,
-     * or not equal to this fraction instance.
+     * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof FractionImpl) {
-            FractionImpl f = (FractionImpl) obj;
+    public boolean equals(Object o) {
+        if (o instanceof FractionImpl) {
+            FractionImpl f = (FractionImpl) o;
             return this.numerator == f.numerator && this.denominator == f.denominator;
         }
 
@@ -233,10 +208,7 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Returns a cloned instance of the current Fraction.
-     *
-     * @return a cloned Fraction
-     * @throws CloneNotSupportedException if this operation is not supported
+     * {@inheritDoc}
      */
     @Override
     protected Object clone() throws CloneNotSupportedException {
@@ -244,25 +216,21 @@ public class FractionImpl implements Fraction {
     }
 
     /**
-     * Compares this Fraction to another object.
-     *
-     * @param o the fraction to compare to.
-     * @return -1 if this is less than object, +1 if this is greater than object, 0 if they are equal.
+     * {@inheritDoc}
      */
     @Override
-    public int compareTo(Fraction o) {
+    public int compareTo(Fraction f) {
         // To compare two fractions we have to normalize them to have a common denominator
-        FractionImpl f = (FractionImpl) o;
-        return (this.numerator * f.denominator) - (f.numerator * this.denominator);
+        FractionImpl fi = (FractionImpl) f;
+        return (this.numerator * fi.denominator) - (fi.numerator * this.denominator);
     }
 
     /**
-     * Returns the String representing this fraction, e.g, "num / dem" or just "num" if the denominator is one.
-     *
-     * @return a string representation of the fraction.
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
         return denominator == 1 ? String.valueOf(numerator) : numerator + "/" + denominator;
     }
+
 }
