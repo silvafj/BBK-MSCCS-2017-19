@@ -156,6 +156,13 @@ public class FractionTest {
 
 
     @Test
+    public void testAbs() {
+        assertEquals(new FractionImpl(1), (new FractionImpl(-1)).abs());
+        assertEquals(new FractionImpl(0), (new FractionImpl(0)).abs());
+        assertEquals(new FractionImpl("3/2"), (new FractionImpl("-3/2")).abs());
+    }
+
+    @Test
     public void testNegate() {
         assertEquals(new FractionImpl("1/1"), (new FractionImpl("-1")).negate());
         assertEquals(new FractionImpl("0/1"), (new FractionImpl("0")).negate());

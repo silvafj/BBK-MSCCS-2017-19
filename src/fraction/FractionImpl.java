@@ -183,8 +183,7 @@ public class FractionImpl implements Fraction {
      * @return a Fraction instance.
      */
     public Fraction abs() {
-        // TODO: I don't know what is expected here
-        return null;
+        return new FractionImpl(Math.abs(this.numerator), this.denominator);
     }
 
     /**
