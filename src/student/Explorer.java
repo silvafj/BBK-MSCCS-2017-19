@@ -53,6 +53,8 @@ public class Explorer {
 
             NodeStatus closerNode = null;
             if (!toVisit.isEmpty()) {
+                toVisit.sort(NodeStatus::compareTo);
+
                 // Pick the next possible move
                 for (NodeStatus node : toVisit) {
                     closerNode = node;
