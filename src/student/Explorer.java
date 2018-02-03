@@ -1,8 +1,6 @@
 package student;
 
-import game.EscapeState;
-import game.ExplorationState;
-import game.NodeStatus;
+import game.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +94,34 @@ public class Explorer {
      * @param state the information available at the current state
      */
     public void escape(EscapeState state) {
-        //TODO: Escape from the cavern before time runs out
+        List<Node> visited = new ArrayList<>();
+        Stack<Node> currentPath = new Stack<>();
+
+        Node currentNode = state.getCurrentNode();
+
+        while (!state.getExit().equals(currentNode)) {
+            List<Node> toVisit = new ArrayList<>();
+            for (Node node : currentNode.getNeighbours()) {
+                if (!visited.contains(node)) {
+                    toVisit.add(node);
+                }
+            }
+
+            if (!toVisit.isEmpty()) {
+                for (Node node : toVisit) {
+                    currentNode = node;
+                    visited.add(node);
+                    currentPath.add(node);
+                    break;
+                }
+            } else {
+                currentPath.pop();
+                currentNode = currentPath.peek();
+            }
+        }
+
+        for (Node node : currentPath) {
+            state.moveTo(node);
+        }
     }
 }
