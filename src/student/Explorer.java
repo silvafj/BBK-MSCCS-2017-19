@@ -122,6 +122,10 @@ public class Explorer {
 
         for (Node node : currentPath) {
             state.moveTo(node);
+
+            if (node.getTile().getGold() > 0) {
+                state.pickUpGold();
+            }
         }
     }
 }
