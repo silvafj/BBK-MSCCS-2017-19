@@ -6,6 +6,7 @@ import game.NodeStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Explorer {
 
@@ -41,22 +42,33 @@ public class Explorer {
      */
     public void explore(ExplorationState state) {
         List<NodeStatus> visited = new ArrayList<>();
+        Stack<NodeStatus> currentPath = new Stack<>();
 
         while (state.getDistanceToTarget() > 0) {
-            NodeStatus closerNode = null;
-            int closerNodeDistance = -1;
-
+            // Generate a list with the next possible moves
+            List<NodeStatus> toVisit = new ArrayList<>();
             for (NodeStatus node : state.getNeighbours()) {
-                if (!visited.contains(node) && (closerNodeDistance == -1 || node.getDistanceToTarget() <= closerNodeDistance)) {
-                    closerNode = node;
-                    closerNodeDistance = node.getDistanceToTarget();
+                if (!visited.contains(node)) {
+                    toVisit.add(node);
                 }
             }
 
-            if (closerNode != null) {
-                visited.add(closerNode);
-                state.moveTo(closerNode.getId());
+            NodeStatus closerNode = null;
+            if (!toVisit.isEmpty()) {
+                // Pick the next possible move
+                for (NodeStatus node : toVisit) {
+                    closerNode = node;
+                    visited.add(node);
+                    currentPath.add(node);
+                    break;
+                }
+            } else {
+                // If there are no more possible moves, we must go back on our previous path
+                currentPath.pop();
+                closerNode = currentPath.peek();
             }
+
+            state.moveTo(closerNode.getId());
         }
     }
 
