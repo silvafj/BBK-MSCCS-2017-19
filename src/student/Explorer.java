@@ -100,31 +100,45 @@ public class Explorer {
     public void escape(EscapeState state) {
         Stack<Node> route = getShortestRoute(state.getCurrentNode(), state.getExit());
 
+        // Estimate the required time to go through the shortest route
+        // This will be used to decide if we should pick up more gold around the neighbours or not
+        int requiredTime = 0;
+        for (int i = 1; i < route.size(); i++) {
+            requiredTime += route.get(i - 1).getEdge(route.get(i)).length;
+        }
+
         while (!route.empty()) {
             // Pick gold before moving further
             if (state.getCurrentNode().getTile().getGold() > 0) {
                 state.pickUpGold();
             }
 
-            // Select from the neighbour nodes, the one that has more gold,
-            Optional<Node> nodeWithMaxGold = state.getCurrentNode().getNeighbours().stream()
-                    .filter(n -> n.getTile().getGold() > 0)
-                    .max(Comparator.comparingInt(n -> n.getTile().getGold()));
+            // identify the next node to move on
+            Node nextNode = route.pop();
 
-            if (nodeWithMaxGold.isPresent()) {
-                Node goBackNode = state.getCurrentNode();
-                state.moveTo(nodeWithMaxGold.get());
-                state.pickUpGold();
-                // Don't go back if the node is part of our path to escape
-                if (!route.contains(nodeWithMaxGold.get())) {
-                    state.moveTo(goBackNode);
+            // If we have time, make a small detour and collect gold around the current node
+            if (state.getTimeRemaining() > requiredTime) {
+                // Select from the neighbour nodes, the one that has more gold
+                Optional<Node> selectNodeWithGold = state.getCurrentNode().getNeighbours().stream()
+                        .filter(n -> n.getTile().getGold() > 0)
+                        .max(Comparator.comparingInt(n -> n.getTile().getGold()));
+
+                if (selectNodeWithGold.isPresent()) {
+                    Node goBackNode = state.getCurrentNode();
+                    Node nodeWithMostGold = selectNodeWithGold.get();
+                    state.moveTo(nodeWithMostGold);
+                    state.pickUpGold();
+
+                    // Don't go back if the node is part of our path to escape
+                    if (!nodeWithMostGold.equals(nextNode)) {
+                        state.moveTo(goBackNode);
+                    }
                 }
             }
 
             // Move forward to the next node in the path
-            Node node = route.pop();
-            if (!state.getCurrentNode().equals(node)) {
-                state.moveTo(node);
+            if (!state.getCurrentNode().equals(nextNode)) {
+                state.moveTo(nextNode);
             }
         }
     }
@@ -136,7 +150,7 @@ public class Explorer {
         private Node node;
         private int weight;
 
-        public NodeAndWeightTuple(Node node, int weight) {
+        private NodeAndWeightTuple(Node node, int weight) {
             this.node = node;
             this.weight = weight;
         }
