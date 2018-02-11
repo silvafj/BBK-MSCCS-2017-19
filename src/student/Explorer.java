@@ -101,12 +101,28 @@ public class Explorer {
         Stack<Node> route = getShortestRoute(state.getCurrentNode(), state.getExit());
 
         while (!route.empty()) {
+            // Pick gold before moving further
             if (state.getCurrentNode().getTile().getGold() > 0) {
                 state.pickUpGold();
             }
 
+            // Select from the neighbour nodes, the one that has more gold,
+            Optional<Node> nodeWithMaxGold = state.getCurrentNode().getNeighbours().stream()
+                    .filter(n -> n.getTile().getGold() > 0)
+                    .max(Comparator.comparingInt(n -> n.getTile().getGold()));
+
+            if (nodeWithMaxGold.isPresent()) {
+                Node goBackNode = state.getCurrentNode();
+                state.moveTo(nodeWithMaxGold.get());
+                state.pickUpGold();
+                // Don't go back if the node is part of our path to escape
+                if (!route.contains(nodeWithMaxGold.get())) {
+                    state.moveTo(goBackNode);
+                }
+            }
+
+            // Move forward to the next node in the path
             Node node = route.pop();
-            // TODO: moveTo() throws an exception if the node is the same as the current node
             if (!state.getCurrentNode().equals(node)) {
                 state.moveTo(node);
             }
