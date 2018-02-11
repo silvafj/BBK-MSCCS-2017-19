@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * An instance is a priority queue of elements of type E implemented as a min-heap.
  */
-class InternalMinHeap<E> {
+public class InternalMinHeap<E> {
 
     private int size; // number of elements in the priority queue (and heap)
 

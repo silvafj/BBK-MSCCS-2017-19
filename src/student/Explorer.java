@@ -2,9 +2,7 @@ package student;
 
 import game.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Explorer {
 
@@ -39,11 +37,14 @@ public class Explorer {
      * @param state the information available at the current state
      */
     public void explore(ExplorationState state) {
+        // Keep a list of visited nodes, to avoid visiting the same node twice
         List<NodeStatus> visited = new ArrayList<>();
+
+        // Keep the current path in the stack, to be able to go back when we find a dead end
         Stack<NodeStatus> currentPath = new Stack<>();
 
         while (state.getDistanceToTarget() > 0) {
-            // Generate a list with the next possible moves
+            // Generate a list with the next possible moves, excluding the nodes that were visited.
             List<NodeStatus> toVisit = new ArrayList<>();
             for (NodeStatus node : state.getNeighbours()) {
                 if (!visited.contains(node)) {
@@ -53,6 +54,7 @@ public class Explorer {
 
             NodeStatus closerNode = null;
             if (!toVisit.isEmpty()) {
+                // Sort the nodes we can visit by how close they are to the target
                 toVisit.sort(NodeStatus::compareTo);
 
                 // Pick the next possible move
@@ -96,38 +98,76 @@ public class Explorer {
      * @param state the information available at the current state
      */
     public void escape(EscapeState state) {
-        List<Node> visited = new ArrayList<>();
-        Stack<Node> currentPath = new Stack<>();
+        Stack<Node> route = getShortestRoute(state.getCurrentNode(), state.getExit());
 
-        Node currentNode = state.getCurrentNode();
-
-        while (!state.getExit().equals(currentNode)) {
-            List<Node> toVisit = new ArrayList<>();
-            for (Node node : currentNode.getNeighbours()) {
-                if (!visited.contains(node)) {
-                    toVisit.add(node);
-                }
-            }
-
-            if (!toVisit.isEmpty()) {
-                for (Node node : toVisit) {
-                    currentNode = node;
-                    visited.add(node);
-                    currentPath.add(node);
-                    break;
-                }
-            } else {
-                currentPath.pop();
-                currentNode = currentPath.peek();
-            }
-        }
-
-        for (Node node : currentPath) {
-            state.moveTo(node);
-
-            if (node.getTile().getGold() > 0) {
+        System.out.println(state.getCurrentNode().getId());
+        while (!route.empty()) {
+            if (state.getCurrentNode().getTile().getGold() > 0) {
                 state.pickUpGold();
             }
+
+            Node node = route.pop();
+            System.out.print(node.getId() + ", ");
+            // TODO: moveTo() throws an exception if the node is the same as the current node
+            if (!state.getCurrentNode().equals(node)) {
+                state.moveTo(node);
+            }
         }
+        System.out.println();
     }
+
+    private Stack<Node> getShortestRoute(Node start, Node end) {
+        // Copied most of the code from Cavern.minPathLengthToTarget() to calculate the shortest path
+        InternalMinHeap<Node> frontier = new InternalMinHeap<>();
+        Map<Long, Integer> pathWeights = new HashMap<>();
+        Map<Node, Node> pathNodes = new HashMap<>();
+
+        pathWeights.put(start.getId(), 0);
+        frontier.add(start, 0);
+
+        while (!frontier.isEmpty()) {
+            Node f = frontier.poll();
+            if (f.equals(end)) {
+                break;
+            }
+
+            int nWeight = pathWeights.get(f.getId());
+
+            for (Edge e : f.getExits()) {
+                Node w = e.getOther(f);
+                int weightThroughN = nWeight + e.length();
+                Integer existingWeight = pathWeights.get(w.getId());
+                if (existingWeight == null) {
+                    pathWeights.put(w.getId(), weightThroughN);
+                    frontier.add(w, weightThroughN);
+                } else if (weightThroughN < existingWeight) {
+                    pathWeights.put(w.getId(), weightThroughN);
+                    frontier.changePriority(w, weightThroughN);
+                }
+
+                if (existingWeight == null || weightThroughN < existingWeight) {
+                    pathNodes.put(w, f);
+                }
+
+            }
+        }
+
+        //
+        System.out.println(pathWeights.keySet());
+        for (Node n : pathNodes.keySet()) {
+            System.out.print(n.getId() + ", ");
+        }
+        System.out.println();
+
+        Stack<Node> path = new Stack<>();
+
+        Node n = end;
+        while (n != null) {
+            path.push(n);
+            n = pathNodes.get(n);
+        }
+
+        return path;
+    }
+
 }
