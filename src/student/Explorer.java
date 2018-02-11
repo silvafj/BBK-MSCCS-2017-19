@@ -100,71 +100,79 @@ public class Explorer {
     public void escape(EscapeState state) {
         Stack<Node> route = getShortestRoute(state.getCurrentNode(), state.getExit());
 
-        System.out.println(state.getCurrentNode().getId());
         while (!route.empty()) {
             if (state.getCurrentNode().getTile().getGold() > 0) {
                 state.pickUpGold();
             }
 
             Node node = route.pop();
-            System.out.print(node.getId() + ", ");
             // TODO: moveTo() throws an exception if the node is the same as the current node
             if (!state.getCurrentNode().equals(node)) {
                 state.moveTo(node);
             }
         }
-        System.out.println();
     }
 
-    private Stack<Node> getShortestRoute(Node start, Node end) {
-        // Copied most of the code from Cavern.minPathLengthToTarget() to calculate the shortest path
-        InternalMinHeap<Node> frontier = new InternalMinHeap<>();
-        Map<Long, Integer> pathWeights = new HashMap<>();
-        Map<Node, Node> pathNodes = new HashMap<>();
+    /**
+     * Tuple structure of Node and Weight to be used internally for shortest route calculation.
+     */
+    private class NodeAndWeightTuple {
+        private Node node;
+        private int weight;
 
-        pathWeights.put(start.getId(), 0);
+        public NodeAndWeightTuple(Node node, int weight) {
+            this.node = node;
+            this.weight = weight;
+        }
+    }
+
+    /**
+     * Calculates the shortest path between start and end nodes.
+     * <p>
+     * This code is based on Cavern.minPathLengthToTarget() which is used to calculate the time limit for the escape
+     * stage of the game.
+     *
+     * @param start Initial node in the path
+     * @param end   Final node in the path
+     * @return stack of nodes with the shortest path between start and end
+     */
+    private Stack<Node> getShortestRoute(Node start, Node end) {
+        Map<Node, NodeAndWeightTuple> pathWeights = new HashMap<>();
+        pathWeights.put(start, new NodeAndWeightTuple(null, 0));
+
+        InternalMinHeap<Node> frontier = new InternalMinHeap<>();
         frontier.add(start, 0);
 
         while (!frontier.isEmpty()) {
-            Node f = frontier.poll();
-            if (f.equals(end)) {
+            Node node = frontier.poll();
+            if (node.equals(end)) {
                 break;
             }
 
-            int nWeight = pathWeights.get(f.getId());
+            int nWeight = pathWeights.get(node).weight;
 
-            for (Edge e : f.getExits()) {
-                Node w = e.getOther(f);
-                int weightThroughN = nWeight + e.length();
-                Integer existingWeight = pathWeights.get(w.getId());
-                if (existingWeight == null) {
-                    pathWeights.put(w.getId(), weightThroughN);
-                    frontier.add(w, weightThroughN);
-                } else if (weightThroughN < existingWeight) {
-                    pathWeights.put(w.getId(), weightThroughN);
-                    frontier.changePriority(w, weightThroughN);
+            for (Edge edge : node.getExits()) {
+                Node edgeNode = edge.getOther(node);
+                NodeAndWeightTuple existingTuple = pathWeights.get(edgeNode);
+
+                int weightThroughN = nWeight + edge.length();
+
+                if (existingTuple == null) {
+                    pathWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
+                    frontier.add(edgeNode, weightThroughN);
+                } else if (weightThroughN < existingTuple.weight) {
+                    pathWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
+                    frontier.changePriority(edgeNode, weightThroughN);
                 }
-
-                if (existingWeight == null || weightThroughN < existingWeight) {
-                    pathNodes.put(w, f);
-                }
-
             }
         }
 
-        //
-        System.out.println(pathWeights.keySet());
-        for (Node n : pathNodes.keySet()) {
-            System.out.print(n.getId() + ", ");
-        }
-        System.out.println();
-
+        // Generate the stack of nodes representing the route (begins at the exit node)
         Stack<Node> path = new Stack<>();
-
-        Node n = end;
-        while (n != null) {
-            path.push(n);
-            n = pathNodes.get(n);
+        Node node = end;
+        while (node != null) {
+            path.push(node);
+            node = pathWeights.get(node).node;
         }
 
         return path;
