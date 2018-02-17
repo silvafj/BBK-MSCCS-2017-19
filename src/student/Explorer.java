@@ -44,6 +44,8 @@ public class Explorer {
         // Keep the current path in the stack, to be able to go back when we find a dead end
         Stack<NodeStatus> currentPath = new Stack<>();
 
+        NodeStatus lastEqualDistanceNode = null;
+
         while (state.getDistanceToTarget() > 0) {
             // Generate a list with the next possible moves:
             // 1. Exclude the nodes that were visited
@@ -53,9 +55,21 @@ public class Explorer {
                     .sorted(NodeStatus::compareTo)
                     .collect(Collectors.toList());
 
+
             NodeStatus closerNode;
             if (!toVisit.isEmpty()) {
                 closerNode = toVisit.get(0);
+
+                if (lastEqualDistanceNode != null && lastEqualDistanceNode.getDistanceToTarget() < closerNode.getDistanceToTarget()) {
+                    closerNode = currentPath.pop();
+                    closerNode = currentPath.pop();
+                    lastEqualDistanceNode = null;
+                } else {
+                    if (toVisit.size() > 1 && closerNode.getDistanceToTarget() == toVisit.get(1).getDistanceToTarget()) {
+                        lastEqualDistanceNode = closerNode;
+                    }
+                }
+
                 visited.add(closerNode);
                 currentPath.add(closerNode);
             } else {
@@ -64,7 +78,9 @@ public class Explorer {
                 closerNode = currentPath.peek();
             }
 
-            state.moveTo(closerNode.getId());
+            if (state.getCurrentLocation() != closerNode.getId()) {
+                state.moveTo(closerNode.getId());
+            }
         }
     }
 
