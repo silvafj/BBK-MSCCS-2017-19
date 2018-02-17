@@ -3,6 +3,7 @@ package student;
 import game.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Explorer {
 
@@ -44,26 +45,19 @@ public class Explorer {
         Stack<NodeStatus> currentPath = new Stack<>();
 
         while (state.getDistanceToTarget() > 0) {
-            // Generate a list with the next possible moves, excluding the nodes that were visited.
-            List<NodeStatus> toVisit = new ArrayList<>();
-            for (NodeStatus node : state.getNeighbours()) {
-                if (!visited.contains(node)) {
-                    toVisit.add(node);
-                }
-            }
+            // Generate a list with the next possible moves:
+            // 1. Exclude the nodes that were visited
+            // 2. Sort the nodes by how close they are to the target
+            List<NodeStatus> toVisit = state.getNeighbours().stream()
+                    .filter(nodeStatus -> !(visited.contains(nodeStatus)))
+                    .sorted(NodeStatus::compareTo)
+                    .collect(Collectors.toList());
 
-            NodeStatus closerNode = null;
+            NodeStatus closerNode;
             if (!toVisit.isEmpty()) {
-                // Sort the nodes we can visit by how close they are to the target
-                toVisit.sort(NodeStatus::compareTo);
-
-                // Pick the next possible move
-                for (NodeStatus node : toVisit) {
-                    closerNode = node;
-                    visited.add(node);
-                    currentPath.add(node);
-                    break;
-                }
+                closerNode = toVisit.get(0);
+                visited.add(closerNode);
+                currentPath.add(closerNode);
             } else {
                 // If there are no more possible moves, we must go back on our previous path
                 currentPath.pop();
