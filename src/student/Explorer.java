@@ -170,11 +170,11 @@ public class Explorer {
         Map<Node, NodeAndWeightTuple> pathWeights = new HashMap<>();
         pathWeights.put(start, new NodeAndWeightTuple(null, 0));
 
-        InternalMinHeap<Node> frontier = new InternalMinHeap<>();
-        frontier.add(start, 0);
+        PriorityQueue<NodeAndWeightTuple> frontier = new PriorityQueue<>(1, Comparator.comparingInt(n -> n.weight));
+        frontier.add(new NodeAndWeightTuple(start, 0));
 
         while (!frontier.isEmpty()) {
-            Node node = frontier.poll();
+            Node node = frontier.poll().node;
             if (node.equals(end)) {
                 break;
             }
@@ -189,10 +189,18 @@ public class Explorer {
 
                 if (existingTuple == null) {
                     pathWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
-                    frontier.add(edgeNode, weightThroughN);
+                    frontier.add(new NodeAndWeightTuple(edgeNode, weightThroughN));
                 } else if (weightThroughN < existingTuple.weight) {
                     pathWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
-                    frontier.changePriority(edgeNode, weightThroughN);
+
+                    // Change the weight of an existent node, by removing it first
+                    for (NodeAndWeightTuple nodeAndWeight : frontier) {
+                        if (edgeNode.equals(nodeAndWeight.node)) {
+                            frontier.remove(nodeAndWeight);
+                            break;
+                        }
+                    }
+                    frontier.add(new NodeAndWeightTuple(edgeNode, weightThroughN));
                 }
             }
         }
