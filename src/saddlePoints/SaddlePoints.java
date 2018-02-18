@@ -202,7 +202,6 @@ public class SaddlePoints {
      * @param array an array containing one or more saddle points.
      * @return the lowest-numbered column containing a saddle point.
      */
-
     int saddlePointColumn(int[][] array) {
         if (hasSaddlePoint(array)) {
             int[] largest = largestValues(array);
