@@ -1,0 +1,6 @@
+/**
+ * Aquatic
+ */
+public interface Aquatic {
+
+}

@@ -1,0 +1,6 @@
+/**
+ * Terrestrial
+ */
+public interface Terrestrial {
+
+}
