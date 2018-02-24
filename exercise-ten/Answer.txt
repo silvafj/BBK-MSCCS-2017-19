@@ -1,0 +1,5 @@
+Q: In the preceding exercises, providing the constructors and getter methods of the Point class was rather repetitive.
+   Most IDEs have shortcuts for writing the boilerplate code. What does the IntelliJ IDE offer?
+
+According to IntelliJ documentation -- https://www.jetbrains.com/help/idea/generating-code.html -- we can use the menu
+Code | Generate (or Alt + Insert) which provides a selection of options for which to generate boiler plate code.
