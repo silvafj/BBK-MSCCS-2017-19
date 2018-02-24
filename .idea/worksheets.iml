@@ -33,6 +33,7 @@
       <sourceFolder url="file://$MODULE_DIR$/worksheet-two/twelve/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/worksheet-two/two/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/worksheet-two/two/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/worksheet-three/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
