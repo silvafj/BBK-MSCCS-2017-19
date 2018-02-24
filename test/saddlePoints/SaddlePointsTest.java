@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author Fernando Silva <fdealm02>
+ * @author Fernando Silva
  */
 public class SaddlePointsTest {
 
@@ -17,7 +17,7 @@ public class SaddlePointsTest {
     private SaddlePoints sp = new SaddlePoints(); // create an instance variable
 
     @Test
-    public void testCreateRandomArray() {
+    public void createRandomArray() {
         int[][] arr1 = sp.createRandomArray(0, 0, 0, 1);
         assertArrayEquals(EMPTY_ARRAY_2D, arr1);
 
@@ -42,7 +42,7 @@ public class SaddlePointsTest {
     }
 
     @Test
-    public void testLargest() {
+    public void largest() {
         assertEquals(Integer.MIN_VALUE, sp.largest(EMPTY_ARRAY));
 
         int[] arr1 = {-1, 0, 1};
@@ -56,7 +56,7 @@ public class SaddlePointsTest {
     }
 
     @Test
-    public void testSmallest() {
+    public void smallest() {
         assertEquals(Integer.MAX_VALUE, sp.smallest(EMPTY_ARRAY));
 
         int[] arr1 = {-1, 0, 1};
@@ -70,7 +70,7 @@ public class SaddlePointsTest {
     }
 
     @Test
-    public void testLargestValues() {
+    public void largestValues() {
         assertArrayEquals(EMPTY_ARRAY, sp.largestValues(EMPTY_ARRAY_2D));
 
         int[][] arr1 = {{-1, 0, 1}, {5, 4, 9}, {-5, 10, -2}};
@@ -84,7 +84,7 @@ public class SaddlePointsTest {
     }
 
     @Test
-    public void testSmallestValues() {
+    public void smallestValues() {
         assertArrayEquals(EMPTY_ARRAY, sp.smallestValues(EMPTY_ARRAY_2D));
 
         int[][] arr1 = {{-1, 0, 1}, {5, 4, 9}, {-5, 10, -2}};
@@ -98,20 +98,20 @@ public class SaddlePointsTest {
     }
 
     @Test
-    public void testHasSaddlePoint() {
+    public void hasSaddlePoint() {
         assertFalse(sp.hasSaddlePoint(EMPTY_ARRAY_2D));
         assertTrue(sp.hasSaddlePoint(SADDLE_ARRAY));
         assertFalse(sp.hasSaddlePoint(NO_SADDLE_ARRAY));
     }
 
     @Test
-    public void testSaddlePointRow() {
+    public void saddlePointRow() {
         assertEquals(1, sp.saddlePointRow(SADDLE_ARRAY));
         assertEquals(-1, sp.saddlePointRow(NO_SADDLE_ARRAY));
     }
 
     @Test
-    public void testSaddlePointColumn() {
+    public void saddlePointColumn() {
         assertEquals(2, sp.saddlePointColumn(SADDLE_ARRAY));
         assertEquals(-1, sp.saddlePointColumn(NO_SADDLE_ARRAY));
     }

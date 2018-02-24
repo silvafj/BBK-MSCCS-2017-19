@@ -1,7 +1,7 @@
 package saddlePoints;
 
 /**
- * @author Fernando Silva <fdealm02>
+ * @author Fernando Silva
  */
 public class Main {
     /**
