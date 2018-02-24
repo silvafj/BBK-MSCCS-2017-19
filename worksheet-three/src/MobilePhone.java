@@ -8,6 +8,10 @@ public class MobilePhone extends OldPhone {
 
     private LinkedList<String> lastNumbers = new LinkedList();
 
+    public MobilePhone(String brand) {
+        super(brand);
+    }
+
     protected void saveLastNumber(String number) {
         if (lastNumbers.size() == 10) {
             lastNumbers.pollFirst();

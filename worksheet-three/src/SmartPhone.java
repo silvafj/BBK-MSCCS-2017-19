@@ -3,6 +3,10 @@
  */
 public class SmartPhone extends MobilePhone {
 
+    public SmartPhone(String brand) {
+        super(brand);
+    }
+
     /**
      * {@inheritDoc}
      */

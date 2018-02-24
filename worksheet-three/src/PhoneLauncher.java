@@ -15,7 +15,9 @@ public class PhoneLauncher {
      *
      */
     public void launch() {
-        SmartPhone smartPhone = new SmartPhone();
+        SmartPhone smartPhone = new SmartPhone("Samsung");
+
+        System.out.println("Your phone brand is " + smartPhone.getBrand());
 
         for (int i = 0; i < 16; i++) {
             smartPhone.call("07702 3432" + (50 + i));
