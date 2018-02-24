@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class FractionTest {
 
     @Test
-    public void testValidFractions() {
+    public void validFractions() {
         assertEquals(new FractionImpl("1/1"), new FractionImpl(1));
         assertEquals(new FractionImpl("0/1"), new FractionImpl(0));
         assertEquals(new FractionImpl("-1/1"), new FractionImpl(-1));
@@ -41,7 +41,7 @@ public class FractionTest {
     }
 
     @Test
-    public void testInvalidFractions() {
+    public void invalidFractions() {
         assertThrown(() -> new FractionImpl(1, 0), ArithmeticException.class);
 
         assertThrown(() -> new FractionImpl("1/0"), ArithmeticException.class);
@@ -50,7 +50,7 @@ public class FractionTest {
     }
 
     @Test
-    public void testToString() {
+    public void fractionToString() {
         assertEquals("-1", (new FractionImpl(-1)).toString());
         assertEquals("0", (new FractionImpl(0)).toString());
         assertEquals("1", (new FractionImpl(1)).toString());
@@ -58,7 +58,7 @@ public class FractionTest {
     }
 
     @Test
-    public void testAdd() {
+    public void add() {
         String[][] rows = {
                 {"0", "-1", "-1/1"},
                 {"0", "0", "0/1"},
@@ -82,7 +82,7 @@ public class FractionTest {
     }
 
     @Test
-    public void testSubtract() {
+    public void subtract() {
         String[][] rows = {
                 {"0", "-1", "1/1"},
                 {"0", "0", "0/1"},
@@ -105,7 +105,7 @@ public class FractionTest {
     }
 
     @Test
-    public void testMultiply() {
+    public void multiply() {
         String[][] rows = {
                 {"0", "-1", "0/1"},
                 {"0", "0", "0/1"},
@@ -129,7 +129,7 @@ public class FractionTest {
     }
 
     @Test
-    public void testDivide() {
+    public void divide() {
         String[][] rows = {
                 {"0", "-1", "0/1"},
                 {"0", "1", "0/1"},
@@ -150,38 +150,38 @@ public class FractionTest {
     }
 
     @Test
-    public void testDivideByZero() {
+    public void divideByZero() {
         assertThrown(() -> (new FractionImpl(1)).divide(new FractionImpl(0)), ArithmeticException.class);
     }
 
 
     @Test
-    public void testAbs() {
+    public void abs() {
         assertEquals(new FractionImpl(1), (new FractionImpl(-1)).abs());
         assertEquals(new FractionImpl(0), (new FractionImpl(0)).abs());
         assertEquals(new FractionImpl("3/2"), (new FractionImpl("-3/2")).abs());
     }
 
     @Test
-    public void testNegate() {
+    public void negate() {
         assertEquals(new FractionImpl("1/1"), (new FractionImpl("-1")).negate());
         assertEquals(new FractionImpl("0/1"), (new FractionImpl("0")).negate());
         assertEquals(new FractionImpl("-1/1"), (new FractionImpl("1")).negate());
     }
 
     @Test
-    public void testInverse() {
+    public void inverse() {
         assertEquals(new FractionImpl("-1"), (new FractionImpl("-1")).inverse());
         assertEquals(new FractionImpl("4"), (new FractionImpl("1/4")).inverse());
     }
 
     @Test
-    public void testInverseZero() {
+    public void inverseZero() {
         assertThrown(() -> (new FractionImpl(0)).inverse(), ArithmeticException.class);
     }
 
     @Test
-    public void testCompareTo() {
+    public void compareTo() {
         assertEquals(-1, (new FractionImpl("1/2")).compareTo(new FractionImpl(1)));
         assertEquals(0, (new FractionImpl("10/6")).compareTo(new FractionImpl("5/3")));
         assertEquals(1, (new FractionImpl(1)).compareTo(new FractionImpl("1/2")));
