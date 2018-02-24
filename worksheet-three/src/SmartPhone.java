@@ -20,6 +20,28 @@ public class SmartPhone extends MobilePhone {
         }
     }
 
+    /*
+     * playGame() was changed to private in MobilePhone.
+     * We need to re-implement it here, to keep PhoneLauncher working.
+     *
+     * @param game
+     *
+    public void playGame(String game) {
+        System.out.println("Playing game: " + game);
+    }
+    */
+
+    /**
+     * Another (better) alternative is to set playGame() access to protected in MobilePhone.
+     * This allows us to override it here, while keeping the original code intact.
+     *
+     * @param game
+     */
+    @Override
+    public void playGame(String game) {
+        super.playGame(game);
+    }
+
     /**
      * @param url
      */

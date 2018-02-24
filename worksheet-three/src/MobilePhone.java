@@ -38,7 +38,7 @@ public class MobilePhone extends OldPhone {
     /**
      * @param game
      */
-    public void playGame(String game) {
+    protected void playGame(String game) {
         System.out.println("Playing game: " + game);
     }
 
