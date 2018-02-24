@@ -173,7 +173,6 @@ public class GameState implements ExplorationState, EscapeState {
         DecimalFormat df = new DecimalFormat("#.##");
         System.out.println("Bonus multiplier : " + df.format(computeBonusFactor()));
         System.out.println("Score            : " + getScore());
-        System.out.println("Seed             : " + seed);
     }
 
     /**
