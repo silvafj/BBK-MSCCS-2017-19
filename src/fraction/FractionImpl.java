@@ -17,8 +17,8 @@ public class FractionImpl implements Fraction {
      * @param wholeNumber the numerator.
      */
     public FractionImpl(int wholeNumber) {
-        this.numerator = wholeNumber;
-        this.denominator = 1;
+        this.setNumerator(wholeNumber);
+        this.setDenominator(1);
     }
 
     /**
@@ -49,13 +49,49 @@ public class FractionImpl implements Fraction {
         } else {
             int numerator = Integer.parseInt(parts[0].trim());
             if (parts.length == 1) {
-                this.numerator = numerator;
-                this.denominator = 1;
+                this.setNumerator(numerator);
+                this.setDenominator(1);
             } else {
                 int denominator = Integer.parseInt(parts[1].trim());
                 validateAndNormalize(numerator, denominator);
             }
         }
+    }
+
+    /**
+     * Return the Fraction numerator.
+     *
+     * @return the numerator.
+     */
+    private int getNumerator() {
+        return numerator;
+    }
+
+    /**
+     * Set the Fraction numerator.
+     *
+     * @param numerator
+     */
+    private void setNumerator(int numerator) {
+        this.numerator = numerator;
+    }
+
+    /**
+     * Return the Fraction denominator.
+     *
+     * @return the denominator.
+     */
+    private int getDenominator() {
+        return denominator;
+    }
+
+    /**
+     * Set the Fraction denominator.
+     *
+     * @param denominator
+     */
+    private void setDenominator(int denominator) {
+        this.denominator = denominator;
     }
 
     /**
@@ -106,12 +142,12 @@ public class FractionImpl implements Fraction {
         }
 
         if (numerator == 0) {
-            this.numerator = 0;
-            this.denominator = 1;
+            this.setNumerator(0);
+            this.setDenominator(1);
         } else {
             int common = gcd(Math.abs(numerator), denominator);
-            this.numerator = numerator / common;
-            this.denominator = denominator / common;
+            this.setNumerator(numerator / common);
+            this.setDenominator(denominator / common);
         }
     }
 
@@ -123,8 +159,8 @@ public class FractionImpl implements Fraction {
 
         // a/b + c/d = (ad + bc) / bd
         return new FractionImpl(
-                this.numerator * fi.denominator + this.denominator * fi.numerator,
-                this.denominator * fi.denominator
+                this.getNumerator() * fi.getDenominator() + this.getDenominator() * fi.getNumerator(),
+                this.getDenominator() * fi.getDenominator()
         );
     }
 
@@ -136,8 +172,8 @@ public class FractionImpl implements Fraction {
 
         // a/b - c/d = (ad - bc) / bd
         return new FractionImpl(
-                this.numerator * fi.denominator - this.denominator * fi.numerator,
-                this.denominator * fi.denominator
+                this.getNumerator() * fi.getDenominator() - this.getDenominator() * fi.getNumerator(),
+                this.getDenominator() * fi.getDenominator()
         );
     }
 
@@ -149,8 +185,8 @@ public class FractionImpl implements Fraction {
 
         // (a/b) * (c/d) = (a*c) / (b*d)
         return new FractionImpl(
-                this.numerator * fi.numerator,
-                this.denominator * fi.denominator
+                this.getNumerator() * fi.getNumerator(),
+                this.getDenominator() * fi.getDenominator()
         );
     }
 
@@ -162,8 +198,8 @@ public class FractionImpl implements Fraction {
 
         // (a/b) / (c/d) = (a*d) / (b*c)
         return new FractionImpl(
-                this.numerator * fi.denominator,
-                this.denominator * fi.numerator
+                this.getNumerator() * fi.getDenominator(),
+                this.getDenominator() * fi.getNumerator()
         );
     }
 
@@ -171,21 +207,21 @@ public class FractionImpl implements Fraction {
      * {@inheritDoc}
      */
     public Fraction abs() {
-        return new FractionImpl(Math.abs(this.numerator), this.denominator);
+        return new FractionImpl(Math.abs(this.getNumerator()), this.getDenominator());
     }
 
     /**
      * {@inheritDoc}
      */
     public Fraction negate() {
-        return new FractionImpl(this.numerator * -1, this.denominator);
+        return new FractionImpl(this.getNumerator() * -1, this.getDenominator());
     }
 
     /**
      * {@inheritDoc}
      */
     public Fraction inverse() {
-        return new FractionImpl(this.denominator, this.numerator);
+        return new FractionImpl(this.getDenominator(), this.getNumerator());
     }
 
     /**
@@ -194,7 +230,7 @@ public class FractionImpl implements Fraction {
     @Override
     public int hashCode() {
         // According to item 9 in Josh Bloch's Effective Java
-        return Objects.hash(this.numerator, this.denominator);
+        return Objects.hash(this.getNumerator(), this.getDenominator());
     }
 
     /**
@@ -204,7 +240,7 @@ public class FractionImpl implements Fraction {
     public boolean equals(Object o) {
         if (o instanceof FractionImpl) {
             FractionImpl f = (FractionImpl) o;
-            return this.numerator == f.numerator && this.denominator == f.denominator;
+            return this.getNumerator() == f.getNumerator() && this.getDenominator() == f.getDenominator();
         }
 
         return false;
@@ -225,7 +261,7 @@ public class FractionImpl implements Fraction {
     public int compareTo(Fraction f) {
         // To compare two fractions we have to normalize them to have a common denominator
         FractionImpl fi = (FractionImpl) f;
-        return (this.numerator * fi.denominator) - (fi.numerator * this.denominator);
+        return (this.getNumerator() * fi.getDenominator()) - (fi.getNumerator() * this.getDenominator());
     }
 
     /**
@@ -233,7 +269,9 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public String toString() {
-        return denominator == 1 ? String.valueOf(numerator) : numerator + "/" + denominator;
+        return this.getDenominator() == 1
+                ? String.valueOf(this.getNumerator())
+                : this.getNumerator() + "/" + this.getDenominator();
     }
 
 }

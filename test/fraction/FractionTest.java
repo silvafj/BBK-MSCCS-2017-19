@@ -15,6 +15,7 @@ public class FractionTest {
         assertEquals(new FractionImpl("1/1"), new FractionImpl(1));
         assertEquals(new FractionImpl("0/1"), new FractionImpl(0));
         assertEquals(new FractionImpl("-1/1"), new FractionImpl(-1));
+        assertEquals(new FractionImpl("-1/-1"), new FractionImpl(1));
 
         assertEquals(new FractionImpl("1/1"), new FractionImpl(1, 1));
         assertEquals(new FractionImpl("0/1"), new FractionImpl(0, 1));
