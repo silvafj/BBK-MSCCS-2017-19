@@ -181,6 +181,19 @@ public class FractionTest {
     }
 
     @Test
+    public void hashcode() {
+        assertEquals((new FractionImpl("-1")).hashCode(), (new FractionImpl("-1/1")).hashCode());
+        assertEquals((new FractionImpl("1")).hashCode(), (new FractionImpl("1/1")).hashCode());
+    }
+
+    @Test
+    public void equals() {
+        assertTrue((new FractionImpl("-1")).equals(new FractionImpl("-1/1")));
+        assertTrue((new FractionImpl("1")).equals(new FractionImpl("1/1")));
+        assertFalse((new FractionImpl("1")).equals(new FractionImpl("2")));
+    }
+
+    @Test
     public void compareTo() {
         assertEquals(-1, (new FractionImpl("1/2")).compareTo(new FractionImpl(1)));
         assertEquals(0, (new FractionImpl("10/6")).compareTo(new FractionImpl("5/3")));

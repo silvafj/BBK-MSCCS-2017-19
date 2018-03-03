@@ -1,5 +1,7 @@
 package fraction;
 
+import java.util.Objects;
+
 /**
  * Representation of a rational number, using Euclid's algorithm.
  *
@@ -191,7 +193,8 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public int hashCode() {
-        return super.hashCode();
+        // According to item 9 in Josh Bloch's Effective Java
+        return Objects.hash(this.numerator, this.denominator);
     }
 
     /**
