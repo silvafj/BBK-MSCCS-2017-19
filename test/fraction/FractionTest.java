@@ -54,6 +54,7 @@ public class FractionTest {
     public void fractionToString() {
         assertEquals("-1", (new FractionImpl(-1)).toString());
         assertEquals("0", (new FractionImpl(0)).toString());
+        assertEquals("0", (new FractionImpl(0, 1)).toString());
         assertEquals("1", (new FractionImpl(1)).toString());
         assertEquals("1/2", (new FractionImpl(1, 2)).toString());
     }
