@@ -11,6 +11,18 @@ public class FractionImpl implements Fraction {
 
     private int numerator, denominator;
 
+    // NOTE (for the grader): about typecasting `FractionImpl fi = (FractionImpl) f;`
+    // https://moodle.bbk.ac.uk/mod/forum/discuss.php?d=88896
+    //
+    // Several of the functions (defined in the interface) require accessing the numerator and denominator which are
+    // private fields of this implementation. This means that if we add a different implementation for the same
+    // interface, these two implementations will be incompatible and throw exceptions.
+    // (e.g, java.lang.ClassCastException: fraction.AnotherImpl cannot be cast to fraction.FractionImpl)
+    //
+    // In a nutshell, Fraction interface is incomplete and should declare getNumerator() and getDenominator() to avoid
+    // typecasting on FractionImpl.
+
+
     /**
      * Creates a fraction from an <code>int</code>. The fraction is <code>wholeNumber / 1</code>.
      *
