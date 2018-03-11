@@ -1,4 +1,4 @@
-# Coursework Two
+# Coursework Two - Full-time
 
 Java provides several types of numbers, but it does not provide fractions. Your task is to implement a 
 `Fraction` API (**A**pplication **P**rogrammer's **I**nterface) and write a small program that uses it.
@@ -13,15 +13,15 @@ Java provides several types of numbers, but it does not provide fractions. Your 
 
 ## General idea of the assignment
 
-* Implement the `Fraction` API (see interface `Fraction`) 
+* Implement a `Fraction` API. 
 * Write very thorough `JUnit` tests. 
 
-Create a package named `fraction`. Your classes, `Fraction`, `FractionImpl`, and `FractionTest`, 
-will all be within this package (though in different parts of the project).
+Create a package named `fraction`. Your classes, `Fraction`, and `FractionTest`, 
+will all be within this package.
 
 Declare your class as 
 ```java
-  public class FractionImpl implements Fraction, Comparable {...}
+  public class Fraction implements Comparable<Fraction> {...}
 ``` 
 (The reason for the "`implements`" part will be explained in class; for now, just do it.)
 
@@ -33,9 +33,9 @@ The following lists some information about your new `Fraction` type:
 
 ### Instance variables
 
-Two `private` integers, known as the `numerator` and the `denominator`. 
-Do not provide public accessors or mutators ()getters or setters) for 
-these instance variables; there is no reason for anything outside the `FractionImpl` class to know about them.
+Two `private` integers, known as the *numerator* and the *denominator*. 
+Do not provide getters or setters for 
+these instance variables; there is no reason for anything outside the `Fraction` class to know about them.
 
 Note: Even though these instance variables are `private`, they are private to the *class*, 
 not to the object. 
@@ -61,19 +61,18 @@ with a negative numerator.)
 
 * Zero should be represented as `0/1`.
 
-The following lists the constructors you should have (please note that Java does not allow constructors to 
-be specified in an *interface*, hence the use of `FractionImpl`):
+The following lists the constructors you should have:
 
 Constructor | How it uses its parameters
 ------------|------------
-`public FractionImpl(int numerator, int denominator)` | Parameters are the *numerator* and the *denominator*. **Normalize** the fraction as you create it. For instance, if the parameters are `(8, -12)`, create a `Fraction` with numerator `-2` and denominator `3`. The constructor should throw an `ArithmeticException` if the denominator is zero.
-`public FractionImpl(int wholeNumber)` | The parameter is the numerator and `1` is the implicit denominator.
-`public FractionImpl(String fraction)` | The parameter is a `String` containing either a whole number, such as `"5"` or `"-3"`, or a fraction, such as `"8/-12"`. Allow blanks around (but not within) integers. The constructor should throw an `ArithmeticException` if given a string representing a fraction whose denominator is zero.<br/><br/>You may find it helpful to look at the available [`String`](https://docs.oracle.com/javase/9/docs/api/java/lang/String.html) methods in the [Java API](https://docs.oracle.com/javase/9/docs/api/overview-summary.html).
+`public Fraction(int numerator, int denominator)` | Parameters are the *numerator* and the *denominator*. **Normalize** the fraction as you create it. For instance, if the parameters are `(8, -12)`, create a `Fraction` with numerator `-2` and denominator `3`. The constructor should throw an `ArithmeticException` if the denominator is zero.
+`public Fraction(int wholeNumber)` | The parameter is the numerator and `1` is the implicit denominator.
+`public Fraction(String fraction)` | The parameter is a `String` containing either a whole number, such as `"5"` or `"-3"`, or a fraction, such as `"8/-12"`. Allow blanks around (but not within) integers. The constructor should throw an `ArithmeticException` if given a string representing a fraction whose denominator is zero.<br/><br/>You may find it helpful to look at the available [`String`](https://docs.oracle.com/javase/9/docs/api/java/lang/String.html) methods in the [Java API](https://docs.oracle.com/javase/9/docs/api/overview-summary.html).
 
 Notes:
 
 * Java allows you to have more than one constructor, so long as they have different numbers or 
-  types of parameters. For example, if you call `new FractionImpl(3)` you will get the second constructor 
+  types of parameters. For example, if you call `new Fraction(3)` you will get the second constructor 
   listed above. A `String` is a string, though, so the third constructor will have to distinguish 
   between `"3"` and `"3/4"`.
 * To throw an `Exception`, write a statement such as:
@@ -96,7 +95,7 @@ Method signature | What it does
 `public Fraction negate()` | Returns a new `Fraction` that has the same numeric value of `this` fraction, but the opposite sign.
 `public Fraction inverse()` | The inverse of `a/b` is `b/a`.
 `@Override`<br/>`public boolean equals(Object o)` | Returns `true` if `o` is a `Fraction` equal to `this`, and `false` in all other cases.<br/><br/>You need this method for your `assertEquals(expected, actual)` JUnit tests to work! The `assertEquals` method calls *your* `equals` method to do its testing.
-`@Override`<br/>`public int compareTo(Fraction o)` | If `o` is a `Fraction` or an `int`, this method returns:<ul><li>A negative `int` if `this` is less than `o`.</li><li>Zero if `this` is equal to `o`.</li><li>A positive `int` if `this` is greater than `o`.</li></ul>If `o` is neither a `Fraction` nor an `int`, this method throws a `ClassCastException`.
+`@Override`<br/>`public int compareTo(Fraction o)` |This method returns:<ul><li>A negative `int` if `this` is less than `o`.</li><li>Zero if `this` is equal to `o`.</li><li>A positive `int` if `this` is greater than `o`.</li></ul>If `o` is `null` this method throws an appropriate (unchecked) exception.
 `@Override`<br/>`public String toString()` | Returns a `String` of the form `n/d`, where `n` is the *numerator* and `d` is the *denominator*.<br/>However, if `d` is `1`, just return `n` (as a `String`).<br/> The returned `String` should not contain any blanks.<br/>If the fraction represents a negative number, a minus sign should precede `n`.<br/>This should be one of the first methods you write, because it will help you in debugging.
 
 #### Notes:
