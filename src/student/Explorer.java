@@ -1,9 +1,7 @@
 package student;
 
-import game.*;
-
-import java.util.*;
-import java.util.stream.Collectors;
+import game.EscapeState;
+import game.ExplorationState;
 
 public class Explorer {
 
@@ -38,34 +36,7 @@ public class Explorer {
      * @param state the information available at the current state
      */
     public void explore(ExplorationState state) {
-        // Keep a list of visited nodes, to avoid visiting the same node twice
-        List<NodeStatus> visited = new ArrayList<>();
-
-        // Keep the current path in the stack, to be able to go back when we find a dead end
-        Stack<NodeStatus> currentPath = new Stack<>();
-
-        while (state.getDistanceToTarget() > 0) {
-            // Generate a list with the next possible moves:
-            // 1. Exclude the nodes that were visited
-            // 2. Sort the nodes by how close they are to the target
-            List<NodeStatus> toVisit = state.getNeighbours().stream()
-                    .filter(nodeStatus -> !(visited.contains(nodeStatus)))
-                    .sorted(NodeStatus::compareTo)
-                    .collect(Collectors.toList());
-
-            NodeStatus closerNode;
-            if (!toVisit.isEmpty()) {
-                closerNode = toVisit.get(0);
-                visited.add(closerNode);
-                currentPath.add(closerNode);
-            } else {
-                // If there are no more possible moves, we must go back on our previous path
-                currentPath.pop();
-                closerNode = currentPath.peek();
-            }
-
-            state.moveTo(closerNode.getId());
-        }
+        (new OrbFinder(state)).find();
     }
 
     /**
@@ -92,122 +63,7 @@ public class Explorer {
      * @param state the information available at the current state
      */
     public void escape(EscapeState state) {
-        Stack<Node> route = getShortestRoute(state.getCurrentNode(), state.getExit());
-
-        // Estimate the required time to go through the shortest route
-        // This will be used to decide if we should pick up more gold around the neighbours or not
-        int requiredTime = 0;
-        for (int i = 1; i < route.size(); i++) {
-            requiredTime += route.get(i - 1).getEdge(route.get(i)).length;
-        }
-
-        while (!route.empty()) {
-            // Pick gold before moving further
-            if (state.getCurrentNode().getTile().getGold() > 0) {
-                state.pickUpGold();
-            }
-
-            // identify the next node to move on
-            Node nextNode = route.pop();
-
-            // If we have time, make a small detour and collect gold around the current node
-            if (state.getTimeRemaining() > requiredTime) {
-                // Select from the neighbour nodes, the one that has more gold
-                Optional<Node> selectNodeWithGold = state.getCurrentNode().getNeighbours().stream()
-                        .filter(n -> n.getTile().getGold() > 0)
-                        .max(Comparator.comparingInt(n -> n.getTile().getGold()));
-
-                if (selectNodeWithGold.isPresent()) {
-                    Node goBackNode = state.getCurrentNode();
-                    Node nodeWithMostGold = selectNodeWithGold.get();
-                    state.moveTo(nodeWithMostGold);
-                    state.pickUpGold();
-
-                    // Don't go back if the node is part of our path to escape
-                    if (!nodeWithMostGold.equals(nextNode)) {
-                        state.moveTo(goBackNode);
-                    }
-                }
-            }
-
-            // Move forward to the next node in the path
-            if (!state.getCurrentNode().equals(nextNode)) {
-                state.moveTo(nextNode);
-            }
-        }
-    }
-
-    /**
-     * Tuple structure of Node and Weight to be used internally for shortest route calculation.
-     */
-    private class NodeAndWeightTuple {
-        private Node node;
-        private int weight;
-
-        private NodeAndWeightTuple(Node node, int weight) {
-            this.node = node;
-            this.weight = weight;
-        }
-    }
-
-    /**
-     * Calculates the shortest path between start and end nodes.
-     * <p>
-     * This code is based on Cavern.minPathLengthToTarget() which is used to calculate the time limit for the escape
-     * stage of the game.
-     *
-     * @param start Initial node in the path
-     * @param end   Final node in the path
-     * @return stack of nodes with the shortest path between start and end
-     */
-    private Stack<Node> getShortestRoute(Node start, Node end) {
-        Map<Node, NodeAndWeightTuple> pathWeights = new HashMap<>();
-        pathWeights.put(start, new NodeAndWeightTuple(null, 0));
-
-        PriorityQueue<NodeAndWeightTuple> frontier = new PriorityQueue<>(1, Comparator.comparingInt(n -> n.weight));
-        frontier.add(new NodeAndWeightTuple(start, 0));
-
-        while (!frontier.isEmpty()) {
-            Node node = frontier.poll().node;
-            if (node.equals(end)) {
-                break;
-            }
-
-            int nWeight = pathWeights.get(node).weight;
-
-            for (Edge edge : node.getExits()) {
-                Node edgeNode = edge.getOther(node);
-                NodeAndWeightTuple existingTuple = pathWeights.get(edgeNode);
-
-                int weightThroughN = nWeight + edge.length();
-
-                if (existingTuple == null) {
-                    pathWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
-                    frontier.add(new NodeAndWeightTuple(edgeNode, weightThroughN));
-                } else if (weightThroughN < existingTuple.weight) {
-                    pathWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
-
-                    // Change the weight of an existent node, by removing it first
-                    for (NodeAndWeightTuple nodeAndWeight : frontier) {
-                        if (edgeNode.equals(nodeAndWeight.node)) {
-                            frontier.remove(nodeAndWeight);
-                            break;
-                        }
-                    }
-                    frontier.add(new NodeAndWeightTuple(edgeNode, weightThroughN));
-                }
-            }
-        }
-
-        // Generate the stack of nodes representing the route (begins at the exit node)
-        Stack<Node> path = new Stack<>();
-        Node node = end;
-        while (node != null) {
-            path.push(node);
-            node = pathWeights.get(node).node;
-        }
-
-        return path;
+        (new EscapeFinder(state)).find();
     }
 
 }
