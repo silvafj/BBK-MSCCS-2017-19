@@ -88,9 +88,9 @@ def test_swap_cities(road_map, index1, index2, expected_road_map,
                                           ("state", "city2", 1.0, 1.0)]),
         # Three cities
         ([("state", "city3", 2.0, 2.0), ("state", "city1", 10.0, 10.0),
-          ("state", "city2", 1.0, 1.0)], [("state", "city1", 10.0, 10.0),
-                                          ("state", "city3", 2.0, 2.0),
-                                          ("state", "city2", 1.0, 1.0)]),
+          ("state", "city2", 1.0, 1.0)], [("state", "city3", 2.0, 2.0),
+                                          ("state", "city2", 1.0, 1.0),
+                                          ("state", "city1", 10.0, 10.0)]),
     ])
 def test_find_best_cycle(road_map, expected_road_map):
     assert find_best_cycle(road_map) == expected_road_map

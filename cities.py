@@ -8,7 +8,6 @@ route that visits each city exactly once and returns to the origin city.
 import copy
 import math
 import operator
-import random
 
 SWAPS_LIMIT = 10000
 
@@ -243,7 +242,7 @@ def main():
     print_map(new_road_map)
 
     # Used to export to Google Maps and have a nice visualisation of the roadmap
-    export_to_google_maps(new_road_map)
+    # export_to_google_maps(new_road_map)
 
 
 if __name__ == "__main__":
