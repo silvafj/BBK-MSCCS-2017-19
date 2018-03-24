@@ -8,6 +8,7 @@ route that visits each city exactly once and returns to the origin city.
 import copy
 import math
 import operator
+import random
 
 
 def distance(lat1degrees, long1degrees, lat2degrees, long2degrees):
@@ -157,6 +158,10 @@ def find_best_cycle(road_map):
         return road_map
 
     best_road_map = road_map
+
+    # Optimization to provide a better heuristic on the path order
+    best_road_map.sort(key=lambda conn: distance(0, 0, conn[2], conn[3]))
+
     best_total_distance = compute_total_distance(road_map)
 
     swaps = 0
