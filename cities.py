@@ -10,6 +10,8 @@ import math
 import operator
 import random
 
+SWAPS_LIMIT = 10000
+
 
 def distance(lat1degrees, long1degrees, lat2degrees, long2degrees):
     """
@@ -144,42 +146,33 @@ def find_best_cycle(road_map):
     :rtype: list<tuple>
     """
 
-    # The specification suggests using `swap_cities` and `swap_adjacent_cities`.
-    # Also, it is infered from the specification "tips" using random module.
-    #
-    # This leads to understanding that it is expected to use random `swap_cities`
-    # attempts and then some `swap_adjacent_cities`. This is a non-deterministic
-    # approach, far from optimal.
-    #
-    # I'm taking a different approach, using only `swap_cities`, which always
-    # gives a determinisc result.
-
     if len(road_map) < 2:
         return road_map
 
-    best_road_map = road_map
-
     # Optimization to provide a better heuristic on the path order
+    best_road_map = copy.copy(road_map)
     best_road_map.sort(key=lambda conn: distance(0, 0, conn[2], conn[3]))
-
     best_total_distance = compute_total_distance(road_map)
 
-    swaps = 0
-    swap_from = 0
-    while swaps <= 10000:
-        for i in range(swap_from + 1, len(road_map)):
+    # Use a while loop, to have absolutely sure that we don't go over the
+    # limit of swaps we are entitled to. Yes, I could break from a "for" loop
+    # but the lecturer doesn't like it...
+    swaps = a = b = 0
+    while a < len(road_map) and swaps < SWAPS_LIMIT:
+
+        b = a + 1
+        while b < len(road_map) and swaps < SWAPS_LIMIT:
             swaps += 1
             new_road_map, new_total_distance = \
-                swap_cities(best_road_map, swap_from, i)
+                swap_cities(best_road_map, a, b)
 
             if new_total_distance < best_total_distance:
                 best_road_map = new_road_map
                 best_total_distance = new_total_distance
 
-        swap_from += 1
+            b = b + 1
 
-        if swap_from > len(road_map):
-            swap_from = 0
+        a = a + 1
 
     return best_road_map
 
@@ -238,6 +231,9 @@ def main():
 
     print("\n{:=^50}\n".format(" BEST ROUTE "))
     print_map(new_road_map)
+
+    # Used to export to Google Maps and have a nice visualisation of the roadmap
+    export_to_google_maps(new_road_map)
 
 
 if __name__ == "__main__":
