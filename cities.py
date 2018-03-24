@@ -30,7 +30,7 @@ def distance(lat1degrees, long1degrees, lat2degrees, long2degrees):
     long_difference = long2 - long1
     sin_half_lat = math.sin(lat_difference / 2)
     sin_half_long = math.sin(long_difference / 2)
-    a = sin_half_lat ** 2 + math.cos(lat1) * math.cos(lat2) * sin_half_long ** 2
+    a = sin_half_lat**2 + math.cos(lat1) * math.cos(lat2) * sin_half_long**2
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1.0 - a))
     return earth_radius * c
 
@@ -87,8 +87,8 @@ def compute_total_distance(road_map):
         _, _, lat1degrees, long1degrees = item
         _, _, lat2degrees, long2degrees = road_map[(i + 1) % len(road_map)]
 
-        total_distance += distance(lat1degrees, long1degrees,
-                                   lat2degrees, long2degrees)
+        total_distance += distance(lat1degrees, long1degrees, lat2degrees,
+                                   long2degrees)
 
     return total_distance
 
@@ -187,7 +187,7 @@ def print_map(road_map):
     :param list road_map: List of four-tuples containing cities data
     """
     for i in range(len(road_map)):
-        connection = road_map[i:i+2]
+        connection = road_map[i:i + 2]
         if i == len(road_map) - 1:
             connection.append(road_map[0])
 
