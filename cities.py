@@ -166,6 +166,16 @@ def find_best_cycle(road_map):
             new_road_map, new_total_distance = \
                 swap_cities(best_road_map, a, b)
 
+            # This is an implementation of the 2-opt algorithm as described in
+            # https://en.wikipedia.org/wiki/2-opt
+            #
+            # It allows us to find the optimal route of 16500 miles. It is for
+            # reference only, because it goes against the original assignment
+            # specifications.
+            # new_road_map = (best_road_map[:a] + best_road_map[a:b][::-1] +
+            #                 best_road_map[b:])
+            # new_total_distance = compute_total_distance(new_road_map)
+
             if new_total_distance < best_total_distance:
                 best_road_map = new_road_map
                 best_total_distance = new_total_distance
