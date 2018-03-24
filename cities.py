@@ -202,6 +202,23 @@ def print_map(road_map):
         compute_total_distance(road_map)))
 
 
+def export_to_google_maps(road_map):
+    """Plot the roadmap in Google Maps."""
+
+    import gmplot
+
+    start = road_map[0]
+    gmap = gmplot.GoogleMapPlotter(start[2], start[3], 5)
+    gmap.plot(
+        lats=[conn[2] for conn in road_map] + [start[2]],
+        lngs=[conn[3] for conn in road_map] + [start[3]],
+        color="red",
+        edge_width=3,
+    )
+
+    gmap.draw("cities_road_map.html")
+
+
 def main():
     """
     Reads in (and prints out) the city data; then calculates and prints the
