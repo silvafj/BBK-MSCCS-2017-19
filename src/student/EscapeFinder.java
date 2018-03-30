@@ -6,7 +6,6 @@ import game.Node;
 import game.Tile;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -138,9 +137,9 @@ public class EscapeFinder {
                 cachedRoutes.put(node, getShortestRoute(currentNode, node));
             }
 
-            // Filter out all nodes that don't have gold
+            // Filter out all nodes that have been visited or don't have enough gold
             Optional<Node> closestGoldNode = state.getVertices().stream()
-                    .filter(node -> node.getTile().getGold() > totalGoldStats.getAverage())
+                    .filter(node -> node.getTile().getGold() >= totalGoldStats.getAverage())
                     .filter(node -> !visited.contains(node))
                     .sorted(Comparator.comparingInt(node -> timeToTraverse(cachedRoutes.get(node))))
                     .findFirst();
