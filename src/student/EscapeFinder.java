@@ -30,6 +30,10 @@ public class EscapeFinder {
     EscapeFinder(EscapeState state) {
         this.state = state;
         this.route = getShortestRoute(state.getCurrentNode(), state.getExit());
+
+        // The following was a test using the code provided in coursework-temple/src/searchexample/Paths.java
+        // resulting in the same shortest path.
+        // this.route = dijkstra(state.getCurrentNode(), state.getExit());
     }
 
     /**
@@ -140,4 +144,5 @@ public class EscapeFinder {
             this.weight = weight;
         }
     }
+
 }
