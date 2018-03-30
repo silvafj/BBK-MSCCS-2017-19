@@ -1,11 +1,9 @@
 package student;
 
-import game.Edge;
-import game.EscapeState;
-import game.Node;
-import game.Tile;
+import game.*;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 
 /**
@@ -15,12 +13,12 @@ import java.util.*;
  */
 public class EscapeFinder {
 
-    private EscapeState state;
+    final private EscapeState state;
 
     /**
-     * Shortest route to the exit.
+     * Route calculated during initialization.
      */
-    private Stack<Node> route;
+    final private List<Node> route;
 
     /**
      * Constructor.
@@ -34,20 +32,21 @@ public class EscapeFinder {
         // resulting in the same shortest path as my getShortestRoute()
         // route = dijkstra(state.getCurrentNode(), state.getExit());
 
+        // route = getShortestRoute(state.getCurrentNode(), state.getExit());
         route = getMaxGoldRoute(state.getCurrentNode(), state.getExit());
     }
 
     /**
      * Calculates the shortest path between start and end nodes.
-     *
+     * <p>
      * This code is based on Cavern.minPathLengthToTarget() which is used to calculate the time limit for the escape
      * stage of the game.
      *
      * @param start initial node in the path.
-     * @param end final node in the path.
-     * @return stack of nodes with the shortest path between start and end
+     * @param end   final node in the path.
+     * @return list of nodes with the shortest path between start and end
      */
-    private Stack<Node> getShortestRoute(Node start, Node end) {
+    private List<Node> getShortestRoute(Node start, Node end) {
         Map<Node, NodeAndWeightTuple> pathWeights = new HashMap<>();
         pathWeights.put(start, new NodeAndWeightTuple(null, 0));
 
@@ -86,13 +85,14 @@ public class EscapeFinder {
             }
         }
 
-        // Generate the stack of nodes representing the route (begins at the exit node)
-        Stack<Node> path = new Stack<>();
+
+        ArrayList<Node> path = new ArrayList<>();
         Node node = end;
         while (node != null) {
-            path.push(node);
+            path.add(node);
             node = pathWeights.get(node).node;
         }
+        Collections.reverse(path);
 
         return path;
     }
@@ -101,45 +101,103 @@ public class EscapeFinder {
      * Calculates the path having most gold between start and end nodes.
      *
      * @param start initial node in the path.
-     * @param end final node in the path.
-     * @return stack of nodes with the path having most gold between start and end
+     * @param end   final node in the path.
+     * @return list of nodes with the path having most gold between start and end
      */
-    private Stack<Node> getMaxGoldRoute(Node start, Node end) {
-        return getShortestRoute(start, end);
+    private List<Node> getMaxGoldRoute(Node start, Node end) {
+        // Initialize the discovery of the route with most gold
+        Node currentNode = start;
+
+        // That can the traversed within the time limit
+        int remainingTime = state.getTimeRemaining();
+
+        // Update the route with the starting node
+        List<Node> goldRoute = new ArrayList<>();
+        goldRoute.add(currentNode);
+
+        // When discovering the nodes, exclude the ones already visited
+        Set<Node> visited = new HashSet<>();
+        visited.add(currentNode);
+
+        // When the time limit is reached, stop and escape now
+        while (remainingTime > 0) {
+            // Calculates the shortest route from the current node to each node in the map.
+            // This will be cached, to reduce computations further along.
+            Map<Node, List<Node>> cachedRoutes = new HashMap<>();
+            for (Node node : state.getVertices()) {
+                cachedRoutes.put(node, getShortestRoute(currentNode, node));
+            }
+
+            // Filter out all nodes that don't have gold
+            Optional<Node> closestGoldNode = state.getVertices().stream()
+                    .filter(node -> node.getTile().getGold() > 0)
+                    .filter(node -> !visited.contains(node))
+                    .sorted((o1, o2) -> timeToTraverse(cachedRoutes.get(o1)) - timeToTraverse(cachedRoutes.get(o2)))
+                    .findFirst();
+
+            // No more nodes with gold
+            if (!closestGoldNode.isPresent()) {
+                goldRoute.addAll(cachedRoutes.get(end));
+                remainingTime = 0;
+            } else {
+                // Find closest node with gold from current position.
+                int bestTimeToNode = timeToTraverse(cachedRoutes.get(closestGoldNode.get()));
+
+                // Calculate the total time taking in account the time required to exit
+                List<Node> exitRoute = getShortestRoute(closestGoldNode.get(), end);
+                int totalTime = bestTimeToNode + timeToTraverse(exitRoute);
+
+                // No more time available
+                if (totalTime > remainingTime) {
+                    goldRoute.addAll(cachedRoutes.get(end));
+                    remainingTime = 0;
+                } else {
+                    currentNode = closestGoldNode.get();
+                    List<Node> routeToNode = cachedRoutes.get(closestGoldNode.get());
+                    goldRoute.addAll(routeToNode);
+                    visited.addAll(routeToNode);
+                    remainingTime -= bestTimeToNode;
+                }
+
+            }
+        }
+
+        return goldRoute;
     }
 
     /**
-     * Calculates the next node in the path to the exit.
+     * Calculates the total time required to traverse the route.
      *
-     * @return next node to move to.
+     * @param route to traverse.
+     * @return time required.
      */
-    private Node getNode() {
-        return route.pop();
+    private int timeToTraverse(List<Node> route) {
+        return IntStream.range(0, route.size() - 1)
+                .map(i -> route.get(i).getEdge(route.get(i + 1)).length())
+                .sum();
     }
 
     /**
-     * Returns True if the target was reached.
+     * Checks if the tile has gold and pick it up.
      *
-     * @return True if the target was reached.
+     * @param tile to pick up gold from.
      */
-    private boolean found() {
-        return state.getExit().equals(state.getCurrentNode());
-    }
-
     private void pickUpGold(Tile tile) {
         if (tile.getGold() > 0) {
             state.pickUpGold();
         }
     }
 
+    /**
+     * Traverse the route while picking up gold.
+     */
     public void find() {
         pickUpGold(state.getCurrentNode().getTile());
-        while (!found()) {
-            pickUpGold(state.getCurrentNode().getTile());
 
-            Node nextNode = getNode();
-            if (!state.getCurrentNode().equals(nextNode)) {
-                state.moveTo(nextNode);
+        for (Node node : route) {
+            if (!state.getCurrentNode().equals(node)) {
+                state.moveTo(node);
+                pickUpGold(state.getCurrentNode().getTile());
             }
         }
     }
@@ -148,8 +206,8 @@ public class EscapeFinder {
      * Tuple structure of Node and Weight to be used internally for shortest route calculation.
      */
     private class NodeAndWeightTuple {
-        public Node node;
-        public int weight;
+        private Node node;
+        private int weight;
 
         NodeAndWeightTuple(Node node, int weight) {
             this.node = node;

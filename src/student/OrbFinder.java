@@ -15,7 +15,7 @@ import java.util.Stack;
  */
 public class OrbFinder {
 
-    private ExplorationState state;
+    final private ExplorationState state;
 
     /**
      * Keep a list of visited nodes, to avoid visiting the same node twice
@@ -61,18 +61,14 @@ public class OrbFinder {
     }
 
     /**
-     * Returns True if the target was reached.
-     *
-     * @return True if the target was reached.
+     * Explore the map until Orb is found.
      */
-    private boolean found() {
-        return state.getDistanceToTarget() == 0;
-    }
-
     public void find() {
-        while (!found()) {
+        while (state.getDistanceToTarget() > 0) {
             NodeStatus nextNode = getNode();
             state.moveTo(nextNode.getId());
+
+            // Mark the node as visited
             visited.add(nextNode);
             currentPath.add(nextNode);
         }
