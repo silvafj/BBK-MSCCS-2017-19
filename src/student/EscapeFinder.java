@@ -6,6 +6,7 @@ import game.Node;
 import game.Tile;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -124,24 +125,24 @@ public class EscapeFinder {
 
         // Calculate the amount of gold and its distribution, giving priority to nodes with most gold
         IntSummaryStatistics totalGoldStats = state.getVertices().stream()
-                .filter(node -> node.getTile().getGold() > 0)
+                .filter(n -> n.getTile().getGold() > 0)
                 .mapToInt(value -> value.getTile().getGold())
                 .summaryStatistics();
 
         // When the time limit is reached, stop and escape now
         while (remainingTime > 0) {
-            // Calculates the shortest route from the current node to each node in the map.
-            // This will be cached, to reduce computations further along.
-            Map<Node, List<Node>> cachedRoutes = new HashMap<>();
-            for (Node node : state.getVertices()) {
-                cachedRoutes.put(node, getShortestRoute(currentNode, node));
-            }
+            // Calculates the shortest route from the current node to each node (we need) in the map.
+            // This is cached, to reduce the number of repeated calculations in the next blocks of code.
+            final Node currentNodeFinal = currentNode; // lambda requires a variable to be effectively final
+            final Map<Node, List<Node>> cachedRoutes = state.getVertices().stream()
+                    .filter(n -> n.equals(end) || (n.getTile().getGold() >= totalGoldStats.getAverage()))
+                    .collect(Collectors.toUnmodifiableMap(n -> n, n -> getShortestRoute(currentNodeFinal, n)));
 
             // Filter out all nodes that have been visited or don't have enough gold
             Optional<Node> closestGoldNode = state.getVertices().stream()
-                    .filter(node -> node.getTile().getGold() >= totalGoldStats.getAverage())
-                    .filter(node -> !visited.contains(node))
-                    .sorted(Comparator.comparingInt(node -> timeToTraverse(cachedRoutes.get(node))))
+                    .filter(n -> n.getTile().getGold() >= totalGoldStats.getAverage())
+                    .filter(n -> !visited.contains(n))
+                    .sorted(Comparator.comparingInt(n -> timeToTraverse(cachedRoutes.get(n))))
                     .findFirst();
 
             // No more nodes with gold
