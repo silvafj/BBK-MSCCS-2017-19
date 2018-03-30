@@ -6,6 +6,7 @@ import game.Node;
 import game.Tile;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -122,6 +123,12 @@ public class EscapeFinder {
         Set<Node> visited = new HashSet<>();
         visited.add(currentNode);
 
+        // Calculate the amount of gold and its distribution, giving priority to nodes with most gold
+        IntSummaryStatistics totalGoldStats = state.getVertices().stream()
+                .filter(node -> node.getTile().getGold() > 0)
+                .mapToInt(value -> value.getTile().getGold())
+                .summaryStatistics();
+
         // When the time limit is reached, stop and escape now
         while (remainingTime > 0) {
             // Calculates the shortest route from the current node to each node in the map.
@@ -133,19 +140,9 @@ public class EscapeFinder {
 
             // Filter out all nodes that don't have gold
             Optional<Node> closestGoldNode = state.getVertices().stream()
-                    .filter(node -> node.getTile().getGold() > 0)
+                    .filter(node -> node.getTile().getGold() > totalGoldStats.getAverage())
                     .filter(node -> !visited.contains(node))
-                    .sorted(new Comparator<>() {
-                        @Override
-                        public int compare(Node o1, Node o2) {
-                            int time = timeToTraverse(cachedRoutes.get(o1)) - timeToTraverse(cachedRoutes.get(o2));
-                            if (time != 0) {
-                                return time;
-                            }
-
-                            return o1.getTile().getGold() - o2.getTile().getGold();
-                        }
-                    })
+                    .sorted(Comparator.comparingInt(node -> timeToTraverse(cachedRoutes.get(node))))
                     .findFirst();
 
             // No more nodes with gold
