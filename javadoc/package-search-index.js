@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l": "game"}, {"l": "gui"}, {"l": "main"}, {"l": "searchexample"}, {"l": "student"}]
+packageSearchIndex = [{"l":"game"},{"l":"gui"},{"l":"searchexample"},{"l":"student"}]
