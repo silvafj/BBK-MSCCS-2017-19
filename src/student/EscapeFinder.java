@@ -29,21 +29,22 @@ public class EscapeFinder {
      */
     EscapeFinder(EscapeState state) {
         this.state = state;
-        this.route = getShortestRoute(state.getCurrentNode(), state.getExit());
 
         // The following was a test using the code provided in coursework-temple/src/searchexample/Paths.java
-        // resulting in the same shortest path.
-        // this.route = dijkstra(state.getCurrentNode(), state.getExit());
+        // resulting in the same shortest path as my getShortestRoute()
+        // route = dijkstra(state.getCurrentNode(), state.getExit());
+
+        route = getMaxGoldRoute(state.getCurrentNode(), state.getExit());
     }
 
     /**
      * Calculates the shortest path between start and end nodes.
-     * <p>
+     *
      * This code is based on Cavern.minPathLengthToTarget() which is used to calculate the time limit for the escape
      * stage of the game.
      *
      * @param start initial node in the path.
-     * @param end   final node in the path.
+     * @param end final node in the path.
      * @return stack of nodes with the shortest path between start and end
      */
     private Stack<Node> getShortestRoute(Node start, Node end) {
@@ -94,6 +95,17 @@ public class EscapeFinder {
         }
 
         return path;
+    }
+
+    /**
+     * Calculates the path having most gold between start and end nodes.
+     *
+     * @param start initial node in the path.
+     * @param end final node in the path.
+     * @return stack of nodes with the path having most gold between start and end
+     */
+    private Stack<Node> getMaxGoldRoute(Node start, Node end) {
+        return getShortestRoute(start, end);
     }
 
     /**
