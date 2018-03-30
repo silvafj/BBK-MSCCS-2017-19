@@ -1,13 +1,24 @@
 package game;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Queue;
+import java.util.Random;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * An instance represents a Cavern that the explorer can navigate through.
- * The cavern is set up as a grid of Tile objects with a weighted graph of all non-floor tiles.
+ * The cavern is set up as a grid of Tile objects with a weighted graph of all
+ * non-floor tiles.
  * There is an entrance to the cavern and a target location (which may also be the entrance).
  */
 public class Cavern {
@@ -15,8 +26,10 @@ public class Cavern {
     public static final int MAX_EDGE_WEIGHT = 15;
     public static final int MAX_GOLD_VALUE = 1000;
     public static final int TASTY_VALUE = 5000;
+
     private static final double DENSITY = 0.6;
     private static final double GOLD_PROBABILITY = 0.33;
+
     private final int rows;
     private final int cols;
     private final Set<Node> graph;
@@ -40,22 +53,19 @@ public class Cavern {
         cols = cls;
 
         graph = generateGraph(rand, targetType, goldGenerator);
-
         entrance = graph.stream().filter((n) -> n.getTile().getType() == Tile.Type.ENTRANCE).findAny().get();
-
         target = graph.stream().filter((n) -> n.getTile().getType() == targetType).findAny().get();
 
         // Set tiles for the floor and then add walls wherever floor is missing.
-        tiles = new Node[rows][cols];
-        for (Node node : graph) {
+        tiles = new NodeImpl[rows][cols];
+        for (var node : graph) {
             Tile t = node.getTile();
             tiles[t.getRow()][t.getColumn()] = node;
         }
-
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (tiles[i][j] == null) {
-                    tiles[i][j] = new Node(new Tile(i, j, 0, Tile.Type.WALL));
+                    tiles[i][j] = new NodeImpl(new Tile(i, j, 0, Tile.Type.WALL));
                 }
             }
         }
@@ -76,9 +86,7 @@ public class Cavern {
         cols = tiles[0].length;
 
         graph = Collections.unmodifiableSet(givenGraph);
-
         entrance = graph.stream().filter((n) -> n.getTile().getType() == Tile.Type.ENTRANCE).findAny().get();
-
         target = trgt;
     }
 
@@ -105,7 +113,8 @@ public class Cavern {
     }
 
     /**
-     * Return a new random Cavern of size (rows, cols) with random gold and edge weights.
+     * Return a new random Cavern of size (rows, cols) with random
+     * gold and edge weights.
      * It is guaranteed that (currentRow, currentCol}) will be an open floor cell.
      * Use rand as a source of randomness for the cavern generation.
      */
@@ -148,22 +157,23 @@ public class Cavern {
 
         Map<Long, Node> idToNode = new HashMap<>();
         for (String nodeStr : nodeStrList) {
-            if (!nodeStr.equals(extraInfo)) {
-
-                String nodeInfo = nodeStr.substring(0, nodeStr.indexOf("="));
-                String[] splitInfo = nodeInfo.split(",");
-
-                long nodeId = Long.parseLong(splitInfo[0]);
-                Node n = new Node(nodeId,
-                        new Tile(Integer.parseInt(splitInfo[1]),
-                                Integer.parseInt(splitInfo[2]),
-                                Integer.parseInt(splitInfo[3]),
-                                Tile.Type.valueOf(splitInfo[4])));
-                idToNode.put(nodeId, n);
+            if (nodeStr.equals(extraInfo)) {
+                continue;
             }
+
+            String nodeInfo = nodeStr.substring(0, nodeStr.indexOf("="));
+            String[] splitInfo = nodeInfo.split(",");
+
+            long nodeId = Long.parseLong(splitInfo[0]);
+            Node n = new NodeImpl(nodeId,
+                    new Tile(Integer.parseInt(splitInfo[1]),
+                            Integer.parseInt(splitInfo[2]),
+                            Integer.parseInt(splitInfo[3]),
+                            Tile.Type.valueOf(splitInfo[4])));
+            idToNode.put(nodeId, n);
         }
 
-        Node[][] tiles = new Node[rows][cols];
+        Node[][] tiles = new NodeImpl[rows][cols];
         for (String nodeStr : nodeStrList) {
             // The first line is not a node, it's metadata, so skip it.
             if (nodeStr.equals(extraInfo)) {
@@ -186,7 +196,7 @@ public class Cavern {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (tiles[i][j] == null) {
-                    tiles[i][j] = new Node(new Tile(i, j, 0, Tile.Type.WALL));
+                    tiles[i][j] = new NodeImpl(new Tile(i, j, 0, Tile.Type.WALL));
                 }
             }
         }
@@ -246,7 +256,7 @@ public class Cavern {
         Queue<Node> frontier = new ArrayDeque<>();
 
         Point entrancePoint = getEntrancePoint(rand);
-        Node entrance = new Node(new Tile(entrancePoint.row, entrancePoint.col, 0, Tile.Type.ENTRANCE));
+        Node entrance = new NodeImpl(new Tile(entrancePoint.row, entrancePoint.col, 0, Tile.Type.ENTRANCE));
         nodes.add(entrance);
 
         pointsSeen.add(entrancePoint);
@@ -287,7 +297,7 @@ public class Cavern {
                 newExits.stream()
                         .filter((q) -> q.equals(forcedExit) || rand.nextDouble() < modifiedDensity)
                         .peek(openPoints::add)
-                        .map((q) -> new Node(new Tile(q.row, q.col, goldGenerator.get(), Tile.Type.FLOOR)))
+                        .map((q) -> new NodeImpl(new Tile(q.row, q.col, goldGenerator.get(), Tile.Type.FLOOR)))
                         .peek(frontier::add)
                         .forEach(nodes::add);
             }

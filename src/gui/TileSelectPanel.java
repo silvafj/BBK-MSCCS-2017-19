@@ -2,15 +2,18 @@ package gui;
 
 import game.Node;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static gui.Constants.ROOT;
+import javax.imageio.ImageIO;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * An instance is a panel that displays information about a currently selected Tile.
@@ -40,7 +43,7 @@ public class TileSelectPanel extends JPanel {
     //Height proportion at which to display the amount of gold
     private static final double GOLD_HEIGHT = 0.70;
     private BufferedImage background;        //Background for options pane
-    private String BACKGROUND_PATH = ROOT + "info_texture.png";            //Location of background image
+    private String BACKGROUND_PATH = "res/info_texture.png";            //Location of background image
     private JLabel instructions;            //Tells user how to use this panel
     private GUI gui;                        //Information about the larger GUI
     private Node selectedNode;        //The currently selected node
@@ -99,7 +102,6 @@ public class TileSelectPanel extends JPanel {
     /**
      * Paint this component using page.
      */
-    @Override
     public void paintComponent(Graphics page) {
         super.paintComponent(page);
         page.drawImage(background, 0, 0, getWidth(), getHeight(), null);

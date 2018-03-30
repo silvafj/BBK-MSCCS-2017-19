@@ -14,28 +14,28 @@ public interface ExplorationState {
     /**
      * Return the unique identifier associated with your current location.
      */
-    long getCurrentLocation();
+    public long getCurrentLocation();
 
     /**
      * Returns an unordered collection of NodeStatus objects
-     * associated with all direct neighbours of your current location.
-     * Each status contains a unique identifier for the neighbouring node
+     * associated with all direct neighbors of your current location.
+     * Each status contains a unique identifier for the neighboring node
      * as well as the distance of that node to the target along the grid
      * (NB: This is NOT the distance in the graph, it is only the number
      * of rows and columns away from the target.)
      * It is possible to move directly to any node identifier in this collection.
      */
-    Collection<NodeStatus> getNeighbours();
+    public Collection<NodeStatus> getNeighbors();
 
     /**
      * Return your current distance along the grid (NOT THE GRAPH) from the target.
      */
-    int getDistanceToTarget();
+    public int getDistanceToTarget();
 
     /**
      * Change your current location to the node specified by id.
      * You can move only to nodes adjacent to your current node.
      * Throw an IllegalArgumentException if id is not a neihgbor of your current location.
      */
-    void moveTo(long id);
+    public void moveTo(long id);
 }

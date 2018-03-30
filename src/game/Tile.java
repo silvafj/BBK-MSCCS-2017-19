@@ -1,6 +1,7 @@
 package game;
 
 public class Tile {
+
     /**
      * The row and column position of the GameNode
      */
@@ -73,7 +74,7 @@ public class Tile {
      * Set the gold on this Node to 0 and returns the amount "picked up".
      */
     public int takeGold() {
-        final int result = getGold();
+        int result = getGold();
         goldPickedUp = true;
         return result;
     }

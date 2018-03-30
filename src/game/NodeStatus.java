@@ -3,7 +3,8 @@ package game;
 import java.util.Objects;
 
 /**
- * An instance maintains the status of a node -- it's id and its distance from the Orb.
+ * An instance maintains the status of a node --its id
+ * and its distance from the Orb.
  */
 public class NodeStatus implements Comparable<NodeStatus> {
     private final long id;

@@ -47,7 +47,7 @@ public class OrbFinder {
         // The best unvisited neighbour:
         // 1. Exclude the nodes that were visited
         // 2. Sort the nodes by how close they are to the target
-        Optional<NodeStatus> nextNode = state.getNeighbours().stream()
+        Optional<NodeStatus> nextNode = state.getNeighbors().stream()
                 .filter(nodeStatus -> !(visited.contains(nodeStatus)))
                 .sorted(NodeStatus::compareTo)
                 .findFirst();

@@ -1,28 +1,38 @@
 package gui;
 
 import game.Cavern;
+import game.GameState;
 import game.Node;
 import game.Tile;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 /**
  * An instance is a GUI for the game.
+ * Run this file as a Java application to test the project.
  */
-public class GUI extends JFrame implements Constants {
-
+public class GUI extends JFrame {
+    public static final double GAME_WIDTH_PROP = 0.78;       //Width of the game portion (prop of total)
+    public static final double GAME_HEIGHT_PROP = 1.0;      //Height of the game portion (prop of total)
     private static final long serialVersionUID = 1L;
-
-    private static int screenWidth = 1050;    //Width of the entire screen
-    private static int screenHeight = 600;    //Height of the entire screen
-
-    private static int framesPerSecond = 60;    //Framerate of game (fps)
-    private static int framesPerMove = 25;      //How many frames does a single move take us?
-
+    //Dimensions of the error pane (in pixels)
+    private static final int ERROR_WIDTH = 500;
+    private static final int ERROR_HEIGHT = 150;
+    private static final double INFO_SIZE = 0.5;    //How much of the screen should the info make up?
+    public static int SCREEN_WIDTH = 1050;    //Width of the entire screen
+    public static int SCREEN_HEIGHT = 600;    //Height of the entire screen
+    public static int FRAMES_PER_SECOND = 60;    //Framerate of game (fps)
+    public static int FRAMES_PER_MOVE = 25;      //How many frames does a single move take us?
     private MazePanel mazePanel;            //The panel for generating and drawing the maze
     private ExplorerSprite explorer;        //The panel for updating and drawing the explorer
     private OptionsPanel options;           //The panel for showing stats / displaying options
@@ -33,11 +43,11 @@ public class GUI extends JFrame implements Constants {
      * using randomg number seed seed. */
     public GUI(Cavern cavern, int playerRow, int playerCol, long seed) {
         //Initialize frame
-        setSize(screenWidth, screenHeight);
+        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setLocation(150, 150);
 
-        int GAME_WIDTH = (int) (GAME_WIDTH_PROP * screenWidth);
-        int GAME_HEIGHT = (int) (GAME_HEIGHT_PROP * screenHeight);
+        int GAME_WIDTH = (int) (GAME_WIDTH_PROP * SCREEN_WIDTH);
+        int GAME_HEIGHT = (int) (GAME_HEIGHT_PROP * SCREEN_HEIGHT);
 
         //Create the maze
         mazePanel = new MazePanel(cavern, GAME_WIDTH, GAME_HEIGHT, this);
@@ -50,18 +60,19 @@ public class GUI extends JFrame implements Constants {
         explorer.setOpaque(false);
 
         //Create the panel for stats and options
-        options = new OptionsPanel(GAME_WIDTH, 0, screenWidth - GAME_WIDTH, (int) (screenHeight * INFO_SIZE), seed);
+        options = new OptionsPanel(GAME_WIDTH, 0, SCREEN_WIDTH - GAME_WIDTH, (int) (SCREEN_HEIGHT * INFO_SIZE), seed);
 
         //Create the panel for tile information
-        tileSelect = new TileSelectPanel(GAME_WIDTH, (int) (screenHeight * INFO_SIZE),
-                screenWidth - GAME_WIDTH, (int) (screenHeight * (1 - INFO_SIZE)), this);
+        tileSelect = new TileSelectPanel(GAME_WIDTH, (int) (SCREEN_HEIGHT * INFO_SIZE),
+                SCREEN_WIDTH - GAME_WIDTH, (int) (SCREEN_HEIGHT * (1 - INFO_SIZE)), this);
 
         //Layer the explorer and maze into master panel
         master = new JLayeredPane();
-        master.add(mazePanel, 1);
-        master.add(options, 1);
-        master.add(tileSelect, 1);
-        master.add(explorer, 2);
+
+        master.add(mazePanel, new Integer(1));
+        master.add(options, new Integer(1));
+        master.add(tileSelect, new Integer(1));
+        master.add(explorer, new Integer(2));
 
         //Display GUI
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,17 +83,17 @@ public class GUI extends JFrame implements Constants {
         addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
-                screenWidth = getWidth();
-                screenHeight = getHeight();
-                int GAME_WIDTH = (int) (GAME_WIDTH_PROP * screenWidth);
-                int GAME_HEIGHT = (int) (GAME_HEIGHT_PROP * screenHeight);
+                SCREEN_WIDTH = getWidth();
+                SCREEN_HEIGHT = getHeight();
+                int GAME_WIDTH = (int) (GAME_WIDTH_PROP * SCREEN_WIDTH);
+                int GAME_HEIGHT = (int) (GAME_HEIGHT_PROP * SCREEN_HEIGHT);
                 mazePanel.updateScreenSize(GAME_WIDTH, GAME_HEIGHT);
                 mazePanel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
                 explorer.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
                 explorer.repaint();
-                options.setBounds(GAME_WIDTH, 0, screenWidth - GAME_WIDTH, (int) (screenHeight * INFO_SIZE));
-                tileSelect.updateLoc(GAME_WIDTH, (int) (screenHeight * INFO_SIZE),
-                        screenWidth - GAME_WIDTH, (int) (screenHeight * (1 - INFO_SIZE)));
+                options.setBounds(GAME_WIDTH, 0, SCREEN_WIDTH - GAME_WIDTH, (int) (SCREEN_HEIGHT * INFO_SIZE));
+                tileSelect.updateLoc(GAME_WIDTH, (int) (SCREEN_HEIGHT * INFO_SIZE),
+                        SCREEN_WIDTH - GAME_WIDTH, (int) (SCREEN_HEIGHT * (1 - INFO_SIZE)));
             }
 
             @Override
@@ -99,20 +110,26 @@ public class GUI extends JFrame implements Constants {
         });
     }
 
-    public static int getFramesPerSecond() {
-        return framesPerSecond;
-    }
+    /**
+     * The main program.
+     */
+    public static void main(String[] args) {
+        List<String> argList = new ArrayList<String>(Arrays.asList(args));
+        int seedIndex = argList.indexOf("-s");
+        long seed = 0;
+        if (seedIndex >= 0) {
+            try {
+                seed = Long.parseLong(argList.get(seedIndex + 1));
+            } catch (NumberFormatException e) {
+                System.err.println("Error, -s must be followed by a numerical seed");
+                return;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.err.println("Error, -s must be followed by a seed");
+                return;
+            }
+        }
 
-    public static void setFramesPerSecond(int framesPerSecond) {
-        GUI.framesPerSecond = framesPerSecond;
-    }
-
-    public static int getFramesPerMove() {
-        return framesPerMove;
-    }
-
-    public static void setFramesPerMove(int framesPerMove) {
-        GUI.framesPerMove = framesPerMove;
+        GameState.runNewGame(seed, true);
     }
 
     /**

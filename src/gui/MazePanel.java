@@ -4,16 +4,16 @@ import game.Cavern;
 import game.Node;
 import game.Tile;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static gui.Constants.ROOT;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 /**
  * An instance is responsible for drawing the underlying maze on the screen.
@@ -23,20 +23,18 @@ import static gui.Constants.ROOT;
 public class MazePanel extends JPanel {
     private static final long serialVersionUID = 1L;
 
-    private static final String ORB_PATH = ROOT + "orb.png";           //Path to orb image
-    private static final String PATH_PATH = ROOT + "path.png";         //Path to image representing path
-    private static final String WALL_PATH = ROOT + "wall.png";         //Path to wall image
-    private static final String COIN_PATH = ROOT + "coins.png";        //Path to the coin image
-    private static final String ENTRANCE_PATH = ROOT + "entrance.png"; //Path to the entrance image
-    private static final String TASTY_PATH = ROOT + "notes.txt";
-    private static final String BACKGROUND_PATH = ROOT + "info_texture.png";
+    private static final String ORB_PATH = "res/orb.png";           //Path to orb image
+    private static final String PATH_PATH = "res/path.png";         //Path to image representing path
+    private static final String WALL_PATH = "res/wall.png";         //Path to wall image
+    private static final String COIN_PATH = "res/coins.png";        //Path to the coin image
+    private static final String ENTRANCE_PATH = "res/entrance.png"; //Path to the entrance image
+    private static final String TASTY_PATH = "res/notes.png";
+    private static final String BACKGROUND_PATH = "res/info_texture.png";
     private static final float DARK_FACTOR = 0.3f; //How dark should dark path be? Lower values means darker
     private static final int COIN_SPRITES_PER_ROW = 7;
     private static final int COIN_SPRITES_PER_COL = 2;
-
     public static int TILE_WIDTH;       //The width (in pixels) of a tile on the grid
     public static int TILE_HEIGHT;      //The height (in pixels) of a tile on the grid
-
     private final BufferedImage path;   //Image representing an area the explorer can walk on
     private final BufferedImage wall;   //Image representing a blocked area
     private final BufferedImage orb;    //Image representing the orb
@@ -169,7 +167,6 @@ public class MazePanel extends JPanel {
     /**
      * Draw the maze on the screen.
      */
-    @Override
     public void paintComponent(Graphics page) {
         super.paintComponent(page);
         for (int i = 0; i < getWidth(); i += 100) {

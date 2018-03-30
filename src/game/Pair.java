@@ -3,11 +3,12 @@ package game;
 import java.util.Objects;
 
 /**
- * A Pair (X,Y) represents an immutable ordered pair of two Objects of types X and Y respectively.
+ * A Pair (X,Y) represents an immutable ordered pair of two Objects of types X
+ * and Y respectively.
  */
 public final class Pair<X, Y> {
-    private X first;
-    private Y second;
+    X first;
+    Y second;
 
     /**
      * Constructor: an instance (x, y).

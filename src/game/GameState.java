@@ -1,42 +1,48 @@
 package game;
 
-import gui.GUI;
-import student.Explorer;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
-import static game.Constants.*;
+import gui.GUI;
+
+import student.Explorer;
 
 public class GameState implements ExplorationState, EscapeState {
 
+    public static final int MIN_ROWS = 8;
+    public static final int MAX_ROWS = 25;
+    public static final int MIN_COLS = 12;
+    public static final int MAX_COLS = 40;
+    public static final double MIN_BONUS = 1.0;
+    public static final double MAX_BONUS = 1.3;
+    private static final double EXTRA_TIME_FACTOR = 0.3;     //bigger is nicer - addition to total multiplier
+    private static final double NO_BONUS_LENGTH = 3;
     private final Cavern exploreCavern;
     private final Cavern escapeCavern;
     private final Explorer explorer;
     private final Optional<GUI> gui;
     private final long seed;
-
     private Node position;
     private int stepsTaken;
     private int timeRemaining;
     private int goldCollected;
     private Stage stage;
-
-    // represents exploreSucceeded, escapeSucceeded, exploreErrored, escapeErrored
-    private boolean flags[];
+    private boolean exploreSucceeded = false;
+    private boolean escapeSucceeded = false;
+    private boolean exploreErrored = false;
+    private boolean escapeErrored = false;
     private int minTimeToExplore;
 
-    {
-        flags = new boolean[4];
-        for (int i = 0; i < flags.length; i++) {
-            flags[i] = false;
-        }
-    }
-
-    public GameState(Path exploreCavernPath, Path escapeCavernPath) throws IOException {
+    /* package */ GameState(Path exploreCavernPath, Path escapeCavernPath) throws IOException {
         exploreCavern = Cavern.deserialize(Files.readAllLines(exploreCavernPath));
         minTimeToExplore = exploreCavern.minPathLengthToTarget(exploreCavern.getEntrance());
         escapeCavern = Cavern.deserialize(Files.readAllLines(escapeCavernPath));
@@ -58,7 +64,7 @@ public class GameState implements ExplorationState, EscapeState {
      * Constructor: a random instance with a GUI only if useGUI is true.
      */
     private GameState(boolean useGui) {
-        this((new Random()).nextLong(), useGui);   // dodgy code - should reuse the random number
+        this((new Random()).nextLong(), useGui);
     }
 
     /**
@@ -99,9 +105,43 @@ public class GameState implements ExplorationState, EscapeState {
         } else {
             state = new GameState(useGui);
         }
-
+        System.out.println("Seed : " + state.seed);
         state.run();
         return state.getScore();
+    }
+
+    public static void main(String[] args) throws IOException {
+        List<String> argList = new ArrayList<String>(Arrays.asList(args));
+        int repeatNumberIndex = argList.indexOf("-n");
+        int numTimesToRun = 1;
+        if (repeatNumberIndex >= 0) {
+            try {
+                numTimesToRun = Math.max(Integer.parseInt(argList.get(repeatNumberIndex + 1)), 1);
+            } catch (Exception e) {
+                // numTimesToRun = 1
+            }
+        }
+        int seedIndex = argList.indexOf("-s");
+        long seed = 0;
+        if (seedIndex >= 0) {
+            try {
+                seed = Long.parseLong(argList.get(seedIndex + 1));
+            } catch (NumberFormatException e) {
+                System.err.println("Error, -s must be followed by a numerical seed");
+                return;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.err.println("Error, -s must be followed by a seed");
+                return;
+            }
+        }
+
+        int totalScore = 0;
+        for (int i = 0; i < numTimesToRun; i++) {
+            totalScore += runNewGame(seed, false);
+            System.out.println();
+        }
+
+        System.out.println("Average score : " + totalScore / numTimesToRun);
     }
 
     /**
@@ -110,14 +150,14 @@ public class GameState implements ExplorationState, EscapeState {
     private void run() {
         // TODO: In the error cases we should really pop something up!
         explore();
-        if (!flags[0]) return;
+        if (!exploreSucceeded) return;
         escape();
     }
 
-    void explore() {
+    /* package */ void explore() {
         stage = Stage.EXPLORE;
         stepsTaken = 0;
-        flags[0] = false;
+        exploreSucceeded = false;
         position = exploreCavern.getEntrance();
         gui.ifPresent((g) -> g.setLighting(false));
         gui.ifPresent((g) -> g.updateCavern(exploreCavern, 0));
@@ -126,48 +166,52 @@ public class GameState implements ExplorationState, EscapeState {
         try {
             explorer.explore(this);
             if (position.equals(exploreCavern.getTarget())) {
-                flags[0] = true;
+                exploreSucceeded = true;
             } else {
-                output(gui, "Your solution to explore returned at the wrong location.");
+                System.err.println("Your solution to explore returned at the wrong location.");
+                gui.ifPresent((g) -> g.displayError("Your solution to explore returned at the wrong location."));
             }
         } catch (Throwable t) {
-            output(gui, "Your code caused an error  during the explore phase. Please see console output.");
+            System.err.println("Your code errored during the explore phase.");
+            gui.ifPresent((g) -> g.displayError("Your code errored during the explore phase. Please see console output."));
             System.err.println("We will move on to the escape phase anyway, but your solution is not correct!");
             System.err.println("Here is the error that occurred.");
             t.printStackTrace();
-            flags[2] = true;
+            exploreErrored = true;
         }
     }
 
-    void escape() {
+    /* package */ void escape() {
         stage = Stage.ESCAPE;
         Tile orbTile = exploreCavern.getTarget().getTile();
         position = escapeCavern.getNodeAt(orbTile.getRow(), orbTile.getColumn());
-        if (flags[0]) {
+        if (exploreSucceeded) {
             timeRemaining = computeTimeToEscape();
         } else {
             timeRemaining = escapeCavern.minPathLengthToTarget(position);
             gui.ifPresent((g) -> g.moveTo(position));
         }
-
         gui.ifPresent((g) -> g.setLighting(true));
         gui.ifPresent((g) -> g.updateCavern(escapeCavern, timeRemaining));
 
         try {
             explorer.escape(this);
             if (position.equals(escapeCavern.getTarget())) {
-                flags[1] = true;
+                escapeSucceeded = true;
             }
         } catch (OutOfTimeException e) {
-            output(gui, "Your solution to escape ran out of steps before returning!");
+            System.err.println("Your solution to escape ran out of steps before returning!");
+            gui.ifPresent((g) -> g.displayError("Your solution to escape ran out of steps before returning!"));
         } catch (Throwable t) {
-            output(gui, "Your code caused an error during the escape phase. Please see console output.");
+            System.err.println("Your code errored during the escape phase.");
+            gui.ifPresent((g) -> g.displayError("Your code errored during the escape phase. Please see console output."));
             t.printStackTrace();
-            flags[3] = true;
+            escapeErrored = true;
         }
 
-        if (!flags[1]) {
-            output(gui, "Your solution to escape failed to end at the stairs. Your code is not correct!");
+        if (!escapeSucceeded) {
+            System.err.println("Your solution to escape failed to end at the stairs. Your code is not correct!");
+            gui.ifPresent((g) -> g.displayError("Your solution to escape failed to end at the stairs. Your code is not correct!"));
         }
         System.out.println("Gold collected   : " + getGoldCollected());
         DecimalFormat df = new DecimalFormat("#.##");
@@ -179,6 +223,12 @@ public class GameState implements ExplorationState, EscapeState {
      * Return the time to escape
      */
     private int computeTimeToEscape() {
+        //        int minTimeToExplore= exploreCavern.minPathLengthToTarget(exploreCavern.getEntrance());
+        //        int minTimeToEscape= escapeCavern.minPathLengthToTarget(position);
+        //
+        //        int maxExtraTime= escapeCavern.getRowCount() * escapeCavern.getColumnCount() * Cavern.MAX_EDGE_WEIGHT / 6;
+        //        double extraTimeFactor = Math.max(0.0, 4 - ((double)stepsTaken - minTimeToExplore)/minTimeToExplore) / 4;
+        //        return minTimeToEscape + (int)(maxExtraTime * extraTimeFactor);
         int minTimeToEscape = escapeCavern.minPathLengthToTarget(position);
         return (int) (minTimeToEscape + EXTRA_TIME_FACTOR * (Cavern.MAX_EDGE_WEIGHT + 1) * escapeCavern.numOpenTiles() / 2);
 
@@ -197,7 +247,7 @@ public class GameState implements ExplorationState, EscapeState {
     /**
      * See moveTo(Node&lt;TileData&gt; n)
      *
-     * @param id The Id of the neighbouring Node to move to
+     * @param id The Id of the neighboring Node to move to
      */
     @Override
     public void moveTo(long id) {
@@ -205,7 +255,7 @@ public class GameState implements ExplorationState, EscapeState {
             throw new IllegalStateException("moveTo(ID) can only be called while exploring!");
         }
 
-        for (Node n : position.getNeighbours()) {
+        for (var n : position.getNeighbors()) {
             if (n.getId() == id) {
                 position = n;
                 stepsTaken++;
@@ -234,13 +284,13 @@ public class GameState implements ExplorationState, EscapeState {
      * and the distance from that node to the target.
      */
     @Override
-    public Collection<NodeStatus> getNeighbours() {
+    public Collection<NodeStatus> getNeighbors() {
         if (stage != Stage.EXPLORE) {
-            throw new IllegalStateException("getNeighbours() can only be called while exploring!");
+            throw new IllegalStateException("getNeighbors() can only be called while exploring!");
         }
 
         Collection<NodeStatus> options = new ArrayList<>();
-        for (Node n : position.getNeighbours()) {
+        for (Node n : position.getNeighbors()) {
             int distance = computeDistanceToTarget(n.getTile().getRow(), n.getTile().getColumn());
             options.add(new NodeStatus(n.getId(), distance));
         }
@@ -294,10 +344,10 @@ public class GameState implements ExplorationState, EscapeState {
     /**
      * Attempts to move the explorer from the current position to
      * the <tt>Node</tt> <tt>n</tt>. Throws an <tt>IllegalArgumentException</tt>
-     * if <tt>n</tt> is not neighbouring. Increments the steps taken
+     * if <tt>n</tt> is not neighboring. Increments the steps taken
      * if successful.
      *
-     * @param n A neighbouring <tt>Node</tt>
+     * @param n A neighboring <tt>Node</tt>
      */
     @Override
     public void moveTo(Node n) {
@@ -309,7 +359,7 @@ public class GameState implements ExplorationState, EscapeState {
             throw new OutOfTimeException();
         }
 
-        if (position.getNeighbours().contains(n)) {
+        if (position.getNeighbors().contains(n)) {
             position = n;
             timeRemaining -= distance;
             gui.ifPresent((g) -> g.updateTimeRemaining(timeRemaining));
@@ -338,7 +388,7 @@ public class GameState implements ExplorationState, EscapeState {
         return timeRemaining;
     }
 
-    int getGoldCollected() {
+    /* package */ int getGoldCollected() {
         return goldCollected;
     }
 
@@ -347,29 +397,24 @@ public class GameState implements ExplorationState, EscapeState {
      *
      * @return the player's current score
      */
-    int getScore() {
+    /* package */ int getScore() {
         return (int) (computeBonusFactor() * goldCollected);
     }
 
-    boolean getExploreSucceeded() {
-        return flags[0];
+    /* package */ boolean getExploreSucceeded() {
+        return exploreSucceeded;
     }
 
-    boolean getEscapeSucceeded() {
-        return flags[1];
+    /* package */ boolean getEscapeSucceeded() {
+        return escapeSucceeded;
     }
 
-    boolean getExploreErrored() {
-        return flags[2];
+    /* package */ boolean getExploreErrored() {
+        return exploreErrored;
     }
 
-    boolean getEscapeErrored() {
-        return flags[3];
-    }
-
-    private void output(Optional<GUI> gui, String s) {
-        System.err.println(s);
-        gui.ifPresent((g) -> g.displayError(s));
+    /* package */ boolean getEscapeErrored() {
+        return escapeErrored;
     }
 
     private enum Stage {

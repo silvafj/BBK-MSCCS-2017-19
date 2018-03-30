@@ -1,9 +1,10 @@
 package gui;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Maintains\ information about a sprite for the GUI. A sprite is defined by a spritesheet,

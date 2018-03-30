@@ -14,18 +14,18 @@ public class Edge {
     /**
      * The Node this edge is coming from
      */
-    private final Node src;
+    private final Node source;
     /**
      * The node this edge is going to
      */
-    private final Node dest;
+    private final Node destination;
 
     /**
-     * Constructor: an edge of length len from src to dest.
+     * Constructor: an edge of length len from source to destination.
      */
-    public Edge(Node src, Node dest, int len) {
-        this.src = src;
-        this.dest = dest;
+    public Edge(Node source, Node destination, int len) {
+        this.source = source;
+        this.destination = destination;
         this.length = len;
     }
 
@@ -33,8 +33,8 @@ public class Edge {
      * Constructor: an edge like e ...
      */
     public Edge(Edge e, Map<Node, Node> isomorphism) {
-        src = isomorphism.get(e.src);
-        dest = isomorphism.get(e.dest);
+        source = isomorphism.get(e.source);
+        destination = isomorphism.get(e.destination);
         length = e.length;
     }
 
@@ -43,11 +43,11 @@ public class Edge {
      * Throw an <tt>IllegalArgumentException</tt> if <tt>n</tt> is not in this <tt>Edge</tt>.
      */
     public Node getOther(Node n) {
-        if (src == n) {
-            return dest;
+        if (source == n) {
+            return destination;
         }
-        if (dest == n) {
-            return src;
+        if (destination == n) {
+            return source;
         }
         throw new IllegalArgumentException("getOther: Edge must contain provided node");
     }
@@ -63,13 +63,13 @@ public class Edge {
      * Return the source of this edge.
      */
     public Node getSource() {
-        return src;
+        return source;
     }
 
     /**
      * Return the destination of this edge.
      */
-    public Node getDest() {
-        return dest;
+    public Node getDestination() {
+        return destination;
     }
 }

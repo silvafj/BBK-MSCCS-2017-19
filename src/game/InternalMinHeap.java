@@ -1,11 +1,16 @@
 package game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
- * An instance is a priority queue of elements of type E implemented as a min-heap.
+ * An instance is a priority queue of elements of type E
+ * implemented as a min-heap.
  */
-class InternalMinHeap<E> {
+/* package */ class InternalMinHeap<E> {
 
     private int size; // number of elements in the priority queue (and heap)
 
@@ -23,8 +28,8 @@ class InternalMinHeap<E> {
      * For each element e in the heap, the map entry contains in the
      * Info object the priority of e and its index in b.
      */
-    private List<E> b = new ArrayList<>();
-    private Map<E, Info> map = new HashMap<>();
+    private List<E> b = new ArrayList<E>();
+    private Map<E, Info> map = new HashMap<E, Info>();
 
     /**
      * Constructor: an empty heap.

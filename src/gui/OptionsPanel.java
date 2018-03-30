@@ -1,8 +1,9 @@
 package gui;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import game.GameState;
+
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -10,8 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import static game.Constants.MAX_BONUS;
-import static gui.Constants.ROOT;
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JSlider;
 
 public class OptionsPanel extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -28,7 +33,7 @@ public class OptionsPanel extends JPanel implements ActionListener {
     private JLabel timeRemainingLabel;        //Shows the amount of time we have left
     private JLabel scoreLabel;                //Shows coins multiplied by bonus factor
     private BufferedImage background;        //Background for options pane
-    private String BACKGROUND_PATH = ROOT + "info_texture.png";            //Location of background image
+    private String BACKGROUND_PATH = "res/info_texture.png";            //Location of background image
 
     /**
      * Constructor: an instance
@@ -41,16 +46,16 @@ public class OptionsPanel extends JPanel implements ActionListener {
          */
         int lowVal = (int) (Math.log10(MAX_SPEED) * -1000);
         int highVal = (int) (Math.log10(MIN_SPEED) * -1000);
-        int startVal = (int) (-1000 * Math.log10((double) GUI.getFramesPerMove() / GUI.getFramesPerSecond()));
+        int startVal = (int) (-1000 * Math.log10((double) GUI.FRAMES_PER_MOVE / GUI.FRAMES_PER_SECOND));
         speedSelect = new JSlider(JSlider.HORIZONTAL, lowVal, highVal, startVal);
-        speedSelect.addChangeListener((e) -> GUI.setFramesPerMove((int) (GUI.getFramesPerSecond() * Math.pow(10, -(double) speedSelect.getValue() / 1000.0))));
-        ;
+        speedSelect.addChangeListener((e) -> GUI.FRAMES_PER_MOVE =
+                (int) (GUI.FRAMES_PER_SECOND * Math.pow(10, -(double) speedSelect.getValue() / 1000.0)));
 
         timeRemaining = new JProgressBar(0, 100);
         this.seed = seed;
 
         speedLabel = new JLabel("Speed:");
-        bonusLabel = new JLabel("Bonus: " + MAX_BONUS);
+        bonusLabel = new JLabel("Bonus: " + GameState.MAX_BONUS);
         coinsLabel = new JLabel("Coins: 0");
         scoreLabel = new JLabel("Score: 0");
         timeRemainingLabel = new JLabel("Time Remaining: 0");
@@ -131,13 +136,11 @@ public class OptionsPanel extends JPanel implements ActionListener {
     /**
      * Paint the commponent
      */
-    @Override
     public void paintComponent(Graphics page) {
         super.paintComponent(page);
         page.drawImage(background, 0, 0, getWidth(), getHeight(), null);
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == showSeed) {
             System.out.println("Seed : " + seed);
