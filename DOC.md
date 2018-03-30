@@ -32,7 +32,7 @@ to take. This was the basis for the first prototype, where it was observed a hug
 The following prototype was built based on a depth-first search:
 * The direction to take considers the distance to the Orb;
 * When a dead end is reached, it will back track to the previous intersection;
-* Avoids repeating previous routes by memorizing visited tiles.
+* Avoids repeating previous paths by memorizing visited tiles.
 
 #### Limitations
 
@@ -44,7 +44,7 @@ luck and the device might choose a worse direction.
 ![Collecting gold during the escape phase](escape.png)
 
 After picking up the Orb:
-* The walls of the cavern shift and a new layout is generated, stopping the device from using the previous known path;
+* The walls of the cavern shift and a new layout is generated, stopping the device from using the previous known route;
 * The stress of the moving walls has compromised the integrity of the cavern, beginning a time limit after which the
 ceiling will collapse; 
 * Activated the traps and puzzles of the cavern, causing different edges of the graph to have different weights; 
@@ -55,21 +55,22 @@ Luckily, underneath the Orb is a map, revealing the full cavern.
 The first device prototype used the same algorithm from the exploration phase and it was a complete disaster, where
 dozens of dummies were crushed during testing.
 
-After further research, I came across Dijkstra's algorithm that returns the shortest path between two nodes and
+After further research, I came across Dijkstra's algorithm that returns the shortest route between two nodes and
 guaranties that *Philip Hammond* can escape the cavern.
 
 Thus, the current device has the following functionality:
-* Uses the map of the cavern the to decide the shortest path to the exit;
-* Along the path to the exit will pick up gold from the floor;
-* Calculates if there is enough time to pick up gold from closer locations;
+* Identifies all the map locations having gold;
+* Calculates the route with most gold and within the time window to escape;
+* Picks up gold while escaping.
 
 #### Limitations
 
-On big maps where we might be closer to the exit, the algorithm does not take advantage of the time to choose a longer
-route and pick more gold. To maximize the gold collection, an option will be to evaluate all the tiles in the map and
-generate more routes, sorted by total gold and excluding the ones that we can't escape.
+It might be possible to optimise the route selection to pick up more gold.
 
 ## Code
 
-Exploration and escaping logic was implemented in a single file, <code>src/student/Explorer.java</code>, with focus on
-keeping it short and efficient.
+* <code>src/student/EscapeFinder.java</code> contains the algorithm to
+  * find the shortest route from any given node to another node
+  * find the route between Philip's location and the exit having most gold that can be collect within the time remaining 
+* <code>src/student/Explorer.java</code> provides the class used by the device to execute the exploration and escape
+* <code>src/student/OrbFinder.java</code> contains the DFS algorithm to find the route to the Orb

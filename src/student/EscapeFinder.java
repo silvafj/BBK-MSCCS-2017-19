@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 
 /**
- * Escape the cavern based on Dijkstra's algorithm.
+ * Escape the cavern, based on Dijkstra's algorithm, calculating the route having most gold.
  *
  * @author Fernando Silva
  */
@@ -16,7 +16,7 @@ public class EscapeFinder {
     final private EscapeState state;
 
     /**
-     * Route calculated during initialization.
+     * Route calculated in the constructor.
      */
     final private List<Node> route;
 
@@ -29,7 +29,7 @@ public class EscapeFinder {
         this.state = state;
 
         // The following was a test using the code provided in coursework-temple/src/searchexample/Paths.java
-        // resulting in the same shortest path as my getShortestRoute()
+        // resulting in the same shortest route as my getShortestRoute()
         // route = dijkstra(state.getCurrentNode(), state.getExit());
 
         // route = getShortestRoute(state.getCurrentNode(), state.getExit());
@@ -37,18 +37,18 @@ public class EscapeFinder {
     }
 
     /**
-     * Calculates the shortest path between start and end nodes.
+     * Calculates the shortest route between start and end nodes.
      * <p>
      * This code is based on Cavern.minPathLengthToTarget() which is used to calculate the time limit for the escape
      * stage of the game.
      *
-     * @param start initial node in the path.
-     * @param end   final node in the path.
-     * @return list of nodes with the shortest path between start and end
+     * @param start initial node in the route.
+     * @param end final node in the route.
+     * @return list of nodes with the shortest route between start and end
      */
     private List<Node> getShortestRoute(Node start, Node end) {
-        Map<Node, NodeAndWeightTuple> pathWeights = new HashMap<>();
-        pathWeights.put(start, new NodeAndWeightTuple(null, 0));
+        Map<Node, NodeAndWeightTuple> routeWeights = new HashMap<>();
+        routeWeights.put(start, new NodeAndWeightTuple(null, 0));
 
         PriorityQueue<NodeAndWeightTuple> frontier = new PriorityQueue<>(1, Comparator.comparingInt(n -> n.weight));
         frontier.add(new NodeAndWeightTuple(start, 0));
@@ -59,19 +59,19 @@ public class EscapeFinder {
                 break;
             }
 
-            int nWeight = pathWeights.get(node).weight;
+            int nWeight = routeWeights.get(node).weight;
 
             for (Edge edge : node.getExits()) {
                 Node edgeNode = edge.getOther(node);
-                NodeAndWeightTuple existingTuple = pathWeights.get(edgeNode);
+                NodeAndWeightTuple existingTuple = routeWeights.get(edgeNode);
 
                 int weightThroughN = nWeight + edge.length();
 
                 if (existingTuple == null) {
-                    pathWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
+                    routeWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
                     frontier.add(new NodeAndWeightTuple(edgeNode, weightThroughN));
                 } else if (weightThroughN < existingTuple.weight) {
-                    pathWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
+                    routeWeights.put(edgeNode, new NodeAndWeightTuple(node, weightThroughN));
 
                     // Change the weight of an existent node, by removing it first
                     for (NodeAndWeightTuple nodeAndWeight : frontier) {
@@ -86,23 +86,23 @@ public class EscapeFinder {
         }
 
 
-        ArrayList<Node> path = new ArrayList<>();
+        ArrayList<Node> route = new ArrayList<>();
         Node node = end;
         while (node != null) {
-            path.add(node);
-            node = pathWeights.get(node).node;
+            route.add(node);
+            node = routeWeights.get(node).node;
         }
-        Collections.reverse(path);
+        Collections.reverse(route);
 
-        return path;
+        return route;
     }
 
     /**
-     * Calculates the path having most gold between start and end nodes.
+     * Calculates the route having most gold between start and end nodes.
      *
-     * @param start initial node in the path.
-     * @param end   final node in the path.
-     * @return list of nodes with the path having most gold between start and end
+     * @param start initial node in the route.
+     * @param end   final node in the route.
+     * @return list of nodes with the route having most gold between start and end
      */
     private List<Node> getMaxGoldRoute(Node start, Node end) {
         // Initialize the discovery of the route with most gold
@@ -132,7 +132,17 @@ public class EscapeFinder {
             Optional<Node> closestGoldNode = state.getVertices().stream()
                     .filter(node -> node.getTile().getGold() > 0)
                     .filter(node -> !visited.contains(node))
-                    .sorted((o1, o2) -> timeToTraverse(cachedRoutes.get(o1)) - timeToTraverse(cachedRoutes.get(o2)))
+                    .sorted(new Comparator<>() {
+                        @Override
+                        public int compare(Node o1, Node o2) {
+                            int time = timeToTraverse(cachedRoutes.get(o1)) - timeToTraverse(cachedRoutes.get(o2));
+                            if (time != 0) {
+                                return time;
+                            }
+
+                            return o1.getTile().getGold() - o2.getTile().getGold();
+                        }
+                    })
                     .findFirst();
 
             // No more nodes with gold
