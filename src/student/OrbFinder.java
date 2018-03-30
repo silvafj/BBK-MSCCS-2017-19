@@ -69,19 +69,12 @@ public class OrbFinder {
         return state.getDistanceToTarget() == 0;
     }
 
-    /**
-     * Instructs the finder to move to the next location.
-     */
-    private void move() {
-        NodeStatus nextNode = this.getNode();
-        state.moveTo(nextNode.getId());
-        visited.add(nextNode);
-        currentPath.add(nextNode);
-    }
-
     public void find() {
-        while (!this.found()) {
-            this.move();
+        while (!found()) {
+            NodeStatus nextNode = getNode();
+            state.moveTo(nextNode.getId());
+            visited.add(nextNode);
+            currentPath.add(nextNode);
         }
     }
 }

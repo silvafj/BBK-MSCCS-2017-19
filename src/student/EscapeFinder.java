@@ -3,6 +3,7 @@ package student;
 import game.Edge;
 import game.EscapeState;
 import game.Node;
+import game.Tile;
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ public class EscapeFinder {
      */
     EscapeFinder(EscapeState state) {
         this.state = state;
-        route = getShortestRoute(state.getCurrentNode(), state.getExit());
+        this.route = getShortestRoute(state.getCurrentNode(), state.getExit());
     }
 
     /**
@@ -106,26 +107,24 @@ public class EscapeFinder {
      * @return True if the target was reached.
      */
     private boolean found() {
-        return route.empty();
+        return state.getExit().equals(state.getCurrentNode());
     }
 
-    /**
-     * Instructs the finder to move to the next location.
-     */
-    private void move() {
-        Node nextNode = this.getNode();
-        if (!state.getCurrentNode().equals(nextNode)) {
-            state.moveTo(nextNode);
+    private void pickUpGold(Tile tile) {
+        if (tile.getGold() > 0) {
+            state.pickUpGold();
         }
     }
 
     public void find() {
-        while (!this.found()) {
-            if (state.getCurrentNode().getTile().getGold() > 0) {
-                state.pickUpGold();
-            }
+        pickUpGold(state.getCurrentNode().getTile());
+        while (!found()) {
+            pickUpGold(state.getCurrentNode().getTile());
 
-            this.move();
+            Node nextNode = getNode();
+            if (!state.getCurrentNode().equals(nextNode)) {
+                state.moveTo(nextNode);
+            }
         }
     }
 
