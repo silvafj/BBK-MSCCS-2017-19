@@ -131,19 +131,14 @@ public class EscapeFinder {
 
         // When the time limit is reached, stop and escape now
         while (remainingTime > 0) {
-            // Calculates the shortest route from the current node to each node (we need) in the map.
             // This is cached, to reduce the number of repeated calculations in the next blocks of code.
-            final Node currentNodeFinal = currentNode; // lambda requires a variable to be effectively final
-            final Map<Node, List<Node>> cachedRoutes = state.getVertices().stream()
-                    .filter(n -> n.equals(end) || (n.getTile().getGold() >= totalGoldStats.getAverage()))
-                    .collect(Collectors.toUnmodifiableMap(n -> n, n -> getShortestRoute(currentNodeFinal, n)));
+            final Map<Node, List<Node>> cachedRoutes = getGoldRoutes(currentNode, end, totalGoldStats.getAverage());
 
             // Filter out all nodes that have been visited or don't have enough gold
             Optional<Node> closestGoldNode = state.getVertices().stream()
                     .filter(n -> n.getTile().getGold() >= totalGoldStats.getAverage())
                     .filter(n -> !visited.contains(n))
-                    .sorted(Comparator.comparingInt(n -> timeToTraverse(cachedRoutes.get(n))))
-                    .findFirst();
+                    .min(Comparator.comparingInt(n -> timeToTraverse(cachedRoutes.get(n))));
 
             // No more nodes with gold
             if (!closestGoldNode.isPresent()) {
@@ -173,6 +168,20 @@ public class EscapeFinder {
         }
 
         return goldRoute;
+    }
+
+    /**
+     * Calculates the shortest route from the current node to each node (with gold) in the map.
+     *
+     * @param currentNode  the node we are located
+     * @param exitNode     the exit node
+     * @param moreGoldThan the minimum gold we are interested in
+     * @return a map with the routes from the current node to every gold node
+     */
+    private Map<Node, List<Node>> getGoldRoutes(Node currentNode, Node exitNode, double moreGoldThan) {
+        return state.getVertices().stream()
+                .filter(n -> n.equals(exitNode) || (n.getTile().getGold() >= moreGoldThan))
+                .collect(Collectors.toUnmodifiableMap(n -> n, n -> getShortestRoute(currentNode, n)));
     }
 
     /**
