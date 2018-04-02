@@ -1,9 +1,6 @@
 package student;
 
-import game.Edge;
-import game.EscapeState;
-import game.Node;
-import game.Tile;
+import game.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -129,38 +126,41 @@ public class EscapeFinder {
                 .mapToInt(value -> value.getTile().getGold())
                 .summaryStatistics();
 
+        System.out.println("Gold available   : " + totalGoldStats.getSum());
+
         // When the time limit is reached, stop and escape now
         while (remainingTime > 0) {
-            // This is cached, to reduce the number of repeated calculations in the next blocks of code.
-            final Map<Node, List<Node>> cachedRoutes = getGoldRoutes(currentNode, end, totalGoldStats.getAverage());
+            // Calculate the routes for all the nodes with gold that we are interested in reaching
+            final Map<Node, List<Node>> routesToGoldNodes = getGoldRoutes(
+                    currentNode, totalGoldStats.getAverage(), visited);
 
-            // Filter out all nodes that have been visited or don't have enough gold
-            Optional<Node> closestGoldNode = state.getVertices().stream()
-                    .filter(n -> n.getTile().getGold() >= totalGoldStats.getAverage())
-                    .filter(n -> !visited.contains(n))
-                    .min(Comparator.comparingInt(n -> timeToTraverse(cachedRoutes.get(n))));
+            // Get the node (and route) that we are closer too
+            final Optional<Map.Entry<Node, List<Node>>> closestGoldNode = routesToGoldNodes.entrySet().stream()
+                    .min(Comparator.comparingInt(
+                            e -> e.getKey().getTile().getGold() == 5000 // Cavern.TASTY_VALUE
+                                    ? e.getKey().getTile().getGold() * -1
+                                    : timeToTraverse(e.getValue())));
 
             // No more nodes with gold
             if (!closestGoldNode.isPresent()) {
-                goldRoute.addAll(cachedRoutes.get(end));
+                goldRoute.addAll(getShortestRoute(currentNode, end));
                 remainingTime = 0;
             } else {
                 // Find closest node with gold from current position.
-                int bestTimeToNode = timeToTraverse(cachedRoutes.get(closestGoldNode.get()));
+                int bestTimeToNode = timeToTraverse(closestGoldNode.get().getValue());
 
                 // Calculate the total time taking in account the time required to exit
-                List<Node> exitRoute = getShortestRoute(closestGoldNode.get(), end);
+                List<Node> exitRoute = getShortestRoute(closestGoldNode.get().getKey(), end);
                 int totalTime = bestTimeToNode + timeToTraverse(exitRoute);
 
                 // No more time available
                 if (totalTime > remainingTime) {
-                    goldRoute.addAll(cachedRoutes.get(end));
+                    goldRoute.addAll(getShortestRoute(currentNode, end));
                     remainingTime = 0;
                 } else {
-                    currentNode = closestGoldNode.get();
-                    List<Node> routeToNode = cachedRoutes.get(closestGoldNode.get());
-                    goldRoute.addAll(routeToNode);
-                    visited.addAll(routeToNode);
+                    currentNode = closestGoldNode.get().getKey();
+                    goldRoute.addAll(closestGoldNode.get().getValue());
+                    visited.addAll(closestGoldNode.get().getValue());
                     remainingTime -= bestTimeToNode;
                 }
 
@@ -174,13 +174,14 @@ public class EscapeFinder {
      * Calculates the shortest route from the current node to each node (with gold) in the map.
      *
      * @param currentNode  the node we are located
-     * @param exitNode     the exit node
      * @param moreGoldThan the minimum gold we are interested in
+     * @param visited      don't calculate for nodes that have been visited
      * @return a map with the routes from the current node to every gold node
      */
-    private Map<Node, List<Node>> getGoldRoutes(Node currentNode, Node exitNode, double moreGoldThan) {
+    private Map<Node, List<Node>> getGoldRoutes(Node currentNode, double moreGoldThan, Set<Node> visited) {
         return state.getVertices().stream()
-                .filter(n -> n.equals(exitNode) || (n.getTile().getGold() >= moreGoldThan))
+                .filter(n -> !visited.contains(n))
+                .filter(n -> n.getTile().getGold() >= moreGoldThan)
                 .collect(Collectors.toUnmodifiableMap(n -> n, n -> getShortestRoute(currentNode, n)));
     }
 
