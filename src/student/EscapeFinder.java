@@ -34,7 +34,7 @@ public class EscapeFinder {
         // route = dijkstra(state.getCurrentNode(), state.getExit());
 
         // route = getShortestRoute(state.getCurrentNode(), state.getExit());
-        route = getMaxGoldRoute(state.getCurrentNode(), state.getExit());
+        route = getMaximumGoldRoute(state.getCurrentNode(), state.getExit());
     }
 
     /**
@@ -105,7 +105,7 @@ public class EscapeFinder {
      * @param end   final node in the route.
      * @return list of nodes with the route having most gold between start and end
      */
-    private List<Node> getMaxGoldRoute(Node start, Node end) {
+    private List<Node> getMaximumGoldRoute(Node start, Node end) {
         // Initialize the discovery of the route with most gold
         Node currentNode = start;
 
@@ -131,27 +131,26 @@ public class EscapeFinder {
         // When the time limit is reached, stop and escape now
         while (remainingTime > 0) {
             // Calculate the routes for all the nodes with gold that we are interested in reaching
-            final Map<Node, List<Node>> routesToGoldNodes = getGoldRoutes(
+            final Map<Node, List<Node>> routesToGoldNodes = getInterestingGoldRoutes(
                     currentNode, totalGoldStats.getAverage(), visited);
 
-            // Get the node (and route) that we are closer too
+            // Get the node (and route) that we are closer too (exceptionally give priority to reach the bonus)
             final Optional<Map.Entry<Node, List<Node>>> closestGoldNode = routesToGoldNodes.entrySet().stream()
                     .min(Comparator.comparingInt(
-                            e -> e.getKey().getTile().getGold() == 5000 // Cavern.TASTY_VALUE
-                                    ? e.getKey().getTile().getGold() * -1
-                                    : timeToTraverse(e.getValue())));
+                            // Cavern.TASTY_VALUE == 5000 (no idea if I'm allowed to use the constant)
+                            e -> e.getKey().getTile().getGold() == 5000 ? -1 : routeTraverseTime(e.getValue())));
 
             // No more nodes with gold
             if (!closestGoldNode.isPresent()) {
                 goldRoute.addAll(getShortestRoute(currentNode, end));
                 remainingTime = 0;
             } else {
-                // Find closest node with gold from current position.
-                int bestTimeToNode = timeToTraverse(closestGoldNode.get().getValue());
+                // Calculate the time required to traverse the selected route
+                int timeToNode = routeTraverseTime(closestGoldNode.get().getValue());
 
-                // Calculate the total time taking in account the time required to exit
+                // Calculate the time taking in account the time required to exit
                 List<Node> exitRoute = getShortestRoute(closestGoldNode.get().getKey(), end);
-                int totalTime = bestTimeToNode + timeToTraverse(exitRoute);
+                int totalTime = timeToNode + routeTraverseTime(exitRoute);
 
                 // No more time available
                 if (totalTime > remainingTime) {
@@ -161,7 +160,7 @@ public class EscapeFinder {
                     currentNode = closestGoldNode.get().getKey();
                     goldRoute.addAll(closestGoldNode.get().getValue());
                     visited.addAll(closestGoldNode.get().getValue());
-                    remainingTime -= bestTimeToNode;
+                    remainingTime -= timeToNode;
                 }
 
             }
@@ -171,14 +170,14 @@ public class EscapeFinder {
     }
 
     /**
-     * Calculates the shortest route from the current node to each node (with gold) in the map.
+     * Calculates the shortest route from the current node to each node (with enough gold to be interesting) in the map.
      *
      * @param currentNode  the node we are located
      * @param moreGoldThan the minimum gold we are interested in
      * @param visited      don't calculate for nodes that have been visited
      * @return a map with the routes from the current node to every gold node
      */
-    private Map<Node, List<Node>> getGoldRoutes(Node currentNode, double moreGoldThan, Set<Node> visited) {
+    private Map<Node, List<Node>> getInterestingGoldRoutes(Node currentNode, double moreGoldThan, Set<Node> visited) {
         return state.getVertices().stream()
                 .filter(n -> !visited.contains(n))
                 .filter(n -> n.getTile().getGold() >= moreGoldThan)
@@ -191,7 +190,7 @@ public class EscapeFinder {
      * @param route to traverse.
      * @return time required.
      */
-    private int timeToTraverse(List<Node> route) {
+    private int routeTraverseTime(List<Node> route) {
         return IntStream.range(0, route.size() - 1)
                 .map(i -> route.get(i).getEdge(route.get(i + 1)).length())
                 .sum();

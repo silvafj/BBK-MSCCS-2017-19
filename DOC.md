@@ -65,7 +65,7 @@ Thus, the current device has the following functionality:
 
 #### Limitations
 
-It might be possible to optimise the route selection to pick up more gold.
+A better algorithm could take in account the proximity of gold clusters instead of evaluating just single nodes.
 
 ## Code
 
