@@ -74,3 +74,14 @@ A better algorithm could take in account the proximity of gold clusters instead 
   * find the route between Philip's location and the exit having most gold that can be collect within the time remaining 
 * <code>src/student/Explorer.java</code> provides the class used by the device to execute the exploration and escape
 * <code>src/student/OrbFinder.java</code> contains the DFS algorithm to find the route to the Orb
+
+## Testing
+
+Because the game is based on the generation of random mazes that produce different results, the approach taken for
+testing was by completing 10.000 runs every time I considered that I had a significant improvement in my algorithm.
+
+This allowed me to optimise both the exploration and escape stages, based on the average instead of focusing on specific
+mazes.
+
+Analysing the results of these runs, I could conclude that: smaller maps have a significant negative impact on the
+average score.
