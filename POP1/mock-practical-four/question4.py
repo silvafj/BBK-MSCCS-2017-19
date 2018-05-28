@@ -5,6 +5,14 @@ def spoken_by_all(languages):
 
     return common
 
+def most_spoken_by_student(languages):
+    maximum, index = 0, -1
+    for i, row in enumerate(languages):
+        if (len(row) > maximum):
+            maximum = len(row)
+            index = i
+    return languages[index]
+
 def distinct_languages(languages):
     distinct = set()
     for row in languages:
@@ -24,8 +32,8 @@ def main():
         common = spoken_by_all(languages)
         print("{} languages spoken by all: {}".format(len(common), " ".join(common)))
 
-        # distinct = spoken_by_at_least_one(languages)
-        # print("{} languages spoken by all: {}".format(len(common), " ".join(common)))
+        most_spoken = most_spoken_by_student(languages)
+        print("One student speaks {} languages: {}".format(len(most_spoken), " ".join(most_spoken)))
 
         for language in sorted(distinct_languages(languages)):
             print(language)
