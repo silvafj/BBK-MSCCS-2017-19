@@ -1,0 +1,5 @@
+T F T F T F T F T F T F T F T F T F T F T F T F T F T F T F
+100 T F T T F F T F T F T F T F T T T F F F x F T x T F T F x F
+101 T T T T T T T F T F x x x x x x T F T F T F T F T F F F F T
+110 T F T F T F T F T F T F T F T F T F T F T F T F T F T F T F
+999
