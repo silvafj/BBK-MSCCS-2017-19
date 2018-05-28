@@ -5,6 +5,12 @@ def spoken_by_all(languages):
 
     return common
 
+def distinct_languages(languages):
+    distinct = set()
+    for row in languages:
+        distinct = distinct.union(set(row))
+    return distinct
+
 
 def main():
     with open("question4-data.txt") as data:
@@ -18,6 +24,13 @@ def main():
         common = spoken_by_all(languages)
         print("{} languages spoken by all: {}".format(len(common), " ".join(common)))
 
+        # distinct = spoken_by_at_least_one(languages)
+        # print("{} languages spoken by all: {}".format(len(common), " ".join(common)))
+
+        for language in sorted(distinct_languages(languages)):
+            print(language)
+
+
 if __name__ == "__main__":
     main()
 
@@ -25,8 +38,6 @@ if __name__ == "__main__":
 
 
 """
-(a) find and print the number of languages spoken by all the students, followed
-by a list the languages by name, then
 (b) print the number of languages spoken by at least one student, followed by
 the list of the languages by name.
 Print the languages in alphabetical order.
