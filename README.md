@@ -3,11 +3,11 @@
 In these exercises we will be examining the following design patterns:
 
 1. Strategy,
-+ Abstract Factory, 
-+ Builder,
-+ Facade,
-+ Bridge, and
-+ Composite.
+2. Abstract Factory, 
+3. Builder,
+4. Facade,
+5. Bridge, and
+6. Composite.
 
 ## Short form questions
 
