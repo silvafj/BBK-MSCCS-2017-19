@@ -2,7 +2,7 @@
 
 In these exercises we will be examining the following design patterns (amongst others):
 
-+ Adapter,
+1. Adapter,
 + Decorator,
 + Factory Method,
 + Observer, and
