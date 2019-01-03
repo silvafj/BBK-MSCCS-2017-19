@@ -1,4 +1,4 @@
-# Worksheet on Creational Design Patterns
+# Worksheet on Design Patterns - Part I
 
 In these exercises we will be examining the following design patterns (amongst others):
 
