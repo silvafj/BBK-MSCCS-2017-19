@@ -67,8 +67,8 @@ the editor will able to format the text as required.
 	```
 	The above code should result to the following output:
 	```
-	[CapTextFormatter]: TESTING TEXT IN CAPS FORMATTER
-	[LowerTextFormatter]: testing text in lower formatter
+	CapTextFormatter: TESTING TEXT IN CAPS FORMATTER
+	LowerTextFormatter: testing text in lower formatter
 	```
 2. A product company, *Bigfish*, has changed the way they take orders from their clients. 
 The company uses an application to take orders from them. 
