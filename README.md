@@ -411,9 +411,9 @@ They receive a vehicle, produce the system for it, and then assemble it and inst
 	+ `BigWheelGearLocking`.
 	
 	The class diagram is as follows:
-	```
+	
 	![Design](images/design.png)
-	```
+	
 	After a while, another car company "Motoren" asked them to produce a new system of central locking and 
 	gear lock for their new model. 
 	Since, the same security system cannot be used in both models of different cars, 
@@ -423,9 +423,11 @@ They receive a vehicle, produce the system for it, and then assemble it and inst
 	
 	which also extend the `CarProductSecurity` class. 
 	Now the new class diagram looks like this:
-	```
+
+
 	![NewDesign](images/newdesign.png)
-	```
+
+
 	what happens if another car company demands another new system for central locking and gear lock? 
 	One would need to create another two new classes for it. 
 	This design will create one class per system, or worse, if a reverse parking system is produced for 
