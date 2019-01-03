@@ -53,9 +53,8 @@ the editor will able to format the text as required.
 	Some sample test code might look like:
 	```java
 	public class TestStrategyPattern {
-
 		public static void main(String[] args) {
-			TextFormatter formatter = new CapTextFormatter();
+		    TextFormatter formatter = new CapTextFormatter();
 			TextEditor editor = new TextEditor(formatter);
 			editor.publishText("Testing text in caps formatter");
 		
