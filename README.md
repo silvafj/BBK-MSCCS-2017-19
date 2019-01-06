@@ -2,37 +2,11 @@
 
 In these exercises we will be examining the following design patterns (amongst others):
 
-1. Adapter,
-+ Decorator,
 + Factory Method,
++ Singleton, 
++ Adapter,
 + Observer, and
-+ Singleton.
-
-## Short form questions
-
-1. Write down three differences between abstract classes and interfaces in Java.
-
-2. Which of the following statements are true?
-	+ Every interface must have at least one method.
-	+ An interface can declare instance fields that an implementing class must also declare.
-	+ Although you can't instantiate an interface, an interface definition can declare constructor 
-	methods that require an implementing class to provide constructors with given signatures.
-	
-3. Give an example of an interface with methods that do not imply responsibility on the part of 
-   the implementing class to take action on behalf of the caller or to return a value.
-   
-4. What is the purpose of a stub class like `WindowAdapter`, composed of methods that do nothing? 
-
-5. How can you prevent other developers from constructing new instances of your class? 
-   Provide appropriate examples to illustrate your answer.
-   
-6. Name two commonly used Java methods that return a new object.
-
-7. What are the indications that a *Factory Method* is at work?
-
-8. Consult the source code for `Object.clone()` and write down what this method does.
-
-## Long form questions
++ Decorator,
 
 1. The *Factory Method* pattern gives us a way to encapsulate the instantiations of 
 concrete types; it encapsulates the functionality required to select and instantiate 
