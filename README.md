@@ -583,17 +583,7 @@ In these exercises we will be examining the following design patterns:
 	The simple `Shape` class has an `id` and `name` as its attributes.
 	```java
 	public class ShapeStorage {
-		private Shape []shapes = new Shape[5];
-		private int index;
-	
-		public void addShape(String name){
-			int i = index++;
-			shapes[i] = new Shape(i,name);
-		}
-	
-		public Shape[] getShapes(){
-			return shapes;
-		}
+		// TODO
 	}
 	```
 	The above class is used to store the `Shape` objects. 
@@ -916,5 +906,7 @@ In these exercises we will be examining the following design patterns:
 	and should result in the following output:
 	```
 	Setting up for COTTON program	Button pressed.	Valve is opened...	Filling water...	Valve is closed...	Heater is on...	Temperature reached 40 C	Temperature is set to 40	Heater is off...	Start motor...	Rotating drum at 700 rpm.	Adding detergent	Setting Soil Removal to low	Adding softener
-	Setting up for DENIM program	Button pressed.	Valve is opened...	Filling water...	Valve is closed...	Heater is on...	Temperature reached 30 C	Temperature is set to 30	Heater is off...	Start motor...	Rotating drum at 1400 rpm.	Adding detergent	Setting Soil Removal to medium	No softener is required	
+
+	**********************************************************
+		Setting up for DENIM program	Button pressed.	Valve is opened...	Filling water...	Valve is closed...	Heater is on...	Temperature reached 30 C	Temperature is set to 30	Heater is off...	Start motor...	Rotating drum at 1400 rpm.	Adding detergent	Setting Soil Removal to medium	No softener is required	
 	```
