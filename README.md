@@ -2,38 +2,12 @@
 
 In these exercises we will be examining the following design patterns:
 
-1. Strategy,
-2. Abstract Factory, 
-3. Builder,
-4. Facade,
-5. Bridge, and
-6. Composite.
-
-## Short form questions
-
-1. 
-	+ Briefly describe the *Strategy* design pattern?
-	+ When is it appropriate to use the *Strategy* design pattern?
-
-2. When is it appropriate to use the *Abstract Factory* design pattern?
-
-3. > "In general, the details of object construction, such as instantiating and initialising the components 
-   > that comprise the object, are kept within the object, often as part of its constructor.”
-
-	Comment on this statement with reference to modularity and construction bloat.
-	
-4. 
-	+ What is the *Facade* design pattern?
-	+ When, and why, would you use the *Facade* design pattern?
-	
-5. When should one make use of the *Bridge* design pattern?
-
-6. 
-	+ What is the *Composite* design pattern?
-	+ Under what conditions would you use a *Composite* design pattern?
-	+ What are the four participants of the *Composite* design pattern?
-	
-## Long form questions
++ Strategy,
++ Abstract Factory, 
++ Builder,
++ Facade,
++ Bridge, and
++ Composite.
 
 1. Create a text formatter for a text editor. A text editor can have different text formatters to 
 format text. We can create different text formatters and then pass the required one to the text editor, so that 
@@ -294,10 +268,10 @@ The graphical tool uses these specifications to display the car.
 	```
 	
 4. "BetterBisc" is product based company and it has launched a product in the market, named "Schedule Server".
-It is a kind of server in itself, and it is used to manage jobs. 
-The jobs could be any kind of jobs like sending a list of emails, SMS, 
-reading or writing files from a destination, or just simply transferring files from 
-a source to the destination.
+	It is a kind of server in itself, and it is used to manage jobs. 
+	The jobs could be any kind of jobs like sending a list of emails, SMS, 
+	reading or writing files from a destination, or just simply transferring files from a source to the 
+	destination.
 
 	The product is used by the developers to manage such types of job and enables them to concentrate on their 
 	business goals. 
