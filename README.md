@@ -16,6 +16,20 @@ The aim of this assignment is to give you practice with
 
 amongst other skills.
 
+## Details
+
+**Name**: Your name should appear here
+
+**Your userid**: e.g., myname01
+
+### Comments to grader
+
+Anything you want the grader to know; otherwise just remove this section.
+
+### Feedback to student
+
+Will appear here.
+
 ## The problem
 
 You will write an interpreter for a simple machine language — **SML**. 
@@ -125,7 +139,7 @@ for the use of a label that doesn’t exist, and for a register number not in th
 
 Finally, study the `main` method.
 
-## Class Instruction and it subclasses
+## The `Instruction` class and its subclasses
 
 All the programming that you do has to do with `Instruction` class and it's subclasses. 
 The specification of the class `Instruction` has been given to you — open the file
@@ -175,6 +189,11 @@ Therefore, these properties are maintained in the base class of all instructions
 	where you deem appropriate. (You are allowed to use other design patterns if you consider them necessary.)
 	
 8. All of these parts of the coursework should be fully tested.
+
+## Submission
+
+As part of your portfolio your repository will be *cloned* at the appropriate due date and time.
+
 
 
 
