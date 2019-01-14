@@ -1,8 +1,9 @@
 # Worksheet on Java Reflection and Java Generics
 
 This worksheet consists of two sections; one on Java Reflection and the other, a refresher on Java Generics.
-You should commit your changes regularly. Remember that you do not need to keep separate versions of the code
-as your commits with deal with that situation.
+You should commit your changes regularly. 
+Where the questions make incremental changes to the code you do not need to keep separate versions of 
+your code, as your commits will deal with that situation.
 
 ## Java Reflection
 
