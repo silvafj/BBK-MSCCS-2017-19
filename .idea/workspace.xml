@@ -17,11 +17,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/reflection/Introspection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+            <state relative-caret-position="150">
+              <caret line="10" column="72" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
               <folding>
                 <element signature="e#546#547#0" expanded="true" />
                 <element signature="e#598#599#0" expanded="true" />
+                <element signature="e#1003#1004#0" expanded="true" />
+                <element signature="e#1051#1052#0" expanded="true" />
+                <element signature="e#1007#1008#0" expanded="true" />
+                <element signature="e#1042#1043#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -30,8 +34,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/reflection/IntrospectionTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="60">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../repo/java/test/junit/MyClassTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" lean-forward="true" selection-start-line="2" selection-end-line="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,7 +161,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548104369800" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548105183838" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -173,7 +189,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Introspection">
+  <component name="RunManager" selected="JUnit.IntrospectionTest.classNotFoundException">
     <configuration name="Introspection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="reflection.Introspection" />
       <module name="worksheet-on-java-reflection-and-generics" />
@@ -184,6 +200,38 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IntrospectionTest.classNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="worksheet-on-java-reflection-and-generics" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="reflection.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="reflection" />
+      <option name="MAIN_CLASS_NAME" value="reflection.IntrospectionTest" />
+      <option name="METHOD_NAME" value="classNotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IntrospectionTest.classNotFoundException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="worksheet-on-java-reflection-and-generics" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="reflection.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="reflection" />
+      <option name="MAIN_CLASS_NAME" value="reflection.IntrospectionTest" />
+      <option name="METHOD_NAME" value="classNotFoundException" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -207,9 +255,13 @@
     <list>
       <item itemvalue="Application.Introspection" />
       <item itemvalue="JUnit.IntrospectionTest.inspect" />
+      <item itemvalue="JUnit.IntrospectionTest.classNotFound" />
+      <item itemvalue="JUnit.IntrospectionTest.classNotFoundException" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.IntrospectionTest.classNotFoundException" />
+        <item itemvalue="JUnit.IntrospectionTest.classNotFound" />
         <item itemvalue="Application.Introspection" />
         <item itemvalue="JUnit.IntrospectionTest.inspect" />
       </list>
@@ -226,7 +278,7 @@
       <option name="presentableId" value="Default" />
       <updated>1548101298255</updated>
       <workItem from="1548101299616" duration="165000" />
-      <workItem from="1548101476849" duration="2812000" />
+      <workItem from="1548101476849" duration="3643000" />
     </task>
     <task id="LOCAL-00001" summary="Initial skeleton to handle command line arguments">
       <created>1548103632887</created>
@@ -235,22 +287,38 @@
       <option name="project" value="LOCAL" />
       <updated>1548103632887</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Refactor code to use instances instead of static methods">
+      <created>1548104377988</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1548104377988</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
     <history-entry file="IntrospectionTest_inspect - 2019.01.21 at 20h 48m 33s.xml">
       <configuration name="IntrospectionTest.inspect" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="IntrospectionTest_classNotFound - 2019.01.21 at 21h 07m 10s.xml">
+      <configuration name="IntrospectionTest.classNotFound" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="IntrospectionTest_classNotFound - 2019.01.21 at 21h 09m 51s.xml">
+      <configuration name="IntrospectionTest.classNotFound" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="IntrospectionTest_classNotFound - 2019.01.21 at 21h 10m 20s.xml">
+      <configuration name="IntrospectionTest.classNotFound" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2977000" />
+    <option name="totallyTimeSpent" value="3808000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="1577" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -260,7 +328,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.32996634" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32996634" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32996634" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -286,7 +354,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial skeleton to handle command line arguments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial skeleton to handle command line arguments" />
+    <MESSAGE value="Refactor code to use instances instead of static methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor code to use instances instead of static methods" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/reflection/IntrospectionTest.java">
@@ -305,19 +374,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/reflection/Introspection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        <state relative-caret-position="150">
+          <caret line="10" column="72" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
           <folding>
             <element signature="e#546#547#0" expanded="true" />
             <element signature="e#598#599#0" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1051#1052#0" expanded="true" />
+            <element signature="e#1007#1008#0" expanded="true" />
+            <element signature="e#1042#1043#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../repo/java/test/junit/MyClassTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" lean-forward="true" selection-start-line="2" selection-end-line="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/reflection/IntrospectionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="60">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

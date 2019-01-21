@@ -8,10 +8,10 @@ import java.util.ArrayList;
 */
 public class Introspection {
 
-    private ArrayList<String> classDetails;
+    private ArrayList<String> classDetails; // TODO: make this immutable
 
     public Introspection(String className) {
-        this.classDetails = introspect(className);
+        introspect(className);
     }
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Introspection {
         }
     }
 
-    public ArrayList<String> introspect(String className) {
+    private void introspect(String className) {
         ArrayList<String> items = new ArrayList<>();
 
         try {
@@ -30,11 +30,19 @@ public class Introspection {
             items.add(e.toString());
         }
 
-        return items;
+        setClassDetails(items);
+    }
+
+    private void setClassDetails(ArrayList<String> classDetails) {
+        this.classDetails = classDetails;
+    }
+
+    public ArrayList<String> getClassDetails() {
+        return this.classDetails;
     }
 
     public void printAsJava() {
-        for (String item : this.classDetails) {
+        for (String item : getClassDetails()) {
             System.out.println(item);
         }
     }
