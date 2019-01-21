@@ -1,6 +1,8 @@
 package reflection;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /*
   Write a Java program that reads the name of a class from the command line and emits the interface of
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 */
 public class Introspection {
 
-    private ArrayList<String> classDetails; // TODO: make this immutable
+    private ArrayList<String> classDetails;
 
     public Introspection(String className) {
         introspect(className);
@@ -16,7 +18,9 @@ public class Introspection {
 
     public static void main(String[] args) {
         for (String className : args) {
-            (new Introspection(className)).printAsJava();
+            for (String item : (new Introspection(className)).getClassDetails()) {
+                System.out.println(item);
+            }
         }
     }
 
@@ -37,14 +41,8 @@ public class Introspection {
         this.classDetails = classDetails;
     }
 
-    public ArrayList<String> getClassDetails() {
-        return this.classDetails;
-    }
-
-    public void printAsJava() {
-        for (String item : getClassDetails()) {
-            System.out.println(item);
-        }
+    public List<String> getClassDetails() {
+        return Collections.unmodifiableList(this.classDetails);
     }
 
 }
