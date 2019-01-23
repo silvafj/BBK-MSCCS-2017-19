@@ -1,8 +1,8 @@
 package reflection;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /*
   Write a Java program that reads the name of a class from the command line and emits the interface of
@@ -10,39 +10,36 @@ import java.util.List;
 */
 public class Introspection {
 
-    private ArrayList<String> classDetails;
-
-    public Introspection(String className) {
-        introspect(className);
-    }
-
     public static void main(String[] args) {
         for (String className : args) {
-            for (String item : (new Introspection(className)).getClassDetails()) {
-                System.out.println(item);
-            }
+            Introspection.printDetails(className);
+            System.out.println();
         }
     }
 
-    private void introspect(String className) {
-        ArrayList<String> items = new ArrayList<>();
-
+    private static void printDetails(String className) {
         try {
             Class type = java.lang.Class.forName(className);
-            items.add(type.getName());
+
+            System.out.println(type.toString() + " {");
+            for (Field field: type.getDeclaredFields()) {
+                System.out.println("    " + field.toString());
+            }
+
+            System.out.println();
+            for (Constructor constructor: type.getDeclaredConstructors()) {
+                System.out.println("    " + constructor.toString());
+            }
+
+            System.out.println();
+            for (Method method: type.getDeclaredMethods()) {
+                System.out.println("    " + method.toString());
+            }
+
+            System.out.println("}");
         } catch (ClassNotFoundException e) {
-            items.add(e.toString());
+            System.out.println(e.toString());
         }
-
-        setClassDetails(items);
-    }
-
-    private void setClassDetails(ArrayList<String> classDetails) {
-        this.classDetails = classDetails;
-    }
-
-    public List<String> getClassDetails() {
-        return Collections.unmodifiableList(this.classDetails);
     }
 
 }
