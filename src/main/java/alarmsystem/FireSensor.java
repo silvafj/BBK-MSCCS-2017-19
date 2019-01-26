@@ -22,7 +22,7 @@ public class FireSensor implements Sensor {
 
     @Override
     public String getSensorType() {
-        return "Fires sensor";
+        return "Fire";
     }
 
     private void drainBattery() {

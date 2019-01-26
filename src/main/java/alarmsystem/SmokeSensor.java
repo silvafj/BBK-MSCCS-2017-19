@@ -16,12 +16,12 @@ public class SmokeSensor implements Sensor {
 
     @Override
     public String getLocation() {
-        return "In the auditorium";
+        return "Auditorium";
     }
 
     @Override
     public String getSensorType() {
-        return "Smoke sensor";
+        return "Smoke";
     }
 
     private void drainBattery() {

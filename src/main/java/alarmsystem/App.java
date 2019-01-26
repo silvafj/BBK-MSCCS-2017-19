@@ -13,7 +13,10 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         String input = "";
         while (!input.equals(EXIT)) {
-            // TODO
+            if (input.equals(POLL)) {
+                controlUnit.pollSensors();
+            }
+            input = scanner.nextLine();
         }
     }
 }

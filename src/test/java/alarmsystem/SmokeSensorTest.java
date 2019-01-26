@@ -4,14 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class FireSensorsTest {
+class SmokeSensorTest {
+
     @Test
     void getBatteryPercentage() {
-        FireSensor sensor = new FireSensor();
+        SmokeSensor sensor = new SmokeSensor();
         assertEquals(100.0, sensor.getBatteryPercentage());
         sensor.isTriggered();
-        assertEquals(90.0, sensor.getBatteryPercentage());
+        assertEquals(80.0, sensor.getBatteryPercentage());
         sensor.isTriggered();
-        assertEquals(81.0, sensor.getBatteryPercentage());
+        assertEquals(64.0, sensor.getBatteryPercentage());
     }
 }

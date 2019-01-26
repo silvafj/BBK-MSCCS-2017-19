@@ -1,7 +1,5 @@
 package alarmsystem;
 
-import sun.management.Sensor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +7,13 @@ public class ControlUnit {
 
     public void pollSensors() {
         List<Sensor> sensors = new ArrayList<>();
-        // TODO
+        sensors.add(new FireSensor());
+        sensors.add(new SmokeSensor());
 
         for (Sensor sensor : sensors) {
-            // TODO
+            if (sensor.isTriggered()) {
+                System.out.println(sensor.getSensorType() + " sensor located in " + sensor.getLocation() + " has fired!");
+            }
         }
     }
 }
