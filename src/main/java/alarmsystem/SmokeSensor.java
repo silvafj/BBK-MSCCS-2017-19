@@ -2,7 +2,7 @@ package alarmsystem;
 
 import java.util.Random;
 
-public class SmokeSensor implements Sensor {
+public class SmokeSensor implements Sensor, Battery {
 
     private Random random = new Random();
     private double batteryPercentage = 100.0;
