@@ -22,6 +22,21 @@ public class Driver {
         } catch (IllegalAccessException e) {
             // ...
         }
+
+        System.out.println( aStorage.getValue().showBalance() );
+        if( aStorage.getClass() == sStorage.getClass() ) {
+            System.out.println( "EQUAL" );
+        } else {
+            System.out.println( "NOT EQUAL" );
+        }
+
+        // The runtime output is:
+        // 115.0
+        // EQUAL
+
+        // 115.0 is the correct value, because BankAccount initially had 100 balance.
+        // aStorage and sStorage are the same class (same implementation and behaviour)
+        // But when we use a generic class and specify the related type, the class will enforce strong typing for that type
     }
 
 }
