@@ -16,7 +16,7 @@ public class Instantiation {
     }
 
     public Instantiation(String a, String b, String c) {
-        System.out.println("2: " +a + " " + b + " " + c);
+        System.out.println("2: " + a + " " + b + " " + c);
     }
 
     public Instantiation(String a, Integer b, String c) {

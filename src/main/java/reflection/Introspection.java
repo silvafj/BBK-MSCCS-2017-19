@@ -22,17 +22,17 @@ public class Introspection {
             Class type = java.lang.Class.forName(className);
 
             System.out.println(type.toString() + " {");
-            for (Field field: type.getDeclaredFields()) {
+            for (Field field : type.getDeclaredFields()) {
                 System.out.println("    " + field.toString());
             }
 
             System.out.println();
-            for (Constructor constructor: type.getDeclaredConstructors()) {
+            for (Constructor constructor : type.getDeclaredConstructors()) {
                 System.out.println("    " + constructor.toString());
             }
 
             System.out.println();
-            for (Method method: type.getDeclaredMethods()) {
+            for (Method method : type.getDeclaredMethods()) {
                 System.out.println("    " + method.toString());
             }
 
