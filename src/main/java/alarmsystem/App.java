@@ -12,13 +12,15 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         BeanFactory factory = new ClassPathXmlApplicationContext("alarmsystem.xml");
-        ControlUnit controlUnit = factory.getBean(ControlUnit.class);
+        ControlUnit controlUnit = (ControlUnit) factory.getBean("controlUnit");
+        SecurityControlUnit securityControlUnit = (SecurityControlUnit) factory.getBean("securityControlUnit");
 
         Scanner scanner = new Scanner(System.in);
         String input = "";
         while (!input.equals(EXIT)) {
             if (input.equals(POLL)) {
                 controlUnit.pollSensors();
+                securityControlUnit.pollSensors();
             }
             input = scanner.nextLine();
         }

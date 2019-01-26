@@ -10,7 +10,7 @@
 
     <context:annotation-config/>
 
-    <bean class="alarmsystem.ControlUnit">
+    <bean id="controlUnit" class="alarmsystem.ControlUnit">
         <constructor-arg>
             <list>
                 <ref bean="fireSensor"/>
@@ -19,7 +19,16 @@
         </constructor-arg>
     </bean>
 
+    <bean id="securityControlUnit" class="alarmsystem.SecurityControlUnit">
+        <constructor-arg>
+            <list>
+                <ref bean="motionSensor"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
     <bean id="fireSensor" class="alarmsystem.FireSensor"/>
     <bean id="smokeSensor" class="alarmsystem.SmokeSensor"/>
+    <bean id="motionSensor" class="alarmsystem.MotionSensor"/>
 
 </beans>
