@@ -10,16 +10,16 @@
 
     <context:annotation-config/>
 
-    <bean id="ControlUnit" class="alarmsystem.ControlUnit">
+    <bean class="alarmsystem.ControlUnit">
         <constructor-arg>
             <list>
-                <ref bean="FireSensor"/>
-                <ref bean="SmokeSensor"/>
+                <ref bean="fireSensor"/>
+                <ref bean="smokeSensor"/>
             </list>
         </constructor-arg>
     </bean>
 
-    <bean id="FireSensor" class="alarmsystem.FireSensor"/>
-    <bean id="SmokeSensor" class="alarmsystem.SmokeSensor"/>
+    <bean id="fireSensor" class="alarmsystem.FireSensor"/>
+    <bean id="smokeSensor" class="alarmsystem.SmokeSensor"/>
 
 </beans>
