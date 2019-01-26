@@ -7,12 +7,12 @@ import java.util.List;
 
 public class ControlUnit {
 
-  public void pollSensors() {
-    List<Sensor> sensors = new ArrayList<>();
-    // TODO
+    public void pollSensors() {
+        List<Sensor> sensors = new ArrayList<>();
+        // TODO
 
-    for (Sensor sensor : sensors) {
-      // TODO
+        for (Sensor sensor : sensors) {
+            // TODO
+        }
     }
-  }
 }

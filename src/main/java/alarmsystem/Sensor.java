@@ -1,11 +1,11 @@
 package alarmsystem;
 
 public interface Sensor {
-  boolean isTriggered();
+    boolean isTriggered();
 
-  String getLocation();
+    String getLocation();
 
-  String getSensorType();
+    String getSensorType();
 
-  double getBatteryPercentage();
+    double getBatteryPercentage();
 }
