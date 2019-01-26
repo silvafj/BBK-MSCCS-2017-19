@@ -12,7 +12,7 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         BeanFactory factory = new ClassPathXmlApplicationContext("alarmsystem.xml");
-        ControlUnit controlUnit = factory.getBean (ControlUnit.class);
+        ControlUnit controlUnit = factory.getBean(ControlUnit.class);
 
         Scanner scanner = new Scanner(System.in);
         String input = "";

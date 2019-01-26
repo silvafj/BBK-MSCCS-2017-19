@@ -25,6 +25,11 @@ public class FireSensor implements Sensor, Battery {
         return "Fire";
     }
 
+    @Override
+    public SensorCategory getSensorCategory() {
+        return SensorCategory.HAZARD;
+    }
+
     private void drainBattery() {
         if (batteryPercentage > 0) {
             batteryPercentage -= (batteryPercentage * 0.1);

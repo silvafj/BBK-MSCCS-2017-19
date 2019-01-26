@@ -25,6 +25,11 @@ public class SmokeSensor implements Sensor, Battery {
         return "Smoke";
     }
 
+    @Override
+    public SensorCategory getSensorCategory() {
+        return SensorCategory.HAZARD;
+    }
+
     private void drainBattery() {
         if (batteryPercentage > 0) {
             batteryPercentage -= (batteryPercentage * 0.2);
