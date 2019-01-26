@@ -7,4 +7,21 @@ public class Driver {
         Storage<BankAccount> aStorage = new Storage<>();
         Storage<String> sStorage = new Storage<>();
     }
+
+    public void depositAmount() {
+        Class baCls = BankAccount.class;
+        try {
+            // This doesn't compile because we are using reflection to create a new instance of BankAccount
+            // but it is recognised only as Object
+            Object myAccount = baCls.newInstance();
+            aStorage.setValue(myAccount);
+            // Deposit
+            myAccount.deposit(15);
+        } catch (InstantiationException e) {
+            // ...
+        } catch (IllegalAccessException e) {
+            // ...
+        }
+    }
+
 }
