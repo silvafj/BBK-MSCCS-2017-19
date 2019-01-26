@@ -7,12 +7,13 @@ public class Driver {
         Storage<BankAccount> aStorage = new Storage<>();
         Storage<String> sStorage = new Storage<>();
 
-        Class baCls = BankAccount.class;
+        Class<BankAccount> baCls = BankAccount.class;
         try {
-            // Dynamic cast is used to enforce that a certain value is from a different type than the original
-            // It will be performed by the JVM (hence the dynamic aspect of it)
-            // This code is not safe and unless properly tested and checked at runtime can cause unattended results
-            BankAccount myAccount = (BankAccount) baCls.newInstance();
+            // The dynamic cast is now redundant
+            // Because when we instantiate a new instance of the class, we are explicit saying that we want an instance
+            // of bankAccount
+            // Generics allows us to enforce strict typing at compiler time, while using a common code implementation
+            BankAccount myAccount = baCls.newInstance();
             aStorage.setValue(myAccount);
             // Deposit
             myAccount.deposit(15);
