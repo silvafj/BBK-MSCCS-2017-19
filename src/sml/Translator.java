@@ -2,6 +2,7 @@ package sml;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -88,41 +89,63 @@ public class Translator {
             return null;
 
         String ins = scan();
-        switch (ins) {
-            case "add":
-                r = scanInt();
-                s1 = scanInt();
-                s2 = scanInt();
-                return new AddInstruction(label, r, s1, s2);
-            case "sub":
-                r = scanInt();
-                s1 = scanInt();
-                s2 = scanInt();
-                return new SubInstruction(label, r, s1, s2);
-            case "mul":
-                r = scanInt();
-                s1 = scanInt();
-                s2 = scanInt();
-                return new MulInstruction(label, r, s1, s2);
-            case "div":
-                r = scanInt();
-                s1 = scanInt();
-                s2 = scanInt();
-                return new DivInstruction(label, r, s1, s2);
-            case "lin":
-                r = scanInt();
-                s1 = scanInt();
-                return new LinInstruction(label, r, s1);
-            case "out":
-                r = scanInt();
-                return new OutInstruction(label, r);
-            case "bnz":
-                r = scanInt();
-                String jumpLabel = scan();
-                return new BnzInstruction(label, r, jumpLabel);
-        }
 
-        // You will have to write code here for the other instructions.
+        try {
+            String instructionClassname = ins.substring(0, 1).toUpperCase() + ins.substring(1) + "Instruction";
+            Class<Instruction> instructionClass = (Class<Instruction>) Class.forName("sml." + instructionClassname).asSubclass(Instruction.class);
+
+            switch (ins) {
+                case "add":
+                    r = scanInt();
+                    s1 = scanInt();
+                    s2 = scanInt();
+                    return instructionClass
+                            .getConstructor(String.class, int.class, int.class, int.class)
+                            .newInstance(label, r, s1, s2);
+                case "sub":
+                    r = scanInt();
+                    s1 = scanInt();
+                    s2 = scanInt();
+                    return instructionClass
+                            .getConstructor(String.class, int.class, int.class, int.class)
+                            .newInstance(label, r, s1, s2);
+                case "mul":
+                    r = scanInt();
+                    s1 = scanInt();
+                    s2 = scanInt();
+                    return instructionClass
+                            .getConstructor(String.class, int.class, int.class, int.class)
+                            .newInstance(label, r, s1, s2);
+                case "div":
+                    r = scanInt();
+                    s1 = scanInt();
+                    s2 = scanInt();
+                    return instructionClass
+                            .getConstructor(String.class, int.class, int.class, int.class)
+                            .newInstance(label, r, s1, s2);
+                case "lin":
+                    r = scanInt();
+                    s1 = scanInt();
+                    return instructionClass
+                            .getConstructor(String.class, int.class, int.class)
+                            .newInstance(label, r, s1);
+                case "out":
+                    r = scanInt();
+                    return instructionClass
+                            .getConstructor(String.class, int.class)
+                            .newInstance(label, r);
+                case "bnz":
+                    r = scanInt();
+                    String jumpLabel = scan();
+                    return instructionClass
+                            .getConstructor(String.class, int.class, String.class)
+                            .newInstance(label, r, jumpLabel);
+            }
+
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+            // TODO: make this better
+            System.out.println(e.toString());
+        }
 
         return null;
     }
