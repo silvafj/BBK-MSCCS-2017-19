@@ -1,7 +1,7 @@
 package sml;
 
 /**
- * The Load Instruction class
+ * This class represents the "lin" instruction from the language.
  *
  * @author Fernando Silva (fdealm02)
  */
@@ -24,9 +24,9 @@ public class LinInstruction extends Instruction {
     }
 
     /**
-     * Execute the instruction in the context of the Machine
+     * Execute the instruction and update the register with the specified value.
      *
-     * @param m the machine
+     * @param m the machine under which the instruction executes
      */
     @Override
     public void execute(Machine m) {

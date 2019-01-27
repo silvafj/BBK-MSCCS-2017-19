@@ -18,9 +18,9 @@ amongst other skills.
 
 ## Details
 
-**Name**: Your name should appear here
+**Name**: Fernando de Almeida da Silva 
 
-**Your userid**: e.g., myname01
+**Your userid**: fdealm02
 
 ### Comments to grader
 

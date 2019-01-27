@@ -24,9 +24,9 @@ public abstract class Instruction {
     // =
 
     /**
-     * the representation "label: opcode" of this Instruction
+     * The representation "label: opcode" of this instruction.
      *
-     * @return "label: opcode" of this Instruction
+     * @return "label: opcode" of this instruction
      */
     @Override
     public String toString() {
