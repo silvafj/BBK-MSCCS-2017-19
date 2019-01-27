@@ -10,14 +10,6 @@ public class LinInstruction extends Instruction {
     private int value;
 
     /**
-     * @param label
-     * @param opcode
-     */
-    public LinInstruction(String label, String opcode) {
-        super(label, opcode);
-    }
-
-    /**
      * Initialise the instruction
      *
      * @param label    of the instruction

@@ -11,21 +11,13 @@ public class AddInstruction extends Instruction {
     private int op2;
 
     /**
-     * @param label of the instruction
-     * @param op    the operands
-     */
-    public AddInstruction(String label, String op) {
-        super(label, op);
-    }
-
-    /**
      * @param label  of the instruction
      * @param result of the computation
      * @param op1    the first operand
      * @param op2    the second operand
      */
     public AddInstruction(String label, int result, int op1, int op2) {
-        this(label, "add");
+        super(label, "add");
         this.result = result;
         this.op1 = op1;
         this.op2 = op2;

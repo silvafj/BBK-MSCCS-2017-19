@@ -16,7 +16,7 @@ public abstract class Instruction {
      * @param l  label
      * @param op operand
      */
-    public Instruction(String l, String op) {
+    protected Instruction(String l, String op) {
         this.label = l;
         this.opcode = op;
     }

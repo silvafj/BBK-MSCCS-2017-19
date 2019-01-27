@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7c598fc-72cd-4688-8372-19dd388f673d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/sml/AddInstructionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/sml/LinInstructionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coursework-small-machine-language.iml" beforeDir="false" afterPath="$PROJECT_DIR$/coursework-small-machine-language.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sml/AddInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/AddInstruction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sml/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/Instruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/Labels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/Labels.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sml/LinInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/LinInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/Machine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/Registers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/Registers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/Translator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/sml/AddInstructionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sml/AddInstructionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/sml/LinInstructionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sml/LinInstructionTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sml/Instruction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-49">
-              <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="21" />
+            <state relative-caret-position="274">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -39,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sml/AddInstruction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-25">
-              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+            <state relative-caret-position="-13">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -48,35 +42,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/sml/AddInstructionTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+            <state relative-caret-position="345">
+              <caret line="23" selection-start-line="12" selection-end-line="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sml/LinInstruction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/sml/LinInstruction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-123">
-              <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/sml/LinInstructionTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sml/Labels.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="70" selection-start-line="70" selection-end-line="70" />
+            <state relative-caret-position="330">
+              <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sml/Machine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-895">
-              <caret line="18" column="68" selection-start-line="18" selection-start-column="68" selection-end-line="18" selection-end-column="68" />
+            <state relative-caret-position="250">
+              <caret line="81" column="20" selection-start-line="81" selection-start-column="11" selection-end-line="81" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+            <state relative-caret-position="750">
+              <caret line="56" column="52" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -129,6 +120,9 @@
       <find>termin</find>
       <find>* @author</find>
       <find>* @author</find>
+      <find>getins</find>
+      <find>getInstruction</find>
+      <find>registers</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -143,12 +137,12 @@
         <option value="$PROJECT_DIR$/src/sml/Machine.java" />
         <option value="$PROJECT_DIR$/src/sml/Registers.java" />
         <option value="$PROJECT_DIR$/src/sml/Translator.java" />
-        <option value="$PROJECT_DIR$/src/sml/AddInstruction.java" />
         <option value="$PROJECT_DIR$/src/sml/Labels.java" />
+        <option value="$PROJECT_DIR$/src/sml/LinInstruction.java" />
         <option value="$PROJECT_DIR$/src/sml/Instruction.java" />
+        <option value="$PROJECT_DIR$/src/sml/AddInstruction.java" />
         <option value="$PROJECT_DIR$/tests/sml/AddInstructionTest.java" />
         <option value="$PROJECT_DIR$/tests/sml/LinInstructionTest.java" />
-        <option value="$PROJECT_DIR$/src/sml/LinInstruction.java" />
       </list>
     </option>
   </component>
@@ -216,7 +210,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548595260898" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548598026631" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -251,7 +245,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.AddInstructionTest.execute">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -274,6 +268,40 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AddInstructionTest.execute" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="coursework-small-machine-language" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sml.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sml" />
+      <option name="MAIN_CLASS_NAME" value="sml.AddInstructionTest" />
+      <option name="METHOD_NAME" value="execute" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LinInstructionTest.execute" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="coursework-small-machine-language" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sml.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sml" />
+      <option name="MAIN_CLASS_NAME" value="sml.LinInstructionTest" />
+      <option name="METHOD_NAME" value="execute" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -304,6 +332,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AddInstructionTest.execute" />
+        <item itemvalue="JUnit.LinInstructionTest.execute" />
         <item itemvalue="Application.Machine" />
       </list>
     </recent_temporary>
@@ -324,18 +354,46 @@
       <workItem from="1547401730229" duration="1596000" />
       <workItem from="1547403336100" duration="26000" />
       <workItem from="1547403396191" duration="1211000" />
-      <workItem from="1548591257171" duration="2443000" />
+      <workItem from="1548591257171" duration="5065000" />
     </task>
+    <task id="LOCAL-00001" summary="Update @author on all classes and reformat whole project">
+      <created>1548595302573</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1548595302573</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="AddInstructionTest_execute - 2019.01.27 at 13h 43m 21s.xml">
+      <configuration name="AddInstructionTest.execute" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AddInstructionTest_execute - 2019.01.27 at 13h 45m 38s.xml">
+      <configuration name="AddInstructionTest.execute" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AddInstructionTest_execute - 2019.01.27 at 13h 48m 00s.xml">
+      <configuration name="AddInstructionTest.execute" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AddInstructionTest_execute - 2019.01.27 at 13h 50m 58s.xml">
+      <configuration name="AddInstructionTest.execute" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AddInstructionTest_execute - 2019.01.27 at 14h 05m 39s.xml">
+      <configuration name="AddInstructionTest.execute" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LinInstructionTest_execute - 2019.01.27 at 14h 06m 28s.xml">
+      <configuration name="LinInstructionTest.execute" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6404000" />
+    <option name="totallyTimeSpent" value="9026000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49909747" visible="true" weight="0.26680973" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49909747" visible="true" weight="0.26680973" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Learn" order="3" weight="0.32960597" />
@@ -345,8 +403,8 @@
       <window_info id="Favorites" order="7" sideWeight="0.50090253" side_tool="true" weight="0.24973376" />
       <window_info id="Image Layers" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32866243" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32866243" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32866243" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32866243" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -361,7 +419,7 @@
       <window_info anchor="bottom" id="Version Control" order="14" />
       <window_info anchor="bottom" id="Flutter Performance" order="15" side_tool="true" weight="0.32942238" />
       <window_info anchor="bottom" id="Tail" order="16" />
-      <window_info anchor="bottom" id="Messages" order="17" weight="0.32942238" />
+      <window_info anchor="bottom" id="Messages" order="17" weight="0.32866243" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -378,6 +436,10 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update @author on all classes and reformat whole project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update @author on all classes and reformat whole project" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
@@ -387,13 +449,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/test1.sml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sml/Registers.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -408,53 +463,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sml/Labels.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
+        <state relative-caret-position="1050">
           <caret line="70" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/sml/AddInstructionTest.java">
+    <entry file="file://$PROJECT_DIR$/src/sml/Instruction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        <state relative-caret-position="274">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/sml/LinInstructionTest.java">
+    <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        <state relative-caret-position="750">
+          <caret line="56" column="52" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sml/AddInstruction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-13">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sml/Machine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-895">
-          <caret line="18" column="68" selection-start-line="18" selection-start-column="68" selection-end-line="18" selection-end-column="68" />
+        <state relative-caret-position="250">
+          <caret line="81" column="20" selection-start-line="81" selection-start-column="11" selection-end-line="81" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sml/Instruction.java">
+    <entry file="file://$PROJECT_DIR$/tests/sml/AddInstructionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-49">
-          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sml/AddInstruction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        <state relative-caret-position="345">
+          <caret line="23" selection-start-line="12" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sml/LinInstruction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-123">
-          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/sml/LinInstructionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
