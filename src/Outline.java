@@ -18,19 +18,21 @@ public class Outline {
         Arrays.sort(strArray, (a, b) -> a.charAt(0) - b.charAt(0));
         System.out.println("Sorted by first character: " + Arrays.asList(strArray));
 
-        Arrays.sort(strArray, (a, b) -> {
-            int i1 = a.indexOf('e');
-            int i2 = b.indexOf('e');
-            if (i1 == -1 && i2 == -1) {
-                return 0;
-            } else if (i1 >= 0 && i2 == -1) {
-                return -1;
-            } else if (i1 == -1 && i2 >= 0) {
-                return 1;
-            } else {
-                return i1 - i2;
-            }
-        });
+        Arrays.sort(strArray, Outline::eChecker);
         System.out.println("Sorted by contain 'e' first: " + Arrays.asList(strArray));
+    }
+
+    private static int eChecker(String s1, String s2) {
+        int i1 = s1.indexOf('e');
+        int i2 = s2.indexOf('e');
+        if (i1 == -1 && i2 == -1) {
+            return 0;
+        } else if (i1 >= 0 && i2 == -1) {
+            return -1;
+        } else if (i1 == -1 && i2 >= 0) {
+            return 1;
+        } else {
+            return i1 - i2;
+        }
     }
 }
