@@ -65,7 +65,7 @@ public class Outline {
         return checker.test(e1, e2) ? e1 : e2;
     }
 
-    private static List<String> allMatches(List<String> words, Predicate<String> tester) {
+    private static <T> List<T> allMatches(List<T> words, Predicate<T> tester) {
         return words.stream().filter(tester).collect(Collectors.toList());
     }
 }

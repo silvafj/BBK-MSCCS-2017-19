@@ -26,8 +26,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Outline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="329">
+              <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -97,7 +97,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549137247012" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549137307628" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -138,7 +138,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1549132861295</updated>
-      <workItem from="1549132862567" duration="3865000" />
+      <workItem from="1549132862567" duration="3960000" />
     </task>
     <task id="LOCAL-00001" summary="Sort an array of strings by length, reversed length, first character and string containing 'e' first">
       <created>1549134968552</created>
@@ -168,11 +168,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549136905283</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Created allMatches method to filter results based on lambda function">
+      <created>1549137275834</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1549137275834</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3865000" />
+    <option name="totallyTimeSpent" value="3960000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -219,7 +226,8 @@
     <MESSAGE value="Added a static function that allows checking &quot;e&quot; on a string" />
     <MESSAGE value="Created a FunctionalInterface to be used as argument for a function that checks strings" />
     <MESSAGE value="Using generics to implement a betterEntry function that accepts a lambda" />
-    <option name="LAST_COMMIT_MESSAGE" value="Using generics to implement a betterEntry function that accepts a lambda" />
+    <MESSAGE value="Created allMatches method to filter results based on lambda function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created allMatches method to filter results based on lambda function" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -253,8 +261,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Outline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="329">
+          <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
