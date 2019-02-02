@@ -46,7 +46,6 @@ public class BnzInstruction implements Instruction {
     public void execute(Machine m) {
         if (m.getRegisters().getRegister(register) != 0) {
             m.setPc(m.getLabels().indexOf(jumpLabel));
-            // TODO: must fix this because we might jump to an invalid label setting PC to -1
         }
     }
 

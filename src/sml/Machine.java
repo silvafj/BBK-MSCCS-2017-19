@@ -116,7 +116,9 @@ public class Machine {
     }
 
     public void setPc(int pc) {
-        this.pc = pc;
+        if (pc >= 0) {
+            this.pc = pc;
+        }
     }
 
     @Override
