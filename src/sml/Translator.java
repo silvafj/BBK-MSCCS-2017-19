@@ -110,12 +110,22 @@ public class Translator {
                             .getConstructor(String.class, int.class, int.class, int.class)
                             .newInstance(label, r, s1, s2);
                 case "mul":
-                    r = scanInt();
-                    s1 = scanInt();
-                    s2 = scanInt();
+                    Class[] pTypes = instructionClass.getConstructors()[0].getParameterTypes();
+
+                    Object[] parameters = new Object[pTypes.length];
+                    parameters[0] = label;
+
+                    for (int i = 1; i < pTypes.length; i++) {
+                        if (pTypes[i].equals(String.class)) {
+                            parameters[i] = scan();
+                        } else if (pTypes[i].equals(int.class)) {
+                            parameters[i] = scanInt();
+                        }
+                    }
+
                     return instructionClass
-                            .getConstructor(String.class, int.class, int.class, int.class)
-                            .newInstance(label, r, s1, s2);
+                            .getConstructor(pTypes)
+                            .newInstance(parameters);
                 case "div":
                     r = scanInt();
                     s1 = scanInt();

@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7c598fc-72cd-4688-8372-19dd388f673d" name="Default Changelist" comment="Replace instantiation by name with reflection">
+    <list default="true" id="e7c598fc-72cd-4688-8372-19dd388f673d" name="Default Changelist" comment="Move all instructions into &quot;instructions&quot; package">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/AddInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/instructions/AddInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/BnzInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/instructions/BnzInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/DivInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/instructions/DivInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/LinInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/instructions/LinInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/MulInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/instructions/MulInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/OutInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/instructions/OutInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sml/SubInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/instructions/SubInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/sml/AddInstructionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sml/AddInstructionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/sml/DivInstructionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sml/DivInstructionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/sml/LinInstructionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sml/LinInstructionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/sml/MulInstructionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sml/MulInstructionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/sml/SubInstructionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sml/SubInstructionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sml/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/Translator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -112,7 +101,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/sml/AddInstructionTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -124,20 +113,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sml/instructions/SubInstruction.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="347">
+              <caret line="125" selection-start-line="125" selection-end-line="125" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
+        <entry file="file://$PROJECT_DIR$/src/sml/Machine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="123" selection-start-line="123" selection-end-line="123" />
+            <state relative-caret-position="167">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3109#3110#0" expanded="true" />
+                <element signature="e#3137#3138#0" expanded="true" />
+                <element signature="e#4549#4550#0" expanded="true" />
+                <element signature="e#4596#4597#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -191,7 +187,6 @@
         <option value="$PROJECT_DIR$/src/sml/OutInstruction.java" />
         <option value="$PROJECT_DIR$/src/sml/Machine.java" />
         <option value="$PROJECT_DIR$/src/sml/BnzInstruction.java" />
-        <option value="$PROJECT_DIR$/src/sml/Translator.java" />
         <option value="$PROJECT_DIR$/src/sml/instructions/BnzInstruction.java" />
         <option value="$PROJECT_DIR$/src/sml/instructions/DivInstruction.java" />
         <option value="$PROJECT_DIR$/src/sml/instructions/LinInstruction.java" />
@@ -199,6 +194,7 @@
         <option value="$PROJECT_DIR$/src/sml/instructions/OutInstruction.java" />
         <option value="$PROJECT_DIR$/tests/sml/instructions/AddInstructionTest.java" />
         <option value="$PROJECT_DIR$/tests/sml/AddInstructionTest.java" />
+        <option value="$PROJECT_DIR$/src/sml/Translator.java" />
       </list>
     </option>
   </component>
@@ -267,7 +263,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549102130954" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549103840038" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -445,7 +441,7 @@
       <workItem from="1548591257171" duration="12292000" />
       <workItem from="1548965473971" duration="81000" />
       <workItem from="1548965620618" duration="170000" />
-      <workItem from="1549101632380" duration="376000" />
+      <workItem from="1549101632380" duration="2071000" />
     </task>
     <task id="LOCAL-00001" summary="Update @author on all classes and reformat whole project">
       <created>1548595302573</created>
@@ -475,16 +471,24 @@
       <option name="project" value="LOCAL" />
       <updated>1548605676319</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Move all instructions into &quot;instructions&quot; package">
+      <created>1549102070997</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1549102070997</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Move all instructions into &quot;instructions&quot; package">
+      <created>1549102152445</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1549102152445</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AddInstructionTest_execute - 2019.01.27 at 13h 50m 58s.xml">
-      <configuration name="AddInstructionTest.execute" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="AddInstructionTest_execute - 2019.01.27 at 14h 05m 39s.xml">
-      <configuration name="AddInstructionTest.execute" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="LinInstructionTest_execute - 2019.01.27 at 14h 06m 28s.xml">
       <configuration name="LinInstructionTest.execute" configurationId="JUnit" />
     </history-entry>
@@ -509,14 +513,21 @@
     <history-entry file="All_in_coursework-small-machine-language_(1) - 2019.02.02 at 10h 07m 07s.xml">
       <configuration name="All in coursework-small-machine-language (1)" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="All_in_coursework-small-machine-language_(1) - 2019.02.02 at 10h 08m 16s.xml">
+      <configuration name="All in coursework-small-machine-language (1)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_coursework-small-machine-language_(1) - 2019.02.02 at 10h 08m 32s.xml">
+      <configuration name="All in coursework-small-machine-language (1)" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16880000" />
+    <option name="totallyTimeSpent" value="18575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49909747" visible="true" weight="0.27753934" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49909747" visible="true" weight="0.27753934" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Learn" order="3" weight="0.32960597" />
@@ -527,14 +538,14 @@
       <window_info id="Image Layers" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32866243" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32866243" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32866243" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="7" weight="0.3299363" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3299363" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="11" />
       <window_info anchor="bottom" id="CheckStyle" order="12" weight="0.3299363" />
@@ -544,6 +555,7 @@
       <window_info anchor="bottom" id="Tail" order="16" />
       <window_info anchor="bottom" id="Messages" order="17" weight="0.32866243" />
       <window_info anchor="bottom" id="PMD" order="18" weight="0.3299363" />
+      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.3297568" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -565,9 +577,20 @@
     <MESSAGE value="Created tests for &quot;add&quot; and &quot;lin&quot; instructions" />
     <MESSAGE value="Added missing instructions (sub, mul, div, out, bnz) and respective basic tests" />
     <MESSAGE value="Replace instantiation by name with reflection" />
-    <option name="LAST_COMMIT_MESSAGE" value="Replace instantiation by name with reflection" />
+    <MESSAGE value="Move all instructions into &quot;instructions&quot; package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move all instructions into &quot;instructions&quot; package" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/sml/Translator.java</url>
+          <line>125</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="instructionClass.getConstructors()" language="JAVA" />
@@ -653,19 +676,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sml/Machine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="117" column="29" selection-start-line="117" selection-start-column="29" selection-end-line="117" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3109#3110#0" expanded="true" />
-            <element signature="e#3137#3138#0" expanded="true" />
-            <element signature="e#4596#4597#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sml/Labels.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="762">
@@ -683,13 +693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
         </state>
       </provider>
     </entry>
@@ -767,6 +770,27 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sml/Machine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3109#3110#0" expanded="true" />
+            <element signature="e#3137#3138#0" expanded="true" />
+            <element signature="e#4549#4550#0" expanded="true" />
+            <element signature="e#4596#4597#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
         </state>
       </provider>
     </entry>
