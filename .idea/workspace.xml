@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7c598fc-72cd-4688-8372-19dd388f673d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/sml/InstructionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sml/InstructionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/InstructionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sml/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/Translator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/sml/OutInstructionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sml/OutInstructionTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,13 +22,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sml/instructions/AddInstruction.java">
+        <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="59" column="58" selection-start-line="59" selection-start-column="55" selection-end-line="59" selection-end-column="58" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="496">
+              <caret line="72" selection-start-line="72" selection-end-line="72" />
             </state>
           </provider>
         </entry>
@@ -37,20 +33,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sml/InstructionFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+            <state relative-caret-position="302">
+              <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="86" column="69" selection-start-line="86" selection-start-column="69" selection-end-line="86" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -75,6 +62,7 @@
       <find>add</find>
       <find>accum</find>
       <find>scanInt</find>
+      <find>args</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -150,6 +138,11 @@
             <path>
               <item name="coursework-one-sml-silvafj" type="b2602c69:ProjectViewProjectNode" />
               <item name="coursework-one-sml-silvafj" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="coursework-one-sml-silvafj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="coursework-one-sml-silvafj" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -179,7 +172,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549109036864" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549111956237" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -341,7 +334,7 @@
       <workItem from="1548591257171" duration="12292000" />
       <workItem from="1548965473971" duration="81000" />
       <workItem from="1548965620618" duration="170000" />
-      <workItem from="1549101632380" duration="7033000" />
+      <workItem from="1549101632380" duration="9936000" />
     </task>
     <task id="LOCAL-00001" summary="Update @author on all classes and reformat whole project">
       <created>1548595302573</created>
@@ -406,7 +399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549106944714</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Extract getInstruction() logic from the translator into a specialised Instruction factory.">
+      <created>1549109097403</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1549109097403</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -442,7 +442,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23537000" />
+    <option name="totallyTimeSpent" value="26440000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -460,7 +460,7 @@
       <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.3299363" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32866243" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.32866243" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.32866243" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -475,7 +475,7 @@
       <window_info anchor="bottom" id="Version Control" order="15" />
       <window_info anchor="bottom" id="Flutter Performance" order="16" side_tool="true" weight="0.32942238" />
       <window_info anchor="bottom" id="Tail" order="17" />
-      <window_info active="true" anchor="bottom" id="Messages" order="18" visible="true" weight="0.32866243" />
+      <window_info anchor="bottom" id="Messages" order="18" weight="0.32866243" />
       <window_info anchor="bottom" id="PMD" order="19" weight="0.3299363" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.3297568" />
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
@@ -503,7 +503,8 @@
     <MESSAGE value="Create an instance of &quot;mul&quot; just with reflection" />
     <MESSAGE value="Use reflection to translate all instructions" />
     <MESSAGE value="Refactor code to take advantage of lombok, but because it doesn't work well with super() also refactored the abstract class Instruction to be an interface." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor code to take advantage of lombok, but because it doesn't work well with super() also refactored the abstract class Instruction to be an interface." />
+    <MESSAGE value="Extract getInstruction() logic from the translator into a specialised Instruction factory." />
+    <option name="LAST_COMMIT_MESSAGE" value="Extract getInstruction() logic from the translator into a specialised Instruction factory." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -578,9 +579,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/test2.sml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/test1.sml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/sml/AddInstructionTest.java">
@@ -724,13 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="86" column="69" selection-start-line="86" selection-start-column="69" selection-end-line="86" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sml/instructions/AddInstruction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
@@ -741,10 +732,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/test1.sml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/util/AbstractList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="166" selection-start-line="166" selection-end-line="166" />
+          <folding>
+            <element signature="e#5512#5513#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sml/InstructionFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        <state relative-caret-position="302">
+          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

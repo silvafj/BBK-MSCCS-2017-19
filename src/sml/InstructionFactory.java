@@ -1,20 +1,24 @@
 package sml;
 
-import lombok.RequiredArgsConstructor;
-
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This class is responsible for creating instructions.
  *
  * @author Fernando Silva (fdealm02)
  */
-@RequiredArgsConstructor
 public class InstructionFactory {
 
-    private final String opcode;
+    public static Instruction getInstruction(String[] args) {
+        if (args.length < 2)
+            return null;
 
-    public Instruction getInstruction(String[] args) {
+        ArrayList<String> elements = new ArrayList<>(Arrays.asList(args));
+
+        String opcode = elements.remove(1);
+
         try {
             String instructionClassname = opcode.substring(0, 1).toUpperCase() + opcode.substring(1) + "Instruction";
             Class<Instruction> instructionClass = (Class<Instruction>) Class.forName("sml.instructions." + instructionClassname).asSubclass(Instruction.class);
@@ -24,9 +28,9 @@ public class InstructionFactory {
             Object[] parameters = new Object[pTypes.length];
             for (int i = 0; i < pTypes.length; i++) {
                 if (pTypes[i].equals(String.class)) {
-                    parameters[i] = args[i];
+                    parameters[i] = elements.get(i);
                 } else if (pTypes[i].equals(int.class)) {
-                    parameters[i] = parseInt(args[i]);
+                    parameters[i] = parseInt(elements.get(i));
                 }
             }
 
@@ -45,7 +49,7 @@ public class InstructionFactory {
      *
      * @return integer value
      */
-    private int parseInt(String value) {
+    private static int parseInt(String value) {
         if (value.length() == 0) {
             return Integer.MAX_VALUE;
         }

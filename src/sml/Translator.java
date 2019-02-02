@@ -2,6 +2,7 @@ package sml;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -22,7 +23,6 @@ public class Translator {
     // word has no whitespace
     // If word and line are not empty, line begins with whitespace
 
-    private String line = "";
     private Labels labels; // The labels of the program being translated
     private ArrayList<Instruction> program; // The program to be created
     private String fileName; // source file of SML code
@@ -31,10 +31,13 @@ public class Translator {
         this.fileName = PATH + fileName;
     }
 
-    // translate the small program in the file into lab (the labels) and
-    // prog (the program)
-    // return "no errors were detected"
-
+    /**
+     * Translate the small program in the file into lab (the labels) and prog (the program).
+     *
+     * @param lab will contain the labels in the program
+     * @param prog will contain the instruction in the program
+     * @return "no errors were detected"
+     */
     public boolean readAndTranslate(Labels lab, ArrayList<Instruction> prog) {
         try (Scanner sc = new Scanner(new File(fileName))) {
             // Scanner attached to the file chosen by the user
@@ -43,29 +46,19 @@ public class Translator {
             program = prog;
             program.clear();
 
-            try {
-                line = sc.nextLine();
-            } catch (NoSuchElementException ioE) {
-                return false;
-            }
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine().trim();
+                if (line.isEmpty())
+                    continue;
 
-            // Each iteration processes line and reads the next line into line
-            while (line != null) {
-                // Store the label in label
-                String label = scan();
+                String[] elements = line.split("\\s+");
+                if (elements.length < 2)
+                    continue;
 
-                if (label.length() > 0) {
-                    Instruction ins = getInstruction(label);
-                    if (ins != null) {
-                        labels.addLabel(label);
-                        program.add(ins);
-                    }
-                }
-
-                try {
-                    line = sc.nextLine();
-                } catch (NoSuchElementException ioE) {
-                    return false;
+                Instruction instruction = InstructionFactory.getInstruction(elements);
+                if (instruction != null) {
+                    labels.addLabel(elements[0]);
+                    program.add(instruction);
                 }
             }
         } catch (IOException ioE) {
@@ -73,36 +66,8 @@ public class Translator {
             System.exit(-1);
             return false;
         }
+
         return true;
-    }
-
-    // line should consist of an MML instruction, with its label already
-    // removed. Translate line into an instruction with label label
-    // and return the instruction
-    public Instruction getInstruction(String label) {
-        if (line.equals(""))
-            return null;
-
-        String opcode = scan();
-        return (new InstructionFactory(opcode)).getInstruction((label + line).split("\\s+"));
-    }
-
-    /*
-     * Return the first word of line and remove it from line. If there is no
-     * word, return ""
-     */
-    private String scan() {
-        line = line.trim();
-        if (line.length() == 0)
-            return "";
-
-        int i = 0;
-        while (i < line.length() && line.charAt(i) != ' ' && line.charAt(i) != '\t') {
-            i = i + 1;
-        }
-        String word = line.substring(0, i);
-        line = line.substring(i);
-        return word;
     }
 
 }
