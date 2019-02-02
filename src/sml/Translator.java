@@ -83,32 +83,8 @@ public class Translator {
         if (line.equals(""))
             return null;
 
-        try {
-            String ins = scan();
-            String instructionClassname = ins.substring(0, 1).toUpperCase() + ins.substring(1) + "Instruction";
-
-            Class<Instruction> instructionClass = (Class<Instruction>) Class.forName("sml.instructions." + instructionClassname).asSubclass(Instruction.class);
-
-            Class[] pTypes = instructionClass.getConstructors()[0].getParameterTypes();
-
-            Object[] parameters = new Object[pTypes.length];
-            parameters[0] = label;
-
-            for (int i = 1; i < pTypes.length; i++) {
-                if (pTypes[i].equals(String.class)) {
-                    parameters[i] = scan();
-                } else if (pTypes[i].equals(int.class)) {
-                    parameters[i] = scanInt();
-                }
-            }
-
-            return instructionClass.getConstructor(pTypes).newInstance(parameters);
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-            // TODO: make this better
-            System.out.println(e.toString());
-        }
-
-        return null;
+        String opcode = scan();
+        return (new InstructionFactory(opcode)).getInstruction((label + line).split("\\s+"));
     }
 
     /*
@@ -129,18 +105,4 @@ public class Translator {
         return word;
     }
 
-    // Return the first word of line as an integer. If there is
-    // any error, return the maximum int
-    private int scanInt() {
-        String word = scan();
-        if (word.length() == 0) {
-            return Integer.MAX_VALUE;
-        }
-
-        try {
-            return Integer.parseInt(word);
-        } catch (NumberFormatException e) {
-            return Integer.MAX_VALUE;
-        }
-    }
 }
