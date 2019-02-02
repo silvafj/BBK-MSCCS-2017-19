@@ -76,8 +76,8 @@ public class Outline {
         return input.stream().filter(tester).collect(Collectors.toList());
     }
 
-    private static List<String> transformedList(List<String> words, Function<String, String> transformer) {
-        return words.stream().map(transformer).collect(Collectors.toList());
+    private static <T> List<T> transformedList(List<T> input, Function<T, T> transformer) {
+        return input.stream().map(transformer).collect(Collectors.toList());
     }
 
 }
