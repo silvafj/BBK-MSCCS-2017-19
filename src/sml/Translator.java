@@ -80,78 +80,29 @@ public class Translator {
     // removed. Translate line into an instruction with label label
     // and return the instruction
     public Instruction getInstruction(String label) {
-        int s1; // Possible operands of the instruction
-        int s2;
-        int r;
-        int x;
-
         if (line.equals(""))
             return null;
 
-        String ins = scan();
-
         try {
+            String ins = scan();
             String instructionClassname = ins.substring(0, 1).toUpperCase() + ins.substring(1) + "Instruction";
+
             Class<Instruction> instructionClass = (Class<Instruction>) Class.forName("sml.instructions." + instructionClassname).asSubclass(Instruction.class);
 
-            switch (ins) {
-                case "add":
-                    r = scanInt();
-                    s1 = scanInt();
-                    s2 = scanInt();
-                    return instructionClass
-                            .getConstructor(String.class, int.class, int.class, int.class)
-                            .newInstance(label, r, s1, s2);
-                case "sub":
-                    r = scanInt();
-                    s1 = scanInt();
-                    s2 = scanInt();
-                    return instructionClass
-                            .getConstructor(String.class, int.class, int.class, int.class)
-                            .newInstance(label, r, s1, s2);
-                case "mul":
-                    Class[] pTypes = instructionClass.getConstructors()[0].getParameterTypes();
+            Class[] pTypes = instructionClass.getConstructors()[0].getParameterTypes();
 
-                    Object[] parameters = new Object[pTypes.length];
-                    parameters[0] = label;
+            Object[] parameters = new Object[pTypes.length];
+            parameters[0] = label;
 
-                    for (int i = 1; i < pTypes.length; i++) {
-                        if (pTypes[i].equals(String.class)) {
-                            parameters[i] = scan();
-                        } else if (pTypes[i].equals(int.class)) {
-                            parameters[i] = scanInt();
-                        }
-                    }
-
-                    return instructionClass
-                            .getConstructor(pTypes)
-                            .newInstance(parameters);
-                case "div":
-                    r = scanInt();
-                    s1 = scanInt();
-                    s2 = scanInt();
-                    return instructionClass
-                            .getConstructor(String.class, int.class, int.class, int.class)
-                            .newInstance(label, r, s1, s2);
-                case "lin":
-                    r = scanInt();
-                    s1 = scanInt();
-                    return instructionClass
-                            .getConstructor(String.class, int.class, int.class)
-                            .newInstance(label, r, s1);
-                case "out":
-                    r = scanInt();
-                    return instructionClass
-                            .getConstructor(String.class, int.class)
-                            .newInstance(label, r);
-                case "bnz":
-                    r = scanInt();
-                    String jumpLabel = scan();
-                    return instructionClass
-                            .getConstructor(String.class, int.class, String.class)
-                            .newInstance(label, r, jumpLabel);
+            for (int i = 1; i < pTypes.length; i++) {
+                if (pTypes[i].equals(String.class)) {
+                    parameters[i] = scan();
+                } else if (pTypes[i].equals(int.class)) {
+                    parameters[i] = scanInt();
+                }
             }
 
+            return instructionClass.getConstructor(pTypes).newInstance(parameters);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
             // TODO: make this better
             System.out.println(e.toString());

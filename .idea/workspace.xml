@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7c598fc-72cd-4688-8372-19dd388f673d" name="Default Changelist" comment="Move all instructions into &quot;instructions&quot; package">
+    <list default="true" id="e7c598fc-72cd-4688-8372-19dd388f673d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sml/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sml/Translator.java" afterDir="false" />
     </list>
@@ -24,7 +24,7 @@
         <entry file="file://$PROJECT_DIR$/src/sml/instructions/AddInstruction.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="59">
-              <caret line="4" lean-forward="true" selection-start-line="2" selection-end-line="4" />
+              <caret line="4" selection-start-line="2" selection-end-line="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/tests/sml/AddInstructionTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+              <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,8 +116,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="125" selection-start-line="125" selection-end-line="125" />
+            <state relative-caret-position="133">
+              <caret line="89" selection-start-line="89" selection-end-line="89" />
             </state>
           </provider>
         </entry>
@@ -263,7 +263,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549103840038" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549104126751" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -302,7 +302,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Machine">
+  <component name="RunManager" selected="JUnit.All in coursework-small-machine-language (2)">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -355,7 +355,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in coursework-small-machine-language" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in coursework-small-machine-language (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="coursework-small-machine-language" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -364,18 +364,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LinInstructionTest.execute" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in coursework-small-machine-language" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="coursework-small-machine-language" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="sml.instructions.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="sml.instructions" />
-      <option name="MAIN_CLASS_NAME" value="sml.instructions.LinInstructionTest" />
-      <option name="METHOD_NAME" value="execute" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -409,16 +401,16 @@
       <item itemvalue="Application.Machine" />
       <item itemvalue="JUnit.AddInstructionTest.execute" />
       <item itemvalue="JUnit.All in coursework-small-machine-language" />
-      <item itemvalue="JUnit.LinInstructionTest.execute" />
       <item itemvalue="JUnit.All in coursework-small-machine-language (1)" />
+      <item itemvalue="JUnit.All in coursework-small-machine-language (2)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in coursework-small-machine-language (2)" />
         <item itemvalue="Application.Machine" />
         <item itemvalue="JUnit.All in coursework-small-machine-language (1)" />
         <item itemvalue="JUnit.All in coursework-small-machine-language" />
         <item itemvalue="JUnit.AddInstructionTest.execute" />
-        <item itemvalue="JUnit.LinInstructionTest.execute" />
       </list>
     </recent_temporary>
   </component>
@@ -441,7 +433,7 @@
       <workItem from="1548591257171" duration="12292000" />
       <workItem from="1548965473971" duration="81000" />
       <workItem from="1548965620618" duration="170000" />
-      <workItem from="1549101632380" duration="2071000" />
+      <workItem from="1549101632380" duration="2310000" />
     </task>
     <task id="LOCAL-00001" summary="Update @author on all classes and reformat whole project">
       <created>1548595302573</created>
@@ -485,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549102152445</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Create an instance of &quot;mul&quot; just with reflection">
+      <created>1549103903647</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1549103903647</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -521,7 +520,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18575000" />
+    <option name="totallyTimeSpent" value="18814000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -578,19 +577,10 @@
     <MESSAGE value="Added missing instructions (sub, mul, div, out, bnz) and respective basic tests" />
     <MESSAGE value="Replace instantiation by name with reflection" />
     <MESSAGE value="Move all instructions into &quot;instructions&quot; package" />
-    <option name="LAST_COMMIT_MESSAGE" value="Move all instructions into &quot;instructions&quot; package" />
+    <MESSAGE value="Create an instance of &quot;mul&quot; just with reflection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create an instance of &quot;mul&quot; just with reflection" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sml/Translator.java</url>
-          <line>125</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="instructionClass.getConstructors()" language="JAVA" />
@@ -706,7 +696,7 @@
     <entry file="file://$PROJECT_DIR$/src/sml/instructions/AddInstruction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="59">
-          <caret line="4" lean-forward="true" selection-start-line="2" selection-end-line="4" />
+          <caret line="4" selection-start-line="2" selection-end-line="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -766,7 +756,7 @@
     <entry file="file://$PROJECT_DIR$/tests/sml/AddInstructionTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -789,8 +779,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sml/Translator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="125" selection-start-line="125" selection-end-line="125" />
+        <state relative-caret-position="133">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
         </state>
       </provider>
     </entry>
