@@ -1,5 +1,6 @@
 package sml.instructions;
 
+import lombok.RequiredArgsConstructor;
 import sml.Instruction;
 import sml.Machine;
 
@@ -8,18 +9,31 @@ import sml.Machine;
  *
  * @author Fernando Silva (fdealm02)
  */
-public class OutInstruction extends Instruction {
-    private int register;
+@RequiredArgsConstructor
+public class OutInstruction implements Instruction {
+    private static final String OPCODE = "out";
+
+    private final String label;
+    private final int register;
 
     /**
-     * Initialise the instruction
+     * Returns the label of the instruction.
      *
-     * @param label    of the instruction
-     * @param register to work with
+     * @return label of the instruction.
      */
-    public OutInstruction(String label, int register) {
-        super(label, "out");
-        this.register = register;
+    @Override
+    public String getLabel() {
+        return this.label;
+    }
+
+    /**
+     * Returns the instruction opcode.
+     *
+     * @return instruction opcode.
+     */
+    @Override
+    public String getOpcode() {
+        return OPCODE;
     }
 
     /**
@@ -39,6 +53,6 @@ public class OutInstruction extends Instruction {
      */
     @Override
     public String toString() {
-        return super.toString() + " prints the contents of register " + register + " on the console ";
+        return getLabel() + ": " + getOpcode() + " prints the contents of register " + register + " on the console ";
     }
 }

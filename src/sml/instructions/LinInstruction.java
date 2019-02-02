@@ -1,5 +1,6 @@
 package sml.instructions;
 
+import lombok.RequiredArgsConstructor;
 import sml.Instruction;
 import sml.Machine;
 
@@ -8,22 +9,32 @@ import sml.Machine;
  *
  * @author Fernando Silva (fdealm02)
  */
-public class LinInstruction extends Instruction {
-    private int register;
-    private int value;
+@RequiredArgsConstructor
+public class LinInstruction implements Instruction {
+    private static final String OPCODE = "lin";
+
+    private final String label;
+    private final int register;
+    private final int value;
 
     /**
-     * Initialise the instruction
+     * Returns the label of the instruction.
      *
-     * @param label    of the instruction
-     * @param register to work with
-     * @param value    to load
+     * @return label of the instruction.
      */
-    public LinInstruction(String label, int register, int value) {
-        super(label, "lin");
-        this.register = register;
-        this.value = value;
+    @Override
+    public String getLabel() {
+        return this.label;
+    }
 
+    /**
+     * Returns the instruction opcode.
+     *
+     * @return instruction opcode.
+     */
+    @Override
+    public String getOpcode() {
+        return OPCODE;
     }
 
     /**
@@ -43,6 +54,6 @@ public class LinInstruction extends Instruction {
      */
     @Override
     public String toString() {
-        return super.toString() + " register " + register + " value is " + value;
+        return getLabel() + ": " + getOpcode() + " register " + register + " value is " + value;
     }
 }

@@ -1,5 +1,6 @@
 package sml.instructions;
 
+import lombok.RequiredArgsConstructor;
 import sml.Instruction;
 import sml.Machine;
 
@@ -8,24 +9,33 @@ import sml.Machine;
  *
  * @author Fernando Silva (fdealm02)
  */
-public class AddInstruction extends Instruction {
-    private int result;
-    private int op1;
-    private int op2;
+@RequiredArgsConstructor
+public class AddInstruction implements Instruction {
+    private static final String OPCODE = "add";
+
+    private final String label;
+    private final int result;
+    private final int op1;
+    private final int op2;
 
     /**
-     * Initialise the instruction
+     * Returns the label of the instruction.
      *
-     * @param label  of the instruction
-     * @param result of the computation
-     * @param op1    the first operand
-     * @param op2    the second operand
+     * @return label of the instruction.
      */
-    public AddInstruction(String label, int result, int op1, int op2) {
-        super(label, "add");
-        this.result = result;
-        this.op1 = op1;
-        this.op2 = op2;
+    @Override
+    public String getLabel() {
+        return this.label;
+    }
+
+    /**
+     * Returns the instruction opcode.
+     *
+     * @return instruction opcode.
+     */
+    @Override
+    public String getOpcode() {
+        return OPCODE;
     }
 
     /**
@@ -41,12 +51,13 @@ public class AddInstruction extends Instruction {
     }
 
     /**
-     * String representation of the instruction
+     * String representation of the instruction.
      *
      * @return representation of the operands and result
      */
     @Override
     public String toString() {
-        return super.toString() + " " + op1 + " + " + op2 + " => " + result;
+        return getLabel() + ": " + getOpcode() + " " + op1 + " + " + op2 + " => " + result;
     }
+
 }

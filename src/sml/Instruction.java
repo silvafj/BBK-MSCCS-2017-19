@@ -1,42 +1,29 @@
 package sml;
 
 /**
- * This class represents an abstract instruction
+ * Represents a basic instruction with no operands.
  *
  * @author Fernando Silva (fdealm02)
  */
-public abstract class Instruction {
-    protected String label;
-    protected String opcode;
+public interface Instruction {
+    /**
+     * Returns the label of the instruction.
+     *
+     * @return label of the instruction.
+     */
+    String getLabel();
 
     /**
-     * Constructor: an instruction with label l and opcode op
-     * (op must be an operation of the language)
+     * Returns the instruction opcode.
      *
-     * @param l  label
-     * @param op operand
+     * @return instruction opcode.
      */
-    protected Instruction(String l, String op) {
-        this.label = l;
-        this.opcode = op;
-    }
-
-    // =
-
-    /**
-     * The representation "label: opcode" of this instruction.
-     *
-     * @return "label: opcode" of this instruction
-     */
-    @Override
-    public String toString() {
-        return label + ": " + opcode;
-    }
+    String getOpcode();
 
     /**
      * Execute this instruction on machine m.
      *
      * @param m the machine in which to execute the instruction.
      */
-    public abstract void execute(Machine m);
+    void execute(Machine m);
 }

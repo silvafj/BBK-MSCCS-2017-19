@@ -1,5 +1,6 @@
 package sml.instructions;
 
+import lombok.RequiredArgsConstructor;
 import sml.Instruction;
 import sml.Machine;
 
@@ -8,21 +9,32 @@ import sml.Machine;
  *
  * @author Fernando Silva (fdealm02)
  */
-public class BnzInstruction extends Instruction {
-    private int register;
-    private String jumpLabel;
+@RequiredArgsConstructor
+public class BnzInstruction implements Instruction {
+    private static final String OPCODE = "bnz";
+
+    private final String label;
+    private final int register;
+    private final String jumpLabel;
 
     /**
-     * Initialise the instruction
+     * Returns the label of the instruction.
      *
-     * @param label     of the instruction
-     * @param register  of the computation
-     * @param jumpLabel the first operand
+     * @return label of the instruction.
      */
-    public BnzInstruction(String label, int register, String jumpLabel) {
-        super(label, "bnz");
-        this.register = register;
-        this.jumpLabel = jumpLabel;
+    @Override
+    public String getLabel() {
+        return this.label;
+    }
+
+    /**
+     * Returns the instruction opcode.
+     *
+     * @return instruction opcode.
+     */
+    @Override
+    public String getOpcode() {
+        return OPCODE;
     }
 
     /**
@@ -45,8 +57,9 @@ public class BnzInstruction extends Instruction {
      */
     @Override
     public String toString() {
-        return super.toString() + " if the contents of register " + register + " is not zero, " +
+        return getLabel() + ": " + getOpcode() + " if the contents of register " + register + " is not zero, " +
                 "then make the statement labeled " + jumpLabel + " the next one to execute";
 
     }
+
 }
