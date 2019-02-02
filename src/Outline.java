@@ -1,9 +1,12 @@
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Outline {
 
-    private static final String LOREM_IPSUM = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod";
+    private static final String LOREM_IPSUM = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do badu";
 
     public static void main(String... args) {
         String[] strArray = LOREM_IPSUM.split("\\s+");
@@ -32,6 +35,12 @@ public class Outline {
 
         System.out.println("betterEntry 2: " +
                 Outline.betterEntry("always this", "test2", (s1, s2) -> true));
+
+        System.out.println("shortWords: " + Outline.allMatches(Arrays.asList(strArray), s -> s.length() < 4));
+
+        System.out.println("wordsWithB: " + Outline.allMatches(Arrays.asList(strArray), s -> s.contains("b")));
+
+        System.out.println("evenLengthWords: " + Outline.allMatches(Arrays.asList(strArray), s -> (s.length() % 2) == 0));
     }
 
     private static int eChecker(String s1, String s2) {
@@ -54,5 +63,9 @@ public class Outline {
 
     private static <T> T betterEntry(T e1, T e2, TwoElementPredicate<T> checker) {
         return checker.test(e1, e2) ? e1 : e2;
+    }
+
+    private static List<String> allMatches(List<String> words, Predicate<String> tester) {
+        return words.stream().filter(tester).collect(Collectors.toList());
     }
 }
