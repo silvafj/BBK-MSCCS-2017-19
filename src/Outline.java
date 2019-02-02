@@ -26,6 +26,12 @@ public class Outline {
 
         System.out.println("betterString 2: " +
                 Outline.betterString("always this", "test2", (s1, s2) -> true));
+
+        System.out.println("betterEntry 1: " +
+                Outline.betterEntry("test1", "will return this", (s1, s2) -> s1.length() > s2.length()));
+
+        System.out.println("betterEntry 2: " +
+                Outline.betterEntry("always this", "test2", (s1, s2) -> true));
     }
 
     private static int eChecker(String s1, String s2) {
@@ -44,5 +50,9 @@ public class Outline {
 
     private static String betterString(String s1, String s2, TwoStringPredicate checker) {
         return checker.test(s1, s2) ? s1 : s2;
+    }
+
+    private static <T> T betterEntry(T e1, T e2, TwoElementPredicate<T> checker) {
+        return checker.test(e1, e2) ? e1 : e2;
     }
 }
