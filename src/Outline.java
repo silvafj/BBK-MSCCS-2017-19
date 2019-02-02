@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -41,6 +42,12 @@ public class Outline {
         System.out.println("wordsWithB: " + Outline.allMatches(Arrays.asList(strArray), s -> s.contains("b")));
 
         System.out.println("evenLengthWords: " + Outline.allMatches(Arrays.asList(strArray), s -> (s.length() % 2) == 0));
+
+        System.out.println("excitingWords: " + Outline.transformedList(Arrays.asList(strArray), s -> s + "!"));
+
+        System.out.println("eyeWords: " + Outline.transformedList(Arrays.asList(strArray), s -> s.replace("i", "eye")));
+
+        System.out.println("upperCaseWords: " + Outline.transformedList(Arrays.asList(strArray), String::toUpperCase));
     }
 
     private static int eChecker(String s1, String s2) {
@@ -65,7 +72,12 @@ public class Outline {
         return checker.test(e1, e2) ? e1 : e2;
     }
 
-    private static <T> List<T> allMatches(List<T> words, Predicate<T> tester) {
-        return words.stream().filter(tester).collect(Collectors.toList());
+    private static <T> List<T> allMatches(List<T> input, Predicate<T> tester) {
+        return input.stream().filter(tester).collect(Collectors.toList());
     }
+
+    private static List<String> transformedList(List<String> words, Function<String, String> transformer) {
+        return words.stream().map(transformer).collect(Collectors.toList());
+    }
+
 }
