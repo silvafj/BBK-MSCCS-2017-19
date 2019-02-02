@@ -20,6 +20,12 @@ public class Outline {
 
         Arrays.sort(strArray, Outline::eChecker);
         System.out.println("Sorted by contain 'e' first: " + Arrays.asList(strArray));
+
+        System.out.println("betterString 1: " +
+                Outline.betterString("test1", "will return this", (s1, s2) -> s1.length() > s2.length()));
+
+        System.out.println("betterString 2: " +
+                Outline.betterString("always this", "test2", (s1, s2) -> true));
     }
 
     private static int eChecker(String s1, String s2) {
@@ -34,5 +40,9 @@ public class Outline {
         } else {
             return i1 - i2;
         }
+    }
+
+    private static String betterString(String s1, String s2, TwoStringPredicate checker) {
+        return checker.test(s1, s2) ? s1 : s2;
     }
 }
