@@ -92,7 +92,7 @@ public class Translator {
 
         try {
             String instructionClassname = ins.substring(0, 1).toUpperCase() + ins.substring(1) + "Instruction";
-            Class<Instruction> instructionClass = (Class<Instruction>) Class.forName("sml." + instructionClassname).asSubclass(Instruction.class);
+            Class<Instruction> instructionClass = (Class<Instruction>) Class.forName("sml.instructions." + instructionClassname).asSubclass(Instruction.class);
 
             switch (ins) {
                 case "add":

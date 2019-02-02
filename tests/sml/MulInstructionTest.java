@@ -1,6 +1,8 @@
 package sml;
 
 import org.junit.jupiter.api.Test;
+import sml.instructions.LinInstruction;
+import sml.instructions.MulInstruction;
 
 import java.util.ArrayList;
 

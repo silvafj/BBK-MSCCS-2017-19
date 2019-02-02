@@ -1,4 +1,7 @@
-package sml;
+package sml.instructions;
+
+import sml.Instruction;
+import sml.Machine;
 
 /**
  * This class represents the "bnz" instruction from the language.
