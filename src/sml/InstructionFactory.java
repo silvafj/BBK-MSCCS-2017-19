@@ -1,8 +1,18 @@
 package sml;
 
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Properties;
+
+class InstructionNotFoundException extends Exception {
+
+    public InstructionNotFoundException(String message) {
+        super(message);
+    }
+}
 
 /**
  * This class is responsible for creating instructions.
@@ -11,18 +21,42 @@ import java.util.Arrays;
  */
 public class InstructionFactory {
 
+    private final static String FILENAME = "resources/instructions.properties";
+    private final static Properties PROPERTIES = new Properties();
+
+    static {
+        try {
+            PROPERTIES.load(Files.newInputStream(Paths.get(FILENAME)));
+        } catch (Exception ex) {
+            System.err.println("Failed to load " + FILENAME);
+        }
+    }
+
+    /**
+     * Returns the instruction class for the string opcode.
+     *
+     * @param opcode instruction string representation
+     * @return the instruction class
+     */
+    private static Class<Instruction> getInstructionClass(String opcode) throws InstructionNotFoundException {
+        String defaultClassname = opcode.substring(0, 1).toUpperCase() + opcode.substring(1) + "Instruction";
+        String foundClassName = PROPERTIES.getProperty(opcode, defaultClassname);
+
+        try {
+            return (Class<Instruction>) Class.forName("sml.instructions." + foundClassName).asSubclass(Instruction.class);
+        } catch (ClassNotFoundException e) {
+            throw new InstructionNotFoundException("Unable to find '" + foundClassName + "' to handle '" + opcode + "' opcode.");
+        }
+    }
+
     public static Instruction getInstruction(String[] args) {
         if (args.length < 2)
             return null;
 
         ArrayList<String> elements = new ArrayList<>(Arrays.asList(args));
 
-        String opcode = elements.remove(1);
-
         try {
-            String instructionClassname = opcode.substring(0, 1).toUpperCase() + opcode.substring(1) + "Instruction";
-            Class<Instruction> instructionClass = (Class<Instruction>) Class.forName("sml.instructions." + instructionClassname).asSubclass(Instruction.class);
-
+            Class<Instruction> instructionClass = getInstructionClass(elements.remove(1));
             Class[] pTypes = instructionClass.getConstructors()[0].getParameterTypes();
 
             Object[] parameters = new Object[pTypes.length];
@@ -35,7 +69,7 @@ public class InstructionFactory {
             }
 
             return instructionClass.getConstructor(pTypes).newInstance(parameters);
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (InstructionNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
             // TODO: make this better
             System.out.println(e.toString());
         }

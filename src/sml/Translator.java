@@ -2,10 +2,7 @@ package sml;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -34,7 +31,7 @@ public class Translator {
     /**
      * Translate the small program in the file into lab (the labels) and prog (the program).
      *
-     * @param lab will contain the labels in the program
+     * @param lab  will contain the labels in the program
      * @param prog will contain the instruction in the program
      * @return "no errors were detected"
      */
