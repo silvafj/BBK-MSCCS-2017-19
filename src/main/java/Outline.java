@@ -106,7 +106,17 @@ public class Outline {
         System.out.println(randomNumberList(5));
 
         System.out.println("Produces a list of 5 numbers that go in order by a 5 step size");
-        System.out.println(orderedNumberList(50, 5, 10));
+        List<Integer> myListOfInts = orderedNumberList(50, 5, 10);
+        System.out.println(myListOfInts);
+
+        System.out.println("Compute the sum of a list of numbers (reduce)");
+        System.out.println(myListOfInts.stream().reduce((x,y) -> x+y).orElse(0));
+
+        System.out.println("Compute the sum of a list of numbers (sum)");
+        System.out.println(myListOfInts.stream().mapToInt(Integer::intValue).sum());
+
+        System.out.println("Compute the sum of a list of numbers (collecting)");
+        System.out.println(myListOfInts.stream().collect(Collectors.summingInt(Integer::intValue)));
     }
 
     private static List<Double> randomNumberList(int size) {
