@@ -60,6 +60,15 @@ public class Outline {
 
         System.out.println("upperCaseWords using map");
         words.stream().map(String::toUpperCase).forEach(System.out::println);
+
+        System.out.println("shortWords using filter");
+        words.stream().filter(s -> s.length() < 4).forEach(System.out::println);
+
+        System.out.println("wordsWithB using filter");
+        words.stream().filter(s -> s.contains("b")).forEach(System.out::println);
+
+        System.out.println("evenLengthWords using filter");
+        words.stream().filter(s -> (s.length() % 2) == 0).forEach(System.out::println);
     }
 
 }
