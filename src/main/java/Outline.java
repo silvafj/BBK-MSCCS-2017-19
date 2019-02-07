@@ -120,10 +120,10 @@ public class Outline {
         System.out.println(myListOfInts.stream().parallel().collect(Collectors.summingInt(Integer::intValue)));
 
         System.out.println("Compute the product of some doubles (serial)");
-        System.out.println(myListOfDoubles.stream().reduce((x, y) -> y * x).orElse(0.0));
+        System.out.println(myListOfDoubles.stream().reduce(2.0, (x, y) -> y * x));
 
         System.out.println("Compute the product of some doubles (parallel)");
-        System.out.println(myListOfDoubles.stream().parallel().reduce((x, y) -> y * x).orElse(0.0));
+        System.out.println(myListOfDoubles.stream().parallel().reduce(2.0, (x, y) -> y * x));
 
     }
 
