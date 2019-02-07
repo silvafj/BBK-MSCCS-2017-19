@@ -103,20 +103,27 @@ public class Outline {
         );
 
         System.out.println("Produces list of 5 random doubles");
-        System.out.println(randomNumberList(5));
+        List<Double> myListOfDoubles = randomNumberList(10);
+        System.out.println(myListOfDoubles);
 
         System.out.println("Produces a list of 5 numbers that go in order by a 5 step size");
         List<Integer> myListOfInts = orderedNumberList(50, 5, 10);
         System.out.println(myListOfInts);
 
         System.out.println("Compute the sum of a list of numbers (reduce)");
-        System.out.println(myListOfInts.stream().reduce((x,y) -> x+y).orElse(0));
+        System.out.println(myListOfInts.stream().reduce((x, y) -> x + y).orElse(0));
 
         System.out.println("Compute the sum of a list of numbers (sum)");
         System.out.println(myListOfInts.stream().parallel().mapToInt(Integer::intValue).sum());
 
         System.out.println("Compute the sum of a list of numbers (collecting)");
         System.out.println(myListOfInts.stream().parallel().collect(Collectors.summingInt(Integer::intValue)));
+
+        System.out.println("Compute the product of some doubles (serial)");
+        System.out.println(myListOfDoubles.stream().reduce((x, y) -> y * x).orElse(0.0));
+
+        System.out.println("Compute the product of some doubles (parallel)");
+        System.out.println(myListOfDoubles.stream().parallel().reduce((x, y) -> y * x).orElse(0.0));
 
     }
 
