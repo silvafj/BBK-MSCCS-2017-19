@@ -44,7 +44,7 @@ public class Outline {
                         .collect(Collectors.toUnmodifiableList())
         );
 
-        List<String> words = Arrays.asList("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks");
+        List<String> words = Arrays.asList("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks", "cem", "que");
 
         System.out.println("Loop through the words and print each one on a separate line, with two spaces in front of each word");
         words.stream().forEach(s -> System.out.println("  " + s));
@@ -69,6 +69,30 @@ public class Outline {
 
         System.out.println("evenLengthWords using filter");
         words.stream().filter(s -> (s.length() % 2) == 0).forEach(System.out::println);
+
+        System.out.println("Turn the strings in the array words into uppercase (e)");
+        System.out.println(
+                words.stream()
+                        .filter(s -> s.length() < 4)
+                        .filter(s -> s.contains("e"))
+                        .map(String::toUpperCase)
+                        .findFirst()
+                        .orElse("")
+        );
+
+        System.out.println("Turn the strings in the array words into uppercase (q)");
+        System.out.println(
+                words.stream()
+                        .filter(s -> s.length() < 4)
+                        .filter(s -> s.contains("q"))
+                        .map(String::toUpperCase)
+                        .findFirst()
+                        .orElse("")
+        );
+
+
+        // (*) , and, of what is remaining, keep only the ones that contain "e", and print the first result.
+        // Repeat the process, except checking for a "q" instead of an "e"
     }
 
 }
