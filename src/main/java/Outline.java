@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,13 +44,22 @@ public class Outline {
                         .collect(Collectors.toUnmodifiableList())
         );
 
+        List<String> words = Arrays.asList("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks");
+
         System.out.println("Loop through the words and print each one on a separate line, with two spaces in front of each word");
-        Stream.of("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks")
-                .forEach(s -> System.out.println("  " + s));
+        words.stream().forEach(s -> System.out.println("  " + s));
 
         System.out.println("Loop through the words and print each one on a separate line");
-        Stream.of("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks")
-                .forEach(System.out::println);
+        words.stream().forEach(System.out::println);
+
+        System.out.println("excitingWords using map");
+        words.stream().map(s -> s + "!").forEach(System.out::println);
+
+        System.out.println("eyeWords using map");
+        words.stream().map(s -> s.replace("i", "eye")).forEach(System.out::println);
+
+        System.out.println("upperCaseWords using map");
+        words.stream().map(String::toUpperCase).forEach(System.out::println);
     }
 
 }
