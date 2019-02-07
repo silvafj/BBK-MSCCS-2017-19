@@ -105,11 +105,20 @@ public class Outline {
         System.out.println("Produces list of 5 random doubles");
         System.out.println(randomNumberList(5));
 
+        System.out.println("Produces a list of 5 numbers that go in order by a 5 step size");
+        System.out.println(orderedNumberList(50, 5, 10));
     }
 
     private static List<Double> randomNumberList(int size) {
         return IntStream.range(0, size)
                 .mapToDouble(i -> (new Random().nextDouble()))
+                .boxed()
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    private static List<Integer> orderedNumberList(int start, int step, int size) {
+        return IntStream.range(0, size)
+                .map(i -> start + (step * i))
                 .boxed()
                 .collect(Collectors.toUnmodifiableList());
     }
