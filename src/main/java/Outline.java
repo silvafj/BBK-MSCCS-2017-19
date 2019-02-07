@@ -39,9 +39,13 @@ public class Outline {
         System.out.println(
                 Stream.of(1, 2, 3)
                         .flatMap(i -> Stream.of(3, 4).map(j -> Arrays.asList(i, j)))
-                        .filter(l -> l.stream().reduce ((x,y) -> x+y).orElse(0) % 3 == 0)
+                        .filter(l -> l.stream().reduce((x, y) -> x + y).orElse(0) % 3 == 0)
                         .collect(Collectors.toUnmodifiableList())
         );
+
+        System.out.println("Loop through the words and print each one on a separate line, with two spaces in front of each word");
+        Stream.of("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks")
+                .forEach(s -> System.out.println("  " + s));
     }
 
 }
