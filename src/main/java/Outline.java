@@ -11,6 +11,17 @@ public class Outline {
                     .filter(dish -> dish.getCalories() >= 500)
                     .collect(Collectors.toUnmodifiableList())
     );
+
+    System.out.println("How would you count the number of dishes in a stream using the map and reduce methods?");
+    System.out.println(
+            Dish.menu.stream()
+                    .map(dish -> 1)
+                    .reduce((x,y) -> x+y)
+                    .orElse(0)
+    );
+
+
+
   }
 
 }
