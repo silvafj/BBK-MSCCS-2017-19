@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Outline {
@@ -100,6 +102,16 @@ public class Outline {
                         .orElse("")
         );
 
+        System.out.println("Produces list of 5 random doubles");
+        System.out.println(randomNumberList(5));
+
+    }
+
+    private static List<Double> randomNumberList(int size) {
+        return IntStream.range(0, size)
+                .mapToDouble(i -> (new Random().nextDouble()))
+                .boxed()
+                .collect(Collectors.toUnmodifiableList());
     }
 
 }
