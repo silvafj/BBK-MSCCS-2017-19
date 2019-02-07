@@ -46,6 +46,10 @@ public class Outline {
         System.out.println("Loop through the words and print each one on a separate line, with two spaces in front of each word");
         Stream.of("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks")
                 .forEach(s -> System.out.println("  " + s));
+
+        System.out.println("Loop through the words and print each one on a separate line");
+        Stream.of("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks")
+                .forEach(System.out::println);
     }
 
 }
