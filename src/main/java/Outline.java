@@ -88,12 +88,12 @@ public class Outline {
                 .ifPresent(System.out::println);
 
         System.out.println("\nExample that proves that it is doing lazy evaluation");
-        words.stream()
+        // Nothing will be evaluated until the terminal operation is called
+        Stream<String> myStream = words.stream()
+                .map(Outline::mapperWithPrint)
                 .filter(s -> s.length() < 4)
                 .filter(s -> s.contains("q"))
-                .map(String::toUpperCase)
-                .findFirst()
-                .ifPresent(System.out::println);
+                .map(String::toUpperCase);
 
         System.out.println("\nProduces list of 5 random doubles");
         List<Double> myListOfDoubles = randomNumberList(10);
@@ -132,6 +132,11 @@ public class Outline {
                 .map(i -> start + (step * i))
                 .boxed()
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    private static String mapperWithPrint(String source) {
+        System.out.println("Mapping: " + source);
+        return source;
     }
 
 }
