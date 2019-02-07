@@ -90,9 +90,16 @@ public class Outline {
                         .orElse("")
         );
 
+        System.out.println("Example that proves that it is doing lazy evaluation");
+        System.out.println(
+                words.stream()
+                        .map(String::toUpperCase)
+                        .filter(s -> s.length() < 4)
+                        .filter(s -> s.contains("q"))
+                        .findFirst()
+                        .orElse("")
+        );
 
-        // (*) , and, of what is remaining, keep only the ones that contain "e", and print the first result.
-        // Repeat the process, except checking for a "q" instead of an "e"
     }
 
 }
