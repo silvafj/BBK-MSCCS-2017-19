@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,7 +28,12 @@ public class Outline {
                         .collect(Collectors.toUnmodifiableList())
         );
 
-
+        System.out.println("How would you return all pairs of numbers?");
+        System.out.println(
+                Stream.of(1, 2, 3)
+                        .flatMap(i -> Stream.of(3, 4).map(j -> Arrays.asList(i, j)))
+                        .collect(Collectors.toUnmodifiableList())
+        );
     }
 
 }
