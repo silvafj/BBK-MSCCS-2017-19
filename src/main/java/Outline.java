@@ -16,29 +16,28 @@ public class Outline {
                         .collect(Collectors.toUnmodifiableList())
         );
 
-        System.out.println("How would you count the number of dishes in a stream using the map and reduce methods?");
+        System.out.println("\nHow would you count the number of dishes in a stream using the map and reduce methods?");
         System.out.println(
                 Dish.menu.stream()
                         .map(dish -> 1)
-                        .reduce((x, y) -> x + y)
-                        .orElse(0)
+                        .reduce(0, (x, y) -> x + y)
         );
 
-        System.out.println("How would you return a list of the square of each number?");
+        System.out.println("\nHow would you return a list of the square of each number?");
         System.out.println(
                 Stream.of(1, 2, 3, 4, 5)
                         .map(i -> i * i)
                         .collect(Collectors.toUnmodifiableList())
         );
 
-        System.out.println("How would you return all pairs of numbers?");
+        System.out.println("\nHow would you return all pairs of numbers?");
         System.out.println(
                 Stream.of(1, 2, 3)
                         .flatMap(i -> Stream.of(3, 4).map(j -> Arrays.asList(i, j)))
                         .collect(Collectors.toUnmodifiableList())
         );
 
-        System.out.println("How would you return only pairs whose sum is divisible by 3?");
+        System.out.println("\nHow would you return only pairs whose sum is divisible by 3?");
         System.out.println(
                 Stream.of(1, 2, 3)
                         .flatMap(i -> Stream.of(3, 4).map(j -> Arrays.asList(i, j)))
@@ -48,81 +47,75 @@ public class Outline {
 
         List<String> words = Arrays.asList("hi", "hello", "ola", "hola", "gracias", "obrigado", "thanks", "cem", "que");
 
-        System.out.println("Loop through the words and print each one on a separate line, with two spaces in front of each word");
+        System.out.println("\nLoop through the words and print each one on a separate line, with two spaces in front of each word");
         words.stream().forEach(s -> System.out.println("  " + s));
 
-        System.out.println("Loop through the words and print each one on a separate line");
+        System.out.println("\nLoop through the words and print each one on a separate line");
         words.stream().forEach(System.out::println);
 
-        System.out.println("excitingWords using map");
+        System.out.println("\nexcitingWords using map");
         words.stream().map(s -> s + "!").forEach(System.out::println);
 
-        System.out.println("eyeWords using map");
+        System.out.println("\neyeWords using map");
         words.stream().map(s -> s.replace("i", "eye")).forEach(System.out::println);
 
-        System.out.println("upperCaseWords using map");
+        System.out.println("\nupperCaseWords using map");
         words.stream().map(String::toUpperCase).forEach(System.out::println);
 
-        System.out.println("shortWords using filter");
+        System.out.println("\nshortWords using filter");
         words.stream().filter(s -> s.length() < 4).forEach(System.out::println);
 
-        System.out.println("wordsWithB using filter");
+        System.out.println("\nwordsWithB using filter");
         words.stream().filter(s -> s.contains("b")).forEach(System.out::println);
 
-        System.out.println("evenLengthWords using filter");
+        System.out.println("\nevenLengthWords using filter");
         words.stream().filter(s -> (s.length() % 2) == 0).forEach(System.out::println);
 
-        System.out.println("Turn the strings in the array words into uppercase (e)");
-        System.out.println(
-                words.stream()
-                        .filter(s -> s.length() < 4)
-                        .filter(s -> s.contains("e"))
-                        .map(String::toUpperCase)
-                        .findFirst()
-                        .orElse("")
-        );
+        System.out.println("\nTurn the strings in the array words into uppercase (e)");
+        words.stream()
+                .filter(s -> s.length() < 4)
+                .filter(s -> s.contains("e"))
+                .map(String::toUpperCase)
+                .findFirst()
+                .ifPresent(System.out::println);
 
-        System.out.println("Turn the strings in the array words into uppercase (q)");
-        System.out.println(
-                words.stream()
-                        .filter(s -> s.length() < 4)
-                        .filter(s -> s.contains("q"))
-                        .map(String::toUpperCase)
-                        .findFirst()
-                        .orElse("")
-        );
+        System.out.println("\nTurn the strings in the array words into uppercase (q)");
+        words.stream()
+                .filter(s -> s.length() < 4)
+                .filter(s -> s.contains("q"))
+                .map(String::toUpperCase)
+                .findFirst()
+                .ifPresent(System.out::println);
 
-        System.out.println("Example that proves that it is doing lazy evaluation");
-        System.out.println(
-                words.stream()
-                        .map(String::toUpperCase)
-                        .filter(s -> s.length() < 4)
-                        .filter(s -> s.contains("q"))
-                        .findFirst()
-                        .orElse("")
-        );
+        System.out.println("\nExample that proves that it is doing lazy evaluation");
+        words.stream()
+                .filter(s -> s.length() < 4)
+                .filter(s -> s.contains("q"))
+                .map(String::toUpperCase)
+                .findFirst()
+                .ifPresent(System.out::println);
 
-        System.out.println("Produces list of 5 random doubles");
+        System.out.println("\nProduces list of 5 random doubles");
         List<Double> myListOfDoubles = randomNumberList(10);
         System.out.println(myListOfDoubles);
 
-        System.out.println("Produces a list of 5 numbers that go in order by a 5 step size");
+        System.out.println("\nProduces a list of 5 numbers that go in order by a 5 step size");
         List<Integer> myListOfInts = orderedNumberList(50, 5, 10);
         System.out.println(myListOfInts);
 
-        System.out.println("Compute the sum of a list of numbers (reduce)");
-        System.out.println(myListOfInts.stream().reduce((x, y) -> x + y).orElse(0));
+        System.out.println("\nCompute the sum of a list of numbers (reduce)");
+        System.out.println(myListOfInts.stream().reduce(0, (x, y) -> x + y));
 
-        System.out.println("Compute the sum of a list of numbers (sum)");
+        System.out.println("\nCompute the sum of a list of numbers (sum)");
         System.out.println(myListOfInts.stream().parallel().mapToInt(Integer::intValue).sum());
 
-        System.out.println("Compute the sum of a list of numbers (collecting)");
+        System.out.println("\nCompute the sum of a list of numbers (collecting)");
         System.out.println(myListOfInts.stream().parallel().collect(Collectors.summingInt(Integer::intValue)));
 
-        System.out.println("Compute the product of some doubles (serial)");
+        System.out.println("\nCompute the product of some doubles (serial)");
         System.out.println(myListOfDoubles.stream().reduce(2.0, (x, y) -> y * x));
 
-        System.out.println("Compute the product of some doubles (parallel)");
+        System.out.println("\nCompute the product of some doubles (parallel)");
         System.out.println(myListOfDoubles.stream().parallel().reduce(2.0, (x, y) -> y * x));
 
     }
