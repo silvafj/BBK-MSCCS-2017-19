@@ -34,6 +34,14 @@ public class Outline {
                         .flatMap(i -> Stream.of(3, 4).map(j -> Arrays.asList(i, j)))
                         .collect(Collectors.toUnmodifiableList())
         );
+
+        System.out.println("How would you return only pairs whose sum is divisible by 3?");
+        System.out.println(
+                Stream.of(1, 2, 3)
+                        .flatMap(i -> Stream.of(3, 4).map(j -> Arrays.asList(i, j)))
+                        .filter(l -> l.stream().reduce ((x,y) -> x+y).orElse(0) % 3 == 0)
+                        .collect(Collectors.toUnmodifiableList())
+        );
     }
 
 }
