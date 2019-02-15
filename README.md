@@ -1,14 +1,245 @@
 # Worksheet on Design Patterns - Part I
 
+## Creational Design Patterns
+
 In these exercises we will be examining the following design patterns (amongst others):
 
++ Abstract Factory,
++ Builder,
 + Factory Method,
-+ Singleton, 
-+ Adapter,
-+ Observer, and
-+ Decorator,
++ Prototype, and
++ Singleton
 
-1. The *Factory Method* pattern gives us a way to encapsulate the instantiations of 
+--
+
+1. This question concerns the *Abstract Factory* design pattern. 
+ 
+	A product company, *Bigfish*, has changed the way they take orders from their clients. 
+The company uses an application to take orders from them. 
+They receive orders, errors in orders, feedback for the previous order, and responses to the order, 
+in an XML format.
+
+	Now the clients don’t want to follow the company’s specific XML rules. 
+	The clients want to use their own XML rules to communicate with "Bigfish". 
+	This means that for every client, the company should have client specific XML parsers. 
+	For example, for the NYC client there should be four specific types of XML parsers, i.e.,
+	+ `NYCErrorXMLParser`, 
+	+ `NYCFeedbackXML`, 
+	+ `NYCOrderXMLParser`, 
+	+ `NYCResponseXMLParser`
+	
+	and four different parsers for the London client.
+	
+	The company has asked you to change the application according to the new requirements. 
+	To develop the parser for the original application they used a *Factory Method* design pattern in which 
+	the exact object to use is decided by the subclasses according to the type of parser. 
+	Now, to implement the new requirements, you are required to use a factory of factories, 
+	i.e., an *Abstract Factory*.
+	
+	**Note**: You will need parsers according to client specific XMLs, so you will create different 
+	factories for different clients which will provide the client specific XML to parse. 
+	You will achieve this by creating an *Abstract Factory* and then implement the factory to provide a 
+	client specific XML factory. 
+	Then you will use that factory to get the desired client specific XML parser object.
+	
+	To implement the pattern you first need to create an interface that will be implemented by all the 
+	concrete factories:
+	```java
+	public interface AbstractParserFactory {
+		public XMLParser getParserInstance(String parserType);
+	}
+	```
+	The above interface is implemented by the client specific concrete factories which will provide the 
+	XML parser object to the client object. 
+	The `getParserInstance` method takes the `parserType` as an argument which is used to get 
+	the message specific (error parser, order parser etc) parser object.
+	
+	The following is a test class for the resulting code: 
+	```java
+	public class TestAbstractFactoryPattern {
+		public static void main(String[] args) {
+
+			AbstractParserFactory parserFactory = ParserFactoryProducer.getFactory("NYFactory");
+			XMLParser parser = parserFactory.getParserInstance("NYORDER");
+			String msg="";
+			msg = parser.parse();
+			System.out.println(msg);
+
+			System.out.println("************************************");
+
+			parserFactory = ParserFactoryProducer.getFactory("TWFactory");
+			parser = parserFactory.getParserInstance("TWFEEDBACK");
+			msg = parser.parse();
+			System.out.println(msg);
+		}
+	}
+	```
+	The above code will result to the following output:
+	```
+	NY Parsing order XML...
+	NY Order XML Message
+	************************************
+	TW Parsing feedback XML...
+	TW Feedback XML Message
+	```
+	
+2. As an example of the *Builder* design pattern, consider a Car company which displays its different cars 
+to its customers using a graphical model. 
+The company has a graphical tool which displays the car on the screen. 
+The requirements of the tool are that it is provided with a car object display. 
+The car object should contain the car’s specifications. 
+The graphical tool uses these specifications to display the car.
+
+	The company has classified its cars into different groups, e.g., *Sedan*, or *Sports Car*. 
+	There is only one car object, and our job is to create the car object according to the classification. 
+	For example, for a sedan car, a car object according to the sedan specification should be built or, 
+	if a sports car is required, then a car object according to the sports car specification should be built.
+	
+	Currently, the Company wants only these two types of cars, but it may require other types of cars also 
+	in the future. 
+	You are required to create two different builders, one of each classification, 
+	i.e., for sedan and sports cars. 
+	The two builders will help in building the car object according to its specification.
+	
+	Shown below is the `Car` class which contains some of the important components of the car 
+	that are required to construct the complete car object:
+	```java
+	public class Car {
+		private String bodyStyle;
+		private String power;
+		private String engine;
+		private String breaks;
+		private String seats;
+		private String windows;
+		private String fuelType;
+		private String carType;
+	
+		public Car (String carType){
+			this.carType = carType;
+		}
+	
+		public String getBodyStyle() {
+			return bodyStyle;
+		}
+	
+		public void setBodyStyle(String bodyStyle) {
+			this.bodyStyle = bodyStyle;
+		}
+	
+		public String getPower() {
+			return power;
+		}
+	
+		public void setPower(String power) {
+			this.power = power;
+		}
+	
+		public String getEngine() {
+			return engine;
+		}
+	
+		public void setEngine(String engine) {
+			this.engine = engine;
+		}
+	
+		public String getBreaks() {
+			return breaks;
+		}
+	
+		public void setBreaks(String breaks) {
+			this.breaks = breaks;
+		}
+	
+		public String getSeats() {
+			return seats;
+		}
+	
+		public void setSeats(String seats) {
+			this.seats = seats;
+		}
+	
+		public String getWindows() {
+			return windows;
+		}
+		
+		public void setWindows(String windows) {
+			this.windows = windows;
+		}
+	
+		public String getFuelType() {
+			return fuelType;
+		}
+		
+		public void setFuelType(String fuelType) {
+			this.fuelType = fuelType;
+		}
+	
+		@Override
+		public String toString(){
+			StringBuilder sb = new StringBuilder();
+			sb.append("--------------"+carType+"--------------------- \\n");
+			sb.append(" Body: ");
+			sb.append(bodyStyle);
+			sb.append("\\n Power: ");
+			sb.append(power);
+			sb.append("\\n Engine: ");
+			sb.append(engine);
+			sb.append("\\n Breaks: ");
+			sb.append(breaks);
+			sb.append("\\n Seats: ");
+			sb.append(seats);
+			sb.append("\\n Windows: ");
+			sb.append(windows);
+			sb.append("\\n Fuel Type: ");
+			sb.append(fuelType);
+		
+			return sb.toString();
+		}
+	}
+	```
+	You should be able to test your implementation using the following `TestBuilderPattern` class:
+	```java
+	public class TestBuilderPattern {
+		public static void main(String[] args) {
+			CarBuilder carBuilder = new SedanCarBuilder();
+			CarDirector director = new CarDirector(carBuilder);
+			
+			director.build();
+		
+			Car car = carBuilder.getCar();
+			System.out.println(car);
+		
+			carBuilder = new SportsCarBuilder();
+			director = new CarDirector(carBuilder);
+			director.build();
+			car = carBuilder.getCar();
+			System.out.println(car);
+		}
+	}
+	```
+	The above code will result to the following output:
+	```
+	--------------SEDAN--------------------- 
+ 	Body: External dimensions: overall length (inches): 202.9, overall width (inches): 76.2, overall height (inches): 60.7, wheelbase (inches): 112.9, front track (inches): 65.3, rear track (inches): 65.5 and curb to curb turning circle (feet): 39.5
+ 	Power: 285 hp @ 6,500 rpm; 253 ft lb of torque @ 4,000 rpm
+	 Engine: 3.5L Duramax V 6 DOHC
+	 Breaks: Four-wheel disc brakes: two ventilated. Electronic brake distribution
+	 Seats: Front seat center armrest.Rear seat center armrest.Split-folding rear seats
+	 Windows: Laminated side windows.Fixed rear window with defroster
+	 Fuel Type: Gasoline 19 MPG city, 29 MPG highway, 23 MPG combined and 437 mi. range
+
+	--------------SPORTS--------------------- 
+	 Body: External dimensions: overall length (inches): 192.3, overall width (inches): 75.5, overall height (inches): 54.2, wheelbase (inches): 112.3, front track (inches): 63.7, rear track (inches): 64.1 and curb to curb turning circle (feet): 37.7
+	 Power: 323 hp @ 6,800 rpm; 278 ft lb of torque @ 4,800 rpm
+	 Engine: 3.6L V 6 DOHC and variable valve timing
+	 Breaks: Four-wheel disc brakes: two ventilated. Electronic brake distribution. StabiliTrak stability control
+	 Seats: Driver sports front seat with one power adjustments manual height, front passenger seat sports front seat with one power adjustments
+	 Windows: Front windows with one-touch on two windows
+	 Fuel Type: Gasoline 17 MPG city, 28 MPG highway, 20 MPG combined and 380 mi. range
+	```
+
+
+3. The *Factory Method* pattern gives us a way to encapsulate the instantiations of 
 concrete types; it encapsulates the functionality required to select and instantiate 
 an appropriate class, inside a designated method referred to as a *factory method*. 
 The factory method selects an appropriate class from a class hierarchy based on the 
@@ -32,7 +263,91 @@ varying class selection criteria.
    In this case the code only deals with the `Product` interface; 
    therefore it can work with any user-defined `ConcreteProduct` classes.
    
-2. In this question we examine the *Singleton* design pattern.
+4. This question concerns the *Prototype* design pattern.
+
+	Let us consider a scenario where an application requires some access control. 
+	The features of the applications can be used by the users according to the access rights provided to them. 
+	For example, some users have access to the reports generated by the application, while some don’t. 
+	Some of them even can modify the reports, while some can only read it. 
+	Some users also have administrative rights to add or even remove other users.
+
+	Every user object has an access control object, which is used to provide or restrict the controls of 
+	the application. 
+	This access control object is a bulky, heavy object and its creation is very costly since it 
+	requires data to be fetched from some external resources, like databases or some property files etc.
+	
+	We also cannot share the same access control object with users of the same level, because the rights can 
+	be changed at runtime by the administrator and a different user with the same level could have a 
+	different access control. 
+	One user object should have one access control object.
+
+	We can use the Prototype design pattern to resolve this problem by creating the access control objects 
+	on all levels at once, and then provide a copy of the object to the user whenever required. 
+	In this case, data fetching from the external resources happens only once. 
+	Next time, the access control object is created by copying the existing one. 
+	The access control object is not created from scratch every time the request is sent; 
+	this approach will certainly reduce object creation time.
+
+	You will use the `clone` method to solve the above problem:
+	```java
+	public interface Prototype extends Cloneable {
+		public AccessControl clone() throws CloneNotSupportedException;
+	}
+	```
+	The above interface extends the `Cloneable` interface and contains a method `clone`. 
+	This interface is implemented by classes which want to create a prototype object.
+	
+	The `AccessControl` class implements the prototype interface and overrides the `clone` method. 
+	The class also contains two properties; the `controlLevel` is used to specific the level of control 
+	this object contains. 
+	The level depends upon the type of user going to use it, for example, `USER`, `ADMIN`, `MANAGER`, etc.
+	
+	The other property is the `access`; it contains the access right for the user. 
+	Please note that, for simplicity, we have used access as a `String` type attribute. 
+	This could be of type `Map`, which can contain key-value pairs of long access rights assigned to the user.
+	
+	The `User` class has a `userName`, `level`, and a reference to the `AccessControl` assigned to it.
+	
+	You should use an `AccessControlProvider` class that creates and stores the possible 
+	`AccessControl` objects in advance. 
+	When there is a request to an `AccessControl` object, it returns a new object created by copying the 
+	stored prototypes.
+
+	The `getAccessControlObject` method fetches a stored prototype object according to the `controlLevel`
+	passed to it, from the map and returns a newly created cloned object to the client code.
+	
+	You should test your code using the following:
+	```java
+	public class TestPrototypePattern {
+		public static void main(String[] args) {
+			AccessControl userAccessControl = AccessControlProvider.getAccessControlObject("USER");
+			User user = new User("User A", "USER Level", userAccessControl);
+
+			System.out.println("************************************");
+			System.out.println(user);
+
+			userAccessControl = AccessControlProvider.getAccessControlObject("USER");
+			user = new User("User B", "USER Level", userAccessControl);
+			System.out.println("Changing access control of: "+user.getUserName());
+			user.getAccessControl().setAccess("READ REPORTS");
+			System.out.println(user);
+
+			System.out.println("************************************");
+
+			AccessControl managerAccessControl = AccessControlProvider.getAccessControlObject("MANAGER");
+			user = new User("User C", "MANAGER Level", managerAccessControl);
+			System.out.println(user);
+		}
+	}
+	```
+	which should produce the following output:
+	```
+	Fetching data from external resources and creating access control objects...	************************************	Name: User A, Level: USER Level, Access Control Level:USER, Access: DO_WORK	Changing access of: User B	Name: User B, Level: USER Level, Access Control Level:USER, Access: READ REPORTS 
+	************************************	Name: User C, Level: MANAGER Level, Access Control Level:MANAGER, Access: GENERATE/READ REPORTS	
+	```
+
+   
+5. In this question we examine the *Singleton* design pattern.
 	+ Why might you decide to *lazy-initialise* a singleton instance rather than initialise 
       it in its field declaration? Provide code examples of both approaches to illustrate your answer.
     + There are many ways to break the singleton pattern. One is in a multi-threaded environment but 
@@ -43,416 +358,3 @@ varying class selection criteria.
 		+ If the class is loaded by multiple *class loaders*.	
 	
 	Try and write a class `SingletonProtected` that addresses some (all?) of these issues.
-
-3. We now consider the *Adapter* design pattern.
-
-	A software developer, Max, has worked on an e-commerce website. 
-The website allows users to shop and pay online. The site is integrated with a third party 
-payment gateway, through which users can pay their bills using their credit card. 
-Everything was going well, until his manager called him for a change in the project.
-
-	The manager has told him that they are planning to change the payment gateway vendor, 
-and Max has to implement that in the code. The problem that arises here is that the site 
-is attached to the `Xpay` payment gateway which takes an `Xpay` type of object. 
-The new vendor, `PayD`, only allows the `PayD` type of objects to allow the process. 
-Max doesn't want to change the whole set of a hundred classes which have reference to an 
-object of type `XPay`. He cannot change the third party tool provided by the payment gateway. 
-
-	The problem arises due to the incompatible interfaces between the two different parts of 
-the code. To get the process to work, Max needs to find a way to make the code 
-compatible with the vendor's provided API.
-
-	The current code interface is not compatible with the new vendor's interface. What Max 
-needs here is an *Adapter* which can sit in between the code and the vendor's API, 
-enabling the transaction to proceed.
-
-	```java
-	public interface Xpay {
-	
-		public String getCreditCardNo();
-		public String getCustomerName();
-		public String getCardExpMonth();
-		public String getCardExpYear();
-		public Short getCardCVVNo();
-		public Double getAmount();
-	
-		public void setCreditCardNo(String creditCardNo);
-		public void setCustomerName(String customerName);
-		public void setCardExpMonth(String cardExpMonth);
-		public void setCardExpYear(String cardExpYear);
-		public void setCardCVVNo(Short cardCVVNo);
-		public void setAmount(Double amount);	
-	}
-	```
-
-	The `Xpay` interface contains setter and getter methods to get the information about 
-the credit card and customer name. The interface is implemented in the following code which is 
-used to instantiate an object of this type, and exposes the object to the vendor's API.
-
-	```java
-	import Xpay;
-
-	public class XpayImpl implements Xpay {
-
-		private String creditCardNo;
-		private String customerName;
-		private String cardExpMonth;
-		private String cardExpYear;
-		private Short cardCVVNo;
-		private Double amount;
-	
-		@Override
-		public String getCreditCardNo() {
-			return creditCardNo;
-		}
-
-		@Override
-		public String getCustomerName() {
-			return customerName;
-		}
-
-		@Override
-		public String getCardExpMonth() {
-			return cardExpMonth;
-		}
-
-		@Override
-		public String getCardExpYear() {
-			return cardExpYear;
-		}
-
-		@Override
-		public Short getCardCVVNo() {
-			return cardCVVNo;
-		}
-
-		@Override
-		public Double getAmount() {
-			return amount;
-		}
-
-		@Override
-		public void setCreditCardNo(String creditCardNo) {
-			this.creditCardNo = creditCardNo;
-		}
-
-		@Override
-		public void setCustomerName(String customerName) {
-			this.customerName = customerName;
-		}
-
-		@Override
-		public void setCardExpMonth(String cardExpMonth) {
-			this.cardExpMonth = cardExpMonth;
-		}
-
-		@Override
-		public void setCardExpYear(String cardExpYear) {
-			this.cardExpYear = cardExpYear;
-		}
-
-		@Override
-		public void setCardCVVNo(Short cardCVVNo) {
-			this.cardCVVNo = cardCVVNo;
-		}
-
-		@Override
-		public void setAmount(Double amount) {
-			this.amount = amount;
-		}
-	}
-	```
-	The new vendor's interface looks like this:
-	```java
-	public interface PayD {
-	
-		public String getCustCardNo();
-		public String getCardOwnerName();
-		public String getCardExpMonthDate();
-		public Integer getCVVNo();
-		public Double getTotalAmount();
-	
-		public void setCustCardNo(String custCardNo);
-		public void setCardOwnerName(String cardOwnerName);
-		public void setCardExpMonthDate(String cardExpMonthDate);
-		public void setCVVNo(Integer cVVNo);
-		public void setTotalAmount(Double totalAmount);
-	}
-	```
-	As you can see, this interface has a set of different methods which need to be implemented 
-	in the code. However, `Xpay` objects are created by most parts of the code, 
-	and it is difficult (and risky) to change the entire set of classes.
-	We need some way, that's able to fulfil the vendor's requirement to process the payment 
-	and also make less or no change to the current code base. 
-
-	You are required to use the *Adapter* pattern to implement a `XpayToPayDAdapter` 
-	class to meet the requirements. We can test your class to see whether it can solve the Max’s problem using
-	the following:
-	```java
-	import PayD;
-	import Xpay;
-
-	public class RunAdapterExample {
-
-		public static void main(String[] args) {
-		
-			// Object for Xpay
-			Xpay xpay = new XpayImpl();
-			xpay.setCreditCardNo("4789565874102365");
-			xpay.setCustomerName("Max Warner");
-			xpay.setCardExpMonth("09");
-			xpay.setCardExpYear("25");
-			xpay.setCardCVVNo((short)235);
-			xpay.setAmount(2565.23);
-		
-			PayD payD = new XpayToPayDAdapter(xpay);
-			testPayD(payD);
-		}
-	
-		private static void testPayD(PayD payD){
-		
-			System.out.println(payD.getCardOwnerName());
-			System.out.println(payD.getCustCardNo());
-			System.out.println(payD.getCardExpMonthDate());
-			System.out.println(payD.getCVVNo());
-			System.out.println(payD.getTotalAmount());
-		}
-	}
-	```
-4. This question examines the *Observer* design pattern.
-
-	*Sports Lobby* is a sports website targeted at sport lovers. 
-	They cover almost all kinds of sports and provide the latest news, 
-	information, matches scheduled dates, information about a particular player or a team. 
-	Now, they are planning to provide live commentary or scores of matches as an SMS service, 
-	but only for their premium users. Their aim is to SMS the live score, match situation, 
-	and important events after short intervals. As a user, you need to 
-	subscribe to the package and when there is a live match you will get an SMS to the 
-	live commentary. The site also provides an option to unsubscribe from the package 
-	whenever a user wants to.
-
-	As a developer, the Sport Lobby has asked you to provide this new feature for them. 
-	The reporters of the Sport Lobby will sit in the commentary box in the match, and they will 
-	update live commentary to a commentary object. As a developer your job is to 
-	provide the commentary to the registered users by fetching it from the commentary 
-	object when it's available. When there is an update, 
-	the system should update the subscribed users by sending them the SMS.
-	This situation clearly indicates a *one-to-many* mapping between the match and the users, 
-	as there could be many users subscribed to a single match. The *Observer* design pattern 
-	is best suited to this situation - you should implement this feature for 
-	Sport Lobby using the *Observer* pattern. 
-
-	Remember that there are four participants in the *Observer* pattern:
-	+ `Subject` which is used to register observers. 
-	Objects use this interface to register as observers and also to remove 
-	themselves from being observers.
-	+ `Observer` defines an updating interface for objects that should be notified of changes in a subject. 
-	All observers need to implement the `Observer` interface. 
-	This interface has a method `update()`, which gets called when the `Subject`'s state changes.
-	+ `ConcreteSubject` stores the state of interest to `ConcreteObserver` objects. 
-	It sends a notification to its observers when its state changes. 
-	A concrete subject always implements the `Subject` interface. 
-	The `notifyObservers()` method is used to update all the current observers whenever the state changes.
-	+ `ConcreateObserver` maintains a reference to a `ConcreteSubject` object and implements the 
-	`Observer` interface. Each observer registers with a concrete subject to receive updates.
-	
-	```java
-	public interface Subject {
-
-		public void subscribeObserver(Observer observer);
-		public void unSubscribeObserver(Observer observer);
-		public void notifyObservers();
-		public String subjectDetails();
-	}
-	```
-	The three key methods in the `Subject` interface are:
-	+ `subscribeObserver`, which is used to subscribe observers or we can say register the observers so that if 
-	there is a change in the state of the subject, all these observers should get notified.
-	+ `unSubscribeObserver`, which is used to unsubscribe observers so that if there is a change in the state
-	of the subject, this unsubscribed observer should not get notified.
-	+ `notifyObservers`, this method notifies the registered observers when there is a change in the state 
-	of the subject.
-
-	And optionally there is one more method `subjectDetails()`, it is a trivial method and is 
-	according to your need. Here, its job is to return the details of the subject.
-	
-	Now, let’s examine the `Observer` interface:
-	```java
-	public interface Observer {
-
-		public void update(String desc);
-		public void subscribe();
-		public void unSubscribe();
-	}
-	```
-	+ `update(String desc)`, method is called by the subject on the observer in order to notify it, 
-	when there is a change in the state of the subject.
-	+ `subscribe()`, method is used to subscribe itself with the subject.
-	+ `unsubscribe()`, method is used to unsubscribe itself with the subject.
-	
-	```java
-	public interface Commentary {
-		public void setDesc(String desc);
-	}
-	```
-	The above interface is used by the reporters to update the live commentary on the commentary object. 
-	It’s an optional interface just to follow the *code to interface* principle, not related to the 
-	*Observer* pattern. You should apply object-oriented programming principles along with the 
-	design patterns wherever applicable. The interface contains only one method which is used 
-	to change the state of the concrete subject object.
-	
-	We can test our implementations of:
-	+ `CommentaryObject`
-	+ `SMSUsers`
-	+ etc.
-	
-	using the following test program:
-	```java
-	import java.util.ArrayList;
-
-	public class TestObserver {
-
-		public static void main(String[] args) {
-			Subject subject = new CommentaryObject(new ArrayList<Observer>(), "Football Match [2019MAR24]");
-			Observer observer = new SMSUsers(subject, "Adam Warner [Manchester]");
-			observer.subscribe();
-
-			System.out.println();
-
-			Observer observer2 = new SMSUsers(subject, "Tim Ronney [London]");
-			observer2.subscribe();
-
-			Commentary cObject = ((Commentary)subject);
-			cObject.setDesc("Welcome to live football match");
-			cObject.setDesc("Current score 0-0");
-
-			System.out.println();
-
-			observer2.unSubscribe();
-
-			System.out.println();
-
-			cObject.setDesc("It's a goal!!");
-			cObject.setDesc("Current score 1-0");
-
-			System.out.println();
-
-			Observer observer3 = new SMSUsers(subject, "Marrie [Paris]");
-			observer3.subscribe();
-
-			System.out.println();
-
-			cObject.setDesc("It's another goal!!");
-			cObject.setDesc("Half-time score 2-0");
-		}
-	}
-	```
-	The above code should produce the following output:
-	```
-	Subscribing Adam Warner [Manchester] to Football Match [2019MAR24] ...
-	Subscribed successfully.
-
-	Subscribing Tim Ronney [London] to Football Match [2019MAR24] ...
-	Subscribed successfully.
-
-	[Adam Warner [Manchester]]: Welcome to live football match
-	[Tim Ronney [London]]: Welcome to live football match
-
-	[Adam Warner [Manchester]]: Current score 0-0
-[	Tim Ronney [London]]: Current score 0-0
-
-	Unsubscribing Tim Ronney [London] to football Match [2019MAR24] ...
-	Unsubscribed successfully.
-
-	[Adam Warner [Manchester]]: It's a goal!!
-
-	[Adam Warner [Manchester]]: Current score 1-0
-
-	Subscribing Marrie [Paris] to football Match [2019MAR24] ...
-	Subscribed successfully.
-
-	[Adam Warner [Manchester]]: It's another goal!!
-	[Marrie [Paris]]: It's another goal!!
-
-	[Adam Warner [Manchester]]: Half-time score 2-0
-	[Marrie [Paris]]: Half-time score 2-0
-	```
-	As you can see, at first two users subscribed themselves for the football match and started 
-	receiving the commentary. Later on a user unsubscribed it, so the user did not receive the commentary 
-	again. Then, another user subscribed and starts receiving the commentary.
-	
-4. This question considers the *Decorator* design pattern.
-
-	You are commissioned by a pizza company make an extra topping calculator. 
-	A user can ask to add extra topping to a pizza and our job is to add toppings and 
-	increase its price using our classes.
-
-	**Please note**: the main aim of the *Decorator* design pattern is to 
-	attach additional responsibilities to an object dynamically. 
-	Decorators provide a flexible alternative to sub-classing for extending functionality.
-	The Decorator prevents the proliferation of subclasses leading to less complexity and confusion.
-
-	For simplicity, let's create a simple `Pizza` interface which contains only two methods:
-
-	```java
-	public interface Pizza {
-		public String getDesc();
-		public double getPrice();
-	}
-	```
-	The `getDesc` method is used to obtain the pizza's description whereas the 
-	`getPrice` method is used to obtain the price.
-
-	Provide two implementations of the `Pizza` interface:
-	+ `SimplyVegPizza`
-	+ `SimplyNonVegPizza`
-	
-	The decorator wraps the object whose functionality needs to be increased, 
-	so it needs to implement the same interface. 
-	
-	Provide an abstract decorator class which will be extended by all the concrete decorators.
-
-	Now provide several implementations of `PizzaDecorator` and exercise your classes
-	with the given test class. 
-	+ `Ham implements PizzaDecorator`
-	+ `Cheese implements PizzaDecorator`
-	+ `Chicken implements PizzaDecorator`
-	+ `FetaCheese implements PizzaDecorator`
-	+ ...
-
-
-	```java
-	import java.text.DecimalFormat;
-
-	public class TestDecoratorPattern {
-	
-		public static void main(String[] args) {
-			DecimalFormat dformat = new DecimalFormat("#.##");
-			Pizza pizza = new SimplyVegPizza();
-		
-			pizza = new RomaTomatoes(pizza);
-			pizza = new GreenOlives(pizza);
-			pizza = new Spinach(pizza);
-		
-			System.out.println("Desc: "+pizza.getDesc());
-			System.out.println("Price: "+dformat.format(pizza.getPrice()));
-		
-			pizza = new SimplyNonVegPizza();
-		
-			pizza = new Meat(pizza);
-			pizza = new Cheese(pizza);
-			pizza = new Cheese(pizza);
-			pizza = new Ham(pizza);
-		
-			System.out.println("Desc: "+pizza.getDesc());
-			System.out.println("Price: "+dformat.format(pizza.getPrice()));
-		}
-	}
-	```
-	The code should result in the following output:
-	```
-	Desc: SimplyVegPizza (230), Roma Tomatoes (5.20), Green Olives (5.47), Spinach (7.92)
-	Price: 248.59
-	Desc: SimplyNonVegPizza (350), Meat (14.25), Cheese (20.72), Cheese (20.72), Ham (18.12)
-	Price: 423.81
-	```
