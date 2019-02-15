@@ -352,7 +352,7 @@ In these exercises we will be examining the following design patterns:
 		}
 	}
 	```
-	Your solution should satisfy the tests specified in the `TestInterpreterPattern` class from the repository.
+	Your solution should satisfy the tests specified in the `TestInterpreterPattern` class from the repository. 
 	The tests should produce the following output:
 	```
 	( 7 3 -2 1 + * ):12
@@ -362,8 +362,7 @@ In these exercises we will be examining the following design patterns:
 	In the example class, we declared a postfix of an expression in the `tokenString` variable. 
 	Then we split the `tokenString` and assign it into an array, the `tokenArray`. 
 	While iterating tokens one by one, first we have checked whether the token is an operator or an operand. 
-	If the token is an *operand* we push it onto the stack, but if it is an *operator* we pop 
-	the first two operands from the stack. 
+	If the token is an *operand* we push it onto the stack, but if it is an *operator* we pop the first two operands from the stack. 
 
 	The `getOperation` method returns the appropriate expression class according to the operator passed to it. 
 	We next interpret the result and push it back onto the stack. 
@@ -410,8 +409,7 @@ In these exercises we will be examining the following design patterns:
 	}
 	```
 	The above class is used to store the `Shape` objects. 
-	The class contains an array of `Shape` type; for simplicity we have initialised that array up to 
-	five elements. 
+	The class contains an array of `Shape` type; for simplicity we have initialised that array up to five elements. 
 	The `addShape` method is used to add a `Shape` object to the array and increment the index by one. 
 	The `getShapes` method returns an array of `Shape` type.
 	
@@ -419,8 +417,7 @@ In these exercises we will be examining the following design patterns:
 	The class implements the `Iterator` interface and defines all the methods of the `Iterator` interface.
 	
 	The `hasNext` method returns a boolean if there’s an item left. 
-	The `next` method returns the next item from the collection, and the `remove` method removes 
-	the current item from the collection.
+	The `next` method returns the next item from the collection, and the `remove` method removes the current item from the collection.
 	
 	You should test your code using the `TestIteratorPattern` from the repository.
 	The code should produce the following output:
@@ -430,8 +427,7 @@ In these exercises we will be examining the following design patterns:
 	
 5. This question concerns the *Mediator* design pattern.
 
-	A major electronic company has asked you to develop a piece of software to operate its new fully 
-	automatic washing machine. 
+	A major electronic company has asked you to develop a piece of software to operate its new fully automatic washing machine. 
 	The company has provided you with the hardware specification and the working knowledge of the machine. 
 	In the specification, they have provided you the different washing programs the machine supports. 
 	They want to produce a fully automatic washing machine that will require almost zero human intervention. 
@@ -440,40 +436,31 @@ In these exercises we will be examining the following design patterns:
 	softener to their respective trays, and press the start button.
 
 	The machine should be smart enough to fill the water in the drum, as much as required. 
-	It should adjust the wash temperature by itself by turning the heater on, according to the type of 
-	clothes in it. 
+	It should adjust the wash temperature by itself by turning the heater on, according to the type of clothes in it. 
 	It should start the motor and spin the drum as much required, rinse according to the clothes needs, 
 	use soil removal if required, and softener too.
 
-	As an object oriented developer, you started analysing and classifying objects, classes, and 
-	their relationships. 
+	As an object oriented developer, you started analysing and classifying objects, classes, and their relationships. 
 	Let’s check some of the important classes and parts of the system. 
 	
-	First of all, a `Machine` class, which has a drum. So a `Drum` class, but also a heater, a sensor to 
-	check the temperature, a motor. 
+	First of all, a `Machine` class, which has a drum. So a `Drum` class, but also a heater, a sensor to check the temperature, a motor. 
 	Additionally, the machine also has a valve to control the water supply, a soil removal, detergent, 
 	and a softener.
 
 	These classes have a very complex relationship with each other, and the relationship also varies. 
 	Please note that currently we are talking only about the high level abstraction of the machine. 
-	If we try to design it without keeping much of OOP principles and patterns in mind, 
-	then the initial design would be very tightly coupled and hard to maintain. 
+	If we try to design it without keeping much of OOP principles and patterns in mind, then the initial design would be very tightly coupled and hard to maintain. 
 	This is because the above classes should contact with each other to get the job done. 
 
 
 	For example, the `Machine` class should ask the `Valve` class to open the valve, or the `Motor` 
-	should spin the `Drum` at certain rpm according to the wash program set (which is set by the type 
-	of clothes in the machine). 
-	Some type of clothes require softener or soil removal, while others don’t, or 
-	the temperature should be set according to the type of clothes.
+	should spin the `Drum` at certain rpm according to the wash program set (which is set by the type of clothes in the machine). 
+	Some type of clothes require softener or soil removal, while others don’t, or the temperature should be set according to the type of clothes.
 
-	If we allow classes to contact each other directly, that is, by providing a reference, 
-	the design will become very tightly coupled and hard to maintain. 
+	If we allow classes to contact each other directly, that is, by providing a reference, the design will become very tightly coupled and hard to maintain. 
 	It would become very difficult to change one class without affecting the other. 
-	Even worse, the relationship between the classes varies, according to the different wash programs, 
-	like different temperature for different type of clothes; so these classes won’t able to be reused.
-	To support all the wash programs we need to put control statements like *if-else* in the code 
-	which would make the code even more complex and difficult to maintain.
+	Even worse, the relationship between the classes varies, according to the different wash programs, like different temperature for different type of clothes; so these classes won’t able to be reused.
+	To support all the wash programs we need to put control statements like *if-else* in the code which would make the code even more complex and difficult to maintain.
 
 	To decouple these objects from each other we need a mediator, which will contact the object on behalf 
 	of the other object, hence providing loose coupling between them. 
@@ -481,9 +468,9 @@ In these exercises we will be examining the following design patterns:
 	The mediator will perform operations on the required underlying object in order to get the work done.
 	
 	You will see how the Mediator design pattern will make the washing machine design better:
-	+ reusable, 
-	+ maintainable, and 
-	+ loosely coupled.
+	+ Reusable, 
+	+ Maintainable, and 
+	+ Loosely coupled.
 
 	The `MachineMediator` is an interface which acts as a generic mediator:
 	```java
@@ -524,76 +511,13 @@ In these exercises we will be examining the following design patterns:
 	This `start` method of the mediator calls the `start` method of the machine class on behalf of the 
 	`Button` class.
 
-	As stated by the company, the washing machine has a set of wash programs and the software should 
-	support all these programs. 
-	The following mediator is set as a washing program for cottons, so parameters such as temperature, 
-	drum spinning speed, level of soil removal, etc., are set accordingly. 
-	We can have different mediators for different washing programs without changing the existing 
-	colleague classes and thus providing loose coupling and reusability. 
-	All these colleague classes can be reused with other washing programs of the machine.
-	```java
-	public class CottonMediator implements MachineMediator{	
-		private final Machine machine;
-		private final Heater heater;
-		private final Motor motor;
-		private final Sensor sensor;
-		private final SoilRemoval soilRemoval;
-		private final Valve valve;
-	
-		public CottonMediator(Machine machine,Heater heater,Motor motor,Sensor sensor,
-							  SoilRemoval soilRemoval,Valve valve) {
-			this.machine = machine;
-			this.heater = heater;
-			this.motor = motor;
-			this.sensor = sensor;
-			this.soilRemoval = soilRemoval;
-			this.valve = valve;
-		
-			System.out.println(".........Setting up for COTTON program ................");
-		}
-	
-		@Override
-		public void start() {
-			machine.start();
-		}
+	As stated by the company, the washing machine has a set of wash programs and the software should support all these programs. 
+	The following mediator is set as a washing program for cottons, so parameters such as temperature, drum spinning speed, level of soil removal, etc., are set accordingly. 
+	We can have different mediators for different washing programs without changing the existing colleague classes and thus providing loose coupling and reusability. 
+	All these *colleague* classes can be reused with the other washing machine programs. 
+	(See `CottonMediator` from the repository.)
 
-		@Override
-		public void wash() {
-			motor.startMotor();
-			motor.rotateDrum(700);
-			System.out.println("Adding detergent");
-			soilRemoval.low();
-			System.out.println("Adding softener");
-		}
-
-		@Override
-		public void open() {
-			valve.open();
-		}
-
-		@Override
-		public void closed() {
-			valve.closed();
-		}
-
-		@Override
-		public void on() {
-			heater.on(40);
-		}
-
-		@Override
-		public void off() {
-			heater.off();
-		}
-
-		@Override
-		public boolean checkTemperature(int temp) {
-			return sensor.checkTemperature(temp);
-		}
-	}
-	```
-	To see the advantages and power of the Mediator design pattern, let’s take another mediator that is 
-	used as a washing program for denim jeans. 
+	To see the advantages and power of the Mediator design pattern, let’s take another mediator that is used as a washing program for denim jeans. 
 	Now we just need to create a new mediator and set the rules in it to wash denims: 
 	+ rules like temperature, 
 	+ the speed at which drum will spin, 
@@ -602,72 +526,10 @@ In these exercises we will be examining the following design patterns:
 	+ etc. 
 	
 	We don’t need to change anything in the existing structure. 
-	No conditional statements like *if-else* are required, something that would otherwise 
-	increase the complexity.
-	```java
-	public class DenimMediator implements MachineMediator {
-		private final Machine machine;
-		private final Heater heater;
-		private final Motor motor;
-		private final Sensor sensor;
-		private final SoilRemoval soilRemoval;
-		private final Valve valve;
+	No conditional statements like *if-else* are required, something that would otherwise increase the complexity. 
+	(See the `DenimMediator` class on the repository.)
 
-		public DenimMediator(Machine machine,Heater heater,Motor motor,Sensor sensor,
-							 SoilRemoval soilRemoval,Valve valve) {
-			this.machine = machine;
-			this.heater = heater;
-			this.motor = motor;
-			this.sensor = sensor;
-			this.soilRemoval = soilRemoval;
-			this.valve = valve;
-
-			System.out.println("..................Setting up for DENIM program..................");
-		}
-
-
-		@Override
-		public void start() {
-			machine.start();
-		}
-
-		@Override
-		public void wash() {
-			motor.startMotor();
-			motor.rotateDrum(1400);
-			System.out.println("Adding detergent");
-			soilRemoval.medium();
-			System.out.println("Adding softener");
-		}
-
-		@Override
-		public void open() {
-			valve.open();
-		}
-
-		@Override
-		public void closed() {
-			valve.closed();
-		}
-
-		@Override
-		public void on() {
-			heater.on(30);
-		}
-
-		@Override
-		public void off() {
-			heater.off();
-		}
-
-		@Override
-		public boolean checkTemperature(int temp) {
-			return sensor.checkTemperature(temp);
-		}
-	}
-	```
-	Now we test these mediators using the `TestMediator` class from the repository 
-	and it should produce the following output:
+	Now we test these mediators using the `TestMediator` class (from the repository) and it should produce the following output:
 	```
 	Setting up for COTTON program	Button pressed.	Valve is opened...	Filling water...	Valve is closed...	Heater is on...	Temperature reached 40 C	Temperature is set to 40	Heater is off...	Start motor...	Rotating drum at 700 rpm.	Adding detergent	Setting Soil Removal to low	Adding softener
 
@@ -694,55 +556,9 @@ In these exercises we will be examining the following design patterns:
 	We will provide users with an `undo` operation. 
 	If the results after some operations are not satisfactory for a user, 
 	the user can call the `undo` operation which will restore the state of the object to the last saved point.
-	```java
-	public class Originator {
-		private double x;
-		private double y;
+	(Please see the `Originator` class from the repository.)
 
-		private String lastUndoSavepoint;
-		CareTaker careTaker;
-
-		public Originator(double x, double y,CareTaker careTaker){
-			// TODO
-			createSavepoint("INITIAL");
-		}
-
-		public double getX(){
-			return x;
-		}
-
-		public double getY(){
-			return y;
-		}
-
-		public void setX(double x) {
-		}
-
-		public void setY(double y) {
-		}
-
-		public void createSavepoint(String savepointName){
-		}
-
-		public void undo(){
-		}
-
-		public void undo(String savepointName){
-		}
-
-		public void undoAll(){
-		}
-
-		private void setOriginatorState(String savepointName){
-		}
-
-		@Override
-		public String toString(){
-			return "X: "+x+", Y: "+y;
-		}
-	}
-	```
-	The above is the `Originator` class whose object state should be saved in a memento. 
+	An instance of the `Originator` class should be saved in a memento. 
 	The class contains two `double` type fields `x` and `y`, and also takes a reference to a `CareTaker`. 
 	The `CareTaker` is used to *save* and *retrieve* the memento objects which represent the state of 
 	the `Originator` object.
@@ -810,46 +626,8 @@ In these exercises we will be examining the following design patterns:
 	+ the `clearSavepoints` method which is used to clear all the savepoints and it deletes all 
 	the saved memento objects.
 	
-	Your code should pass the following (indicative) tests:
-	```java
-	public class TestMementoPattern {
-		public static void main(String[] args) {
-
-			CareTaker careTaker = new CareTaker();
-			Originator originator = new Originator(5, 10, careTaker);
-
-			System.out.println("Default State: "+originator);
-
-			originator.setX(originator.getY()*51);
-
-			System.out.println("State: "+originator);
-			originator.createSavepoint("SAVE1");
-
-			originator.setY(originator.getX()/22);
-			System.out.println("State: "+originator);
-
-			originator.undo();
-			System.out.println("State after undo: "+originator);
-
-			originator.setX(Math.pow(originator.getX(),3));
-			originator.createSavepoint("SAVE2");
-			System.out.println("State: "+originator);
-			originator.setY(originator.getX()-30);
-			originator.createSavepoint("SAVE3");
-			System.out.println("State: "+originator);
-			originator.setY(originator.getX()/22);
-			originator.createSavepoint("SAVE4");
-			System.out.println("State: "+originator);
-
-			originator.undo("SAVE2");
-			System.out.println("Retrieving at: "+originator);
-
-			originator.undoAll();
-			System.out.println("State after undo all: "+originator);
-		}
-	}
-	```
-	The above code should result in the following output:
+	Your code should pass the indicative tests from the class `TestMementoPattern` on the repository.
+	The code should produce the following output:
 	```
 	Saving state...INITIAL	Default State: X: 5.0, Y: 10.0	State: X: 510.0, Y: 10.0	Saving state...SAVE1	State: X: 510.0, Y: 23.181818181818183	Undo at ...SAVE1	State after undo: X: 510.0, Y: 10.0	Saving state...SAVE2	State: X: 1.32651E8, Y: 10.0	Saving state...SAVE3	State: X: 1.32651E8, Y: 1.3265097E8	Saving state...SAVE4	State: X: 1.32651E8, Y: 6029590.909090909	Undo at ...SAVE2	Retrieving at: X: 1.32651E8, Y: 10.0	Undo at ...INITIAL	Clearing all save points...	State after undo all: X: 5.0, Y: 10.0	
 	```
@@ -1026,83 +804,15 @@ In these exercises we will be examining the following design patterns:
 	}
 	```
 	The following class is a concrete class implements the interface. 
-	The class contains the set of all possible states a robot can be in:
-	```java
-	public class Robot implements RoboticState{
-		private RoboticState roboticOn;
-		private RoboticState roboticCook;
-		private RoboticState roboticOff;
-
-		private RoboticState state;
-
-		public Robot(){
-			this.roboticOn = new RoboticOn(this);
-			this.roboticCook = new RoboticCook(this);
-			this.roboticOff = new RoboticOff(this);
-
-			this.state = roboticOn;
-		}
-
-		public void setRoboticState(RoboticState state){
-			this.state = state;
-		}
-
-		@Override
-		public void walk() {
-			state.walk();
-		}
-
-		@Override
-		public void cook() {
-			state.cook();
-		}
-
-		@Override
-		public void off() {
-			state.off();
-		}
-
-		public RoboticState getRoboticOn() {
-			return roboticOn;
-		}
-
-		public void setRoboticOn(RoboticState roboticOn) {
-			this.roboticOn = roboticOn;
-		}
-
-		public RoboticState getRoboticCook() {
-			return roboticCook;
-		}
-
-		public void setRoboticCook(RoboticState roboticCook) {
-			this.roboticCook = roboticCook;
-		}
-
-		public RoboticState getRoboticOff() {
-			return roboticOff;
-		}
-
-		public void setRoboticOff(RoboticState roboticOff) {
-			this.roboticOff = roboticOff;
-		}
-
-		public RoboticState getState() {
-			return state;
-		}
-
-		public void setState(RoboticState state) {
-			this.state = state;
-		}
-	}
-	```
-	The class initialises all the states and sets the current state as `on`.	Now, we will see all the concrete states of a robot. 
+	The class contains the set of all possible states a robot can be in (`Robot` on the repository).
+	The class initialises all the states and sets the current state as `on`.	Now, we will see all the concrete states of a robot. 
 	A robot will be in one of these states at any time:
 	+ `RoboticOn`
 	+ `RoboticCook`
 	+ `RoboticOff`
 
 
-	Now, let’s test the code.
+	We can test the code using the following:
 	```java
 	public class TestStatePattern {
 		public static void main(String[] args) {
@@ -1359,104 +1069,9 @@ the editor will able to format the text as required.
 	and will call the `visit` method, and will pass this operator as an argument.
 	This will allow the visitor method to get all the public members of the object, 
 	and to add new operations based on it.
-	```java
-	import java.util.ArrayList;
-	import java.util.List;
+	Please see the `HtmlParentElement` and `HtmlElement` classes from the repository.
 
-	public class HtmlParentElement extends HtmlTag {
-	
-		public HtmlParentElement(String tagName){}
-	
-		@Override
-		public String getTagName() {}
-
-		@Override
-		public void setStartTag(String tag) {}
-
-		@Override
-		public void setEndTag(String tag) {}
-	
-		@Override
-		public String getStartTag() {}
-	
-		@Override
-		public String getEndTag() {}
-	
-		@Override
-		public void addChildTag(HtmlTag htmlTag){}
-	
-		@Override
-		public void removeChildTag(HtmlTag htmlTag){}
-	
-		@Override
-		public List<HtmlTag>getChildren(){}
-
-		@Override
-		public void generateHtml() {}
-
-		@Override
-		public void accept(Visitor visitor) {
-			visitor.visit(this);
-		}
-	}
-	```
-	and
-	```java
-		public class HtmlElement extends HtmlTag{
-		private String tagName;
-		private String startTag; 
-		private String endTag;
-		private String tagBody;
-	
-		public HtmlElement(String tagName){
-			this.tagName = tagName;
-			this.tagBody = "";
-			this.startTag = "";
-			this.endTag = "";
-		}
-	
-		@Override
-		public String getTagName() {
-			return tagName;
-		}
-
-		@Override
-		public void setStartTag(String tag) {
-			this.startTag = tag;
-		}
-	
-		@Override
-		public void setEndTag(String tag) {
-			this.endTag = tag;
-		}
-	
-		@Override
-		public String getStartTag() {
-			return startTag;
-		}
-	
-		@Override
-		public String getEndTag() {
-			return endTag;
-		}
-	
-		@Override
-		public void setTagBody(String tagBody){
-			this.tagBody = tagBody;
-		}
-	
-		@Override
-		public void generateHtml() {
-			System.out.println(startTag+""+tagBody+""+endTag);
-		}
-
-		@Override
-		public void accept(Visitor visitor) {
-			visitor.visit(this);
-		}
-	}
-	```
-	Now, the concrete visitor classes. 
+	Now we consider the concrete visitor classes. 
 	We have created two concrete classes, one will add a css class visitor to all html tags, 
 	and the other one will change the width of the tag using the `style` attribute of the html tag.
 	```java
@@ -1473,79 +1088,8 @@ the editor will able to format the text as required.
 		}
 	}
 	```
-	Now, let's test the code:
-	```java
-	public class TestVisitorPattern {
-		public static void main(String[] args) {
-		
-			System.out.println("Before visitor......... \\n");
-		
-			HtmlTag parentTag = new HtmlParentElement("<html>");
-			parentTag.setStartTag("<html>");
-			parentTag.setEndTag("</html>");
-		
-			HtmlTag p1 = new HtmlParentElement("<body>");
-			p1.setStartTag("<body>");
-			p1.setEndTag("</body>");
-		
-			parentTag.addChildTag(p1);
-		
-			HtmlTag child1 = new HtmlElement("<p>");
-			child1.setStartTag("<p>");
-			child1.setEndTag("</p>");
-			child1.setTagBody("Testing html tag library");
-			p1.addChildTag(child1);
-		
-			child1 = new HtmlElement("<p>");
-			child1.setStartTag("<p>");
-			child1.setEndTag("</p>");
-			child1.setTagBody("Paragraph 2");
-			p1.addChildTag(child1);
-		
-			parentTag.generateHtml();
-		
-			System.out.println("\\nAfter visitor....... \\n");
-		
-			Visitor cssClass = new CssClassVisitor();
-			Visitor style = new StyleVisitor();
-		
-			parentTag = new HtmlParentElement("<html>");
-			parentTag.setStartTag("<html>");
-			parentTag.setEndTag("</html>");
-			parentTag.accept(style);
-			parentTag.accept(cssClass);
-		
-			p1 = new HtmlParentElement("<body>");
-			p1.setStartTag("<body>");
-			p1.setEndTag("</body>");
-			p1.accept(style);
-			p1.accept(cssClass);
-		
-			parentTag.addChildTag(p1);
-		
-			child1 = new HtmlElement("<p>");
-			child1.setStartTag("<p>");
-			child1.setEndTag("</p>");
-			child1.setTagBody("Testing html tag library");
-			child1.accept(style);
-			child1.accept(cssClass);
-		
-			p1.addChildTag(child1);
-		
-			child1 = new HtmlElement("<p>");
-			child1.setStartTag("<p>");
-			child1.setEndTag("</p>");
-			child1.setTagBody("Paragraph 2");
-			child1.accept(style);
-			child1.accept(cssClass);
-		
-			p1.addChildTag(child1);
-		
-			parentTag.generateHtml();
-		}
-	}
-	```
-	The above code should result in the following output:
+	Now, let's test the code using the `TestVisitorPattern` class from the repository.
+	The code should produce the following output:
 	```
 	Before visitor.........
 	<html>	<body>	<P>Testing html tag library</P>	<P>Paragraph 2</P>	</body>	</html>
