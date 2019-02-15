@@ -1,273 +1,450 @@
 # Worksheet on Design Patterns - Part II
 
+## Structural Design Patterns
+
 In these exercises we will be examining the following design patterns:
 
-+ Strategy,
-+ Abstract Factory, 
-+ Builder,
-+ Facade,
-+ Bridge, and
-+ Composite.
+1. Adapter 
+2. Bridge
+3. Composite 
+4. Decorator 
+5. Façade
+6. Flyweight 
+7. Proxy
 
-1. Create a text formatter for a text editor. A text editor can have different text formatters to 
-format text. We can create different text formatters and then pass the required one to the text editor, so that 
-the editor will able to format the text as required.
+--
 
-	The text editor will hold a reference to a common interface for the text formatter and the editor's job 
-	will be to pass the text to the formatter to format the text. You are required to implement this outline 
-	using the *Strategy* design pattern which will make the code flexible and maintainable.
+1. We now consider the *Adapter* design pattern.
 
-	Below is the `TextFormatter` interface which is implemented by all the concrete formatters, which
-	contains only one method, `format`, used to format the text.
+	A software developer, Max, has worked on an e-commerce website. 
+The website allows users to shop and pay online. The site is integrated with a third party 
+payment gateway, through which users can pay their bills using their credit card. 
+Everything was going well, until his manager called him for a change in the project.
+
+	The manager has told him that they are planning to change the payment gateway vendor, 
+and Max has to implement that in the code. The problem that arises here is that the site 
+is attached to the `Xpay` payment gateway which takes an `Xpay` type of object. 
+The new vendor, `PayD`, only allows the `PayD` type of objects to allow the process. 
+Max doesn't want to change the whole set of a hundred classes which have reference to an 
+object of type `XPay`. He cannot change the third party tool provided by the payment gateway. 
+
+	The problem arises due to the incompatible interfaces between the two different parts of 
+the code. To get the process to work, Max needs to find a way to make the code 
+compatible with the vendor's provided API.
+
+	The current code interface is not compatible with the new vendor's interface. What Max 
+needs here is an *Adapter* which can sit in between the code and the vendor's API, 
+enabling the transaction to proceed.
+
 	```java
-	public interface TextFormatter {	
-		public void format(String text);
+	public interface Xpay {
+	
+		public String getCreditCardNo();
+		public String getCustomerName();
+		public String getCardExpMonth();
+		public String getCardExpYear();
+		public Short getCardCVVNo();
+		public Double getAmount();
+	
+		public void setCreditCardNo(String creditCardNo);
+		public void setCustomerName(String customerName);
+		public void setCardExpMonth(String cardExpMonth);
+		public void setCardExpYear(String cardExpYear);
+		public void setCardCVVNo(Short cardCVVNo);
+		public void setAmount(Double amount);	
 	}
 	```
-	Some sample test code might look like:
+
+	The `Xpay` interface contains setter and getter methods to get the information about 
+the credit card and customer name. The interface is implemented in the following code which is 
+used to instantiate an object of this type, and exposes the object to the vendor's API.
+
 	```java
-	public class TestStrategyPattern {
-		public static void main(String[] args) {
-		    TextFormatter formatter = new CapTextFormatter();
-			TextEditor editor = new TextEditor(formatter);
-			editor.publishText("Testing text in caps formatter");
-		
-			formatter = new LowerTextFormatter();
-			editor = new TextEditor(formatter);
-			editor.publishText("Testing text in lower formatter");
-		}
-	}
-	```
-	The above code should result to the following output:
-	```
-	CapTextFormatter: TESTING TEXT IN CAPS FORMATTER
-	LowerTextFormatter: testing text in lower formatter
-	```
-2. A product company, *Bigfish*, has changed the way they take orders from their clients. 
-The company uses an application to take orders from them. 
-They receive orders, errors in orders, feedback for the previous order, and responses to the order, 
-in an XML format.
+	import Xpay;
 
-	Now the clients don’t want to follow the company’s specific XML rules. 
-	The clients want to use their own XML rules to communicate with "Bigfish". 
-	This means that for every client, the company should have client specific XML parsers. 
-	For example, for the NYC client there should be four specific types of XML parsers, i.e.,
-	+ `NYCErrorXMLParser`, 
-	+ `NYCFeedbackXML`, 
-	+ `NYCOrderXMLParser`, 
-	+ `NYCResponseXMLParser`
-	
-	and four different parsers for the London client.
-	
-	The company has asked you to change the application according to the new requirements. 
-	To develop the parser for the original application they used a *Factory Method* design pattern in which 
-	the exact object to use is decided by the subclasses according to the type of parser. 
-	Now, to implement the new requirements, you are required to use a factory of factories, 
-	i.e., an *Abstract Factory*.
-	
-	**Note**: You will need parsers according to client specific XMLs, so you will create different 
-	factories for different clients which will provide the client specific XML to parse. 
-	You will achieve this by creating an *Abstract Factory* and then implement the factory to provide a 
-	client specific XML factory. 
-	Then you will use that factory to get the desired client specific XML parser object.
-	
-	To implement the pattern you first need to create an interface that will be implemented by all the 
-	concrete factories:
-	```java
-	public interface AbstractParserFactory {
-		public XMLParser getParserInstance(String parserType);
-	}
-	```
-	The above interface is implemented by the client specific concrete factories which will provide the 
-	XML parser object to the client object. 
-	The `getParserInstance` method takes the `parserType` as an argument which is used to get 
-	the message specific (error parser, order parser etc) parser object.
-	
-	The following is a test class for the resulting code: 
-	```java
-	public class TestAbstractFactoryPattern {
-		public static void main(String[] args) {
+	public class XpayImpl implements Xpay {
 
-			AbstractParserFactory parserFactory = ParserFactoryProducer.getFactory("NYFactory");
-			XMLParser parser = parserFactory.getParserInstance("NYORDER");
-			String msg="";
-			msg = parser.parse();
-			System.out.println(msg);
-
-			System.out.println("************************************");
-
-			parserFactory = ParserFactoryProducer.getFactory("TWFactory");
-			parser = parserFactory.getParserInstance("TWFEEDBACK");
-			msg = parser.parse();
-			System.out.println(msg);
-		}
-	}
-	```
-	The above code will result to the following output:
-	```
-	NY Parsing order XML...
-	NY Order XML Message
-	************************************
-	TW Parsing feedback XML...
-	TW Feedback XML Message
-	```
-	
-3. As an example of the *Builder* design pattern, consider a Car company which displays its different cars 
-to its customers using a graphical model. 
-The company has a graphical tool which displays the car on the screen. 
-The requirements of the tool are that it is provided with a car object display. 
-The car object should contain the car’s specifications. 
-The graphical tool uses these specifications to display the car.
-
-	The company has classified its cars into different groups, e.g., *Sedan*, or *Sports Car*. 
-	There is only one car object, and our job is to create the car object according to the classification. 
-	For example, for a sedan car, a car object according to the sedan specification should be built or, 
-	if a sports car is required, then a car object according to the sports car specification should be built.
-	
-	Currently, the Company wants only these two types of cars, but it may require other types of cars also 
-	in the future. 
-	You are required to create two different builders, one of each classification, 
-	i.e., for sedan and sports cars. 
-	The two builders will help in building the car object according to its specification.
-	
-	Shown below is the `Car` class which contains some of the important components of the car 
-	that are required to construct the complete car object:
-	```java
-	public class Car {
-		private String bodyStyle;
-		private String power;
-		private String engine;
-		private String breaks;
-		private String seats;
-		private String windows;
-		private String fuelType;
-		private String carType;
-	
-		public Car (String carType){
-			this.carType = carType;
-		}
-	
-		public String getBodyStyle() {
-			return bodyStyle;
-		}
-	
-		public void setBodyStyle(String bodyStyle) {
-			this.bodyStyle = bodyStyle;
-		}
-	
-		public String getPower() {
-			return power;
-		}
-	
-		public void setPower(String power) {
-			this.power = power;
-		}
-	
-		public String getEngine() {
-			return engine;
-		}
-	
-		public void setEngine(String engine) {
-			this.engine = engine;
-		}
-	
-		public String getBreaks() {
-			return breaks;
-		}
-	
-		public void setBreaks(String breaks) {
-			this.breaks = breaks;
-		}
-	
-		public String getSeats() {
-			return seats;
-		}
-	
-		public void setSeats(String seats) {
-			this.seats = seats;
-		}
-	
-		public String getWindows() {
-			return windows;
-		}
-		
-		public void setWindows(String windows) {
-			this.windows = windows;
-		}
-	
-		public String getFuelType() {
-			return fuelType;
-		}
-		
-		public void setFuelType(String fuelType) {
-			this.fuelType = fuelType;
-		}
+		private String creditCardNo;
+		private String customerName;
+		private String cardExpMonth;
+		private String cardExpYear;
+		private Short cardCVVNo;
+		private Double amount;
 	
 		@Override
-		public String toString(){
-			StringBuilder sb = new StringBuilder();
-			sb.append("--------------"+carType+"--------------------- \\n");
-			sb.append(" Body: ");
-			sb.append(bodyStyle);
-			sb.append("\\n Power: ");
-			sb.append(power);
-			sb.append("\\n Engine: ");
-			sb.append(engine);
-			sb.append("\\n Breaks: ");
-			sb.append(breaks);
-			sb.append("\\n Seats: ");
-			sb.append(seats);
-			sb.append("\\n Windows: ");
-			sb.append(windows);
-			sb.append("\\n Fuel Type: ");
-			sb.append(fuelType);
-		
-			return sb.toString();
+		public String getCreditCardNo() {
+			return creditCardNo;
+		}
+
+		@Override
+		public String getCustomerName() {
+			return customerName;
+		}
+
+		@Override
+		public String getCardExpMonth() {
+			return cardExpMonth;
+		}
+
+		@Override
+		public String getCardExpYear() {
+			return cardExpYear;
+		}
+
+		@Override
+		public Short getCardCVVNo() {
+			return cardCVVNo;
+		}
+
+		@Override
+		public Double getAmount() {
+			return amount;
+		}
+
+		@Override
+		public void setCreditCardNo(String creditCardNo) {
+			this.creditCardNo = creditCardNo;
+		}
+
+		@Override
+		public void setCustomerName(String customerName) {
+			this.customerName = customerName;
+		}
+
+		@Override
+		public void setCardExpMonth(String cardExpMonth) {
+			this.cardExpMonth = cardExpMonth;
+		}
+
+		@Override
+		public void setCardExpYear(String cardExpYear) {
+			this.cardExpYear = cardExpYear;
+		}
+
+		@Override
+		public void setCardCVVNo(Short cardCVVNo) {
+			this.cardCVVNo = cardCVVNo;
+		}
+
+		@Override
+		public void setAmount(Double amount) {
+			this.amount = amount;
 		}
 	}
 	```
-	You should be able to test your implementation using the following `TestBuilderPattern` class:
+	The new vendor's interface looks like this:
 	```java
-	public class TestBuilderPattern {
+	public interface PayD {
+	
+		public String getCustCardNo();
+		public String getCardOwnerName();
+		public String getCardExpMonthDate();
+		public Integer getCVVNo();
+		public Double getTotalAmount();
+	
+		public void setCustCardNo(String custCardNo);
+		public void setCardOwnerName(String cardOwnerName);
+		public void setCardExpMonthDate(String cardExpMonthDate);
+		public void setCVVNo(Integer cVVNo);
+		public void setTotalAmount(Double totalAmount);
+	}
+	```
+	As you can see, this interface has a set of different methods which need to be implemented 
+	in the code. However, `Xpay` objects are created by most parts of the code, 
+	and it is difficult (and risky) to change the entire set of classes.
+	We need some way, that's able to fulfil the vendor's requirement to process the payment 
+	and also make less or no change to the current code base. 
+
+	You are required to use the *Adapter* pattern to implement a `XpayToPayDAdapter` 
+	class to meet the requirements. We can test your class to see whether it can solve the Max’s problem using
+	the following:
+	```java
+	import PayD;
+	import Xpay;
+
+	public class RunAdapterExample {
+
 		public static void main(String[] args) {
-			CarBuilder carBuilder = new SedanCarBuilder();
-			CarDirector director = new CarDirector(carBuilder);
-			
-			director.build();
 		
-			Car car = carBuilder.getCar();
-			System.out.println(car);
+			// Object for Xpay
+			Xpay xpay = new XpayImpl();
+			xpay.setCreditCardNo("4789565874102365");
+			xpay.setCustomerName("Max Warner");
+			xpay.setCardExpMonth("09");
+			xpay.setCardExpYear("25");
+			xpay.setCardCVVNo((short)235);
+			xpay.setAmount(2565.23);
 		
-			carBuilder = new SportsCarBuilder();
-			director = new CarDirector(carBuilder);
-			director.build();
-			car = carBuilder.getCar();
-			System.out.println(car);
+			PayD payD = new XpayToPayDAdapter(xpay);
+			testPayD(payD);
+		}
+	
+		private static void testPayD(PayD payD){
+		
+			System.out.println(payD.getCardOwnerName());
+			System.out.println(payD.getCustCardNo());
+			System.out.println(payD.getCardExpMonthDate());
+			System.out.println(payD.getCVVNo());
+			System.out.println(payD.getTotalAmount());
+		}
+	}
+	```
+2. This question concerns the *Bridge* design pattern.
+
+	"Dodgy Security Systems" is a security and electronic company which produces and assembles products 
+for cars. 
+It delivers any car electronic or security system you want, from air bags to GPS tracking system, reverse 
+parking system, etc. 
+The company uses a well defined object oriented approach to keep track of their products using software which 
+is developed and maintained only by them. 
+They receive a vehicle, produce the system for it, and then assemble it and install it into the vehicle.
+
+	Recently, they received new orders from "BigWheel" (a car company) to produce central locking and gear 
+	lock systems for their new car model. 
+	To maintain this, they are creating a new software system. 
+	They started by creating a new abstract class `CarProductSecurity`, in which they kept some car 
+	specific methods and some of the features which they thought are common to all security products. 
+	Then they extended the class and created two different sub classes:
+	+ `BigWheelCentralLocking`, and 
+	+ `BigWheelGearLocking`.
+	
+	The class diagram is as follows:
+	
+	![Design](images/design.png)
+	
+	After a while, another car company "Motoren" asked them to produce a new system of central locking and 
+	gear lock for their new model. 
+	Since, the same security system cannot be used in both models of different cars, 
+	"Dodgy Security Systems" has produced a new system for them, and also has created two new classes:
+	+ `MotorenCentralLocking`, and 
+	+ `MotorenGearLocking`.
+	
+	which also extend the `CarProductSecurity` class. 
+	Now the new class diagram looks like this:
+
+
+	![NewDesign](images/newdesign.png)
+
+
+	what happens if another car company demands another new system for central locking and gear lock? 
+	One would need to create another two new classes for it. 
+	This design will create one class per system, or worse, if a reverse parking system is produced for 
+	each of these two car companies, two more new classes will be created for each of them.
+	
+	Provide a solution to this problem using an implementation of the *Bridge* design pattern. 
+	We provide an appropriate test method:
+	```java
+	public class TestBridgePattern {
+		public static void main(String[] args) {
+			Product product = new CentralLocking("Central Locking System");
+			Product product2 = new GearLocking("Gear Locking System");
+			Car car = new BigWheel(product , "BigWheel xz model");
+			car.produceProduct();
+			car.assemble();
+			car.printDetails();
+		
+			System.out.println();
+		
+			car = new BigWheel(product2 , "BigWheel xz model");
+			car.produceProduct();
+			car.assemble();
+			car.printDetails();
+		
+			System.out.println("-----------------------------------------------------");
+		
+			car = new Motoren(product, "Motoren lm model");
+			car.produceProduct();
+			car.assemble();
+			car.printDetails();
+		
+			System.out.println();
+		
+			car = new Motoren(product2, "Motoren lm model");
+			car.produceProduct();
+			car.assemble();
+			car.printDetails();	
+		}
+	}
+	```
+	which should produce the following output:
+	```
+	Producing Central Locking System
+	Modifing product Central Locking System according to BigWheel xz model
+	Assembling Central Locking System for BigWheel xz model
+	Car: BigWheel xz model, Product:Central Locking System
+
+	Producing Gear Locking System
+	Modifing product Gear Locking System according to BigWheel xz model
+	Assembling Gear Locking System for BigWheel xz model
+	Car: BigWheel xz model, Product:Gear Locking System
+	-----------------------------------------------------
+	Producing Central Locking System
+	Modifing product Central Locking System according to Motoren lm model
+	Assembling Central Locking System for Motoren lm model
+	Car: Motoren lm model, Product:Central Locking System
+
+	Producing Gear Locking System
+	Modifing product Gear Locking System according to Motoren lm model
+	Assembling Gear Locking System for Motoren lm model
+	Car: Motoren lm model, Product:Gear Locking System
+	```
+3. This question concerns the *Composite* design pattern.
+
+	HTML is hierarchical in nature, its starts from an `<html>` tag which is the parent or the root tag, 
+and it contains other tags which can be a parent or a child tag. 
+The *Composite* design pattern in Java can be implemented using the component class as an abstract class 
+or an interface. 
+In this question, you will use an abstract class which contains all the important methods used in a 
+composite class and a leaf class.
+	```java
+	import java.util.List;
+
+	public abstract class HtmlTag {
+		public abstract String getTagName();
+		public abstract void setStartTag(String tag);
+		public abstract void setEndTag(String tag);
+		public void setTagBody(String tagBody){
+			throw new UnsupportedOperationException("Current operation is not support for this object");
+		}
+	
+		public void addChildTag(HtmlTag htmlTag){
+			throw new UnsupportedOperationException("Current operation is not support for this object");
+		}
+	
+		public void removeChildTag(HtmlTag htmlTag){
+			throw new UnsupportedOperationException("Current operation is not support for this object");
+		}
+	
+		public List<HtmlTag>getChildren(){
+			throw new UnsupportedOperationException("Current operation is not support for this object");
+		}
+	
+		public abstract void generateHtml();
+	}
+	```
+	Given the above class complete two subclasses of the class:
+	+ `HtmlParentElement` — handles the *child* nodes, and
+	+ `HtmlElement` — handles the *leaf* nodes.
+	
+	The following class should be used to test out your classes:
+	```java
+	public class TestCompositePattern {
+		public static void main(String[] args) {
+			HtmlTag parentTag = new HtmlParentElement("<html>");
+			parentTag.setStartTag("<html>");
+			parentTag.setEndTag("</html>");
+		
+			HtmlTag p1 = new HtmlParentElement("<body>");
+			p1.setStartTag("<body>");
+			p1.setEndTag("</body>");
+		
+			parentTag.addChildTag(p1);
+		
+			HtmlTag child1 = new HtmlElement("<p>");
+			child1.setStartTag("<p>");
+			child1.setEndTag("</p>");
+			child1.setTagBody("Testing html tag library");
+			p1.addChildTag(child1);
+		
+			child1 = new HtmlElement("<p>");
+			child1.setStartTag("<p>");
+			child1.setEndTag("</p>");
+			child1.setTagBody("Paragraph 2");
+			p1.addChildTag(child1);
+		
+			parentTag.generateHtml();
 		}
 	}
 	```
 	The above code will result to the following output:
 	```
-	--------------SEDAN--------------------- 
- 	Body: External dimensions: overall length (inches): 202.9, overall width (inches): 76.2, overall height (inches): 60.7, wheelbase (inches): 112.9, front track (inches): 65.3, rear track (inches): 65.5 and curb to curb turning circle (feet): 39.5
- 	Power: 285 hp @ 6,500 rpm; 253 ft lb of torque @ 4,000 rpm
-	 Engine: 3.5L Duramax V 6 DOHC
-	 Breaks: Four-wheel disc brakes: two ventilated. Electronic brake distribution
-	 Seats: Front seat center armrest.Rear seat center armrest.Split-folding rear seats
-	 Windows: Laminated side windows.Fixed rear window with defroster
-	 Fuel Type: Gasoline 19 MPG city, 29 MPG highway, 23 MPG combined and 437 mi. range
-
-	--------------SPORTS--------------------- 
-	 Body: External dimensions: overall length (inches): 192.3, overall width (inches): 75.5, overall height (inches): 54.2, wheelbase (inches): 112.3, front track (inches): 63.7, rear track (inches): 64.1 and curb to curb turning circle (feet): 37.7
-	 Power: 323 hp @ 6,800 rpm; 278 ft lb of torque @ 4,800 rpm
-	 Engine: 3.6L V 6 DOHC and variable valve timing
-	 Breaks: Four-wheel disc brakes: two ventilated. Electronic brake distribution. StabiliTrak stability control
-	 Seats: Driver sports front seat with one power adjustments manual height, front passenger seat sports front seat with one power adjustments
-	 Windows: Front windows with one-touch on two windows
-	 Fuel Type: Gasoline 17 MPG city, 28 MPG highway, 20 MPG combined and 380 mi. range
+	<html>
+	<body>
+	<p>Testing html tag library</p>
+	<p>Paragraph 2</p>
+	</body>
+	</html>
 	```
 	
-4. "BetterBisc" is product based company and it has launched a product in the market, named "Schedule Server".
+4. This question concerns the *Decorator* design pattern.
+
+	You are commissioned by a pizza company make an extra topping calculator. 
+	A user can ask to add extra topping to a pizza and our job is to add toppings and 
+	increase its price using our classes.
+
+	**Please note**: the main aim of the *Decorator* design pattern is to 
+	attach additional responsibilities to an object dynamically. 
+	Decorators provide a flexible alternative to sub-classing for extending functionality.
+	The Decorator prevents the proliferation of subclasses leading to less complexity and confusion.
+
+	For simplicity, let's create a simple `Pizza` interface which contains only two methods:
+
+	```java
+	public interface Pizza {
+		public String getDesc();
+		public double getPrice();
+	}
+	```
+	The `getDesc` method is used to obtain the pizza's description whereas the 
+	`getPrice` method is used to obtain the price.
+
+	Provide two implementations of the `Pizza` interface:
+	+ `SimplyVegPizza`
+	+ `SimplyNonVegPizza`
+	
+	The decorator wraps the object whose functionality needs to be increased, 
+	so it needs to implement the same interface. 
+	
+	Provide an abstract decorator class which will be extended by all the concrete decorators.
+
+	Now provide several implementations of `PizzaDecorator` and exercise your classes
+	with the given test class. 
+	+ `Ham implements PizzaDecorator`
+	+ `Cheese implements PizzaDecorator`
+	+ `Chicken implements PizzaDecorator`
+	+ `FetaCheese implements PizzaDecorator`
+	+ ...
+
+
+	```java
+	import java.text.DecimalFormat;
+
+	public class TestDecoratorPattern {
+	
+		public static void main(String[] args) {
+			DecimalFormat dformat = new DecimalFormat("#.##");
+			Pizza pizza = new SimplyVegPizza();
+		
+			pizza = new RomaTomatoes(pizza);
+			pizza = new GreenOlives(pizza);
+			pizza = new Spinach(pizza);
+		
+			System.out.println("Desc: "+pizza.getDesc());
+			System.out.println("Price: "+dformat.format(pizza.getPrice()));
+		
+			pizza = new SimplyNonVegPizza();
+		
+			pizza = new Meat(pizza);
+			pizza = new Cheese(pizza);
+			pizza = new Cheese(pizza);
+			pizza = new Ham(pizza);
+		
+			System.out.println("Desc: "+pizza.getDesc());
+			System.out.println("Price: "+dformat.format(pizza.getPrice()));
+		}
+	}
+	```
+	The code should result in the following output:
+	```
+	Desc: SimplyVegPizza (230), Roma Tomatoes (5.20), Green Olives (5.47), Spinach (7.92)
+	Price: 248.59
+	Desc: SimplyNonVegPizza (350), Meat (14.25), Cheese (20.72), Cheese (20.72), Ham (18.12)
+	Price: 423.81
+	```
+	
+5. This question concerns the *Façade* design pattern.
+
+	"BetterBisc" is product based company and it has launched a product in the market, named "Schedule Server".
 	It is a kind of server in itself, and it is used to manage jobs. 
 	The jobs could be any kind of jobs like sending a list of emails, SMS, 
 	reading or writing files from a destination, or just simply transferring files from a source to the 
@@ -365,178 +542,616 @@ The graphical tool uses these specifications to display the car.
 		}
 	}
 	```
+6. This question concerns the *Flyweight* design pattern.
 
-5. "Dodgy Security Systems" is a security and electronic company which produces and assembles products 
-for cars. 
-It delivers any car electronic or security system you want, from air bags to GPS tracking system, reverse 
-parking system, etc. 
-The company uses a well defined object oriented approach to keep track of their products using software which 
-is developed and maintained only by them. 
-They receive a vehicle, produce the system for it, and then assemble it and install it into the vehicle.
+	Sometimes the objects in an application might have great similarities and be of a similar kind 
+	(a similar kind here means that most of their properties have similar values and only a few of 
+	them vary in value). 
+	In case they are also heavy objects to create, they should be controlled by the application developer. 
+	Otherwise, they might consume much of the memory and eventually slow down the whole application.
 
-	Recently, they received new orders from "BigWheel" (a car company) to produce central locking and gear 
-	lock systems for their new car model. 
-	To maintain this, they are creating a new software system. 
-	They started by creating a new abstract class `CarProductSecurity`, in which they kept some car 
-	specific methods and some of the features which they thought are common to all security products. 
-	Then they extended the class and created two different sub classes:
-	+ `BigWheelCentralLocking`, and 
-	+ `BigWheelGearLocking`.
-	
-	The class diagram is as follows:
-	
-	![Design](images/design.png)
-	
-	After a while, another car company "Motoren" asked them to produce a new system of central locking and 
-	gear lock for their new model. 
-	Since, the same security system cannot be used in both models of different cars, 
-	"Dodgy Security Systems" has produced a new system for them, and also has created two new classes:
-	+ `MotorenCentralLocking`, and 
-	+ `MotorenGearLocking`.
-	
-	which also extend the `CarProductSecurity` class. 
-	Now the new class diagram looks like this:
+	The Flyweight design pattern is designed to control such kind of object creation and provides 
+	you with a basic caching mechanism. 
+	It allows you to create one object per type (the type here differs by a property of that object), 
+	and if you ask for an object with the same property (already created), 
+	it will return you the same object instead of creating a new one.
 
+	The X-programming site allows users to create and execute programs using their favourite 
+	programming language. 
+	It provides you with plenty of programming language options. 
+	You choose one, write a program with it and execute it to see the result.
 
-	![NewDesign](images/newdesign.png)
-
-
-	what happens if another car company demands another new system for central locking and gear lock? 
-	One would need to create another two new classes for it. 
-	This design will create one class per system, or worse, if a reverse parking system is produced for 
-	each of these two car companies, two more new classes will be created for each of them.
-	
-	Provide a solution to this problem using an implementation of the *Bridge* design pattern. 
-	We provide an appropriate test method:
+	Now the site has started losing its users, the reason being the slowness of the site. 
+	The users are not interested in it any more. 
+	The site is very popular and sometimes there could be more than thousands of programmers using it. 
+	Because of that, the site is crawling. 
+	The heavy usage is not the real problem behind the slowness of the site. 
+	Let us see the core programming of the site which allows users to run and execute their program, 
+	and the true issue will be revealed there.
 	```java
-	public class TestBridgePattern {
-		public static void main(String[] args) {
-			Product product = new CentralLocking("Central Locking System");
-			Product product2 = new GearLocking("Gear Locking System");
-			Car car = new BigWheel(product , "BigWheel xz model");
-			car.produceProduct();
-			car.assemble();
-			car.printDetails();
-		
-			System.out.println();
-		
-			car = new BigWheel(product2 , "BigWheel xz model");
-			car.produceProduct();
-			car.assemble();
-			car.printDetails();
-		
-			System.out.println("-----------------------------------------------------");
-		
-			car = new Motoren(product, "Motoren lm model");
-			car.produceProduct();
-			car.assemble();
-			car.printDetails();
-		
-			System.out.println();
-		
-			car = new Motoren(product2, "Motoren lm model");
-			car.produceProduct();
-			car.assemble();
-			car.printDetails();	
+	public class Code {	
+		private String code;
+
+		public String getCode() {
+			return code;
+		}
+
+		public void setCode(String code) {
+			this.code = code;
+		}
+	}
+	```	
+	The above class is used to set the code done by the programmer in order to get it executed. 
+	The `Code` object is a lightweight simple object having a property code along with its setter and getter.
+	```java
+	public interface Platform {
+		public void execute(Code code);
+	}
+	```
+	The `Platform` interface is implemented by the language specific platform to execute the code. 
+	It has one method, executes, which takes the `Code` object as its parameter.
+	```java
+	public class JavaPlatform implements Platform {
+		public JavaPlatform(){
+			System.out.println("JavaPlatform object created");
+		}
+	
+		@Override
+		public void execute(Code code) {
+			System.out.println("Compiling and executing Java code.");
 		}
 	}
 	```
-	which should produce the following output:
+	The above class implements the `Platform` interface and provides an implementation for the `execute`
+	method, to execute the code in Java.
+	
+	To execute the code, a `Code` object which contains the code and a `Platform` object to execute the 
+	code are created. 
+	The code should look like this:
+	```java
+	Platform platform = JavaPlatform()
+  	platform.execute(code)
 	```
-	Producing Central Locking System
-	Modifing product Central Locking System according to BigWheel xz model
-	Assembling Central Locking System for BigWheel xz model
-	Car: BigWheel xz model, Product:Central Locking System
+	The intent of the flyweight design pattern is to use shared objects to support large numbers of 
+	fine-grained objects efficiently. 
+	A flyweight is a shared object that can be used in multiple contexts simultaneously. 
+	The flyweight acts as an independent object in each context — it’s indistinguishable from an 
+	instance of the object that’s not shared. 
+	Flyweights cannot make assumptions about the context in which they operate.
+	
+	The key concept here is the distinction between *intrinsic* and *extrinsic* state. 
+	+ Intrinsic state is stored in the flyweight; it consists of information that’s 
+		independent of the flyweight’s context, thereby making it sharable.
+	+ Extrinsic state depends on and varies with the flyweight’s context and therefore can’t be shared.
+	
+	Client objects are responsible for passing extrinsic state to the flyweight when it needs it.
+	
+	To solve the problem, you will need to provide a platform factory class which will control the 
+	creation of the `Platform` objects.
+	```java
+	import java.util.HashMap;
+	import java.util.Map;
 
-	Producing Gear Locking System
-	Modifing product Gear Locking System according to BigWheel xz model
-	Assembling Gear Locking System for BigWheel xz model
-	Car: BigWheel xz model, Product:Gear Locking System
-	-----------------------------------------------------
-	Producing Central Locking System
-	Modifing product Central Locking System according to Motoren lm model
-	Assembling Central Locking System for Motoren lm model
-	Car: Motoren lm model, Product:Central Locking System
+	public final class PlatformFactory {
+		private static Map<String, Platform> map = new HashMap<>();
 
-	Producing Gear Locking System
-	Modifing product Gear Locking System according to Motoren lm model
-	Assembling Gear Locking System for Motoren lm model
-	Car: Motoren lm model, Product:Gear Locking System
+
+		private PlatformFactory() {
+			throw new AssertionError("Cannot instantiate the class");
+		}
+	
+		public static synchronized Platform getPlatformInstance(String platformType){
+			Platform platform = map.get(platformType);
+			if(platform==null){
+				switch(platformType){
+					case "C" : platform = new CPlatform(); 
+							   break;
+					case "CPP" : platform = new CPPPlatform(); 
+				   			   break;
+					case "JAVA" : platform = new JavaPlatform(); 
+					   		   break;
+					case "RUBY" : platform = new RubyPlatform(); 
+					   		   break;   		   
+				}
+				map.put(platformType, platform);
+			}
+			return platform;
+		}
+	}
+	```
+	Your code should pass the following (indicative) tests:
+	```java
+	public class TestFlyweight {
+		public static void main(String[] args) {
+			Code code = new Code();
+			code.setCode("C Code...");
+			Platform platform = PlatformFactory.getPlatformInstance("C");
+			platform.execute(code);
+			System.out.println("-------------------------------------");
+		
+			code = new Code();
+			code.setCode("C Code2...");
+			platform = PlatformFactory.getPlatformInstance("C");
+			platform.execute(code);
+			System.out.println("-------------------------------------");
+	
+			code = new Code();
+			code.setCode("JAVA Code...");
+			platform = PlatformFactory.getPlatformInstance("JAVA");
+			platform.execute(code);
+			System.out.println("-------------------------------------");
+			
+			code = new Code();
+			code.setCode("JAVA Code2...");
+			platform = PlatformFactory.getPlatformInstance("JAVA");
+			platform.execute(code);
+			System.out.println("-------------------------------------");
+	
+			code = new Code();
+			code.setCode("RUBY Code...");
+			platform = PlatformFactory.getPlatformInstance("RUBY");
+			platform.execute(code);
+			System.out.println("-------------------------------------");
+
+			code = new Code();
+			code.setCode("RUBY Code2...");
+			platform = PlatformFactory.getPlatformInstance("RUBY");
+			platform.execute(code);
+		}
+	}
+	```
+	The above code will result into the following output:
+	```
+	CPlatform object created
+	Compiling and executing C code.
+	-------------------------------------
+	Compiling and executing C code.
+	-------------------------------------
+	JavaPlatform object created
+	Compiling and executing Java code.
+	-------------------------------------
+	Compiling and executing Java code.
+	-------------------------------------
+	RubyPlatform object created
+	Compiling and executing Ruby code.
+	-------------------------------------
+	Compiling and executing Ruby code.
+	```
+
+
+7. This question concerns the *Proxy* design pattern which has several variations. 
+   Some of the important variations are:
+   + Remote Proxy,
+   + Virtual Proxy, and 
+   + Protection Proxy.
+   
+   In this question, we will examine these variations.
+   
+   **a) Remote Proxy**
+   
+	There is a Pizza Company, which has its outlets at various locations. 
+	The owner of the company gets a daily report by the staff members of the company from various outlets. 
+	The current application supported by the Pizza Company is a desktop application, not a web application. 
+	So, the owner has to ask his employees to generate the report and send it to him. 
+	Now the owner wants to generate and check the report by his own, so that he can generate it whenever 
+	he wants without anyone’s help. 
+	The owner wants you to develop an application for him.
+	
+	The problem here is that all applications are running at their respective JVMs and the 
+	*Report Checker* application (which you will design) should run in the owner’s local system. 
+	The object required to generate the report does not exist in the owner’s system JVM and 
+	you cannot directly call on the remote object. 
+	You should use the *Remote Proxy* design pattern to solve this problem.
+	
+	The `ReportGenerator` interface is as follows:
+	```java
+	import java.rmi.Remote;
+	import java.rmi.RemoteException;
+
+	public interface ReportGenerator extends Remote{
+		public String generateDailyReport() throws RemoteException;
+	}
+	```
+	This is a remote interface which defines the methods that a client can call remotely. 
+	It’s what the client will use as the class type for your service. 
+	Both the *stub* and *actual* service will implement this. 
+	The method in the interface returns a `String` object. 
+	You can return any object from the method; this object is going to be shipped over the wire from 
+	the server back to the client, so it must be `Serializable`. 
+	Please note that all the methods in this interface should throw `RemoteException`.
+	```java	
+	import java.rmi.Naming;
+	import java.rmi.RemoteException;
+	import java.rmi.server.UnicastRemoteObject;
+	import java.util.Date;
+
+	public class ReportGeneratorImpl extends UnicastRemoteObject implements ReportGenerator{
+		private static final long serialVersionUID = 3107413009881629428L;
+
+		protected ReportGeneratorImpl() throws RemoteException {}
+
+		@Override
+		public String generateDailyReport() throws RemoteException {
+			StringBuilder sb = new StringBuilder();
+			sb.append("********************Location X Daily Report********************");
+			sb.append("\\n Location ID: 012");
+			sb.append("\\n Today's Date: "+new Date());
+			sb.append("\\n Total Pizza's Sell: 112");
+			sb.append("\\n Total Price: $2534");
+			sb.append("\\n Net Profit: $1985");
+			sb.append("\\n ***************************************************************");
+
+			return sb.toString();
+		}
+
+		public static void main(String[] args) {
+			try {
+				ReportGenerator reportGenerator = new ReportGeneratorImpl();
+				Naming.rebind("PizzaCoRemoteGenerator", reportGenerator);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	```
+	The final step is to start the service that is, run your concrete implementation of remote class, which 
+	in this case is the class `ReportGeneratorImpl`.
+
+	So far, you have created and run a service. 
+	You now need a client to use it. 
+	The report application for the owner of the pizza company will use this service 
+	to generate and check the report.
+	```java
+	import java.rmi.Naming;
+
+	public class ReportGeneratorClient {
+
+		public static void main(String[] args) {
+			new ReportGeneratorClient().generateReport();
+		}
+
+		public void generateReport(){
+			try {
+				ReportGenerator reportGenerator = 
+					(ReportGenerator)Naming.lookup("rmi://127.0.0.1/PizzaCoRemoteGenerator");
+				System.out.println(reportGenerator.generateDailyReport());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	```
+	The above program should result in the following output:
+	```
+	********************Location X Daily Report********************	Location ID: 012 	Today's Date: Sun Sep 39 00:11:23 GMT 2016	Total Pizza Sell: 112	Total Sale: $2534	Net Profit: $1985	***************************************************************	
 	```
 	
-6. HTML is hierarchical in nature, its starts from an `<html>` tag which is the parent or the root tag, 
-and it contains other tags which can be a parent or a child tag. 
-The *Composite* design pattern in Java can be implemented using the component class as an abstract class 
-or an interface. 
-In this question, you will use an abstract class which contains all the important methods used in a 
-composite class and a leaf class.
+	**b) Virtual Proxy**
+	
+	The *Virtual Proxy* design pattern is a memory saving technique that recommends postponing 
+	an object creation until it is needed; it is used when creating an object the is expensive 
+	in terms of memory usage or processing involved.
+
+	Suppose there is a `Company` object in your application and this object contains a list of employees of 
+	the company in a `ContactList` object. 
+	There could be thousands of employees in a company. 
+	Loading the `Company` object from the database along with the list of all its employees in the 
+	`ContactList` object could be very time consuming. 
+	In some cases you don’t even require the list of the employees, 
+	but you are forced to wait until the company and its list of employees loaded into the memory.
+	
+	One way to save time and memory is to avoid loading of the employee objects until required, 
+	and this is done using the *Virtual Proxy*. 
+	This technique is also known as *Lazy Loading* where you are fetching the data only when it is required.
+	```java
+	public class Company {
+		private String companyName;
+		private String companyAddress;
+		private String companyContactNo;
+		private ContactList contactList ;
+
+		public Company(String companyName,String companyAddress, 
+					   String companyContactNo,ContactList contactList){
+			this.companyName = companyName;
+			this.companyAddress = companyAddress;
+			this.companyContactNo = companyContactNo;
+			this.contactList = contactList;
+
+			System.out.println("Company object created...");
+		}
+
+		public String getCompanyName() {
+			return companyName;
+		}
+
+		public String getCompanyAddress() {
+			return companyAddress;
+		}
+
+		public String getCompanyContactNo() {
+			return companyContactNo;
+		}
+
+		public ContactList getContactList(){
+			return contactList;
+		}
+	}
+	```
+	The above `Company` class has a reference to `ContactList` interface whose real object will be 
+	load only when requested by a call of the `contactList()` method.
 	```java
 	import java.util.List;
 
-	public abstract class HtmlTag {
-		public abstract String getTagName();
-		public abstract void setStartTag(String tag);
-		public abstract void setEndTag(String tag);
-		public void setTagBody(String tagBody){
-			throw new UnsupportedOperationException("Current operation is not support for this object");
-		}
-	
-		public void addChildTag(HtmlTag htmlTag){
-			throw new UnsupportedOperationException("Current operation is not support for this object");
-		}
-	
-		public void removeChildTag(HtmlTag htmlTag){
-			throw new UnsupportedOperationException("Current operation is not support for this object");
-		}
-	
-		public List<HtmlTag>getChildren(){
-			throw new UnsupportedOperationException("Current operation is not support for this object");
-		}
-	
-		public abstract void generateHtml();
+	public interface ContactList {
+		public List<Employee> getEmployeeList();
 	}
 	```
-	Given the above class complete two subclasses of the class:
-	+ `HtmlParentElement` — handles the *child* nodes, and
-	+ `HtmlElement` — handles the *leaf* nodes.
-	
-	The following class should be used to test out your classes:
+	The `ContactList` interface only contains one method, `getEmployeeList()`, which is used to obtain 
+	the employee list of the company.
 	```java
-	public class TestCompositePattern {
-		public static void main(String[] args) {
-			HtmlTag parentTag = new HtmlParentElement("<html>");
-			parentTag.setStartTag("<html>");
-			parentTag.setEndTag("</html>");
-		
-			HtmlTag p1 = new HtmlParentElement("<body>");
-			p1.setStartTag("<body>");
-			p1.setEndTag("</body>");
-		
-			parentTag.addChildTag(p1);
-		
-			HtmlTag child1 = new HtmlElement("<p>");
-			child1.setStartTag("<p>");
-			child1.setEndTag("</p>");
-			child1.setTagBody("Testing html tag library");
-			p1.addChildTag(child1);
-		
-			child1 = new HtmlElement("<p>");
-			child1.setStartTag("<p>");
-			child1.setEndTag("</p>");
-			child1.setTagBody("Paragraph 2");
-			p1.addChildTag(child1);
-		
-			parentTag.generateHtml();
+	import java.util.ArrayList;
+	import java.util.List;
+
+	public class ContactListImpl implements ContactList{
+
+		@Override
+		public List<Employee> getEmployeeList() {
+			return getEmpList();
+		}
+
+		private static List<Employee>getEmpList(){
+			List<Employee> empList = new ArrayList<>(5);
+			empList.add(new Employee("Employee A", 2565.55, "SE"));
+			empList.add(new Employee("Employee B", 22574, "Manager"));
+			empList.add(new Employee("Employee C", 3256.77, "SSE"));
+			empList.add(new Employee("Employee D", 4875.54, "SSE"));
+			empList.add(new Employee("Employee E", 2847.01, "SE"));
+			return empList;
 		}
 	}
 	```
-	The above code will result to the following output:
+	The above class should create a real `ContactList` object which will return the list of employees of 
+	the company. 
+	The object will be *loaded on demand*, only when required.
+	```java
+	import java.util.List;
+
+	public class ContactListProxyImpl implements ContactList{
+		private ContactList contactList;
+
+		@Override
+		public List<Employee> getEmployeeList() {
+			if(contactList == null){
+				System.out.println("Creating contact list and fetching list of employees...");
+				contactList = new ContactListImpl();
+			}
+			return contactList.getEmployeeList();
+		}
+	}
 	```
-	<html>
-	<body>
-	<p>Testing html tag library</p>
-	<p>Paragraph 2</p>
-	</body>
-	</html>
-	```
+	The `ContactListProxyImpl` is the proxy class which also implements `ContactList` and holds a 
+	reference to the real `ContactList` object. 
+	On the implementation of the method `getEmployeeList()` it will check if the `contactList` 
+	reference is `null`, then it will create a real `ContactList` object and then will 
+	invoke the `getEmployeeList()` method on it to get the list of the employees.
 	
+	The `Employee` class should look something like this:
+	```java
+	public class Employee {
+		private String employeeName;
+		private double employeeSalary;
+		private String employeeDesignation;
+
+		public Employee(String employeeName,double employeeSalary,String employeeDesignation){
+			this.employeeName = employeeName;
+			this.employeeSalary = employeeSalary;
+			this.employeeDesignation = employeeDesignation;
+		}
+
+		public String getEmployeeName() {
+			return employeeName;
+		}
+
+		public double getEmployeeSalary() {
+			return employeeSalary;
+		}
+
+		public String getEmployeeDesignation() {
+			return employeeDesignation;
+		}
+
+		public String toString(){
+			return "Employee Name: "+employeeName+", EmployeeDesignation: "+employeeDesignation+", 
+									Employee Salary: "+employeeSalary;
+		}
+	}
+	```
+	You should then test your code with:
+	```java
+	import java.util.List;
+
+	public class TestVirtualProxy {
+		public static void main(String[] args) {
+			ContactList contactList = new ContactListProxyImpl();
+			Company company = new Company("ABC Company", "India", "+91-011-28458965", contactList);
+
+			System.out.println("Company Name: "+company.getCompanyName());
+			System.out.println("Company Address: "+company.getCompanyAddress());
+			System.out.println("Company Contact No.: "+company.getCompanyContactNo());
+
+			System.out.println("Requesting for contact list");
+
+			contactList = company.getContactList();
+
+			List<Employee>empList = contactList.getEmployeeList();
+			for(Employee emp : empList){
+				System.out.println(emp);
+			}
+		}
+	}
+	```
+	producing the following output:
+	```
+	Company object created...	Company Name: ABC Company	Company Address: Alabama	Company Contact No.: 011-2845-8965
+	Requesting for contact list	Creating contact list and fetching list of employees...	Employee Name: Employee A, EmployeeDesignation: SE, Employee Salary: 2565.55	Employee Name: Employee B, EmployeeDesignation: Manager, Employee Salary: 22574.0	Employee Name: Employee C, EmployeeDesignation: SSE, Employee Salary: 3256.77	Employee Name: Employee D, EmployeeDesignation: SSE, Employee Salary: 4875.54	Employee Name: Employee E, EmployeeDesignation: SE, Employee Salary: 2847.01	
+	```
+	**c) Protection Proxy**
+	
+	In general, objects in an application interact with each other to implement the overall 
+	application functionality. 
+	Most application object are generally accessible to all other objects in the application. 
+	At times, it may be necessary to restrict the accessibility of an object only to a limited set of 
+	client objects based on their access rights. 
+	When a client object tries to access such an object, the client is given access to the services 
+	provided by the object only if the client can furnish proper authentication credentials. 
+	In such cases, a separate object can be designated with the responsibility of verifying the access
+	privileges of different client objects when they access the actual object. 
+	
+	In other words, every client must successfully authenticate with this designated object to get access 
+	to the actual object functionality. 
+	Such an object with which a client needs to authenticate to get access to the actual object 
+	can be referred as an object authenticator which is implemented using the *Protection Proxy* 
+	design pattern.
+
+	We will return to the `ReportGenerator` application that you worked on earlier for the pizza company. 
+	The owner now requires that only he can generate the daily report and that no other employee 
+	should be able to do so.
+	
+	To implement this security feature, you are going to use the *Protection Proxy* design pattern 
+	which will check if the object which is trying to generate the report is the owner; 
+	in this case, the report gets generated, otherwise it will not.
+	```java
+	public interface Staff {
+		public boolean isOwner();
+		public void setReportGenerator(ReportGeneratorProxy reportGenerator);
+	}
+	```
+	The `Staff` interface is used by the `Owner` and the `Employee` classes and the interface has two methods: 
+	+ `isOwner()` returns a boolean to check whether the calling object is the owner or not.
+	+ The other method is used to set the ReportGeneratorProxy which is a protection proxy, used to 
+	generate the report.
+	
+	```java
+	public class Employee implements Staff {
+		private ReportGeneratorProxy reportGenerator;
+
+		@Override
+		public void setReportGenerator(ReportGeneratorProxy reportGenerator){
+			this.reportGenerator = reportGenerator;
+		}
+
+		@Override
+		public boolean isOwner() {
+			return false;
+		}
+
+		public String generateDailyReport(){
+			try {
+				return reportGenerator.generateDailyReport();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "";
+		}
+	}
+	```
+	The `Employee` class implements the `Staff` interface, since it’s an employee `isOwner()` 
+	method returns `false`. 
+	The `generateDailyReport()` method asks `ReportGenerator` to generate the daily report.
+	```java
+	public class Owner implements Staff {
+		private boolean isOwner;
+		private ReportGeneratorProxy reportGenerator;
+		
+		{
+			isOwner = true;
+		}
+
+		@Override
+		public void setReportGenerator(ReportGeneratorProxy reportGenerator){
+			this.reportGenerator = reportGenerator;
+		}
+
+		@Override
+		public boolean isOwner(){
+			return isOwner;
+		}
+
+		public String generateDailyReport(){
+			try {
+				return reportGenerator.generateDailyReport();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "";
+		}
+	}
+	```
+	The `Owner` class looks almost the same as the `Employee` class; the only real difference is that the 
+	`isOwner()` method returns `true`.
+	```java
+	public interface ReportGeneratorProxy {
+		public String generateDailyReport();
+	}
+	```
+	The `ReportGeneratorProxy` acts as a *Protection Proxy* which has only one method 
+	`generateDailyReport()` that is used to generate the report.
+	```java
+	import java.rmi.Naming;
+	import ReportGenerator;
+
+	public class ReportGeneratorProtectionProxy implements ReportGeneratorProxy {
+		ReportGenerator reportGenerator;
+		Staff staff;
+
+		public ReportGeneratorProtectionProxy(Staff staff) {
+			this.staff = staff;
+		}
+
+		@Override
+		public String generateDailyReport() {
+			if(staff.isOwner()){
+				ReportGenerator reportGenerator = null;
+				try {
+					reportGenerator = (ReportGenerator)
+									Naming.lookup("rmi://127.0.0.1/PizzaCoRemoteGenerator");
+					return reportGenerator.generateDailyReport();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return "";
+			}
+			else {
+				return "Not Authorized to view report.";
+			}
+		}
+	}
+	```
+	The above class is the concrete implementation of the `ReportGeneratorProxy` which holds a reference to 
+	the `ReportGenerator` interface which is the remote proxy. 
+	In the `generateDailyReport()` method, we check if the `staff` field is referring to the owner, 
+	then request the remote proxy to generate the report; otherwise it returns a string with 
+	`"Not Authorised to view report"` as the message.
+	```java
+	public class TestProtectionProxy {
+		public static void main(String[] args) {
+			Owner owner = new Owner();
+			ReportGeneratorProxy reportGenerator = new ReportGeneratorProtectionProxy(owner);
+			owner.setReportGenerator(reportGenerator);
+
+			Employee employee = new Employee();
+			reportGenerator = new ReportGeneratorProtectionProxy(employee);
+			employee.setReportGenerator(reportGenerator);
+
+			System.out.println("For owner:");
+			System.out.println(owner.generateDailyReport());
+			System.out.println("For employee:");
+			System.out.println(employee.generateDailyReport());
+		}
+	}
+	```
+	The above program should result in the following output:
+	```
+	For owner:	********************Location X Daily Report******************** 	Location ID: 012	Today’s Date: Sun Sep 14 13:28:12 IST 2014	Total Pizza Sell: 112	Total Sale: $2534
+	Net Profit: $1985	***************************************************************	For employee:	Not Authorised to view report.	
+	```
