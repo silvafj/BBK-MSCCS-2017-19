@@ -57,81 +57,9 @@ enabling the transaction to proceed.
 
 	The `Xpay` interface contains setter and getter methods to get the information about 
 the credit card and customer name. The interface is implemented in the following code which is 
-used to instantiate an object of this type, and exposes the object to the vendor's API.
+used to instantiate an object of this type, and exposes the object to the 
+vendor's API (`XpayImpl` on the repository).
 
-	```java
-	import Xpay;
-
-	public class XpayImpl implements Xpay {
-
-		private String creditCardNo;
-		private String customerName;
-		private String cardExpMonth;
-		private String cardExpYear;
-		private Short cardCVVNo;
-		private Double amount;
-	
-		@Override
-		public String getCreditCardNo() {
-			return creditCardNo;
-		}
-
-		@Override
-		public String getCustomerName() {
-			return customerName;
-		}
-
-		@Override
-		public String getCardExpMonth() {
-			return cardExpMonth;
-		}
-
-		@Override
-		public String getCardExpYear() {
-			return cardExpYear;
-		}
-
-		@Override
-		public Short getCardCVVNo() {
-			return cardCVVNo;
-		}
-
-		@Override
-		public Double getAmount() {
-			return amount;
-		}
-
-		@Override
-		public void setCreditCardNo(String creditCardNo) {
-			this.creditCardNo = creditCardNo;
-		}
-
-		@Override
-		public void setCustomerName(String customerName) {
-			this.customerName = customerName;
-		}
-
-		@Override
-		public void setCardExpMonth(String cardExpMonth) {
-			this.cardExpMonth = cardExpMonth;
-		}
-
-		@Override
-		public void setCardExpYear(String cardExpYear) {
-			this.cardExpYear = cardExpYear;
-		}
-
-		@Override
-		public void setCardCVVNo(Short cardCVVNo) {
-			this.cardCVVNo = cardCVVNo;
-		}
-
-		@Override
-		public void setAmount(Double amount) {
-			this.amount = amount;
-		}
-	}
-	```
 	The new vendor's interface looks like this:
 	```java
 	public interface PayD {
@@ -156,39 +84,10 @@ used to instantiate an object of this type, and exposes the object to the vendor
 	and also make less or no change to the current code base. 
 
 	You are required to use the *Adapter* pattern to implement a `XpayToPayDAdapter` 
-	class to meet the requirements. We can test your class to see whether it can solve the Max’s problem using
-	the following:
-	```java
-	import PayD;
-	import Xpay;
+	class to meet the requirements. 
+	We can test your class to see whether it can solve the Max’s problem using
+	the `RunAdapterExample` class from the repository.
 
-	public class RunAdapterExample {
-
-		public static void main(String[] args) {
-		
-			// Object for Xpay
-			Xpay xpay = new XpayImpl();
-			xpay.setCreditCardNo("4789565874102365");
-			xpay.setCustomerName("Max Warner");
-			xpay.setCardExpMonth("09");
-			xpay.setCardExpYear("25");
-			xpay.setCardCVVNo((short)235);
-			xpay.setAmount(2565.23);
-		
-			PayD payD = new XpayToPayDAdapter(xpay);
-			testPayD(payD);
-		}
-	
-		private static void testPayD(PayD payD){
-		
-			System.out.println(payD.getCardOwnerName());
-			System.out.println(payD.getCustCardNo());
-			System.out.println(payD.getCardExpMonthDate());
-			System.out.println(payD.getCVVNo());
-			System.out.println(payD.getTotalAmount());
-		}
-	}
-	```
 2. This question concerns the *Bridge* design pattern.
 
 	"Dodgy Security Systems" is a security and electronic company which produces and assembles products 
@@ -232,40 +131,7 @@ They receive a vehicle, produce the system for it, and then assemble it and inst
 	each of these two car companies, two more new classes will be created for each of them.
 	
 	Provide a solution to this problem using an implementation of the *Bridge* design pattern. 
-	We provide an appropriate test method:
-	```java
-	public class TestBridgePattern {
-		public static void main(String[] args) {
-			Product product = new CentralLocking("Central Locking System");
-			Product product2 = new GearLocking("Gear Locking System");
-			Car car = new BigWheel(product , "BigWheel xz model");
-			car.produceProduct();
-			car.assemble();
-			car.printDetails();
-		
-			System.out.println();
-		
-			car = new BigWheel(product2 , "BigWheel xz model");
-			car.produceProduct();
-			car.assemble();
-			car.printDetails();
-		
-			System.out.println("-----------------------------------------------------");
-		
-			car = new Motoren(product, "Motoren lm model");
-			car.produceProduct();
-			car.assemble();
-			car.printDetails();
-		
-			System.out.println();
-		
-			car = new Motoren(product2, "Motoren lm model");
-			car.produceProduct();
-			car.assemble();
-			car.printDetails();	
-		}
-	}
-	```
+	We provide an appropriate test class in `TestBridgePattern` from the repository
 	which should produce the following output:
 	```
 	Producing Central Locking System
@@ -326,37 +192,8 @@ composite class and a leaf class.
 	+ `HtmlParentElement` — handles the *child* nodes, and
 	+ `HtmlElement` — handles the *leaf* nodes.
 	
-	The following class should be used to test out your classes:
-	```java
-	public class TestCompositePattern {
-		public static void main(String[] args) {
-			HtmlTag parentTag = new HtmlParentElement("<html>");
-			parentTag.setStartTag("<html>");
-			parentTag.setEndTag("</html>");
-		
-			HtmlTag p1 = new HtmlParentElement("<body>");
-			p1.setStartTag("<body>");
-			p1.setEndTag("</body>");
-		
-			parentTag.addChildTag(p1);
-		
-			HtmlTag child1 = new HtmlElement("<p>");
-			child1.setStartTag("<p>");
-			child1.setEndTag("</p>");
-			child1.setTagBody("Testing html tag library");
-			p1.addChildTag(child1);
-		
-			child1 = new HtmlElement("<p>");
-			child1.setStartTag("<p>");
-			child1.setEndTag("</p>");
-			child1.setTagBody("Paragraph 2");
-			p1.addChildTag(child1);
-		
-			parentTag.generateHtml();
-		}
-	}
-	```
-	The above code will result to the following output:
+	The `TestCompositePattern` class, from the repository, should be used to test out your classes.
+	The code should produce the following output:
 	```
 	<html>
 	<body>
@@ -398,43 +235,14 @@ composite class and a leaf class.
 	Provide an abstract decorator class which will be extended by all the concrete decorators.
 
 	Now provide several implementations of `PizzaDecorator` and exercise your classes
-	with the given test class. 
+	with the given test class (`TestDecoratorPattern`)
 	+ `Ham implements PizzaDecorator`
 	+ `Cheese implements PizzaDecorator`
 	+ `Chicken implements PizzaDecorator`
 	+ `FetaCheese implements PizzaDecorator`
 	+ ...
 
-
-	```java
-	import java.text.DecimalFormat;
-
-	public class TestDecoratorPattern {
-	
-		public static void main(String[] args) {
-			DecimalFormat dformat = new DecimalFormat("#.##");
-			Pizza pizza = new SimplyVegPizza();
-		
-			pizza = new RomaTomatoes(pizza);
-			pizza = new GreenOlives(pizza);
-			pizza = new Spinach(pizza);
-		
-			System.out.println("Desc: "+pizza.getDesc());
-			System.out.println("Price: "+dformat.format(pizza.getPrice()));
-		
-			pizza = new SimplyNonVegPizza();
-		
-			pizza = new Meat(pizza);
-			pizza = new Cheese(pizza);
-			pizza = new Cheese(pizza);
-			pizza = new Ham(pizza);
-		
-			System.out.println("Desc: "+pizza.getDesc());
-			System.out.println("Price: "+dformat.format(pizza.getPrice()));
-		}
-	}
-	```
-	The code should result in the following output:
+	The code should produce the following output:
 	```
 	Desc: SimplyVegPizza (230), Roma Tomatoes (5.20), Green Olives (5.47), Spinach (7.92)
 	Price: 248.59
@@ -627,80 +435,10 @@ composite class and a leaf class.
 	Client objects are responsible for passing extrinsic state to the flyweight when it needs it.
 	
 	To solve the problem, you will need to provide a platform factory class which will control the 
-	creation of the `Platform` objects.
-	```java
-	import java.util.HashMap;
-	import java.util.Map;
-
-	public final class PlatformFactory {
-		private static Map<String, Platform> map = new HashMap<>();
-
-
-		private PlatformFactory() {
-			throw new AssertionError("Cannot instantiate the class");
-		}
+	creation of the `Platform` objects (see `PlatformFactory` from the repository).
 	
-		public static synchronized Platform getPlatformInstance(String platformType){
-			Platform platform = map.get(platformType);
-			if(platform==null){
-				switch(platformType){
-					case "C" : platform = new CPlatform(); 
-							   break;
-					case "CPP" : platform = new CPPPlatform(); 
-				   			   break;
-					case "JAVA" : platform = new JavaPlatform(); 
-					   		   break;
-					case "RUBY" : platform = new RubyPlatform(); 
-					   		   break;   		   
-				}
-				map.put(platformType, platform);
-			}
-			return platform;
-		}
-	}
-	```
-	Your code should pass the following (indicative) tests:
-	```java
-	public class TestFlyweight {
-		public static void main(String[] args) {
-			Code code = new Code();
-			code.setCode("C Code...");
-			Platform platform = PlatformFactory.getPlatformInstance("C");
-			platform.execute(code);
-			System.out.println("-------------------------------------");
-		
-			code = new Code();
-			code.setCode("C Code2...");
-			platform = PlatformFactory.getPlatformInstance("C");
-			platform.execute(code);
-			System.out.println("-------------------------------------");
-	
-			code = new Code();
-			code.setCode("JAVA Code...");
-			platform = PlatformFactory.getPlatformInstance("JAVA");
-			platform.execute(code);
-			System.out.println("-------------------------------------");
-			
-			code = new Code();
-			code.setCode("JAVA Code2...");
-			platform = PlatformFactory.getPlatformInstance("JAVA");
-			platform.execute(code);
-			System.out.println("-------------------------------------");
-	
-			code = new Code();
-			code.setCode("RUBY Code...");
-			platform = PlatformFactory.getPlatformInstance("RUBY");
-			platform.execute(code);
-			System.out.println("-------------------------------------");
-
-			code = new Code();
-			code.setCode("RUBY Code2...");
-			platform = PlatformFactory.getPlatformInstance("RUBY");
-			platform.execute(code);
-		}
-	}
-	```
-	The above code will result into the following output:
+	Your code should pass the (indicative) tests from `TestFlyweight` (on the repository).
+	The code should produce the following output:
 	```
 	CPlatform object created
 	Compiling and executing C code.
@@ -966,31 +704,8 @@ composite class and a leaf class.
 		}
 	}
 	```
-	You should then test your code with:
-	```java
-	import java.util.List;
-
-	public class TestVirtualProxy {
-		public static void main(String[] args) {
-			ContactList contactList = new ContactListProxyImpl();
-			Company company = new Company("ABC Company", "India", "+91-011-28458965", contactList);
-
-			System.out.println("Company Name: "+company.getCompanyName());
-			System.out.println("Company Address: "+company.getCompanyAddress());
-			System.out.println("Company Contact No.: "+company.getCompanyContactNo());
-
-			System.out.println("Requesting for contact list");
-
-			contactList = company.getContactList();
-
-			List<Employee>empList = contactList.getEmployeeList();
-			for(Employee emp : empList){
-				System.out.println(emp);
-			}
-		}
-	}
-	```
-	producing the following output:
+	You should then test your code with the `TestVirtualProxy` class from the repository.
+	The code should produce the following output:
 	```
 	Company object created...	Company Name: ABC Company	Company Address: Alabama	Company Contact No.: 011-2845-8965
 	Requesting for contact list	Creating contact list and fetching list of employees...	Employee Name: Employee A, EmployeeDesignation: SE, Employee Salary: 2565.55	Employee Name: Employee B, EmployeeDesignation: Manager, Employee Salary: 22574.0	Employee Name: Employee C, EmployeeDesignation: SSE, Employee Salary: 3256.77	Employee Name: Employee D, EmployeeDesignation: SSE, Employee Salary: 4875.54	Employee Name: Employee E, EmployeeDesignation: SE, Employee Salary: 2847.01	
