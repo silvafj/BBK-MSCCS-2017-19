@@ -4,8 +4,7 @@ Please look at the following before commencing on this work:
 
 + [Pair Programming](http://www.extremeprogramming.org/rules/pair.html): The "rules" from [
 www.extremeprogramming.org](www.extremeprogramming.org).
-+ [All I Really Need to Know about Pair Programming I Learned in Kindergarten][Kindergarten]: Good suggestions 
-on how to program in pairs..
++ [All I Really Need to Know about Pair Programming I Learned in Kindergarten][Kindergarten]: Good suggestions on how to program in pairs..
 
 ## Overview
 
@@ -28,26 +27,28 @@ Working together virtually, for example through shared desktops or Skype calls, 
 + Both repositories should include a `PARTNER.md` file containing the names of the partners; one repo will also include the submitted code.
 A sample `PARTNER.md` file is included in this repository.
 
-
-### FAQ
+## FAQ
 
 + “If my partner did not help with most of the assignment, should I still put his or her name on the assignment?”
 
-	No. If the pairing is *braking down* you should inform the instructor as soon as possible. If this is too 
-	near the submission date, and you completed the remainder of the assignment on your own, then you should 
-	turn in your assignment with just your name on it. You should state who you worked with and the reason why 
-	you did not finish the assignment together.
+	Yes, but you should note this in the comments field of the `PARTNER.md` file. 
+	If the pairing is *braking down* you should inform the instructor as soon as possible. 
+	If this is too near the submission time, and you need to complete the remainder of the assignment on your own, then you should turn in your assignment as usual.
 
 + “If I start working on an assignment with a partner, and then change my mind, what can I do?”
 
-	Once you pair program, you may not change your mind and complete the program alone or with a different 
-	partner. Instead, you must inform the instructor as to why your pair has *broken down*. If given permission 
-	to continue alone you must erase all your code and start over. If your assignment is similar to another 
-	student's, and the other student is not a declared pair-programming partner, then you will need to answer 
-	questions regarding academic integrity.
+	Once you pair program, you cannot change your mind and complete the program alone or with a different partner. 
+	Instead, you must inform the instructor as to why your pair has *broken down*. 
+	If given permission to continue alone you must erase all your code and start over. 
+	If your assignment is similar to another student's, and the other student is not a declared pair-programming partner, then you will need to answer questions regarding academic integrity.
 
 + “If I don’t even try to be in a pair and just submit the work as an individual will my work be graded?”
 
-	Yes, it will be graded and you will receive feedbeck; the grade will be zero. though.
+	No - you will receive feedback but the grade will be zero.
+	
+
+## The Problem
+
+
 
 [Kindergarten]: http://collaboration.csc.ncsu.edu/laurie/Papers/Kindergarten.PDF
