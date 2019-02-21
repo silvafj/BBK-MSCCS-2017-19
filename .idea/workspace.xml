@@ -155,7 +155,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550778109081" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550778286321" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -172,7 +172,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TestBuilderPattern">
+  <component name="RunManager" selected="Application.TestFactory">
     <configuration name="TestAbstractFactoryPattern" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="abstractfactorypattern.TestAbstractFactoryPattern" />
       <module name="worksheet-on-design-patterns-part-i-silvafj" />
@@ -199,8 +199,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestFactory" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="factorypattern.TestFactory" />
+      <module name="worksheet-on-design-patterns-part-i-silvafj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="factorypattern.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestPrototypePattern" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="prototypepattern.TestPrototypePattern" />
+      <module name="worksheet-on-design-patterns-part-i-silvafj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="prototypepattern.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestFactory" />
+        <item itemvalue="Application.TestPrototypePattern" />
         <item itemvalue="Application.TestBuilderPattern" />
         <item itemvalue="Application.TestAbstractFactoryPattern" />
       </list>

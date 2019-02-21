@@ -2,9 +2,10 @@ package builderpattern;
 
 public class SportsCarBuilder implements CarBuilder {
   private Car car = new Car("SPORTS");
+
   @Override
   public void buildBodyStyle() {
-  car.setBodyStyle("External dimensions: overall length (inches): 192.3, overall width (inches): 75.5, overall height (inches): 54.2, wheelbase (inches): 112.3, front track (inches): 63.7, rear track (inches): 64.1 and curb to curb turning circle (feet): 37.7");
+    car.setBodyStyle("External dimensions: overall length (inches): 192.3, overall width (inches): 75.5, overall height (inches): 54.2, wheelbase (inches): 112.3, front track (inches): 63.7, rear track (inches): 64.1 and curb to curb turning circle (feet): 37.7");
   }
 
   @Override
