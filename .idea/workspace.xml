@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b86f3493-ddd1-42da-b8b5-71abb4629d13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builderpattern/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builderpattern/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builderpattern/CarDirector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builderpattern/CarDirector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builderpattern/SedanCarBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builderpattern/SedanCarBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builderpattern/SportsCarBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/builderpattern/SportsCarBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prototypepattern/AccessControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prototypepattern/AccessControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prototypepattern/AccessControlProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prototypepattern/AccessControlProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prototypepattern/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prototypepattern/User.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,42 +17,22 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/builderpattern/Car.java">
+        <entry file="file://$PROJECT_DIR$/src/prototypepattern/AccessControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/builderpattern/CarDirector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/builderpattern/SedanCarBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+            <state relative-caret-position="60">
+              <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
               <folding>
-                <element signature="e#464#465#0" expanded="true" />
-                <element signature="e#541#542#0" expanded="true" />
-                <element signature="e#584#585#0" expanded="true" />
-                <element signature="e#631#632#0" expanded="true" />
-                <element signature="e#486#487#0" expanded="true" />
-                <element signature="e#506#507#0" expanded="true" />
+                <element signature="e#180#181#0" expanded="true" />
+                <element signature="e#193#194#0" expanded="true" />
+                <element signature="e#586#587#0" expanded="true" />
+                <element signature="e#614#615#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/builderpattern/CarBuilder.java">
+        <entry file="file://$PROJECT_DIR$/src/prototypepattern/Prototype.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
@@ -62,19 +41,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/builderpattern/SportsCarBuilder.java">
+        <entry file="file://$PROJECT_DIR$/src/prototypepattern/AccessControlProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="47" column="15" lean-forward="true" selection-start-line="47" selection-start-column="15" selection-end-line="47" selection-end-column="15" />
+            <state relative-caret-position="210">
+              <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/builderpattern/TestBuilderPattern.java">
+        <entry file="file://$PROJECT_DIR$/src/prototypepattern/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="578">
+              <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+              <folding>
+                <element signature="e#434#435#0" expanded="true" />
+                <element signature="e#460#461#0" expanded="true" />
+                <element signature="e#558#559#0" expanded="true" />
+                <element signature="e#591#592#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/prototypepattern/TestPrototypePattern.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="94" selection-start-line="18" selection-start-column="87" selection-end-line="18" selection-end-column="94" />
             </state>
           </provider>
         </entry>
@@ -103,6 +97,11 @@
         <option value="$PROJECT_DIR$/src/builderpattern/SedanCarBuilder.java" />
         <option value="$PROJECT_DIR$/src/builderpattern/Car.java" />
         <option value="$PROJECT_DIR$/src/builderpattern/SportsCarBuilder.java" />
+        <option value="$PROJECT_DIR$/src/factorypattern/ConcreteCreator.java" />
+        <option value="$PROJECT_DIR$/test/factorypattern/TestFactory.java" />
+        <option value="$PROJECT_DIR$/src/prototypepattern/User.java" />
+        <option value="$PROJECT_DIR$/src/prototypepattern/AccessControl.java" />
+        <option value="$PROJECT_DIR$/src/prototypepattern/AccessControlProvider.java" />
       </list>
     </option>
   </component>
@@ -131,7 +130,7 @@
               <item name="worksheet-on-design-patterns-part-i-silvafj" type="b2602c69:ProjectViewProjectNode" />
               <item name="worksheet-on-design-patterns-part-i-silvafj" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="builderpattern" type="462c0819:PsiDirectoryNode" />
+              <item name="prototypepattern" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="worksheet-on-design-patterns-part-i-silvafj" type="b2602c69:ProjectViewProjectNode" />
@@ -142,7 +141,7 @@
               <item name="worksheet-on-design-patterns-part-i-silvafj" type="b2602c69:ProjectViewProjectNode" />
               <item name="worksheet-on-design-patterns-part-i-silvafj" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="builderpattern" type="462c0819:PsiDirectoryNode" />
+              <item name="prototypepattern" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -155,10 +154,16 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550778286321" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550780015311" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test/factorypattern" />
+      <recent name="$PROJECT_DIR$/src/factorypattern" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -172,7 +177,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TestFactory">
+  <component name="RunManager" selected="Application.TestPrototypePattern">
     <configuration name="TestAbstractFactoryPattern" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="abstractfactorypattern.TestAbstractFactoryPattern" />
       <module name="worksheet-on-design-patterns-part-i-silvafj" />
@@ -227,8 +232,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestFactory" />
         <item itemvalue="Application.TestPrototypePattern" />
+        <item itemvalue="Application.TestFactory" />
         <item itemvalue="Application.TestBuilderPattern" />
         <item itemvalue="Application.TestAbstractFactoryPattern" />
       </list>
@@ -244,7 +249,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550776390899</updated>
-      <workItem from="1550776393410" duration="1660000" />
+      <workItem from="1550776393410" duration="3497000" />
     </task>
     <task id="LOCAL-00001" summary="Completed abstract factory pattern">
       <created>1550777351465</created>
@@ -253,11 +258,25 @@
       <option name="project" value="LOCAL" />
       <updated>1550777351465</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Completed the builder pattern">
+      <created>1550778128709</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1550778128709</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Copied the factory pattern from my own repository -- worksheet-on-creational-design-patterns-silvafj">
+      <created>1550778356045</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1550778356045</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1660000" />
+    <option name="totallyTimeSpent" value="3497000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -301,7 +320,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Completed abstract factory pattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed abstract factory pattern" />
+    <MESSAGE value="Completed the builder pattern" />
+    <MESSAGE value="Copied the factory pattern from my own repository -- worksheet-on-creational-design-patterns-silvafj" />
+    <option name="LAST_COMMIT_MESSAGE" value="Copied the factory pattern from my own repository -- worksheet-on-creational-design-patterns-silvafj" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test/abstractfactorypattern/TestAbstractFactoryPattern.java">
@@ -368,13 +389,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/builderpattern/TestBuilderPattern.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/builderpattern/CarDirector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -413,8 +427,71 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/builderpattern/SportsCarBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="47" column="15" lean-forward="true" selection-start-line="47" selection-start-column="15" selection-end-line="47" selection-end-column="15" />
+        <state relative-caret-position="407">
+          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/builderpattern/TestBuilderPattern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/factorypattern/ConcreteCreator.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/factorypattern/TestFactory.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/prototypepattern/Prototype.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/prototypepattern/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+          <folding>
+            <element signature="e#434#435#0" expanded="true" />
+            <element signature="e#460#461#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#591#592#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/prototypepattern/TestPrototypePattern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="94" selection-start-line="18" selection-start-column="87" selection-end-line="18" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/prototypepattern/AccessControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+          <folding>
+            <element signature="e#180#181#0" expanded="true" />
+            <element signature="e#193#194#0" expanded="true" />
+            <element signature="e#586#587#0" expanded="true" />
+            <element signature="e#614#615#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/prototypepattern/AccessControlProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
         </state>
       </provider>
     </entry>
