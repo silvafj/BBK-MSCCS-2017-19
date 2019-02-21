@@ -154,7 +154,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550780015311" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550780176365" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -177,7 +177,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TestPrototypePattern">
+  <component name="RunManager" selected="Application.TestSingleton">
     <configuration name="TestAbstractFactoryPattern" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="abstractfactorypattern.TestAbstractFactoryPattern" />
       <module name="worksheet-on-design-patterns-part-i-silvafj" />
@@ -230,8 +230,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestSingleton" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="singletonpattern.TestSingleton" />
+      <module name="worksheet-on-design-patterns-part-i-silvafj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="singletonpattern.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestSingleton" />
         <item itemvalue="Application.TestPrototypePattern" />
         <item itemvalue="Application.TestFactory" />
         <item itemvalue="Application.TestBuilderPattern" />
