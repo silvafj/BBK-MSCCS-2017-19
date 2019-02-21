@@ -10,9 +10,21 @@ public abstract class Car {
     this.carType = carType;
   }
 
-  public abstract void assemble();
+  public  void assemble() {
+    System.out.println("Assembling " + product.productName() + " for " + carType);
+  }
 
-  public abstract void produceProduct();
+  public  void produceProduct() {
+    product.produce();
+  }
+
+  protected Product getProduct() {
+    return product;
+  }
+
+  protected String getCarType() {
+    return carType;
+  }
 
   public void printDetails() {
     System.out.println("Car: " + carType + ", Product:" + product.productName());
