@@ -1,56 +1,62 @@
 package adapter;
 
 public class XpayToPayDAdapter implements PayD {
-  public XpayToPayDAdapter(Xpay xpay) {
-  }
+    private final Xpay xpay;
 
-  @Override
-  public String getCustCardNo() {
-    return null;
-  }
+    public XpayToPayDAdapter(Xpay xpay) {
+        this.xpay = xpay;
+    }
 
-  @Override
-  public String getCardOwnerName() {
-    return null;
-  }
+    @Override
+    public String getCustCardNo() {
+        return xpay.getCreditCardNo();
+    }
 
-  @Override
-  public String getCardExpMonthDate() {
-    return null;
-  }
+    @Override
+    public void setCustCardNo(String custCardNo) {
+        xpay.setCreditCardNo(custCardNo);
 
-  @Override
-  public Integer getCVVNo() {
-    return null;
-  }
+    }
 
-  @Override
-  public Double getTotalAmount() {
-    return null;
-  }
+    @Override
+    public String getCardOwnerName() {
+        return xpay.getCustomerName();
+    }
 
-  @Override
-  public void setCustCardNo(String custCardNo) {
+    @Override
+    public void setCardOwnerName(String cardOwnerName) {
+        xpay.setCustomerName(cardOwnerName);
+    }
 
-  }
+    @Override
+    public String getCardExpMonthDate() {
+        return xpay.getCardExpMonth();
+    }
 
-  @Override
-  public void setCardOwnerName(String cardOwnerName) {
+    @Override
+    public void setCardExpMonthDate(String cardExpMonthDate) {
+        xpay.setCardExpMonth(cardExpMonthDate);
+    }
 
-  }
+    @Override
+    public Integer getCVVNo() {
+        return xpay.getCardCVVNo().intValue();
+    }
 
-  @Override
-  public void setCardExpMonthDate(String cardExpMonthDate) {
+    @Override
+    public void setCVVNo(Integer cVVNo) {
+        xpay.setCardCVVNo(cVVNo.shortValue());
 
-  }
+    }
 
-  @Override
-  public void setCVVNo(Integer cVVNo) {
+    @Override
+    public Double getTotalAmount() {
+        return xpay.getAmount();
+    }
 
-  }
+    @Override
+    public void setTotalAmount(Double totalAmount) {
+        xpay.setAmount(totalAmount);
+    }
 
-  @Override
-  public void setTotalAmount(Double totalAmount) {
-
-  }
 }
