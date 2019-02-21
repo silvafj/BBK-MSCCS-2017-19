@@ -7,8 +7,14 @@ public final class ParserFactoryProducer {
   }
 
   public static AbstractParserFactory getFactory(String factoryType) {
-    // TODO
-    return null;
+    switch (factoryType) {
+      case "NYFactory":
+        return new NYParserFactory();
+      case "TWFactory":
+        return new TWParserFactory();
+      default:
+        return null;
+    }
   }
 
 }
