@@ -2,19 +2,19 @@ package builderpattern;
 
 public interface CarBuilder {
 
-  public void buildBodyStyle();
+    public void buildBodyStyle();
 
-  public void buildPower();
+    public void buildPower();
 
-  public void buildEngine();
+    public void buildEngine();
 
-  public void buildBreaks();
+    public void buildBreaks();
 
-  public void buildSeats();
+    public void buildSeats();
 
-  public void buildWindows();
+    public void buildWindows();
 
-  public void buildFuelType();
+    public void buildFuelType();
 
-  public Car getCar();
+    public Car getCar();
 }

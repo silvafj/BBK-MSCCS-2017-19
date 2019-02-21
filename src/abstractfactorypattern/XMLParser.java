@@ -1,5 +1,5 @@
 package abstractfactorypattern;
 
 public interface XMLParser {
-  public String parse();
+    public String parse();
 }
