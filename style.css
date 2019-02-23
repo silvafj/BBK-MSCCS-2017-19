@@ -1,0 +1,14 @@
+table {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table tbody {
+  border-top: 15px solid white;
+}
+
+td, th {
+  text-align: left;
+  padding: 5px;
+}
