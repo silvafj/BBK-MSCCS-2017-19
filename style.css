@@ -12,3 +12,7 @@ td, th {
   text-align: left;
   padding: 5px;
 }
+
+tr.won td.name {
+  font-weight: bold;
+}

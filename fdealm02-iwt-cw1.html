@@ -1,69 +1,37 @@
 <!doctype html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <title>Tennis tournament results</title>
-      <!-- I confirm that this coursework submission is entirely my own work, except where explicitly stated otherwise. -->
-      <meta name="author" content="Fernando de Almeida da Silva (fdealm02)">
-      <link rel="stylesheet" href="style.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="script.js"></script>
-   </head>
-   <body>
-      <form id="form-query">
-         <div class="form-item">
-            <label for="tournament">Tournament</label>
-            <select name="tournament" id="tournament">
-               <option value="wimbledon-men-2013">Wimbledon 2013 Men</option>
-               <option value="wimbledon-women-2013">Wimbledon 2013 Women</option>
-            </select>
-         </div>
-         <input type="submit" value="Query">
-      </form>
-      <table id="results-table">
-         <tr>
-            <th>Round</th>
-            <th>Player</th>
-            <th>Set 1</th>
-            <th>Set 2</th>
-            <th>Set 3</th>
-            <th>Set 4</th>
-            <th>Set 5</th>
-         </tr>
-         <tbody>
-            <tr>
-               <td>1</td>
-               <td>B.Becker</td>
-               <td>4</td>
-               <td>3</td>
-               <td>2</td>
-            </tr>
-            <tr>
-               <td>1</td>
-               <td><b>A.Murray</b></td>
-               <td>6</td>
-               <td>6</td>
-               <td>6</td>
-            </tr>
-         </tbody>
-         <tbody>
-            <tr>
-               <td>1</td>
-               <td>J.Ward</td>
-               <td>7</td>
-               <td>4</td>
-               <td>6</td>
-               <td>6</td>
-            </tr>
-            <tr>
-               <td>1</td>
-               <td><b>Y-H.Lu</b></td>
-               <td>6</td>
-               <td>6</td>
-               <td>7</td>
-               <td>7</td>
-            </tr>
-         </tbody>
-      </table>
-   </body>
+  <head>
+    <meta charset="utf-8">
+    <title>Tennis tournament results</title>
+    <!-- I confirm that this coursework submission is entirely my own work, except where explicitly stated otherwise. -->
+    <meta name="author" content="Fernando de Almeida da Silva (fdealm02)">
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <form id="form-query">
+      <div class="form-item">
+        <label for="tournament">Tournament</label>
+        <select name="tournament" id="tournament">
+          <option value="wimbledon-men-2013">Wimbledon 2013 Men</option>
+          <option value="wimbledon-women-2013">Wimbledon 2013 Women</option>
+        </select>
+      </div>
+      <input type="submit" value="Query">
+    </form>
+    <table id="results-table">
+      <thead>
+        <tr>
+          <th>Round</th>
+          <th>Player</th>
+          <th>Set 1</th>
+          <th>Set 2</th>
+          <th>Set 3</th>
+          <th>Set 4</th>
+          <th>Set 5</th>
+        </tr>
+      </thead>
+    </table>
+  </body>
 </html>
