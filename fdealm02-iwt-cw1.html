@@ -18,6 +18,15 @@
           <option value="wimbledon-women-2013">Wimbledon 2013 Women</option>
         </select>
       </div>
+      <div class="form-item">
+        <label for="player">Player</label>
+        <select name="player-condition" id="player-condition">
+          <option value="equals">equals</option>
+          <option value="contains">contains</option>
+          <option value="none">none</option>
+        </select>
+        <input type="input" name="player" id="player">
+      </div>
       <input type="submit" value="Query">
     </form>
     <table id="results-table">
