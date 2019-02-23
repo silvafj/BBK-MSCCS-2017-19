@@ -41,6 +41,23 @@ function filterBySets(matches) {
   return matches.filter(match => match.player.find(setsFilter));
 }
 
+// Filter tournament matches by round
+function filterByRound(matches) {
+  const roundFilters = {
+    "equals": match => match.round == roundValue,
+    "greater-than": match => match.round > roundValue,
+    "less-than": match => match.round < roundValue,
+  };
+
+  const roundValue = $("#round-value").val();
+  const roundCondition = $("#round-condition").val();
+  const roundFilter = roundFilters[roundCondition];
+
+  console.log("Filter by round (" + roundCondition + " " + roundValue + "): " + roundFilter);
+
+  return matches.filter(roundFilter);
+}
+
 // Loads the JSON file and generates a table with the results
 function parseResultsFromJSON(tournament) {
   tournament += ".json";
@@ -54,6 +71,7 @@ function parseResultsFromJSON(tournament) {
     matches = data.match;
     matches = filterByPlayer(matches);
     matches = filterBySets(matches);
+    matches = filterByRound(matches);
 
     // Generate the table with the results
     var table = $("#results-table");
