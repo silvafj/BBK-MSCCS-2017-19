@@ -21,11 +21,27 @@
       <div class="form-item">
         <label for="player">Player</label>
         <select name="player-condition" id="player-condition">
-          <option value="equals">equals</option>
-          <option value="contains">contains</option>
-          <option value="none">none</option>
+          <option value="equals">Equals</option>
+          <option value="contains">Contains</option>
+          <option value="none">None</option>
         </select>
         <input type="input" name="player" id="player">
+      </div>
+      <div class="form-item">
+        <label for="sets-condition">Sets</label>
+        <select name="sets-condition" id="sets-condition">
+          <option value="greater-than">&gt;</option>
+          <option value="less-than">&lt;</option>
+          <option value="equals">=</option>
+        </select>
+        <select name="sets-value" id="sets-value">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
       <input type="submit" value="Query">
     </form>

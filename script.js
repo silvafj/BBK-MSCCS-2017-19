@@ -1,26 +1,44 @@
 // Filter tournament matches by player
 function filterByPlayer(matches) {
   const playerFilters = {
-    equals: function(player) {
-      return player.name === playerValue;
-    },
-    contains: function(player) {
-      return player.name.search(playerValue) > -1;
-    },
-    none: function(player) {
-      return true;
-    }
+    "equals": player => player.name === playerValue,
+    "contains": player => player.name.search(playerValue) > -1,
+    "none": player => true,
   };
 
   var playerValue = $("#player").val();
-  if (playerValue) {
-    const playerFilter = playerFilters[$("#player-condition").val()];
-    console.log("Filter by player: " + playerFilter);
+  var playerCondition = $("#player-condition").val();
 
-    return matches.filter(match => match.player.find(playerFilter));
+  if (playerCondition === "none") {
+    playerValue = "";
   }
 
-  return matches;
+  if (!playerValue) {
+    playerCondition = "none";
+  }
+
+  const playerFilter = playerFilters[playerCondition];
+
+  console.log("Filter by player (" + playerCondition + " " + playerValue + "): " + playerFilter);
+
+  return matches.filter(match => match.player.find(playerFilter));
+}
+
+// Filter tournament matches by number of sets
+function filterBySets(matches) {
+  const setsFilters = {
+    "equals": player => player.set.length == setsValue,
+    "greater-than": player => player.set.length > setsValue,
+    "less-than": player => player.set.length < setsValue,
+  };
+
+  const setsValue = $("#sets-value").val();
+  const setsCondition = $("#sets-condition").val();
+  const setsFilter = setsFilters[setsCondition];
+
+  console.log("Filter by sets (" + setsCondition + " " + setsValue + "): " + setsFilter);
+
+  return matches.filter(match => match.player.find(setsFilter));
 }
 
 // Loads the JSON file and generates a table with the results
@@ -35,6 +53,7 @@ function parseResultsFromJSON(tournament) {
     // Apply the filters requested
     matches = data.match;
     matches = filterByPlayer(matches);
+    matches = filterBySets(matches);
 
     // Generate the table with the results
     var table = $("#results-table");
