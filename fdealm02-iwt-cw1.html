@@ -11,6 +11,7 @@
   </head>
   <body>
     <form id="form-query">
+      <fieldset><legend>Search tennis results</legend>
       <div class="form-item">
         <label for="tournament">Tournament</label>
         <select name="tournament" id="tournament">
@@ -21,11 +22,11 @@
       <div class="form-item">
         <label for="player">Player</label>
         <select name="player-condition" id="player-condition">
-          <option value="equals">Equals</option>
+          <option value="equals">Is</option>
           <option value="contains">Contains</option>
           <option value="none">None</option>
         </select>
-        <input type="input" name="player" id="player">
+        <input type="text" name="player" id="player">
       </div>
       <div class="form-item">
         <label for="sets-condition">Sets</label>
@@ -45,7 +46,8 @@
         </select>
         <input type="number" name="round-value" id="round-value" min="0" max="7">
       </div>
-      <input type="submit" value="Query">
+      <button type="submit">Query</button>
+      </fieldset>
     </form>
     <table id="results-table">
       <thead>

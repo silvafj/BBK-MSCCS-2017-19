@@ -76,8 +76,6 @@ function parseResultsFromJSON(tournament) {
 
   // Let's have some fun with jQuery!
   $.getJSON(tournament, function(data) {
-    console.log("Generating table for " + data.name + " " + data.year);
-
     // Apply the filters requested
     matches = data.match;
     matches = filterByPlayer(matches);
@@ -85,6 +83,8 @@ function parseResultsFromJSON(tournament) {
     matches = filterByRound(matches);
 
     // Generate the table with the results
+    console.log("Generating rows for " + data.name + " " + data.year);
+
     var table = $("#results-table");
     table.find("tbody").remove();
 
@@ -100,10 +100,15 @@ function parseResultsFromJSON(tournament) {
             .html(player.name)
         );
 
+        var setsCount = 0;
         player.set.forEach(function(set) {
+          setsCount++;
           row.append($("<td>").text(set));
         });
 
+        for (var i = setsCount; i < 5; i++) {
+          row.append($("<td>"));
+        }
         tbody.append(row);
       });
 
