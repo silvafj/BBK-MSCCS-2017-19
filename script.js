@@ -30,10 +30,15 @@ function filterBySets(matches) {
     "equals": player => player.set.length == setsValue,
     "greater-than": player => player.set.length > setsValue,
     "less-than": player => player.set.length < setsValue,
+    "none": player => true,
   };
 
-  const setsValue = $("#sets-value").val();
-  const setsCondition = $("#sets-condition").val();
+  var setsValue = $("#sets-value").val();
+  var setsCondition = $("#sets-condition").val();
+  if (!setsValue) {
+      setsCondition = "none";
+  }
+
   const setsFilter = setsFilters[setsCondition];
 
   console.log("Filter by sets (" + setsCondition + " " + setsValue + "): " + setsFilter);
@@ -47,10 +52,16 @@ function filterByRound(matches) {
     "equals": match => match.round == roundValue,
     "greater-than": match => match.round > roundValue,
     "less-than": match => match.round < roundValue,
+    "none": match => true,
   };
 
-  const roundValue = $("#round-value").val();
-  const roundCondition = $("#round-condition").val();
+  var roundValue = $("#round-value").val();
+  var roundCondition = $("#round-condition").val();
+
+  if (!roundValue) {
+      roundCondition = "none";
+  }
+
   const roundFilter = roundFilters[roundCondition];
 
   console.log("Filter by round (" + roundCondition + " " + roundValue + "): " + roundFilter);
