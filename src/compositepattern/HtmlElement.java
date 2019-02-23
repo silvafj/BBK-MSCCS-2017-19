@@ -1,27 +1,23 @@
 package compositepattern;
 
 public class HtmlElement extends HtmlTag {
+  private String tagBody;
+
   public HtmlElement(String s) {
-    super();
+    super(s);
   }
 
   @Override
-  public String getTagName() {
-    return null;
+  public void setTagBody(String tagBody) {
+    this.tagBody = tagBody;
   }
 
-  @Override
-  public void setStartTag(String tag) {
-
-  }
-
-  @Override
-  public void setEndTag(String tag) {
-
+  public String getTagBody() {
+    return tagBody;
   }
 
   @Override
   public void generateHtml() {
-
+    System.out.println(this.getStartTag() + this.getTagBody() + this.getEndTag());
   }
 }

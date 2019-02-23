@@ -3,11 +3,34 @@ package compositepattern;
 import java.util.List;
 
 public abstract class HtmlTag {
-  public abstract String getTagName();
+  private String tagName;
+  private String startTag;
+  private String endTag;
 
-  public abstract void setStartTag(String tag);
+  public HtmlTag(String tagName) {
+    this.tagName = tagName;
+  }
 
-  public abstract void setEndTag(String tag);
+  public  String getTagName() {
+    return tagName;
+  }
+
+  public void setStartTag(String tag) {
+    this.startTag = tag;
+  }
+
+  public String getStartTag() {
+    return this.startTag;
+  }
+
+  public void setEndTag(String tag) {
+    this.endTag = tag;
+  }
+
+  public String getEndTag() {
+    return this.endTag;
+  }
+
 
   public void setTagBody(String tagBody) {
     throw new UnsupportedOperationException("Current operation is not support for this object");
