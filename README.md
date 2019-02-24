@@ -29,21 +29,10 @@ Do not provide `public` getters or setters for these instance variables; there i
 + The denominator **may not** be zero.
 + The fraction is displayed as `n/d`, where `n` is the numerator and `d` is the denominator.
 + The fraction is always kept in its *lowest terms*, that is, the Greatest Common Divisor (GCD) of `n` and `d` is `1` (see Euclid's algorithm if you are interested).
-+ The denominator is never negative.<br/>
++ The denominator is never negative.   
 	(You may provide a negative number for the denominator to the constructor when you create the fraction, but a negative fraction should be represented internally with a negative numerator and a positive denominator.)
 + Zero should be represented as `0/1` (well, the `BigInteger` version).
 + All `Fraction`s should be *immutable*, that is, there should be no external mechanism to change their components after the numbers have been created; most of your methods simply return a new fraction.
-
-<!--
-#### GCD
-
-To put a fraction into its *lowest terms*, divide both the numerator and the denominator by their Greatest Common Divisor (GCD). 
-Euclid's algorithm finds the GCD of two integers:
-
-+ As long as the two numbers are not equal, replace the larger number with the remainder of dividing the larger by the smaller (that is, `larger = larger % smaller`). 
-+ When the two numbers are equal, that value is the GCD. <br/>
-	(If this brief explanation isn't enough, look up Euclid's algorithm on the Web.)
--->
 
 ## The `FractionCalculator` class
 
@@ -70,9 +59,7 @@ In each case, the user may enter *either* a whole number or a fraction for `n`.
 + You **do not** have to handle unary `+`.
 + You can require at least one space after the initial `+`, `-`, `*`, `/`, or `s`, so for example `- -3/5` is legal, but `--3/5` is not.
 
-No user input, however illegal, should cause the program to abort; 
-instead, the program should print a short error message. 
-Illegal input should **not** affect the state of the computation.
+No user input, however illegal, should cause the program to abort; instead, the program should print a short error message. Illegal input should **not** affect the state of the computation.
 
 ## The Code
 
@@ -83,9 +70,7 @@ You are provided with some existing code in your repository:
 + `FractionTest`, and 
 + `FractionCalculator` classes; 
 
-you **should not** assume the code is correct — check it thoroughly.
-
-The `FractionCalculator` class does not require unit testing as it does little computation on its own (it's all carried out in the `Fraction` class), and is mostly concerned with input/output.
+you **should not** assume the code is correct — check it thoroughly. The `FractionCalculator` class does not require unit testing as it does little computation on its own (it's all carried out in the `Fraction` class), and is mostly concerned with input/output.
 
 You are required to complete the classes outlined by the provided code.
 Your goal in writing the `JUnit` test class for the `Fraction` class is to test for every possible error, including that the correct exceptions are thrown (where appropriate).
