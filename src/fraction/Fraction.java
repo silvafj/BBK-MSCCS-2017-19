@@ -1,21 +1,22 @@
 package fraction;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 public class Fraction implements Comparable {
-    private int numerator;
-    private int denominator;
+    private BigInteger numerator;
+    private BigInteger denominator;
+
+    {
+        numerator = BigInteger.ZERO;
+        denominator = BigInteger.ONE;
+    }
 
     /**
-     * Normalize the fraction as you create it.
-     * For instance, if the parameters are (8, -12), create a Fraction with numerator -2 and denominator 3.
-     * The constructor should throw an ArithmeticException if the denominator is zero.
-     *
-     * @param numerator   of the fraction
-     * @param denominator of the fraction
+     * Default constructor creates a Fraction of "1"
      */
-    public Fraction(int numerator, int denominator) {
-
+    public Fraction() {
+        this(BigInteger.ONE);
     }
 
     /**
@@ -23,8 +24,27 @@ public class Fraction implements Comparable {
      *
      * @param wholeNumber of the fraction
      */
-    public Fraction(int wholeNumber) {
+    public Fraction(BigInteger wholeNumber) {
+        this(wholeNumber, BigInteger.ONE);
+    }
 
+    /**
+     * Normalize the fraction as you create it.
+     * For instance, if the parameters are (8, -12), create a Fraction with numerator -2 and denominator 3.
+     * The constructor should throw an ArithmeticException if the denominator is zero.
+     *
+     * @param num   numerator of the fraction
+     * @param denom denominator of the fraction
+     */
+    public Fraction(BigInteger num, BigInteger denom) {
+        BigInteger gcd = num.gcd(denom);
+        setNumerator(num.divide(gcd));
+        setDenominator(denom.divide(gcd));
+
+        if (getDenominator().compareTo(BigInteger.ZERO) < 0) {
+            setNumerator(getNumerator().negate());
+            setDenominator(getDenominator().negate());
+        }
     }
 
     /**
@@ -34,23 +54,23 @@ public class Fraction implements Comparable {
      *
      * @param fraction a String containing either a whole number, such as "5" or " -3", or a fraction, such as "8/ -12".
      */
-    public Fraction(String fraction) {
-
+    public Fraction(String fraction) throws ArithmeticException {
+        // TODO replace with your code
     }
 
-    private int getNumerator() {
+    private BigInteger getNumerator() {
         return numerator;
     }
 
-    private void setNumerator(int numerator) {
+    private void setNumerator(BigInteger numerator) {
         this.numerator = numerator;
     }
 
-    private int getDenominator() {
+    private BigInteger getDenominator() {
         return denominator;
     }
 
-    private void setDenominator(int denominator) {
+    private void setDenominator(BigInteger denominator) {
         this.denominator = denominator;
     }
 
@@ -62,8 +82,9 @@ public class Fraction implements Comparable {
      * @return a new Fraction resulting from the addition
      */
     public Fraction add(Fraction f) {
-        // TODO replace with your code
-        return new Fraction(1);
+        BigInteger num = f.getNumerator().multiply(getDenominator()).add(getNumerator().multiply(f.getDenominator()));
+        BigInteger den = getDenominator().multiply(f.getDenominator());
+        return new Fraction(num, den);
     }
 
     /**
@@ -74,8 +95,7 @@ public class Fraction implements Comparable {
      * @return a new Fraction resulting from the subtraction
      */
     public Fraction subtract(Fraction f) {
-        // TODO replace with your code
-        return new Fraction(1);
+        return add(f.negate());
     }
 
     /**
@@ -86,8 +106,11 @@ public class Fraction implements Comparable {
      * @return a new Fraction resulting from the multiplication
      */
     public Fraction multiply(Fraction f) {
-        // TODO replace with your code
-        return new Fraction(1);
+        BigInteger a = this.getNumerator();
+        BigInteger b = this.getDenominator();
+        BigInteger c = f.getNumerator();
+        BigInteger d = f.getDenominator();
+        return new Fraction(a.multiply(c), b.multiply(d));
     }
 
     /**
@@ -98,8 +121,7 @@ public class Fraction implements Comparable {
      * @return a new fraction resulting from the division
      */
     public Fraction divide(Fraction f) {
-        // TODO replace with your code
-        return new Fraction(1);
+        return multiply(new Fraction(f.getDenominator(), f.getNumerator()));
     }
 
     /**
@@ -107,15 +129,14 @@ public class Fraction implements Comparable {
      */
     public Fraction abs() {
         // TODO replace with your code
-        return new Fraction(1);
+        return new Fraction(BigInteger.ONE);
     }
 
     /**
      * @return a new Fraction that has the same numeric value of this fraction, but the opposite sign.
      */
     public Fraction negate() {
-        // TODO replace with your code
-        return new Fraction(1);
+        return new Fraction(getNumerator().negate(), getDenominator());
     }
 
     /**
@@ -123,31 +144,25 @@ public class Fraction implements Comparable {
      */
     public Fraction inverse() {
         // TODO replace with your code
-        return new Fraction(1);
-    }
-
-    /**
-     * @param o the Fraction to compare
-     * @return true if o is a Fraction equal to this, and false in all other cases.
-     */
-    @Override
-    public boolean equals(Object o) {
-        // TODO replace with your code
-        return true;
+        return new Fraction(BigInteger.ONE);
     }
 
     /**
      * @param o the object to compare this object to
-     * @return If o is a Fraction or an int, this method returns:
+     * @return If o is a Fraction this method returns:
      * A negative int if this is less than o.
      * Zero if this is equal to o.
      * A positive int if this is greater than o.
-     * If o is neither a Fraction nor an int, this method throws a ClassCastException.
+     * If o is not a Fraction, this method throws a ClassCastException.
      */
     @Override
-    public int compareTo(Object o) {
-        // TODO replace with your code
-        return 1;
+    public int compareTo(Object o) throws ClassCastException {
+        if (!(o instanceof Fraction)) {
+            throw new ClassCastException();
+        }
+        Fraction value = (Fraction) o;
+
+        return (this.subtract(value)).getNumerator().signum();
     }
 
     /**
@@ -158,12 +173,25 @@ public class Fraction implements Comparable {
      */
     @Override
     public String toString() {
-        // TODO replace with your code
-        return "";
+        return (getDenominator().equals(BigInteger.ONE)) ? "" + getNumerator()
+            : getNumerator() + "/" + getDenominator();
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getNumerator(), getDenominator());
+    }
+
+    /**
+     * @param o the Fraction to compare
+     * @return true if o is a Fraction equal to this, and false in all other cases.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Fraction)) return false;
+        Fraction fraction = (Fraction) o;
+        return getNumerator().equals(fraction.getNumerator()) &&
+            getDenominator().equals(fraction.getDenominator());
     }
 }
