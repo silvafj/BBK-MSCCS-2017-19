@@ -12,10 +12,10 @@
 
 + Implement a `Fraction` API. 
 + Work with immutable arbitrary-precision integers through the `BigInteger` class.
-+ Write a (very thorough) set of `JUnit` tests. 
-+ Write a small "calculator" program to do arithmetic with fractions.
++ Complete a (very thorough) set of `JUnit` tests (using either version 4, or version 5 syntax).
++ Complete a small "calculator" program to do arithmetic with fractions.
 
-In each case you are provided with some skeletal code which you should complete.
+In each case you are provided with some skeletal code which you should complete. 
 
 ## The `Fraction` class
 
