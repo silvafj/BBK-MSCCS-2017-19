@@ -74,3 +74,11 @@ you **should not** assume the code is correct — check it thoroughly. The `Frac
 
 You are required to complete the classes outlined by the provided code.
 Your goal in writing the `JUnit` test class for the `Fraction` class is to test for every possible error, including that the correct exceptions are thrown (where appropriate).
+
+## Submission
+
+Complete the required fields in the `PARTNER.md` file including the evaluation of your partner. Failure to do so can result in a zero grade.
+
++ You should ensure that you stop work on this assignment at the end of the session and `push` your work to the respective `GitHub Classroom` repository. 
++ **DO NOT** continue working on this assignment after the end time of the session.
++ If you have not completed the work during the alocated time slot then don't worry, just ensure that what work you have done is successfully committed to `GitHub Classroom`.
