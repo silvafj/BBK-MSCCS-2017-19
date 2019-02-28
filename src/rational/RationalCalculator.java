@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class RationalCalculator {
     private static final String QUIT = "q";
-    private static final String ADD = "a";
+    private static final String ABS = "a";
     private static final String CLEAR = "c";
     private static final String INVERSE = "i";
     private static final String SWAP = "s";
@@ -21,18 +21,20 @@ public class RationalCalculator {
         Line command = new Line();
         Rational value = new Rational(0L);
 
-        try (Scanner sc = new Scanner(System.in)) {
-            do {
-                System.out.println(value);
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println(value);
 
+            try {
                 // Validate the input and convert line into command and argument (if present)
                 command = parseCommand(sc.nextLine());
+
                 // execute command
                 value = processCommand(command.getCommand(), command.getLine(), value);
-            } while (!command.getCommand().equals(QUIT));
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
+            } catch (ArithmeticException | NumberFormatException e) {
+                System.err.println(e);
+            }
+        } while (!command.getCommand().equals(QUIT));
     }
 
     private Line parseCommand(String line) {
@@ -52,7 +54,7 @@ public class RationalCalculator {
         switch (cmd) {
             case QUIT:
                 break;
-            case ADD:
+            case ABS:
                 value = value.abs();
                 break;
             case CLEAR:
