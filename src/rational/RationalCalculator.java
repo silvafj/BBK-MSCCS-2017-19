@@ -1,9 +1,8 @@
 package rational;
 
-import java.math.BigInteger;
 import java.util.Scanner;
 
-public class FractionCalculator {
+public class RationalCalculator {
     private static final String QUIT = "q";
     private static final String ADD = "a";
     private static final String CLEAR = "c";
@@ -15,12 +14,12 @@ public class FractionCalculator {
     private static final String DIVIDE = "/";
 
     public static void main(String[] args) {
-        new FractionCalculator().run();
+        new RationalCalculator().run();
     }
 
     private void run() {
         Line command = new Line();
-        Rational value = new Rational(BigInteger.ZERO);
+        Rational value = new Rational(0L);
 
         try (Scanner sc = new Scanner(System.in)) {
             do {
@@ -40,13 +39,13 @@ public class FractionCalculator {
         // split the line removing the command
         String[] args = line.split(" ");
         String cmd = args[0];
-        StringBuilder sb = new StringBuilder();
+        StringBuilder remainder = new StringBuilder();
 
         for (int index = 1; index < args.length; index++) {
-            sb.append(args[index]);
+            remainder.append(args[index]);
         }
 
-        return new Line(cmd, sb.toString());
+        return new Line(cmd, remainder.toString());
     }
 
     private Rational processCommand(String cmd, String line, Rational value) {
@@ -57,7 +56,7 @@ public class FractionCalculator {
                 value = value.abs();
                 break;
             case CLEAR:
-                value = new Rational(BigInteger.ZERO);
+                value = new Rational(0L);
                 break;
             case INVERSE:
                 value = value.inverse();

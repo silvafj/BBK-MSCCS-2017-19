@@ -1,4 +1,4 @@
-package fraction;
+package rational;
 
 import org.junit.Test;
 
@@ -7,39 +7,36 @@ import java.math.BigInteger;
 import static org.junit.Assert.*;
 
 /**
- * This is a junit based test class for the Fraction coursework
+ * This is a junit based test class for the Rational coursework
  * <p>
  * This is a poor piece of include - augment and improve as you see fit
  */
 
-public class FractionTest {
-    private final Fraction def;
-    private final Fraction one;
-    private final Fraction two;
-    private final Fraction twoOverFour;
-    private final Fraction aQuarter;
-    private final Fraction aHalf;
-    private final Fraction oneFifth;
-    private final Fraction minusOneFifth;
-    private final Fraction minusOneFifthBottomSign;
-    private final Fraction minusHalfSignBottomAndTop;
-    private final Fraction twelveOverSeventeen;
+public class RationalTest {
     private final static String ONE = "1";
     private final static String TWO = "2";
-    private final static String FOUR = "4";
+    private final Rational def;
+    private final Rational one;
+    private final Rational twoOverFour;
+    private final Rational aQuarter;
+    private final Rational aHalf;
+    private final Rational oneFifth;
+    private final Rational minusOneFifth;
+    private final Rational minusOneFifthBottomSign;
+    private final Rational minusHalfSignBottomAndTop;
+    private final Rational twelveOverSeventeen;
 
     {
-        def = new Fraction();
-        one = new Fraction(BigInteger.ONE);
-        two = new Fraction(BigInteger.TWO);
-        twoOverFour = new Fraction(BigInteger.TWO, new BigInteger("4"));
-        aQuarter = new Fraction(BigInteger.ONE, new BigInteger("4"));
-        aHalf = new Fraction(BigInteger.ONE, BigInteger.TWO);
-        oneFifth = new Fraction(BigInteger.ONE, new BigInteger("5"));
-        minusOneFifth = new Fraction(BigInteger.ONE.negate(), new BigInteger("5"));
-        minusOneFifthBottomSign = new Fraction(BigInteger.ONE, new BigInteger("5").negate());
-        minusHalfSignBottomAndTop = new Fraction(BigInteger.ONE.negate(), BigInteger.TWO.negate());
-        twelveOverSeventeen = new Fraction(new BigInteger("12"), new BigInteger("17"));
+        def = new Rational();
+        one = new Rational(1L);
+        twoOverFour = new Rational(2L, 4L);
+        aQuarter = new Rational(1L, 4L);
+        aHalf = new Rational(1L, 2L);
+        oneFifth = new Rational(1L, 5L);
+        minusOneFifth = new Rational(-1L, 5L);
+        minusOneFifthBottomSign = new Rational(1L, -5L);
+        minusHalfSignBottomAndTop = new Rational(-1L, -2L);
+        twelveOverSeventeen = new Rational(12L, 17L);
     }
 
     /**
@@ -48,9 +45,8 @@ public class FractionTest {
     @Test
     public void testToString() {
         assertEquals(ONE, def.toString());
-        assertEquals(TWO, two.toString());
         assertEquals("1/2", twoOverFour.toString());
-        assertEquals("12/17", new Fraction(new BigInteger("12"), new BigInteger("17")).toString());
+        assertEquals("12/17", new Rational(12L, 17L).toString());
     }
 
     /**
@@ -73,7 +69,7 @@ public class FractionTest {
 
     @Test
     public void add() {
-        assertEquals(new Fraction(new BigInteger("41"), new BigInteger("34")),
+        assertEquals(new Rational(41L, 34L),
             twelveOverSeventeen.add(twoOverFour));
         assertEquals(aHalf, aQuarter.add(aQuarter));
         assertNotEquals(aQuarter, aQuarter.add(aQuarter));
@@ -92,7 +88,7 @@ public class FractionTest {
 
     @Test
     public void divide() {
-        assertEquals(aHalf, new Fraction(new BigInteger("12")).divide(new Fraction(new BigInteger("24"))));
+        assertEquals(aHalf, new Rational(12L).divide(new Rational(24L)));
     }
 
     @Test
@@ -114,15 +110,16 @@ public class FractionTest {
 
     @Test
     public void inverse() {
+        Rational two = new Rational(2L);
         assertEquals(two, aHalf.inverse());
         assertEquals(aHalf, two.inverse());
         assertNotEquals(aHalf, aHalf.inverse());
-        assertEquals(minusOneFifth, new Fraction(new BigInteger("-5"), BigInteger.ONE).inverse());
+        assertEquals(minusOneFifth, new Rational(-5L, 1L).inverse());
     }
 
     @Test
     public void testEquals() {
-        assertEquals(new Fraction(new BigInteger("12"), new BigInteger("17")), twelveOverSeventeen);
+        assertEquals(new Rational(12L, 17L), twelveOverSeventeen);
     }
 
     @Test
@@ -135,8 +132,8 @@ public class FractionTest {
 
     @Test
     public void testHashCode() {
-        Fraction half = new Fraction(BigInteger.ONE, BigInteger.TWO);
-        Fraction otherHalf = new Fraction(BigInteger.ONE, BigInteger.TWO);
+        Rational half = new Rational(1L, 2L);
+        Rational otherHalf = new Rational(1L, 2L);
         assertEquals(half.hashCode(), otherHalf.hashCode());
     }
 

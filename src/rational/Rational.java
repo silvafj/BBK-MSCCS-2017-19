@@ -1,22 +1,21 @@
-package fraction;
+package rational;
 
-import java.math.BigInteger;
 import java.util.Objects;
 
-public class Fraction implements Comparable {
-    private BigInteger numerator;
-    private BigInteger denominator;
+public class Rational implements Comparable {
+    private long numerator;
+    private long denominator;
 
     {
-        numerator = BigInteger.ZERO;
-        denominator = BigInteger.ONE;
+        numerator = 0L;
+        denominator = 1L;
     }
 
     /**
-     * Default constructor creates a Fraction of "1"
+     * Default constructor creates a Rational of "1"
      */
-    public Fraction() {
-        this(BigInteger.ONE);
+    public Rational() {
+        this(1L);
     }
 
     /**
@@ -24,27 +23,41 @@ public class Fraction implements Comparable {
      *
      * @param wholeNumber of the fraction
      */
-    public Fraction(BigInteger wholeNumber) {
-        this(wholeNumber, BigInteger.ONE);
+    public Rational(long wholeNumber) {
+        this(wholeNumber, 1L);
     }
 
     /**
      * Normalize the fraction as you create it.
-     * For instance, if the parameters are (8, -12), create a Fraction with numerator -2 and denominator 3.
+     * For instance, if the parameters are (8, -12), create a Rational with numerator -2 and denominator 3.
      * The constructor should throw an ArithmeticException if the denominator is zero.
      *
      * @param num   numerator of the fraction
      * @param denom denominator of the fraction
      */
-    public Fraction(BigInteger num, BigInteger denom) {
-        BigInteger gcd = num.gcd(denom);
-        setNumerator(num.divide(gcd));
-        setDenominator(denom.divide(gcd));
+    public Rational(long num, long denom) {
+        long gcd = gcd(num, denom);
+        setNumerator(num / gcd);
+        setDenominator(denom / gcd);
 
-        if (getDenominator().compareTo(BigInteger.ZERO) < 0) {
-            setNumerator(getNumerator().negate());
-            setDenominator(getDenominator().negate());
+        if (getDenominator() < 0) { // CHECK
+            setNumerator(-1L * getNumerator());
+            setDenominator(-1L * getDenominator());
         }
+    }
+
+    /**
+     * Find the Greatest Common Divisor of two numbers
+     * <p>
+     * Uses Euclid's algorithm
+     *
+     * @param num   the first number
+     * @param denom the second number
+     * @return the gcd of <tt>num</tt> and <tt>denom</tt>
+     */
+    private long gcd(long num, long denom) {
+        // TODO - complete using Euclid's algorithm
+        return 1L;
     }
 
     /**
@@ -54,115 +67,123 @@ public class Fraction implements Comparable {
      *
      * @param fraction a String containing either a whole number, such as "5" or " -3", or a fraction, such as "8/ -12".
      */
-    public Fraction(String fraction) throws ArithmeticException {
+    public Rational(String fraction) throws ArithmeticException {
         // TODO replace with your code
     }
 
-    private BigInteger getNumerator() {
+    // DO NOT CHANGE THE VISIBILITY OF THIS METHOD
+
+    private long getNumerator() {
         return numerator;
     }
 
-    private void setNumerator(BigInteger numerator) {
+    // DO NOT CHANGE THE VISIBILITY OF THIS METHOD
+
+    private void setNumerator(long numerator) {
         this.numerator = numerator;
     }
 
-    private BigInteger getDenominator() {
+    // DO NOT CHANGE THE VISIBILITY OF THIS METHOD
+
+    private long getDenominator() {
         return denominator;
     }
 
-    private void setDenominator(BigInteger denominator) {
+    // DO NOT CHANGE THE VISIBILITY OF THIS METHOD
+
+    private void setDenominator(long denominator) {
         this.denominator = denominator;
     }
 
     /**
-     * Returns a new Fraction that is the sum of this and that:
+     * Returns a new Rational that is the sum of this and that:
      * a/b + c/d is (ad + bc)/bd
      *
-     * @param f the Fraction you wish to add to this fraction
-     * @return a new Fraction resulting from the addition
+     * @param f the Rational you wish to add to this fraction
+     * @return a new Rational resulting from the addition
      */
-    public Fraction add(Fraction f) {
-        BigInteger num = f.getNumerator().multiply(getDenominator()).add(getNumerator().multiply(f.getDenominator()));
-        BigInteger den = getDenominator().multiply(f.getDenominator());
-        return new Fraction(num, den);
+    public Rational add(Rational f) {
+        long num = f.getNumerator() * getDenominator() + getNumerator() * f.getDenominator();
+        long den = getDenominator() * f.getDenominator();
+        return new Rational(num, den);
     }
 
     /**
-     * Returns a new Fraction that is the difference of this minus that:
+     * Returns a new Rational that is the difference of this minus that:
      * a/b - c/d is (ad - bc)/bd
      *
-     * @param f the Fraction you wish to subtract from this fraction
-     * @return a new Fraction resulting from the subtraction
+     * @param f the Rational you wish to subtract from this fraction
+     * @return a new Rational resulting from the subtraction
      */
-    public Fraction subtract(Fraction f) {
+    public Rational subtract(Rational f) {
         return add(f.negate());
     }
 
     /**
-     * Returns a new Fraction that is the product of this and that:
+     * Returns a new Rational that is the product of this and that:
      * (a/b) * (c/d) is (a*c)/(b*d)
      *
-     * @param f the Fraction you wish to multiply this fraction with
-     * @return a new Fraction resulting from the multiplication
+     * @param f the Rational you wish to multiply this fraction with
+     * @return a new Rational resulting from the multiplication
      */
-    public Fraction multiply(Fraction f) {
-        BigInteger a = this.getNumerator();
-        BigInteger b = this.getDenominator();
-        BigInteger c = f.getNumerator();
-        BigInteger d = f.getDenominator();
-        return new Fraction(a.multiply(c), b.multiply(d));
+    public Rational multiply(Rational f) {
+        long a = this.getNumerator();
+        long b = this.getDenominator();
+        long c = f.getNumerator();
+        long d = f.getDenominator();
+        return new Rational(a * c, b * d);
     }
 
     /**
-     * Returns a new Fraction that is the quotient of dividing this by that:
+     * Returns a new Rational that is the quotient of dividing this by that:
      * (a/b) / (c/d) is (a*d)/(b*c)
      *
      * @param f the fraction you wish to divide this fraction by
      * @return a new fraction resulting from the division
      */
-    public Fraction divide(Fraction f) {
-        return multiply(new Fraction(f.getDenominator(), f.getNumerator()));
+    public Rational divide(Rational f) {
+        return multiply(new Rational(f.getDenominator(), f.getNumerator()));
     }
 
     /**
-     * @return a new Fraction that is the absolute value of this fraction
+     * @return a new Rational that is the absolute value of this fraction
      */
-    public Fraction abs() {
+    public Rational abs() {
         // TODO replace with your code
-        return new Fraction(BigInteger.ONE);
+        return new Rational(1L);
     }
 
     /**
-     * @return a new Fraction that has the same numeric value of this fraction, but the opposite sign.
+     * @return a new Rational that has the same numeric value of this fraction, but the opposite sign.
      */
-    public Fraction negate() {
-        return new Fraction(getNumerator().negate(), getDenominator());
+    public Rational negate() {
+        return new Rational(-1L * getNumerator(), getDenominator());
     }
 
     /**
      * @return The inverse of a/b is b/a.
      */
-    public Fraction inverse() {
+    public Rational inverse() {
         // TODO replace with your code
-        return new Fraction(BigInteger.ONE);
+        return new Rational(1L);
     }
 
     /**
      * @param o the object to compare this object to
-     * @return If o is a Fraction this method returns:
+     * @return If o is a Rational this method returns:
      * A negative int if this is less than o.
      * Zero if this is equal to o.
      * A positive int if this is greater than o.
-     * If o is not a Fraction, this method throws a ClassCastException.
+     * If o is not a Rational, this method throws a ClassCastException.
      */
     @Override
     public int compareTo(Object o) throws ClassCastException {
-        if (!(o instanceof Fraction)) {
+        if (!(o instanceof Rational)) {
             throw new ClassCastException();
         }
-        Fraction value = (Fraction) o;
+        Rational value = (Rational) o;
 
-        return (this.subtract(value)).getNumerator().signum();
+        return (int) (this.subtract(value)).getNumerator(); // FIX --- this is WRONG!!!
     }
 
     /**
@@ -173,7 +194,7 @@ public class Fraction implements Comparable {
      */
     @Override
     public String toString() {
-        return (getDenominator().equals(BigInteger.ONE)) ? "" + getNumerator()
+        return (getDenominator() == 1L) ? "" + getNumerator()
             : getNumerator() + "/" + getDenominator();
     }
 
@@ -183,15 +204,15 @@ public class Fraction implements Comparable {
     }
 
     /**
-     * @param o the Fraction to compare
-     * @return true if o is a Fraction equal to this, and false in all other cases.
+     * @param o the Rational to compare
+     * @return true if o is a Rational equal to this, and false in all other cases.
      */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Fraction)) return false;
-        Fraction fraction = (Fraction) o;
-        return getNumerator().equals(fraction.getNumerator()) &&
-            getDenominator().equals(fraction.getDenominator());
+        if (!(o instanceof Rational)) return false;
+        Rational rational = (Rational) o;
+        return getNumerator() == rational.getNumerator() &&
+            getDenominator() == rational.getDenominator();
     }
 }
