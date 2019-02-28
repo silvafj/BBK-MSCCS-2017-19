@@ -1,4 +1,4 @@
-package fraction;
+package rational;
 
 import java.math.BigInteger;
 import java.util.Scanner;
@@ -20,7 +20,7 @@ public class FractionCalculator {
 
     private void run() {
         Line command = new Line();
-        Fraction value = new Fraction(BigInteger.ZERO);
+        Rational value = new Rational(BigInteger.ZERO);
 
         try (Scanner sc = new Scanner(System.in)) {
             do {
@@ -49,7 +49,7 @@ public class FractionCalculator {
         return new Line(cmd, sb.toString());
     }
 
-    private Fraction processCommand(String cmd, String line, Fraction value) {
+    private Rational processCommand(String cmd, String line, Rational value) {
         switch (cmd) {
             case QUIT:
                 break;
@@ -57,7 +57,7 @@ public class FractionCalculator {
                 value = value.abs();
                 break;
             case CLEAR:
-                value = new Fraction(BigInteger.ZERO);
+                value = new Rational(BigInteger.ZERO);
                 break;
             case INVERSE:
                 value = value.inverse();
@@ -83,8 +83,8 @@ public class FractionCalculator {
         return value;
     }
 
-    private Fraction parseArgs(String line) {
-        return new Fraction(line); // REPLACE
+    private Rational parseArgs(String line) {
+        return new Rational(line); // REPLACE
     }
 
     class Line {
