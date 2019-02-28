@@ -58,25 +58,25 @@ public class RationalTest {
                     new Rational("");
                 });
 
-//        Assertions.assertThrows(ArithmeticException.class,
-//                () -> {
-//                    new Rational("1/0");
-//                });
-//
-//        Assertions.assertThrows(ArithmeticException.class,
-//                () -> {
-//                    new Rational("1/1/1");
-//                });
-//
-//        Assertions.assertThrows(ArithmeticException.class,
-//                () -> {
-//                    new Rational("1/");
-//                });
-//
-//        Assertions.assertThrows(ArithmeticException.class,
-//                () -> {
-//                    new Rational("/1");
-//                });
+        Assertions.assertThrows(ArithmeticException.class,
+                () -> {
+                    new Rational("1/0");
+                });
+
+        Assertions.assertThrows(ArithmeticException.class,
+                () -> {
+                    new Rational("1/1/1");
+                });
+
+        Assertions.assertThrows(ArithmeticException.class,
+                () -> {
+                    new Rational("1/");
+                });
+
+        Assertions.assertThrows(ArithmeticException.class,
+                () -> {
+                    new Rational("/1");
+                });
 
 
         assertEquals(one, new Rational("1"));

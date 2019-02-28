@@ -50,32 +50,26 @@ public class Rational implements Comparable {
         if (fraction.isEmpty()) {
             throw new ArithmeticException("Fraction is empty.");
         }
-
-        String[] parts = fraction.split("/");
-        if (parts.length == 1) {
-            initialiseNumDenom(Long.valueOf(parts[0]), 1);
+        if (fraction.indexOf("/")==-1){
+            initialiseNumDenom(Long.valueOf(fraction), 1);
             return;
         }
+        String[] parts = fraction.split("/");
+        if (parts.length !=2 || parts[0].isEmpty()) {
+            throw new ArithmeticException ("Fraction format is wrong.");
+        }
 
-//        if (parts.length > 2) {
-//            throw new ArithmeticException("A fraction should have 1 or 2 parts.");
-//        }
-//
-//        if (parts[0].isEmpty()) {
-//            throw new ArithmeticException("Numerator cannot be empty.");
-//        }
-//
-//        if (!parts[0].isEmpty()) {
-//            throw new ArithmeticException("Numerator cannot be empty.");
-//        }
-//
-//        // TODO replace with your code
+        initialiseNumDenom(Long.valueOf(parts[0]), Long.valueOf(parts[1]));
     }
 
     private void initialiseNumDenom(long num, long denom) {
+        if (denom == 0) {
+            throw new ArithmeticException("Cannot divide by zero!");
+        }
         long gcd = gcd(num, denom);
         setNumerator(num / gcd);
         setDenominator(denom / gcd);
+
 
         if (getDenominator() < 0) { // CHECK
             setNumerator(-1L * getNumerator());
@@ -173,9 +167,7 @@ public class Rational implements Comparable {
      * @return a new fraction resulting from the division
      */
     public Rational divide(Rational f) {
-        if (f.getNumerator() == 0) {
-            throw new IllegalArgumentException("Cannot divide by zero!");
-        }
+
         return multiply(new Rational(f.getDenominator(), f.getNumerator()));
     }
 
