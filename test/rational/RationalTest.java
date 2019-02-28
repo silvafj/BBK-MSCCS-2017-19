@@ -53,8 +53,41 @@ public class RationalTest {
      */
     @Test
     public void testConsWithString() {
-        // TODO
-        fail();
+        Assertions.assertThrows(ArithmeticException.class,
+                () -> {
+                    new Rational("");
+                });
+
+//        Assertions.assertThrows(ArithmeticException.class,
+//                () -> {
+//                    new Rational("1/0");
+//                });
+//
+//        Assertions.assertThrows(ArithmeticException.class,
+//                () -> {
+//                    new Rational("1/1/1");
+//                });
+//
+//        Assertions.assertThrows(ArithmeticException.class,
+//                () -> {
+//                    new Rational("1/");
+//                });
+//
+//        Assertions.assertThrows(ArithmeticException.class,
+//                () -> {
+//                    new Rational("/1");
+//                });
+
+
+        assertEquals(one, new Rational("1"));
+//        assertEquals(twoOverFour, new Rational("2/4"));
+//        assertEquals(aQuarter, new Rational("1/4"));
+//        assertEquals(aHalf, new Rational("1/2"));
+//        assertEquals(oneFifth, new Rational("1/5"));
+//        assertEquals(minusOneFifth, new Rational("-1/5"));
+//        assertEquals(minusOneFifthBottomSign, new Rational("1/-5"));
+//        assertEquals(minusHalfSignBottomAndTop, new Rational("-1/-2"));
+//        assertEquals(twelveOverSeventeen, new Rational("12/17"));
     }
 
     /**
@@ -95,7 +128,6 @@ public class RationalTest {
                 () -> {
                     new Rational(1).divide(new Rational(0));
                 });
-
     }
 
     @Test

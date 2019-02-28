@@ -24,7 +24,7 @@ public class Rational implements Comparable {
      * @param wholeNumber of the fraction
      */
     public Rational(long wholeNumber) {
-        this(wholeNumber, 1L);
+        initialiseNumDenom(wholeNumber, 1);
     }
 
     /**
@@ -36,14 +36,7 @@ public class Rational implements Comparable {
      * @param denom denominator of the fraction
      */
     public Rational(long num, long denom) {
-        long gcd = gcd(num, denom);
-        setNumerator(num / gcd);
-        setDenominator(denom / gcd);
-
-        if (getDenominator() < 0) { // CHECK
-            setNumerator(-1L * getNumerator());
-            setDenominator(-1L * getDenominator());
-        }
+        initialiseNumDenom(num, denom);
     }
 
     /**
@@ -54,7 +47,40 @@ public class Rational implements Comparable {
      * @param fraction a String containing either a whole number, such as "5" or " -3", or a fraction, such as "8/ -12".
      */
     public Rational(String fraction) throws ArithmeticException {
-        // TODO replace with your code
+        if (fraction.isEmpty()) {
+            throw new ArithmeticException("Fraction is empty.");
+        }
+
+        String[] parts = fraction.split("/");
+        if (parts.length == 1) {
+            initialiseNumDenom(Long.valueOf(parts[0]), 1);
+            return;
+        }
+
+//        if (parts.length > 2) {
+//            throw new ArithmeticException("A fraction should have 1 or 2 parts.");
+//        }
+//
+//        if (parts[0].isEmpty()) {
+//            throw new ArithmeticException("Numerator cannot be empty.");
+//        }
+//
+//        if (!parts[0].isEmpty()) {
+//            throw new ArithmeticException("Numerator cannot be empty.");
+//        }
+//
+//        // TODO replace with your code
+    }
+
+    private void initialiseNumDenom(long num, long denom) {
+        long gcd = gcd(num, denom);
+        setNumerator(num / gcd);
+        setDenominator(denom / gcd);
+
+        if (getDenominator() < 0) { // CHECK
+            setNumerator(-1L * getNumerator());
+            setDenominator(-1L * getDenominator());
+        }
     }
 
     /**
