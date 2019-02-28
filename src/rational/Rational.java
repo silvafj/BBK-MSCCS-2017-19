@@ -46,17 +46,17 @@ public class Rational implements Comparable {
      *
      * @param fraction a String containing either a whole number, such as "5" or " -3", or a fraction, such as "8/ -12".
      */
-    public Rational(String fraction) throws ArithmeticException {
+    public Rational(String fraction) throws ArithmeticException, NumberFormatException {
         if (fraction.isEmpty()) {
-            throw new ArithmeticException("Fraction is empty.");
+            throw new NumberFormatException("Fraction is empty.");
         }
-        if (fraction.indexOf("/")==-1){
+        if (!fraction.contains("/")) {
             initialiseNumDenom(Long.valueOf(fraction), 1);
             return;
         }
         String[] parts = fraction.split("/");
-        if (parts.length !=2 || parts[0].isEmpty()) {
-            throw new ArithmeticException ("Fraction format is wrong.");
+        if (parts.length != 2 || parts[0].isEmpty()) {
+            throw new NumberFormatException("Fraction format is wrong.");
         }
 
         initialiseNumDenom(Long.valueOf(parts[0]), Long.valueOf(parts[1]));

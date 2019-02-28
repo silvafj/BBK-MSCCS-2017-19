@@ -53,7 +53,7 @@ public class RationalTest {
      */
     @Test
     public void testConsWithString() {
-        Assertions.assertThrows(ArithmeticException.class,
+        Assertions.assertThrows(NumberFormatException.class,
                 () -> {
                     new Rational("");
                 });
@@ -63,31 +63,41 @@ public class RationalTest {
                     new Rational("1/0");
                 });
 
-        Assertions.assertThrows(ArithmeticException.class,
+        Assertions.assertThrows(NumberFormatException.class,
                 () -> {
                     new Rational("1/1/1");
                 });
 
-        Assertions.assertThrows(ArithmeticException.class,
+        Assertions.assertThrows(NumberFormatException.class,
                 () -> {
                     new Rational("1/");
                 });
 
-        Assertions.assertThrows(ArithmeticException.class,
+        Assertions.assertThrows(NumberFormatException.class,
                 () -> {
                     new Rational("/1");
                 });
 
+        Assertions.assertThrows(NumberFormatException.class,
+                () -> {
+                    new Rational("a");
+                });
+
+        Assertions.assertThrows(NumberFormatException.class,
+                () -> {
+                    new Rational("1/a");
+                });
+
 
         assertEquals(one, new Rational("1"));
-//        assertEquals(twoOverFour, new Rational("2/4"));
-//        assertEquals(aQuarter, new Rational("1/4"));
-//        assertEquals(aHalf, new Rational("1/2"));
-//        assertEquals(oneFifth, new Rational("1/5"));
-//        assertEquals(minusOneFifth, new Rational("-1/5"));
-//        assertEquals(minusOneFifthBottomSign, new Rational("1/-5"));
-//        assertEquals(minusHalfSignBottomAndTop, new Rational("-1/-2"));
-//        assertEquals(twelveOverSeventeen, new Rational("12/17"));
+        assertEquals(twoOverFour, new Rational("2/4"));
+        assertEquals(aQuarter, new Rational("1/4"));
+        assertEquals(aHalf, new Rational("1/2"));
+        assertEquals(oneFifth, new Rational("1/5"));
+        assertEquals(minusOneFifth, new Rational("-1/5"));
+        assertEquals(minusOneFifthBottomSign, new Rational("1/-5"));
+        assertEquals(minusHalfSignBottomAndTop, new Rational("-1/-2"));
+        assertEquals(twelveOverSeventeen, new Rational("12/17"));
     }
 
     /**
@@ -124,7 +134,7 @@ public class RationalTest {
 
     @Test
     public void divideByZero() {
-        Assertions.assertThrows(IllegalArgumentException.class,
+        Assertions.assertThrows(ArithmeticException.class,
                 () -> {
                     new Rational(1).divide(new Rational(0));
                 });
@@ -153,6 +163,9 @@ public class RationalTest {
     @Test
     public void testEquals() {
         assertEquals(new Rational(12L, 17L), twelveOverSeventeen);
+        assertFalse(minusOneFifth.equals(0));
+        assertFalse(minusOneFifth.equals(new Rational(1)));
+        assertTrue(minusOneFifth.equals(new Rational(-1, 5)));
     }
 
     @Test
@@ -170,5 +183,4 @@ public class RationalTest {
         assertEquals(half.hashCode(), otherHalf.hashCode());
     }
 
-    // Any other tests you feel are appropriate and aren't covered by the above
 }
