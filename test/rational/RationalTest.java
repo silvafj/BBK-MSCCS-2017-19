@@ -12,9 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class RationalTest {
+    private final static String ZERO = "0";
     private final static String ONE = "1";
     private final static String TWO = "2";
     private final Rational def;
+    private final Rational zero;
     private final Rational one;
     private final Rational twoOverFour;
     private final Rational aQuarter;
@@ -27,6 +29,7 @@ public class RationalTest {
 
     {
         def = new Rational();
+        zero = new Rational(0);
         one = new Rational(1L);
         twoOverFour = new Rational(2L, 4L);
         aQuarter = new Rational(1L, 4L);
@@ -43,6 +46,7 @@ public class RationalTest {
      */
     @Test
     public void testToString() {
+        assertEquals(ZERO, zero.toString());
         assertEquals(ONE, def.toString());
         assertEquals("1/2", twoOverFour.toString());
         assertEquals("12/17", new Rational(12L, 17L).toString());
@@ -96,6 +100,7 @@ public class RationalTest {
         assertEquals(oneFifth, new Rational("1/5"));
         assertEquals(minusOneFifth, new Rational("-1/5"));
         assertEquals(minusOneFifthBottomSign, new Rational("1/-5"));
+        assertEquals(minusOneFifth, minusOneFifthBottomSign);
         assertEquals(minusHalfSignBottomAndTop, new Rational("-1/-2"));
         assertEquals(twelveOverSeventeen, new Rational("12/17"));
     }
