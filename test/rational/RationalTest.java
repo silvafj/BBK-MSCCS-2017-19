@@ -69,8 +69,7 @@ public class RationalTest {
 
     @Test
     public void add() {
-        assertEquals(new Rational(41L, 34L),
-            twelveOverSeventeen.add(twoOverFour));
+        assertEquals(new Rational(41L, 34L), twelveOverSeventeen.add(twoOverFour));
         assertEquals(aHalf, aQuarter.add(aQuarter));
         assertNotEquals(aQuarter, aQuarter.add(aQuarter));
         assertEquals(one, aHalf.add(aHalf));
