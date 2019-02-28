@@ -149,8 +149,7 @@ public class Rational implements Comparable {
      * @return a new Rational that is the absolute value of this fraction
      */
     public Rational abs() {
-        // TODO replace with your code
-        return new Rational(1L);
+        return new Rational(Math.abs(this.getNumerator()), Math.abs(this.getDenominator()));
     }
 
     /**
