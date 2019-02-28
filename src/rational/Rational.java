@@ -163,8 +163,7 @@ public class Rational implements Comparable {
      * @return The inverse of a/b is b/a.
      */
     public Rational inverse() {
-        // TODO replace with your code
-        return new Rational(1L);
+        return new Rational(this.getDenominator(), this.getNumerator());
     }
 
     /**
