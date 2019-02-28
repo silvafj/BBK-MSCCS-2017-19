@@ -47,6 +47,17 @@ public class Rational implements Comparable {
     }
 
     /**
+     * Allow blanks around (but not within) integers.
+     * The constructor should throw an ArithmeticException if given a string representing
+     * a fraction whose denominator is zero.
+     *
+     * @param fraction a String containing either a whole number, such as "5" or " -3", or a fraction, such as "8/ -12".
+     */
+    public Rational(String fraction) throws ArithmeticException {
+        // TODO replace with your code
+    }
+
+    /**
      * Find the Greatest Common Divisor of two numbers
      * <p>
      * Uses Euclid's algorithm
@@ -63,17 +74,6 @@ public class Rational implements Comparable {
         }
 
         return num;
-    }
-
-    /**
-     * Allow blanks around (but not within) integers.
-     * The constructor should throw an ArithmeticException if given a string representing
-     * a fraction whose denominator is zero.
-     *
-     * @param fraction a String containing either a whole number, such as "5" or " -3", or a fraction, such as "8/ -12".
-     */
-    public Rational(String fraction) throws ArithmeticException {
-        // TODO replace with your code
     }
 
     // DO NOT CHANGE THE VISIBILITY OF THIS METHOD
@@ -147,7 +147,7 @@ public class Rational implements Comparable {
      * @return a new fraction resulting from the division
      */
     public Rational divide(Rational f) {
-        if (f.getNumerator()==0) {
+        if (f.getNumerator() == 0) {
             throw new IllegalArgumentException("Cannot divide by zero!");
         }
         return multiply(new Rational(f.getDenominator(), f.getNumerator()));
@@ -201,7 +201,7 @@ public class Rational implements Comparable {
     @Override
     public String toString() {
         return (getDenominator() == 1L) ? "" + getNumerator()
-            : getNumerator() + "/" + getDenominator();
+                : getNumerator() + "/" + getDenominator();
     }
 
     @Override
@@ -219,6 +219,6 @@ public class Rational implements Comparable {
         if (!(o instanceof Rational)) return false;
         Rational rational = (Rational) o;
         return getNumerator() == rational.getNumerator() &&
-            getDenominator() == rational.getDenominator();
+                getDenominator() == rational.getDenominator();
     }
 }

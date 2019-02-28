@@ -3,8 +3,6 @@ package rational;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -92,9 +90,11 @@ public class RationalTest {
     }
 
     @Test
-    public void divideByZero(){
+    public void divideByZero() {
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> { new Rational (1).divide(new Rational (0)); });
+                () -> {
+                    new Rational(1).divide(new Rational(0));
+                });
 
     }
 
