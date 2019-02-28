@@ -37,6 +37,7 @@ public class RationalCalculator {
         } while (!command.getCommand().equals(QUIT));
     }
 
+
     private Line parseCommand(String line) {
         // split the line removing the command
         String[] args = line.split(" ");
