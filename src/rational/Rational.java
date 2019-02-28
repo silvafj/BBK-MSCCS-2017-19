@@ -147,6 +147,9 @@ public class Rational implements Comparable {
      * @return a new fraction resulting from the division
      */
     public Rational divide(Rational f) {
+        if (f.getNumerator()==0) {
+            throw new IllegalArgumentException("Cannot divide by zero!");
+        }
         return multiply(new Rational(f.getDenominator(), f.getNumerator()));
     }
 
