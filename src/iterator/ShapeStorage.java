@@ -1,10 +1,17 @@
 package iterator;
 
-public class ShapeStorage {
-  public void addShape(String polygon) {
-  }
+import java.util.ArrayList;
+import java.util.List;
 
-  public Shape[] getShapes() {
-    return null;
-  }
+public class ShapeStorage {
+    List<Shape> shapes = new ArrayList<>();
+
+
+    public void addShape(String polygon) {
+        shapes.add(new Shape(shapes.size(), polygon));
+    }
+
+    public Shape[] getShapes() {
+        return shapes.toArray(new Shape[0]);
+    }
 }
