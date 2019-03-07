@@ -1,9 +1,14 @@
 package mediator;
 
-public class Machine {
-  public void setMediator(MachineMediator mediator) {
-  }
+public class Machine implements Colleague {
+    private MachineMediator mediator;
 
-  public void start() {
-  }
+    @Override
+    public void setMediator(MachineMediator mediator) {
+        this.mediator = mediator;
+    }
+
+    public void start() {
+        mediator.open();
+    }
 }

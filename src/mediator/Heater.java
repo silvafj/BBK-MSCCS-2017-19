@@ -1,12 +1,22 @@
 package mediator;
 
-public class Heater {
-  public void setMediator(MachineMediator mediator) {
-  }
+public class Heater implements Colleague {
+    private MachineMediator mediator;
 
-  public void on(int i) {
-  }
+    @Override
+    public void setMediator(MachineMediator mediator) {
+        this.mediator = mediator;
+    }
 
-  public void off() {
-  }
+    public void on(int i) {
+        System.out.println("Heater is on...");
+        if (mediator.checkTemperature(i)) {
+            mediator.off();
+        }
+    }
+
+    public void off() {
+        System.out.println("Heater is off...");
+        mediator.wash();
+    }
 }

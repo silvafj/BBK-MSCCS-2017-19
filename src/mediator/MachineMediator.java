@@ -1,17 +1,17 @@
 package mediator;
 
 public interface MachineMediator {
-  public void start();
+    void start();
 
-  public void wash();
+    void wash();
 
-  public void open();
+    void open();
 
-  public void closed();
+    void closed();
 
-  public void on();
+    void on();
 
-  public void off();
+    void off();
 
-  public boolean checkTemperature(int temp);
+    boolean checkTemperature(int temp);
 }

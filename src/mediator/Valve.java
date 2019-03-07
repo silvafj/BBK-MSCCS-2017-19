@@ -1,12 +1,22 @@
 package mediator;
 
-public class Valve {
-  public void setMediator(MachineMediator mediator) {
-  }
+public class Valve implements Colleague {
+    private MachineMediator mediator;
 
-  public void open() {
-  }
+    @Override
+    public void setMediator(MachineMediator mediator) {
+        this.mediator = mediator;
+    }
 
-  public void closed() {
-  }
+    public void open() {
+        System.out.println("Valve is opened...");
+        System.out.println("Filling water...");
+        mediator.closed();
+    }
+
+    public void closed() {
+        System.out.println("Valve is closed...");
+        mediator.on();
+    }
+
 }

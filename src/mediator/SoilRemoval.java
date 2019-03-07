@@ -1,9 +1,18 @@
 package mediator;
 
-public class SoilRemoval {
-  public void low() {
-  }
+public class SoilRemoval implements Colleague {
+    private MachineMediator mediator;
 
-  public void medium() {
-  }
+    @Override
+    public void setMediator(MachineMediator mediator) {
+        this.mediator = mediator;
+    }
+
+    public void low() {
+        System.out.println("Setting Soil Removal to low");
+    }
+
+    public void medium() {
+        System.out.println("Setting Soil Removal to medium");
+    }
 }
