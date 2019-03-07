@@ -1,9 +1,9 @@
 package chainofresponsibility;
 
 public interface Handler {
-  public void setHandler(Handler handler);
+    void setHandler(Handler handler);
 
-  public void process(File file);
+    void process(File file);
 
-  public String getHandlerName();
+    String getHandlerName();
 }
