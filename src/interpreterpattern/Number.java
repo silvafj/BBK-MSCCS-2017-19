@@ -1,14 +1,14 @@
 package interpreterpattern;
 
 public class Number implements Expression {
-  private final int n;
+    private final int n;
 
-  public Number(int n) {
-    this.n = n;
-  }
+    public Number(int n) {
+        this.n = n;
+    }
 
-  @Override
-  public int interpret() {
-    return n;
-  }
+    @Override
+    public int interpret() {
+        return n;
+    }
 }
