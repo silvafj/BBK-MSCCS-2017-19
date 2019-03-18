@@ -2,7 +2,7 @@
 
 ## Optional worksheet
 
-The classes in the `lambdas` packages consist of static methods that return various functions, operations and predicates.
+The classes in the `lambdas` package consist of static methods that return various functions, operations and predicates.
 
 Your task is to implement the `ToDo` section of each class using lambda expressions and method references. 
 
