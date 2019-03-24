@@ -2,7 +2,36 @@
 
 These exercises examine some of the key features of the `java.util.concurrent` package.
 
-## Exercise 1: A shared counter
+
+## Exercise 1: Threads
+
+Write a program that runs three threads in parallel:
+
++ One that writes the numeral '0' 5000 times
++ One that writes the numeral '1' 5000 times
++ One that writes the numeral '2' 5000 times
+
+The purpose is only to show how to set up and run threads, not how to use them effectively.
+
+```java
+/**
+ * Application class with a main() method that illustrates three simple
+ * threads running concurrently: one that writes zeros, one that writes
+ * ones, and one that writes twos.  Each thread writes to standard
+ * output.  The result should be a large trinary number.
+ */
+```
+
+![Numbers](images/numbers.png)
+ 
+## Exercise 2: Sum using Executor or ForkJoin
+
+Write a function to sum all the values in an array, using one thread to sum up the first half of the values and the other thread to sum the rest. 
+Here the threads must wait for each other to complete before the function can combine the results from 
+each thread and return the sum.
+
+
+## Exercise 3: A shared counter
 
 This problem acts as a refresher of your existing Java knowledge of threads.
 
@@ -90,4 +119,35 @@ For that, you need to uncomment the `try-catch` block in the `run()` method.
 This is shown in the second version of `Counter` in the package `ex01.ex01b`.
 
 Find out what is the least number the program could report and demonstrate this by inserting delays.
+
+## Exercise 4: Interleaved = no!
+
+Here we want to write, to standard output, all the prime numbers in the range $2..n$, where $n$ is a command line argument. 
+We do this using $n-1$ threads, each with the responsibility of determining whether or not a different 
+value in the range is prime and writing it if it is prime. 
+
+The interesting thing here is to make sure that a thread gets exclusive access to standard output to 
+write out the whole number; otherwise with interleaved output we could get composite numbers written out.
+
+## Exercise 5: Basic concurrency
+
+Consider an implementation of the dining philosophers problem in which the first four philosophers always pick up their right chopstick first, but the fifth philosopher always picks up her left chopstick first. 
+Can deadlock occur? Why or why not?
+
+
+## Exercise 6: Fairness
+
+Study the documentation for `java.util.concurrent.Semaphore` and, if possible, write an analysis of why `tryAcquire()` without a timeout can break fairness, but `tryAcquite(0, TimeUnit.SECONDS)` does not.
+
+## Exercise 7: Cyclic Barrier
+
+Write a Java application that returns the sum of the values in an integer array by partitioning the array into `N` parts, each of which are summed by a unique thread. 
+Use a cyclic barrier whose runnable sums the partial sums.
+
+## Exercise 8: Semaphores
+
+Rewrite the Java dining philosophers application to use a semaphore for the table and explicit locks for chopsticks.
+
+
+
 
