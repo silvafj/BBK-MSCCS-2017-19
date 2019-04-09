@@ -1,21 +1,30 @@
 package observer;
 
 public class SMSUsers implements Observer {
-  public SMSUsers(Subject subject, String s) {
-  }
+    private final Subject subject;
+    private final String s;
 
-  @Override
-  public void update(String desc) {
+    public SMSUsers(Subject subject, String s) {
+        this.subject = subject;
+        this.s = s;
+    }
 
-  }
+    @Override
+    public void update(String desc) {
+        System.out.println(s + ": " + desc);
+    }
 
-  @Override
-  public void subscribe() {
+    @Override
+    public void subscribe() {
+        System.out.println("Subscribing " + s + " to " + subject.subjectDetails());
+        subject.subscribeObserver(this);
+        System.out.println("Subscribed successfully.");
+    }
 
-  }
-
-  @Override
-  public void unSubscribe() {
-
-  }
+    @Override
+    public void unSubscribe() {
+        System.out.println("Unsubscribing " + s + " to " + subject.subjectDetails());
+        subject.unSubscribeObserver(this);
+        System.out.println("Unsubscribed successfully.");
+    }
 }
