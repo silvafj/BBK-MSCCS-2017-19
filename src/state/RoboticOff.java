@@ -1,21 +1,25 @@
 package state;
 
 public class RoboticOff implements RoboticState {
-  public RoboticOff(Robot robot) {
-  }
+    private Robot robot;
 
-  @Override
-  public void walk() {
+    public RoboticOff(Robot robot) {
+        this.robot = robot;
+    }
 
-  }
+    @Override
+    public void walk() {
+        System.out.println("Walking...");
+        robot.setRoboticState(robot.getRoboticOn());
+    }
 
-  @Override
-  public void cook() {
+    @Override
+    public void cook() {
+        System.out.println("Cannot cook at Off state.");
+    }
 
-  }
-
-  @Override
-  public void off() {
-
-  }
+    @Override
+    public void off() {
+        System.out.println("Already switched off...");
+    }
 }

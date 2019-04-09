@@ -1,9 +1,9 @@
 package state;
 
 public interface RoboticState {
-  public void walk();
+    void walk();
 
-  public void cook();
+    void cook();
 
-  public void off();
+    void off();
 }
