@@ -1,9 +1,18 @@
 <?php
 
+/**
+ * Returns "selected" if the form value for $name is the expected $value.
+ * This is used to simplify the dynamic creation of a <select> maintaining the
+ * selected value across HTTP requests.
+ */
 function is_select_selected($name, $value) {
   return $_GET[$name] == $value ? " selected" : "";
 }
 
+/**
+ * Dynamically build the form fields, maintaining the submitted values across
+ * HTTP requests.
+ */
 function build_form_fields() {
   $names = ['year', 'category', 'nominee', 'info'];
   foreach ($names as $name) {
@@ -27,6 +36,9 @@ function build_form_fields() {
   </div>';
 }
 
+/**
+ * Validate the form values to correctly apply the XSLT parameters.
+ */
 function apply_xslt_parameters($processor) {
   $names = ['year', 'category', 'nominee', 'info'];
   foreach ($names as $name) {
@@ -40,11 +52,14 @@ function apply_xslt_parameters($processor) {
 
     $value = $_GET["won"];
     if ($value == "yes" || $value == "no") {
-      $processor->setParameter('', "no", $value);
+      $processor->setParameter('', "won", $value);
     }
   }
 }
 
+/**
+ * Load XML and XSLT, apply the filtering parameters and return the result.
+ */
 function transform_xml_to_html() {
   $xml = new DOMDocument;
   $xml->load('oscars.xml');
@@ -73,12 +88,12 @@ function transform_xml_to_html() {
   <body>
     <form id="form-query">
       <fieldset><legend>Search Oscars nominations</legend>
-      <?php build_form_fields() ?>
-      <button type="submit">Query</button>
+        <?php build_form_fields() ?>
+
+        <button type="submit">Query</button>
       </fieldset>
     </form>
 
     <?php transform_xml_to_html(); ?>
-
 </body>
 </html>
