@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:param name="year"/>
+<xsl:param name="category"/>
+<xsl:param name="nominee"/>
+<xsl:param name="info"/>
+<xsl:param name="won"/>
 
 <xsl:template match="/Oscars">
   <table>
