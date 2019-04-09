@@ -23,7 +23,6 @@
 				<xsl:apply-templates select="Nomination[(not($year) or contains(Year, $year)) and
       (not($category) or contains(Category, $category)) and
       (not($nominee) or contains(Nominee, $nominee)) and
-      (not($year) or contains(Year, $year)) and
       (not($info) or contains(Info, $info)) and
       (not($won) or Won = $won)]" />
 			</tbody>
