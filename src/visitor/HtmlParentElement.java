@@ -5,52 +5,40 @@ import java.util.List;
 
 public class HtmlParentElement extends HtmlTag {
 
-  public HtmlParentElement(String tagName) {
-  }
+    private List<HtmlTag> children;
 
-  @Override
-  public String getTagName() {
-    return null;
-  }
+    public HtmlParentElement(String s) {
+        super(s);
+        this.children = new ArrayList<>();
+    }
 
-  @Override
-  public void setStartTag(String tag) {
-  }
+    @Override
+    public void addChildTag(HtmlTag htmlTag) {
+        this.children.add(htmlTag);
+    }
 
-  @Override
-  public void setEndTag(String tag) {
-  }
+    @Override
+    public void removeChildTag(HtmlTag htmlTag) {
+        this.children.remove(htmlTag);
+    }
 
-  @Override
-  public String getStartTag() {
-    return null;
-  }
+    @Override
+    public List<HtmlTag> getChildren() {
+        return this.children;
+    }
 
-  @Override
-  public String getEndTag() {
-    return null;
-  }
+    @Override
+    public void generateHtml() {
+        System.out.println(this.getStartTag());
+        for (HtmlTag child : this.getChildren()) {
+            child.generateHtml();
+        }
+        System.out.println(this.getEndTag());
 
-  @Override
-  public void addChildTag(HtmlTag htmlTag) {
-  }
+    }
 
-  @Override
-  public void removeChildTag(HtmlTag htmlTag) {
-  }
-
-  @Override
-  public List<HtmlTag> getChildren() {
-    return null;
-  }
-
-  @Override
-  public void generateHtml() {
-
-  }
-
-  @Override
-  public void accept(Visitor visitor) {
-    visitor.visit(this);
-  }
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }
