@@ -61,6 +61,10 @@ function apply_xslt_parameters($processor) {
  * Load XML and XSLT, apply the filtering parameters and return the result.
  */
 function transform_xml_to_html() {
+  if (!$_GET) {
+    return "";
+  }
+
   $xml = new DOMDocument;
   $xml->load('oscars.xml');
 
