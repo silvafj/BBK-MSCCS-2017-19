@@ -8,7 +8,9 @@ public class Originator {
   CareTaker careTaker;
 
   public Originator(double x, double y, CareTaker careTaker) {
-    // TODO
+    this.careTaker = new CareTaker();
+    this.setX(x);
+    this.setY(y);
     createSavepoint("INITIAL");
   }
 
@@ -21,24 +23,35 @@ public class Originator {
   }
 
   public void setX(double x) {
+    this.x = x;
   }
 
   public void setY(double y) {
+    this.y = y;
   }
 
   public void createSavepoint(String savepointName) {
+    careTaker.saveMemento(new Memento(this.getX(), this.getY()), savepointName);
+    this.lastUndoSavepoint = savepointName;
   }
 
   public void undo() {
+    this.undo(this.lastUndoSavepoint);
   }
 
   public void undo(String savepointName) {
+    this.setOriginatorState(savepointName);
   }
 
   public void undoAll() {
+    this.undo("INITIAL");
+    careTaker.clearSavepoints();
   }
 
   private void setOriginatorState(String savepointName) {
+    Memento memento = careTaker.getMemento(savepointName);
+    this.setX(memento.getX());
+    this.setY(memento.getY());
   }
 
   @Override
