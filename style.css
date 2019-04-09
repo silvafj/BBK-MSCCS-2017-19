@@ -24,7 +24,7 @@ td, th {
 }
 
 #form-query {
-  width: 300px;
+  width: 600px;
   margin: 0 auto;
   margin-bottom: 30px;
 }
@@ -36,9 +36,9 @@ td, th {
 
 #form-query .form-item label {
   display: inline-block;
-  width: 5em;
+  width: 70px;
 }
 
-#form-query input {
-  width: 4em;
+#form-query input[type=text] {
+  width: 380px;
 }
