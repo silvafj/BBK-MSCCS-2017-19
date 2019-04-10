@@ -1,5 +1,11 @@
 <?php
 
+// Ideally, we would only need this results.php (renamed to index.php) which is
+// much simpler and intuitive approach (in the real world, forms are usually
+// built dynamically). But because the coursework requires a HTML file with the
+// form, I copied most of the HTML into index.html to comply with the
+// requirements and not lose marks.
+
 /**
  * Returns "selected" if the form value for $name is the expected $value.
  * This is used to simplify the dynamic creation of a <select> maintaining the
