@@ -2,12 +2,8 @@ package lambdas;
 
 public class Functions {
   /**
-   * A static factory method that creates an integer function map with basic functions:
-   * - abs (absolute value)
-   * - sgn (signum function)
-   * - increment
-   * - decrement
-   * - square
+   * A static factory method that creates an integer function map with basic functions: - abs
+   * (absolute value) - sgn (signum function) - increment - decrement - square
    *
    * @return an instance of {@link FunctionMap} that contains all listed functions
    */

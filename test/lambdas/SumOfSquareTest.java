@@ -21,14 +21,16 @@ public class SumOfSquareTest {
 
   @Test
   public void testCalculateSumOfSquares() {
-    int sumOfSquares = SumOfSquares.calculateSumOfSquaresInRange(1, 5); // 1*1 + 2*2 + 3*3 + 4*4 + 5*5 = 55
+    int sumOfSquares =
+        SumOfSquares.calculateSumOfSquaresInRange(1, 5); // 1*1 + 2*2 + 3*3 + 4*4 + 5*5 = 55
 
     assertEquals(55, sumOfSquares);
   }
 
   @Test
   public void testCalculateSumOfSquaresOnNegative() {
-    int sumOfSquares = SumOfSquares.calculateSumOfSquaresInRange(-4, -2); // -4*(-4) + -3*(-3) + -2*(-2) = 29
+    int sumOfSquares =
+        SumOfSquares.calculateSumOfSquaresInRange(-4, -2); // -4*(-4) + -3*(-3) + -2*(-2) = 29
 
     assertEquals(29, sumOfSquares);
   }

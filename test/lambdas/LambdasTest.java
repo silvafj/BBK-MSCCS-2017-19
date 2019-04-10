@@ -17,7 +17,6 @@ public class LambdasTest {
     assertEquals("Hello", helloSupplier.get());
   }
 
-
   @Test
   public void testIsEmptyPredicate() {
     Predicate<String> isEmptyPredicate = Lambdas.isEmptyPredicate();
@@ -94,7 +93,6 @@ public class LambdasTest {
   public void testLongSumOperation() {
     LongBinaryOperator sumOperation = Lambdas.longSumOperation();
 
-
     long sumOfSevenAndEight = sumOperation.applyAsLong(7, 8);
     long sumOfTenAndZero = sumOperation.applyAsLong(10, 0);
     long sumOfFiveAndMinusTen = sumOperation.applyAsLong(5, -10);
@@ -128,7 +126,8 @@ public class LambdasTest {
   @Test
   public void testRunningThreadSupplier() throws InterruptedException {
     Queue<Integer> concurrentLinkedQueue = new ConcurrentLinkedQueue<>();
-    Supplier<Thread> runningThreadSupplier = Lambdas.runningThreadSupplier(() -> concurrentLinkedQueue.add(25));
+    Supplier<Thread> runningThreadSupplier =
+        Lambdas.runningThreadSupplier(() -> concurrentLinkedQueue.add(25));
 
     // supplier does not create and start a thread before you call get()
     assertEquals(0, concurrentLinkedQueue.size());
@@ -155,14 +154,19 @@ public class LambdasTest {
 
   @Test
   public void testRunnableToThreadSupplierFunction() throws InterruptedException {
-    Function<Runnable, Supplier<Thread>> runnableSupplierFunction = Lambdas.runnableToThreadSupplierFunction();
+    Function<Runnable, Supplier<Thread>> runnableSupplierFunction =
+        Lambdas.runnableToThreadSupplierFunction();
     Queue<Integer> concurrentLinkedQueue = new ConcurrentLinkedQueue<>();
 
-    Supplier<Thread> threadSupplier = runnableSupplierFunction.apply(() -> concurrentLinkedQueue.add(200));
+    Supplier<Thread> threadSupplier =
+        runnableSupplierFunction.apply(() -> concurrentLinkedQueue.add(200));
 
-    assertEquals(0, concurrentLinkedQueue.size()); // supplier does not create and start a thread before you call get()
+    assertEquals(
+        0,
+        concurrentLinkedQueue
+            .size()); // supplier does not create and start a thread before you call get()
 
-    Thread thread = threadSupplier.get();// new thread has been started
+    Thread thread = threadSupplier.get(); // new thread has been started
     thread.join();
 
     assertEquals(1, concurrentLinkedQueue.size());
@@ -171,8 +175,8 @@ public class LambdasTest {
 
   @Test
   public void testFunctionToConditionalFunction() {
-    BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> intFunctionToConditionalIntFunction
-      = Lambdas.functionToConditionalFunction();
+    BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator>
+        intFunctionToConditionalIntFunction = Lambdas.functionToConditionalFunction();
 
     IntUnaryOperator abs = intFunctionToConditionalIntFunction.apply(a -> -a, a -> a < 0);
 
@@ -189,5 +193,4 @@ public class LambdasTest {
 
     assertEquals("WELL DONE!", wellDoneStr);
   }
-
 }

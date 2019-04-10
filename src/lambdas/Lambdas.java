@@ -25,18 +25,18 @@ public class Lambdas {
   }
 
   /**
-   * Returns a {@link Function} that converts a {@link BigDecimal} number into a {@link String} that start with
-   * a dollar sign and then gets a value
+   * Returns a {@link Function} that converts a {@link BigDecimal} number into a {@link String} that
+   * start with a dollar sign and then gets a value
    *
    * @return function that converts adds dollar sign
    */
   public static Function<BigDecimal, String> toDollarStringFunction() {
-    return  d -> "$" + d.toString();
+    return d -> "$" + d.toString();
   }
 
   /**
-   * Receives two parameter that represent a range and returns a {@link Predicate<String>} that verifies if string
-   * length is in the specified range. E.g. min <= length < max
+   * Receives two parameter that represent a range and returns a {@link Predicate<String>} that
+   * verifies if string length is in the specified range. E.g. min <= length < max
    *
    * @param min min length
    * @param max max length
@@ -55,9 +55,9 @@ public class Lambdas {
     return () -> (new Random()).nextInt();
   }
 
-
   /**
-   * Returns an {@link IntUnaryOperator} that receives an int as a bound parameter, and returns a random int
+   * Returns an {@link IntUnaryOperator} that receives an int as a bound parameter, and returns a
+   * random int
    *
    * @return int operation
    */
@@ -104,8 +104,8 @@ public class Lambdas {
   }
 
   /**
-   * Receives a {@link Runnable} parameter, and returns a {@link Supplier<Thread>}. The thread will be started only
-   * when you call supplier method {@link Supplier#get()}
+   * Receives a {@link Runnable} parameter, and returns a {@link Supplier<Thread>}. The thread will
+   * be started only when you call supplier method {@link Supplier#get()}
    *
    * @param runnable the code you want to tun in new thread
    * @return a thread supplier
@@ -119,7 +119,8 @@ public class Lambdas {
   }
 
   /**
-   * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in in a new thread.
+   * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in in a new
+   * thread.
    *
    * @return a runnable consumer
    */
@@ -128,30 +129,34 @@ public class Lambdas {
   }
 
   /**
-   * Returns a {@link Function} that accepts an instance of {@link Runnable} and returns a {@link Supplier} of a
-   * started {@link Thread} that is created from a given {@link Runnable}
+   * Returns a {@link Function} that accepts an instance of {@link Runnable} and returns a {@link
+   * Supplier} of a started {@link Thread} that is created from a given {@link Runnable}
    *
    * @return a function that transforms runnable into a thread supplier
    */
   public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-    return r -> (() -> {
-      Thread t = new Thread(r);
-      t.start();
-      return t;
-    });
+    return r ->
+        (() -> {
+          Thread t = new Thread(r);
+          t.start();
+          return t;
+        });
   }
 
   /**
-   * Returns a {@link BiFunction} that has two parameters. First is {@link IntUnaryOperator} which is some integer function.
-   * Second is {@link IntPredicate} which is some integer condition. And the third is {@link IntUnaryOperator} which is
-   * a new composed function that uses provided predicate (second parameter of binary function) to verify its input
-   * parameter. If predicate returns {@code true} it applies a provided integer function
-   * (first parameter of binary function) and returns a result value, otherwise it returns an element itself.
+   * Returns a {@link BiFunction} that has two parameters. First is {@link IntUnaryOperator} which
+   * is some integer function. Second is {@link IntPredicate} which is some integer condition. And
+   * the third is {@link IntUnaryOperator} which is a new composed function that uses provided
+   * predicate (second parameter of binary function) to verify its input parameter. If predicate
+   * returns {@code true} it applies a provided integer function (first parameter of binary
+   * function) and returns a result value, otherwise it returns an element itself.
    *
-   * @return a binary function that receiver predicate and function and compose them to create a new function
+   * @return a binary function that receiver predicate and function and compose them to create a new
+   *     function
    */
-  public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-    return (intFunc, intPred) ->  (v -> intPred.test(v) ? intFunc.applyAsInt(v) : v);
+  public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator>
+      functionToConditionalFunction() {
+    return (intFunc, intPred) -> (v -> intPred.test(v) ? intFunc.applyAsInt(v) : v);
   }
 
   /**
@@ -163,4 +168,3 @@ public class Lambdas {
     return () -> () -> () -> "WELL DONE!";
   }
 }
-
