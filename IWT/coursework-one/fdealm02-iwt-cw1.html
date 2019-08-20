@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tennis tournament results</title>
+    <!-- I confirm that this coursework submission is entirely my own work, except where explicitly stated otherwise. -->
+    <meta name="author" content="Fernando de Almeida da Silva (fdealm02)">
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <form id="form-query">
+      <fieldset><legend>Search tennis results</legend>
+      <div class="form-item">
+        <label for="tournament">Tournament</label>
+        <select name="tournament" id="tournament">
+          <option value="wimbledon-men-2013">Wimbledon 2013 Men</option>
+          <option value="wimbledon-women-2013">Wimbledon 2013 Women</option>
+        </select>
+      </div>
+      <div class="form-item">
+        <label for="player">Player</label>
+        <select name="player-condition" id="player-condition">
+          <option value="equals">Is</option>
+          <option value="contains">Contains</option>
+          <option value="none">None</option>
+        </select>
+        <input type="text" name="player" id="player">
+      </div>
+      <div class="form-item">
+        <label for="sets-condition">Sets</label>
+        <select name="sets-condition" id="sets-condition">
+          <option value="greater-than">&gt;</option>
+          <option value="less-than">&lt;</option>
+          <option value="equals">=</option>
+        </select>
+        <input type="number" name="sets-value" id="sets-value" min="0" max="5">
+      </div>
+      <div class="form-item">
+        <label for="round-condition">Round</label>
+        <select name="round-condition" id="round-condition">
+          <option value="greater-than">&gt;</option>
+          <option value="less-than">&lt;</option>
+          <option value="equals">=</option>
+        </select>
+        <input type="number" name="round-value" id="round-value" min="0" max="7">
+      </div>
+      <button type="submit">Query</button>
+      </fieldset>
+    </form>
+    <table id="results-table">
+      <thead>
+        <tr>
+          <th>Round</th>
+          <th>Player</th>
+          <th>Set 1</th>
+          <th>Set 2</th>
+          <th>Set 3</th>
+          <th>Set 4</th>
+          <th>Set 5</th>
+        </tr>
+      </thead>
+    </table>
+  </body>
+</html>
