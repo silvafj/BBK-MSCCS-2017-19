@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"fraction","l":"Fraction"},{"p":"fraction","l":"FractionImpl"},{"p":"fraction","l":"FractionTest"}]
