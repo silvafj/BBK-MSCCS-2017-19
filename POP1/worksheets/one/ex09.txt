@@ -1,0 +1,4 @@
+# We’ve seen that `n = 42` is legal. What about `42 = n`?
+
+It is not legal and will cause syntax error.
+The interpreter expects the variable to be on the left.

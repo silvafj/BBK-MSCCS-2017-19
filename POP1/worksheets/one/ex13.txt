@@ -1,0 +1,6 @@
+# In math notation you can multiply x and y like this: `xy`. What happens if you
+# try that in Python?
+
+Python will parse it as a single variable `xy`. Depending on how it is being
+used or if it is defined it might cause runtime error (variable not defined) or
+just cause wrong computations.

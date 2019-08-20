@@ -1,0 +1,4 @@
+# In math notation, leading zeros are ok, as in `02`. What happens if you try
+# this in Python?
+
+It's syntax error. Integers must start with a digit between 1 and 9.
