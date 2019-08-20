@@ -1,0 +1,2 @@
+It throws an exception that the file doesn't exist, which is correct because we
+are passing an empty string to the `path` argument.

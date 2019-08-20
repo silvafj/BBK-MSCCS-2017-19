@@ -1,0 +1,5 @@
+Sequential access means that reading or writing is performed in a sequence from
+the beginning of the file.
+
+Random access on the other hand, allows us to read or write any location (seek)
+of a file skipping everything else we don't need.

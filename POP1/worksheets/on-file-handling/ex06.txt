@@ -1,0 +1,2 @@
+When we try to open a file for reading that doesn't exist it will throw an
+exception stating that the file doesn't exist (FileNotFoundError)

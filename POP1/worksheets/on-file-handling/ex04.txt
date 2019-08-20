@@ -1,0 +1,2 @@
+It's attempting to read from a file that has been closed.
+That will cause an exception stating that the file is closed.
