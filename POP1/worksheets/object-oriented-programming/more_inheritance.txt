@@ -1,0 +1,68 @@
+>>> isinstance(t, Transportation)
+True
+>>> isinstance(b, Bike)
+True
+>>> isinstance(b, Transportation)
+True
+>>> isinstance(b, Car)
+False
+>>> isinstance(b, t)
+throws an exception, because `t` is not a type
+
+>>> isinstance(c, Car)
+True
+>>> isinstance(c, Transportation)
+True
+
+>>> isinstance(f, Ferrari)
+True
+>>> isinstance(f, Car)
+True
+>>> isinstance(f, Transportation)
+True
+
+>>> issubclass(Bike, Transportation)
+True
+>>> issubclass(Car, Transportation)
+True
+>>> issubclass(Ferrari, Car)
+True
+>>> issubclass(Ferrari, Transportation)
+True
+>>> issubclass(Transportation, Transportation)
+True
+
+>>> b.travel(5)
+print("Biking one mile")
+print("Biking one mile")
+print("Biking one mile")
+print("Biking one mile")
+print("Biking one mile")
+
+>>> c.is_auto()
+False  # Transportation set self.wheels = -1 (instance) and Car set wheels = 4 (class level)
+       # This is probably a bug in the code
+>>> f.is_auto()
+False  # Transportation set self.wheels = -1 (instance) and Car set wheels = 4 (class level)
+       # This is probably a bug in the code
+>>> b.is_auto()
+False
+>>> b.make_sound()
+Exception because method make_sound() not found
+>>> c.travel(10)
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+
+>>> f.travel(4)
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
+print("Driving one mile")
