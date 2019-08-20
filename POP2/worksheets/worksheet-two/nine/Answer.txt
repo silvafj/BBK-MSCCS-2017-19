@@ -1,0 +1,1 @@
+Check the repository log to confirm that I've added javadoc to the modules 7 and 8.

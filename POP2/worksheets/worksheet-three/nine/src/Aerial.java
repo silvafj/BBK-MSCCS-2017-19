@@ -1,0 +1,6 @@
+/**
+ * Aerial
+ */
+public interface Aerial {
+
+}

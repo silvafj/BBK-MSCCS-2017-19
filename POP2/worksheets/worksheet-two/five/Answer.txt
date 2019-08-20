@@ -1,0 +1,9 @@
+Q: Can you ever have a mutator method return something other than void?
+
+Yes. We can have a mutator that can return a boolean (to signify success of theoperation) or a instance of the current
+class allowing us to nest calls to the same instance.
+
+
+Q: Can you ever have an accessor method return void?
+
+No. An accessor method implies returning a value of a private member variable.
